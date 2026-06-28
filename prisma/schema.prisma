@@ -1,0 +1,107 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// -------------------------------------------------
+// Data models for the enterprise platform
+// -------------------------------------------------
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  passwordHash  String?
+  roleId        String
+  role          Role     @relation(fields: [roleId], references: [id])
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  // Relations
+  leads         Lead[]
+  clients       Client[]
+  activities    Activity[]
+  notifications Notification[]
+  posts         BlogPost[]
+}
+
+model Role {
+  id    String @id @default(cuid())
+  name  String @unique
+  users User[]
+}
+
+model Lead {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String
+  company   String?
+  message   String?
+  source    String?  @default("Manual")
+  status    String?  @default("New")
+  ownerId   String?
+  owner     User?    @relation(fields: [ownerId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Client {
+  id        String   @id @default(cuid())
+  name      String
+  contact   String?
+  ownerId   String?
+  owner     User?    @relation(fields: [ownerId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Activity {
+  id          String   @id @default(cuid())
+  type        String
+  description String?
+  userId      String
+  user        User @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  channel   String   // email, sms, whatsapp
+  content   String
+  sentAt    DateTime?
+  userId    String
+  user      User @relation(fields: [userId], references: [id])
+}
+
+model BlogPost {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  category  String   @default("General")
+  tag       String?
+  excerpt   String?
+  readTime  String?
+  gradient  String?
+  accent    String?
+  featured  Boolean  @default(false)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  createdAt DateTime @default(now())
+  published Boolean  @default(false)
+  media     Media[]  @relation("BlogPostMedia")
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  url       String
+  type      String   // image, video, document
+  postId    String?
+  post      BlogPost? @relation("BlogPostMedia", fields: [postId], references: [id])
+}
