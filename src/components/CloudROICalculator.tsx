@@ -313,19 +313,19 @@ export function CloudROICalculator() {
               
               <div className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-muted/50 rounded-lg border border-border/50">
+                  <div className="p-4 bg-background dark:bg-white/5 rounded-lg border border-border/50 shadow-sm">
                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block mb-1">Cost Reduction</span>
                     <span className="text-2xl font-black text-foreground">{calculations.costReductionPct}%</span>
                   </div>
-                  <div className="p-4 bg-muted/50 rounded-lg border border-border/50">
+                  <div className="p-4 bg-background dark:bg-white/5 rounded-lg border border-border/50 shadow-sm">
                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block mb-1">Availability</span>
                     <span className="text-2xl font-black text-foreground">99.99%</span>
                   </div>
-                  <div className="p-4 bg-muted/50 rounded-lg border border-border/50">
+                  <div className="p-4 bg-background dark:bg-white/5 rounded-lg border border-border/50 shadow-sm">
                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block mb-1">Deploy Speed</span>
                     <span className="text-2xl font-black text-foreground">+{calculations.deploymentSpeed}%</span>
                   </div>
-                  <div className="p-4 bg-muted/50 rounded-lg border border-border/50">
+                  <div className="p-4 bg-background dark:bg-white/5 rounded-lg border border-border/50 shadow-sm">
                     <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider block mb-1">Hours Recovered</span>
                     <span className="text-2xl font-black text-foreground">{calculations.devHours}<span className="text-sm font-medium text-muted-foreground">/mo</span></span>
                   </div>
@@ -339,7 +339,7 @@ export function CloudROICalculator() {
             </div>
 
             {/* Lead Gen Form */}
-            <div className="bg-muted/30 border border-border rounded-xl p-6 md:p-8 shadow-sm mt-auto">
+            <div className="bg-card dark:bg-white/5 border border-border rounded-xl p-6 md:p-8 shadow-sm mt-auto">
               <AnimatePresence mode="wait">
                 {formSubmitted ? (
                   <motion.div 
