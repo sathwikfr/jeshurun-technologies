@@ -99,8 +99,20 @@ export function HeroStatsPanel() {
               <div className="flex flex-col xl:flex-row items-center xl:items-start gap-2 xl:gap-3 text-center xl:text-left min-w-0 w-full">
                 {/* Icon Container */}
                 <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0 mt-1">
-                  {/* Slow rotating partial-arc border */}
-                  <div className="absolute inset-0 rounded-full border border-blue-500/20 dark:border-blue-400/20 border-t-blue-500/80 dark:border-t-blue-400/80 animate-[spin_6s_linear_infinite]" />
+                  {/* Soft pulsing breathing glow */}
+                  <motion.div 
+                    className="absolute inset-0 rounded-full bg-blue-500 dark:bg-blue-400 blur-md"
+                    animate={{ 
+                      scale: [1, 1.3, 1],
+                      opacity: [0.1, 0.3, 0.1]
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.4
+                    }}
+                  />
                   <div className="relative z-10">{stat.icon}</div>
                 </div>
                 
