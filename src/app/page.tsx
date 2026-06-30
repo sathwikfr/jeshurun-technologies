@@ -509,68 +509,58 @@ const trustLogos = [
 function EnterpriseClientsViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
+  
   return (
     <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes pulseClient {
-          0%, 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 0 rgba(37,99,235,0); }
-          50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px rgba(37,99,235,0.8); }
+        @keyframes orbitRotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
         }
-        @keyframes beamMove {
-          0% { stroke-dashoffset: 60; opacity: 0; }
-          10%, 90% { opacity: 1; }
-          100% { stroke-dashoffset: -60; opacity: 0; }
+        @keyframes orbitRotateReverse {
+          0% { transform: rotate(360deg); }
+          100% { transform: rotate(0deg); }
         }
       `}</style>
       
-      {/* Network Map / SVG */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-80">
-        <svg className="w-full h-full" viewBox="0 0 160 64" strokeWidth="1">
-          {/* Subtle world map dots background (abstracted) */}
-          <g className="fill-[#1E5FFF] opacity-10 dark:opacity-20">
-            <circle cx="20" cy="20" r="0.5"/><circle cx="30" cy="15" r="0.5"/><circle cx="40" cy="25" r="1"/>
-            <circle cx="50" cy="10" r="0.5"/><circle cx="60" cy="30" r="0.5"/><circle cx="70" cy="15" r="1"/>
-            <circle cx="100" cy="20" r="0.5"/><circle cx="110" cy="40" r="0.5"/><circle cx="120" cy="15" r="1"/>
-            <circle cx="130" cy="35" r="0.5"/><circle cx="140" cy="20" r="0.5"/><circle cx="150" cy="30" r="1"/>
-            <circle cx="25" cy="45" r="0.5"/><circle cx="45" cy="50" r="1"/><circle cx="65" cy="40" r="0.5"/>
-            <circle cx="85" cy="55" r="0.5"/><circle cx="105" cy="50" r="1"/><circle cx="125" cy="45" r="0.5"/>
-          </g>
-
-          {/* Complex Graph Lines */}
-          <g className="stroke-[#2563EB] opacity-15 dark:opacity-30" fill="none">
-            {/* Primary connections */}
-            <path d="M 80 32 L 25 25 M 80 32 L 45 45 M 80 32 L 115 20 M 80 32 L 135 40" />
-            {/* Secondary interconnects */}
-            <path d="M 25 25 L 45 45 L 60 20 M 115 20 L 135 40 L 95 50" />
-          </g>
-
-          {/* Animated Beams (Data Packets) */}
-          <g className="stroke-[#3B82F6] dark:stroke-[#60A5FA]" fill="none" strokeWidth="1.5" strokeDasharray="8 40" strokeLinecap="round">
-            <path d="M 80 32 L 25 25" style={{ animation: "beamMove 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 80 32 L 45 45" style={{ animation: "beamMove 2.5s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 80 32 L 115 20" style={{ animation: "beamMove 2.2s linear infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 80 32 L 135 40" style={{ animation: "beamMove 1.8s linear infinite 0.2s", animationPlayState: isInView ? "running" : "paused" }} />
-            {/* Cross-node data */}
-            <path d="M 25 25 L 45 45" strokeDasharray="4 20" style={{ animation: "beamMove 1.5s linear infinite 1.2s", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 115 20 L 135 40" strokeDasharray="4 20" style={{ animation: "beamMove 1.7s linear infinite 0.8s", animationPlayState: isInView ? "running" : "paused" }} />
-          </g>
-        </svg>
+      {/* Background soft glow */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+         <div className="w-16 h-16 rounded-full bg-blue-400/10 dark:bg-blue-500/10 blur-xl" />
       </div>
 
-      {/* Nodes */}
-      <div className="absolute inset-0 z-10">
-        {/* Main Hub */}
-        <div className="absolute left-[calc(50%-4px)] top-[calc(50%-4px)] w-2 h-2 rounded-full bg-[#1E5FFF] z-20 shadow-[0_0_12px_#1E5FFF]" />
+      {/* Main Hub */}
+      <div className="absolute z-20 w-2.5 h-2.5 rounded-full bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,0.6)]" />
+      
+      {/* 14 Orbiting Client Nodes */}
+      <div className="absolute inset-0 z-10 flex items-center justify-center">
+        {/* Track 1 - Inner (4 clients) */}
+        <div className="absolute flex items-center justify-center w-[36px] h-[36px] border border-blue-300/30 dark:border-blue-500/20 rounded-full" 
+             style={{ animation: "orbitRotate 8s linear infinite", animationPlayState: isInView ? "running" : "paused" }}>
+          <div className="absolute -top-[3px] w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
+          <div className="absolute -bottom-[3px] w-1 h-1 rounded-full bg-blue-400" />
+          <div className="absolute -left-[3px] w-1 h-1 rounded-full bg-sky-400" />
+          <div className="absolute -right-[3px] w-1.5 h-1.5 rounded-full bg-indigo-500" />
+        </div>
         
-        {/* Client Nodes (Pulsing) */}
-        <div className="absolute left-[23px] top-[23px] w-1.5 h-1.5 rounded-full bg-white dark:bg-[#0B1220] border border-[#3B82F6]" style={{ animation: "pulseClient 3s infinite 0.2s", animationPlayState: isInView ? "running" : "paused" }} />
-        <div className="absolute left-[43px] top-[43px] w-1 h-1 rounded-full bg-[#60A5FA]" style={{ animation: "pulseClient 2.5s infinite 1.1s", animationPlayState: isInView ? "running" : "paused" }} />
-        <div className="absolute left-[113px] top-[18px] w-1.5 h-1.5 rounded-full bg-white dark:bg-[#0B1220] border border-[#3B82F6]" style={{ animation: "pulseClient 3.2s infinite 0.7s", animationPlayState: isInView ? "running" : "paused" }} />
-        <div className="absolute left-[133px] top-[38px] w-1.5 h-1.5 rounded-full bg-white dark:bg-[#0B1220] border border-[#3B82F6]" style={{ animation: "pulseClient 2.8s infinite 1.5s", animationPlayState: isInView ? "running" : "paused" }} />
+        {/* Track 2 - Middle (6 clients) */}
+        <div className="absolute flex items-center justify-center w-[64px] h-[64px] border border-blue-300/20 dark:border-blue-500/10 rounded-full"
+             style={{ animation: "orbitRotateReverse 12s linear infinite", animationPlayState: isInView ? "running" : "paused" }}>
+          <div className="absolute -top-[2px] left-[12px] w-1.5 h-1.5 rounded-full bg-blue-500" />
+          <div className="absolute -top-[2px] right-[12px] w-1 h-1 rounded-full bg-indigo-400" />
+          <div className="absolute -bottom-[2px] left-[12px] w-1 h-1 rounded-full bg-sky-500" />
+          <div className="absolute -bottom-[2px] right-[12px] w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_4px_rgba(96,165,250,0.8)]" />
+          <div className="absolute top-[26px] -left-[3px] w-1.5 h-1.5 rounded-full bg-indigo-500" />
+          <div className="absolute top-[26px] -right-[3px] w-1 h-1 rounded-full bg-blue-400" />
+        </div>
         
-        {/* Decorative minor nodes */}
-        <div className="absolute left-[58px] top-[18px] w-1 h-1 rounded-full bg-[#1E5FFF] opacity-50" />
-        <div className="absolute left-[93px] top-[48px] w-1 h-1 rounded-full bg-[#1E5FFF] opacity-50" />
+        {/* Track 3 - Outer (4 clients) */}
+        <div className="absolute flex items-center justify-center w-[92px] h-[92px] border border-blue-300/10 dark:border-blue-500/5 rounded-full"
+             style={{ animation: "orbitRotate 18s linear infinite", animationPlayState: isInView ? "running" : "paused" }}>
+          <div className="absolute -top-[3px] w-1 h-1 rounded-full bg-blue-400" />
+          <div className="absolute -bottom-[3px] w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.6)]" />
+          <div className="absolute -left-[3px] w-1 h-1 rounded-full bg-indigo-400" />
+          <div className="absolute -right-[3px] w-1.5 h-1.5 rounded-full bg-blue-500" />
+        </div>
       </div>
     </div>
   );
