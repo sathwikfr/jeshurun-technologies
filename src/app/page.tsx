@@ -1554,7 +1554,7 @@ export default function Home() {
             <div className="lg:col-span-5 flex items-start">
               <div className="w-full grid grid-cols-2 gap-4 h-full">
                 <SpotlightCard borderGlow={false} className="flex flex-col justify-end h-full shadow-sm hover-card-effect p-5">
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex flex-col items-start gap-2 mb-3">
                     <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
                       <Users size={18} />
                     </div>
@@ -1570,7 +1570,7 @@ export default function Home() {
                 </SpotlightCard>
 
                 <SpotlightCard borderGlow={false} className="flex flex-col justify-end h-full shadow-sm hover-card-effect p-5">
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex flex-col items-start gap-2 mb-3">
                     <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
                       <Award size={18} />
                     </div>
@@ -1586,7 +1586,7 @@ export default function Home() {
                 </SpotlightCard>
 
                 <SpotlightCard borderGlow={false} className="flex flex-col justify-end h-full shadow-sm hover-card-effect p-5">
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex flex-col items-start gap-2 mb-3">
                     <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
                       <Clock size={18} />
                     </div>
@@ -1602,7 +1602,7 @@ export default function Home() {
                 </SpotlightCard>
 
                 <SpotlightCard borderGlow={false} className="flex flex-col justify-end h-full shadow-sm hover-card-effect p-5">
-                  <div className="flex items-center gap-3 mb-3">
+                  <div className="flex flex-col items-start gap-2 mb-3">
                     <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
                       <Briefcase size={18} />
                     </div>
