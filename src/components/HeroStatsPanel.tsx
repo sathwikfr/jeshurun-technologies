@@ -40,7 +40,7 @@ function AnimatedCounter({ target, suffix = "", prefix = "", delay = 0 }: { targ
 const statsData = [
   {
     id: 1,
-    icon: <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" strokeWidth={1.5} />,
+    icon: <Briefcase className="w-4 h-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" strokeWidth={1.5} />,
     number: 150,
     suffix: "+",
     label: "PROJECTS DELIVERED",
@@ -48,7 +48,7 @@ const statsData = [
   },
   {
     id: 2,
-    icon: <Layers className="w-5 h-5 text-blue-600 dark:text-blue-400" strokeWidth={1.5} />,
+    icon: <Layers className="w-4 h-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" strokeWidth={1.5} />,
     number: 20,
     suffix: "+",
     label: "TECHNOLOGY DOMAINS",
@@ -56,7 +56,7 @@ const statsData = [
   },
   {
     id: 3,
-    icon: <Globe className="w-5 h-5 text-blue-600 dark:text-blue-400" strokeWidth={1.5} />,
+    icon: <Globe className="w-4 h-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" strokeWidth={1.5} />,
     number: 6,
     suffix: "",
     label: "GLOBAL DELIVERY HUBS",
@@ -64,7 +64,7 @@ const statsData = [
   },
   {
     id: 4,
-    icon: <Headset className="w-5 h-5 text-blue-600 dark:text-blue-400" strokeWidth={1.5} />,
+    icon: <Headset className="w-4 h-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" strokeWidth={1.5} />,
     number: 24,
     suffix: "/7",
     label: "ENTERPRISE SUPPORT",
@@ -82,28 +82,28 @@ export function HeroStatsPanel() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full rounded-2xl md:rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/10 dark:border-white/10 shadow-sm overflow-hidden"
+        className="w-full rounded-2xl md:rounded-full bg-white/40 dark:bg-[#0B1220]/40 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm overflow-hidden"
       >
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-black/10 dark:divide-white/10">
           {statsData.map((stat, i) => (
             <motion.div 
               key={stat.id} 
-              className="flex flex-col items-center justify-center p-4 md:p-5 transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+              className="flex flex-col items-center justify-center p-2 md:p-3 lg:p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/5"
               whileHover={{ y: -2 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="flex flex-col xl:flex-row items-center gap-3 text-center xl:text-left">
+              <div className="flex flex-col xl:flex-row items-center gap-2 xl:gap-3 text-center xl:text-left">
                 {/* Icon Container */}
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0 shadow-[inset_0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]">
                   {stat.icon}
                 </div>
                 
                 {/* Text Layout */}
                 <div className="flex flex-col">
-                  <div className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white leading-none tracking-tight mb-1">
+                  <div className="text-lg md:text-xl font-extrabold text-slate-900 dark:text-white leading-none tracking-tight mb-1 drop-shadow-md">
                     <AnimatedCounter target={stat.number} suffix={stat.suffix} delay={stat.delay} />
                   </div>
-                  <div className="text-[9px] md:text-[10px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest leading-none">
+                  <div className="text-[8px] md:text-[9px] font-bold text-slate-700 dark:text-slate-200 uppercase tracking-widest leading-none drop-shadow-md">
                     {stat.label}
                   </div>
                 </div>
