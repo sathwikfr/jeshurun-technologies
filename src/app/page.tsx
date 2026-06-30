@@ -512,45 +512,64 @@ function EnterpriseClientsViz() {
     <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes pulseClient {
-          0%, 100% { opacity: 0.4; transform: scale(1); box-shadow: 0 0 0 rgba(37,99,235,0); }
-          50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 6px rgba(37,99,235,0.6); }
+          0%, 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 0 rgba(37,99,235,0); }
+          50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 8px rgba(37,99,235,0.8); }
         }
         @keyframes beamMove {
-          0% { stroke-dashoffset: 40; opacity: 0; }
-          20%, 80% { opacity: 1; }
-          100% { stroke-dashoffset: -40; opacity: 0; }
+          0% { stroke-dashoffset: 60; opacity: 0; }
+          10%, 90% { opacity: 1; }
+          100% { stroke-dashoffset: -60; opacity: 0; }
         }
       `}</style>
       
       {/* Network Map / SVG */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center">
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-80">
         <svg className="w-full h-full" viewBox="0 0 160 64" strokeWidth="1">
-          {/* Static Graph Lines */}
-          <g className="stroke-[#2563EB] opacity-20 dark:opacity-40" fill="none">
-            <path d="M 80 32 L 30 20" />
-            <path d="M 80 32 L 40 50" />
-            <path d="M 80 32 L 130 15" />
-            <path d="M 80 32 L 140 45" />
+          {/* Subtle world map dots background (abstracted) */}
+          <g className="fill-[#1E5FFF] opacity-10 dark:opacity-20">
+            <circle cx="20" cy="20" r="0.5"/><circle cx="30" cy="15" r="0.5"/><circle cx="40" cy="25" r="1"/>
+            <circle cx="50" cy="10" r="0.5"/><circle cx="60" cy="30" r="0.5"/><circle cx="70" cy="15" r="1"/>
+            <circle cx="100" cy="20" r="0.5"/><circle cx="110" cy="40" r="0.5"/><circle cx="120" cy="15" r="1"/>
+            <circle cx="130" cy="35" r="0.5"/><circle cx="140" cy="20" r="0.5"/><circle cx="150" cy="30" r="1"/>
+            <circle cx="25" cy="45" r="0.5"/><circle cx="45" cy="50" r="1"/><circle cx="65" cy="40" r="0.5"/>
+            <circle cx="85" cy="55" r="0.5"/><circle cx="105" cy="50" r="1"/><circle cx="125" cy="45" r="0.5"/>
           </g>
-          {/* Animated Beams */}
-          <g className="stroke-[#3B82F6] dark:stroke-[#60A5FA]" fill="none" strokeWidth="1.5" strokeDasharray="10 30" strokeLinecap="round">
-            <path d="M 80 32 L 30 20" style={{ animation: "beamMove 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 80 32 L 40 50" style={{ animation: "beamMove 2.5s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 80 32 L 130 15" style={{ animation: "beamMove 2.2s linear infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 80 32 L 140 45" style={{ animation: "beamMove 1.8s linear infinite 0.2s", animationPlayState: isInView ? "running" : "paused" }} />
+
+          {/* Complex Graph Lines */}
+          <g className="stroke-[#2563EB] opacity-15 dark:opacity-30" fill="none">
+            {/* Primary connections */}
+            <path d="M 80 32 L 25 25 M 80 32 L 45 45 M 80 32 L 115 20 M 80 32 L 135 40" />
+            {/* Secondary interconnects */}
+            <path d="M 25 25 L 45 45 L 60 20 M 115 20 L 135 40 L 95 50" />
+          </g>
+
+          {/* Animated Beams (Data Packets) */}
+          <g className="stroke-[#3B82F6] dark:stroke-[#60A5FA]" fill="none" strokeWidth="1.5" strokeDasharray="8 40" strokeLinecap="round">
+            <path d="M 80 32 L 25 25" style={{ animation: "beamMove 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 80 32 L 45 45" style={{ animation: "beamMove 2.5s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 80 32 L 115 20" style={{ animation: "beamMove 2.2s linear infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 80 32 L 135 40" style={{ animation: "beamMove 1.8s linear infinite 0.2s", animationPlayState: isInView ? "running" : "paused" }} />
+            {/* Cross-node data */}
+            <path d="M 25 25 L 45 45" strokeDasharray="4 20" style={{ animation: "beamMove 1.5s linear infinite 1.2s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 115 20 L 135 40" strokeDasharray="4 20" style={{ animation: "beamMove 1.7s linear infinite 0.8s", animationPlayState: isInView ? "running" : "paused" }} />
           </g>
         </svg>
       </div>
 
       {/* Nodes */}
       <div className="absolute inset-0 z-10">
-        <div className="absolute left-[calc(50%-4px)] top-[calc(50%-4px)] w-2 h-2 rounded-full bg-[#2563EB] z-20 shadow-[0_0_8px_#2563EB]" />
+        {/* Main Hub */}
+        <div className="absolute left-[calc(50%-4px)] top-[calc(50%-4px)] w-2 h-2 rounded-full bg-[#1E5FFF] z-20 shadow-[0_0_12px_#1E5FFF]" />
         
-        {/* Client Nodes */}
-        <div className="absolute left-[28px] top-[18px] w-1.5 h-1.5 rounded-full bg-white dark:bg-slate-800 border border-[#2563EB]" style={{ animation: "pulseClient 3s infinite 0.2s", animationPlayState: isInView ? "running" : "paused" }} />
-        <div className="absolute left-[38px] top-[48px] w-1.5 h-1.5 rounded-full bg-white dark:bg-slate-800 border border-[#2563EB]" style={{ animation: "pulseClient 3s infinite 1.1s", animationPlayState: isInView ? "running" : "paused" }} />
-        <div className="absolute left-[128px] top-[13px] w-1.5 h-1.5 rounded-full bg-white dark:bg-slate-800 border border-[#2563EB]" style={{ animation: "pulseClient 3s infinite 0.7s", animationPlayState: isInView ? "running" : "paused" }} />
-        <div className="absolute left-[138px] top-[43px] w-1.5 h-1.5 rounded-full bg-white dark:bg-slate-800 border border-[#2563EB]" style={{ animation: "pulseClient 3s infinite 2s", animationPlayState: isInView ? "running" : "paused" }} />
+        {/* Client Nodes (Pulsing) */}
+        <div className="absolute left-[23px] top-[23px] w-1.5 h-1.5 rounded-full bg-white dark:bg-[#0B1220] border border-[#3B82F6]" style={{ animation: "pulseClient 3s infinite 0.2s", animationPlayState: isInView ? "running" : "paused" }} />
+        <div className="absolute left-[43px] top-[43px] w-1 h-1 rounded-full bg-[#60A5FA]" style={{ animation: "pulseClient 2.5s infinite 1.1s", animationPlayState: isInView ? "running" : "paused" }} />
+        <div className="absolute left-[113px] top-[18px] w-1.5 h-1.5 rounded-full bg-white dark:bg-[#0B1220] border border-[#3B82F6]" style={{ animation: "pulseClient 3.2s infinite 0.7s", animationPlayState: isInView ? "running" : "paused" }} />
+        <div className="absolute left-[133px] top-[38px] w-1.5 h-1.5 rounded-full bg-white dark:bg-[#0B1220] border border-[#3B82F6]" style={{ animation: "pulseClient 2.8s infinite 1.5s", animationPlayState: isInView ? "running" : "paused" }} />
+        
+        {/* Decorative minor nodes */}
+        <div className="absolute left-[58px] top-[18px] w-1 h-1 rounded-full bg-[#1E5FFF] opacity-50" />
+        <div className="absolute left-[93px] top-[48px] w-1 h-1 rounded-full bg-[#1E5FFF] opacity-50" />
       </div>
     </div>
   );
@@ -1360,7 +1379,7 @@ export default function Home() {
               </motion.div>
 
               {/* 2. MAIN HEADING */}
-              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[48px] md:text-[64px] lg:text-[52px] xl:text-[60px] leading-[1.05] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[52px] md:text-[72px] lg:text-[64px] xl:text-[76px] leading-[1.05] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
                 <span>Empowering</span>
                 <span>Your</span>
                 <span 
@@ -1371,16 +1390,16 @@ export default function Home() {
               </motion.h1>
 
               {/* 3. PARAGRAPH */}
-              <motion.p variants={enterpriseItem} className="mt-6 lg:mt-4 text-gray-600 dark:text-[#B8C0CC] text-lg md:text-[19px] lg:text-[17px] xl:text-[18px] leading-[1.6] max-w-[480px] lg:max-w-[440px] xl:max-w-[500px]">
+              <motion.p variants={enterpriseItem} className="mt-4 lg:mt-3 text-gray-600 dark:text-[#B8C0CC] text-xl md:text-[22px] lg:text-[20px] xl:text-[22px] leading-[1.6] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
                 Enterprise IT consulting and engineering for organizations across Ireland, Europe, the Middle East, and India — architecting resilient systems, accelerating delivery, and turning complex technology challenges into measurable business outcomes.
               </motion.p>
 
               {/* 4. BUTTON ROW */}
-              <motion.div variants={enterpriseItem} className="mt-8 lg:mt-6 flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto justify-center md:justify-start">
-                <button className="text-lg bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full py-[14px] px-[28px] lg:py-[12px] lg:px-[24px] shadow-sm flex items-center justify-center transition-colors w-full sm:w-auto">
+              <motion.div variants={enterpriseItem} className="mt-6 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center md:justify-start">
+                <button className="text-xl bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full py-[16px] px-[32px] lg:py-[14px] lg:px-[28px] shadow-sm flex items-center justify-center transition-colors w-full sm:w-auto">
                   Get Started <span className="ml-2 font-normal">→</span>
                 </button>
-                <button className="text-lg bg-transparent hover:bg-gray-50 text-[#0B1220] border-[#9CA7B5] dark:hover:bg-white/5 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-[14px] px-[28px] lg:py-[12px] lg:px-[24px] flex items-center justify-center transition-colors w-full sm:w-auto">
+                <button className="text-xl bg-transparent hover:bg-gray-50 text-[#0B1220] border-[#9CA7B5] dark:hover:bg-white/5 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-[16px] px-[32px] lg:py-[14px] lg:px-[28px] flex items-center justify-center transition-colors w-full sm:w-auto">
                   Explore Services <span className="ml-2 font-normal">→</span>
                 </button>
               </motion.div>
