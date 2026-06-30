@@ -1337,7 +1337,7 @@ export default function Home() {
         <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile dark:hidden" />
 
         {/* Layer 2: Hero Content */}
-        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-32 pb-8 lg:pt-[100px] xl:pt-[120px] lg:pb-6 flex flex-col h-full min-h-[100vh] lg:h-auto lg:min-h-0 pointer-events-none">
+        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-32 pb-8 lg:pt-[100px] xl:pt-[120px] lg:pb-4 flex flex-col h-full min-h-[100vh] lg:h-full lg:min-h-[100vh] pointer-events-none">
           
           <div className="flex flex-col md:flex-row items-center w-full my-auto pb-12 lg:pb-4 pointer-events-none">
             <motion.div 
@@ -1391,7 +1391,7 @@ export default function Home() {
           </div>
           
           {/* 5. STATS CARDS (Bottom Aligned) */}
-          <div className="w-full mt-auto relative z-30 pointer-events-auto pb-6 lg:pb-8">
+          <div className="w-full mt-auto relative z-30 pointer-events-auto pb-4 lg:pb-6">
             <motion.div 
               variants={enterpriseContainer}
               initial="hidden"
