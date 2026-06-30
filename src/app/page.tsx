@@ -1332,7 +1332,7 @@ export default function Home() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-10px" }}
-              className="flex flex-col justify-between items-center md:items-start text-center md:text-left w-full md:w-[60%] lg:w-[50%] h-full pointer-events-auto pt-4 md:pt-10 2xl:pt-14"
+              className="flex flex-col justify-center gap-8 md:gap-10 lg:gap-12 items-center md:items-start text-center md:text-left w-full md:w-[60%] lg:w-[50%] h-full pointer-events-auto"
             >
               
               {/* 1. BADGE/PILL */}
@@ -1346,12 +1346,12 @@ export default function Home() {
                 </span>
               </motion.div>
 
-              <div className="flex flex-col items-center md:items-start my-auto w-full gap-1.5 lg:gap-1">
+              <div className="flex flex-col items-center md:items-start w-full gap-5 lg:gap-6">
                 {/* 2. MAIN HEADING */}
-                <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[36px] md:text-[46px] lg:text-[38px] xl:text-[44px] leading-[1.05] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
-                  <span className="whitespace-nowrap">Empowering Your</span>
+                <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[36px] md:text-[46px] lg:text-[38px] xl:text-[44px] leading-[1.15] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+                  <span className="whitespace-nowrap block">Empowering Your</span>
                   <span 
-                    className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 dark:from-[#3B82F6] dark:to-[#22D3EE] mt-1 lg:mt-2"
+                    className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 dark:from-[#3B82F6] dark:to-[#22D3EE] block mt-1"
                   >
                     Digital Future
                   </span>
