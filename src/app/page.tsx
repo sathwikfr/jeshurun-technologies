@@ -1348,11 +1348,10 @@ export default function Home() {
 
               <div className="flex flex-col items-center md:items-start my-auto w-full gap-1.5 lg:gap-1">
                 {/* 2. MAIN HEADING */}
-                <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[42px] md:text-[52px] lg:text-[42px] xl:text-[48px] leading-[1.0] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
-                  <span>Empowering</span>
-                  <span>Your</span>
+                <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[36px] md:text-[46px] lg:text-[38px] xl:text-[44px] leading-[1.05] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+                  <span className="whitespace-nowrap">Empowering Your</span>
                   <span 
-                    className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 dark:from-[#3B82F6] dark:to-[#22D3EE]"
+                    className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 dark:from-[#3B82F6] dark:to-[#22D3EE] mt-1 lg:mt-2"
                   >
                     Digital Future
                   </span>
