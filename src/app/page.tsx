@@ -1366,10 +1366,10 @@ export default function Home() {
 
               {/* 4. BUTTON ROW */}
               <motion.div variants={enterpriseItem} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center md:justify-start">
-                <button className="text-base md:text-[17px] bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full py-3 px-7 lg:py-3.5 lg:px-8 shadow-sm flex items-center justify-center transition-colors w-full sm:w-auto">
+                <button className="text-[15px] md:text-base bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full py-3 px-7 lg:py-3.5 lg:px-8 shadow-sm flex items-center justify-center transition-colors w-full sm:w-auto">
                   Get Started <span className="ml-2 font-normal">→</span>
                 </button>
-                <button className="text-base md:text-[17px] bg-transparent hover:bg-gray-50 text-[#0B1220] border-[#9CA7B5] dark:hover:bg-white/5 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-3 px-7 lg:py-3.5 lg:px-8 flex items-center justify-center transition-colors w-full sm:w-auto">
+                <button className="text-[15px] md:text-base bg-transparent hover:bg-gray-50 text-[#0B1220] border-[#9CA7B5] dark:hover:bg-white/5 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-3 px-7 lg:py-3.5 lg:px-8 flex items-center justify-center transition-colors w-full sm:w-auto">
                   Explore Services <span className="ml-2 font-normal">→</span>
                 </button>
               </motion.div>
