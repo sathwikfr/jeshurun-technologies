@@ -1416,7 +1416,7 @@ export default function Home() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-50px" }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full"
+              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full scale-[1.02] origin-bottom"
             >
               
               {/* Card 1 */}
