@@ -1380,7 +1380,7 @@ export default function Home() {
               </motion.div>
 
               {/* 2. MAIN HEADING */}
-              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[52px] md:text-[64px] lg:text-[52px] xl:text-[60px] leading-[1.0] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[42px] md:text-[52px] lg:text-[42px] xl:text-[48px] leading-[1.0] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
                 <span>Empowering</span>
                 <span>Your</span>
                 <span 
@@ -1391,7 +1391,7 @@ export default function Home() {
               </motion.h1>
 
               {/* 3. PARAGRAPH */}
-              <motion.p variants={enterpriseItem} className="mt-3 lg:mt-2 text-gray-600 dark:text-[#B8C0CC] text-lg md:text-xl lg:text-[18px] xl:text-[20px] leading-[1.6] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
+              <motion.p variants={enterpriseItem} className="mt-3 lg:mt-2 text-gray-600 dark:text-[#B8C0CC] text-base md:text-lg lg:text-[16px] xl:text-[18px] leading-[1.6] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
                 Enterprise IT consulting and engineering for organizations across Ireland, Europe, the Middle East, and India — architecting resilient systems, accelerating delivery, and turning complex technology challenges into measurable business outcomes.
               </motion.p>
 
