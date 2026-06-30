@@ -1421,7 +1421,7 @@ export default function Home() {
               
               {/* Card 1 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-between text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-center text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
                       <Briefcase className="w-4 h-4" />
@@ -1434,7 +1434,7 @@ export default function Home() {
 
               {/* Card 2 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-between text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-center text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
                       <Layers className="w-4 h-4" />
@@ -1447,7 +1447,7 @@ export default function Home() {
 
               {/* Card 3 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-between text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-center text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
                       <Globe className="w-4 h-4" />
@@ -1460,7 +1460,7 @@ export default function Home() {
 
               {/* Card 4 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-between text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-center text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
                   <div className="flex items-center gap-3 mb-2">
                     <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
                       <Headset className="w-4 h-4" />
