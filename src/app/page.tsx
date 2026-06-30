@@ -508,7 +508,7 @@ const trustLogos = [
 // --- MICRO-VISUALIZATION COMPONENTS FOR TECH STAT CARDS ---
 function EnterpriseClientsViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   
   // Use first 5 logos to create the overlapping avatar row
   const displayLogos = trustLogos.slice(0, 5);
@@ -545,7 +545,7 @@ function EnterpriseClientsViz() {
 
 function SLAUptimeViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
@@ -594,7 +594,7 @@ function SLAUptimeViz() {
 
 function ExperienceTimelineViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
@@ -647,7 +647,7 @@ function ExperienceTimelineViz() {
 
 function CertifiedEngineersViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
@@ -697,7 +697,7 @@ function CertifiedEngineersViz() {
 // --- MICRO-VISUALIZATION COMPONENTS FOR CORE COMPETENCIES ---
 function ITConsultingViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
@@ -757,7 +757,7 @@ function ITConsultingViz() {
 
 function ProjectManagementViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-24 flex flex-col justify-center px-4 py-2 max-w-[200px] relative mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
@@ -804,7 +804,7 @@ function ProjectManagementViz() {
 
 function TestManagementViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
@@ -855,7 +855,7 @@ function TestManagementViz() {
 
 function InfrastructureViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
@@ -912,7 +912,7 @@ function InfrastructureViz() {
 
 function SoftwareEngineeringViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-24 flex flex-col justify-start px-3 py-2 max-w-[200px] border border-slate-200 dark:border-slate-700/60 shadow-inner relative mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden">
       <style>{`
@@ -965,7 +965,7 @@ function SoftwareEngineeringViz() {
 
 function CloudTransformationViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-24 flex items-center justify-between px-4 max-w-[200px] relative mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
@@ -1022,7 +1022,7 @@ function CloudTransformationViz() {
 
 function AISolutionsViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
@@ -1131,7 +1131,7 @@ function AISolutionsViz() {
 
 function DevOpsViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
     <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
