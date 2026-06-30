@@ -86,7 +86,7 @@ export function HeroStatsPanel() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full rounded-2xl md:rounded-full bg-white/40 dark:bg-[#0B1220]/40 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm overflow-hidden"
+        className="w-full rounded-xl bg-white/40 dark:bg-[#0B1220]/40 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm overflow-hidden"
       >
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-black/10 dark:divide-white/10">
           {statsData.map((stat, i) => (
@@ -98,8 +98,9 @@ export function HeroStatsPanel() {
             >
               <div className="flex flex-col xl:flex-row items-center xl:items-start gap-3 xl:gap-4 text-center xl:text-left">
                 {/* Icon Container */}
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0 shadow-[inset_0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] mt-1">
-                  {stat.icon}
+                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0 shadow-[inset_0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] mt-1">
+                  <div className="absolute inset-0 rounded-full bg-blue-500/30 dark:bg-blue-400/30 animate-ping" style={{ animationDuration: '3s' }} />
+                  <div className="relative z-10">{stat.icon}</div>
                 </div>
                 
                 {/* Text Layout */}

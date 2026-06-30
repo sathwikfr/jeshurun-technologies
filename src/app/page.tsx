@@ -1380,8 +1380,9 @@ export default function Home() {
               </motion.div>
 
               {/* 2. MAIN HEADING */}
-              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[44px] md:text-[56px] lg:text-[48px] xl:text-[52px] leading-[1.05] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
-                <span className="whitespace-nowrap">Empowering Your</span>
+              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[52px] md:text-[64px] lg:text-[52px] xl:text-[60px] leading-[1.0] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+                <span>Empowering</span>
+                <span>Your</span>
                 <span 
                   className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 dark:from-[#3B82F6] dark:to-[#22D3EE]"
                 >
@@ -1390,7 +1391,7 @@ export default function Home() {
               </motion.h1>
 
               {/* 3. PARAGRAPH */}
-              <motion.p variants={enterpriseItem} className="mt-3 lg:mt-2 text-gray-600 dark:text-[#B8C0CC] text-xl md:text-[22px] lg:text-[20px] xl:text-[22px] leading-[1.6] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
+              <motion.p variants={enterpriseItem} className="mt-3 lg:mt-2 text-gray-600 dark:text-[#B8C0CC] text-lg md:text-xl lg:text-[18px] xl:text-[20px] leading-[1.6] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
                 Enterprise IT consulting and engineering for organizations across Ireland, Europe, the Middle East, and India — architecting resilient systems, accelerating delivery, and turning complex technology challenges into measurable business outcomes.
               </motion.p>
 
