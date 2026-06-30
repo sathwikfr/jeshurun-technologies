@@ -92,26 +92,27 @@ export function HeroStatsPanel() {
           {statsData.map((stat, i) => (
             <motion.div 
               key={stat.id} 
-              className="flex flex-col items-center justify-center p-3 md:p-4 lg:p-5 transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+              className="flex flex-col items-center justify-center p-3 lg:p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/5 min-w-0"
               whileHover={{ y: -2 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="flex flex-col xl:flex-row items-center xl:items-start gap-3 xl:gap-4 text-center xl:text-left">
+              <div className="flex flex-col xl:flex-row items-center xl:items-start gap-2 xl:gap-3 text-center xl:text-left min-w-0 w-full">
                 {/* Icon Container */}
-                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0 shadow-[inset_0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] mt-1">
-                  <div className="absolute inset-0 rounded-full bg-blue-500/30 dark:bg-blue-400/30 animate-ping" style={{ animationDuration: '3s' }} />
+                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0 mt-1">
+                  {/* Slow rotating partial-arc border */}
+                  <div className="absolute inset-0 rounded-full border border-blue-500/20 dark:border-blue-400/20 border-t-blue-500/80 dark:border-t-blue-400/80 animate-[spin_6s_linear_infinite]" />
                   <div className="relative z-10">{stat.icon}</div>
                 </div>
                 
                 {/* Text Layout */}
-                <div className="flex flex-col">
+                <div className="flex flex-col min-w-0">
                   <div className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white leading-none tracking-tight mb-1 drop-shadow-md">
                     <AnimatedCounter target={stat.number} suffix={stat.suffix} delay={stat.delay} />
                   </div>
                   <div className="text-[9px] md:text-[10px] font-bold text-slate-700 dark:text-slate-200 uppercase tracking-widest leading-none drop-shadow-md mb-1.5">
                     {stat.label}
                   </div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-snug max-w-[180px]">
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-snug w-full truncate xl:whitespace-normal xl:overflow-visible text-wrap">
                     {stat.description}
                   </div>
                 </div>
