@@ -80,7 +80,7 @@ export function HeroStatsPanel() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <div className="w-full relative z-30 pointer-events-auto pb-4 mt-2 md:mt-4 flex justify-center">
+    <div className="w-full relative z-30 pointer-events-auto pb-0 mt-0 lg:mt-2 flex justify-center">
       {/* 
         ONE LARGE GLASS PANEL
       */}
@@ -165,12 +165,12 @@ export function HeroStatsPanel() {
 
               {/* Metric Item */}
               <motion.div 
-                className="flex flex-col items-center xl:items-start p-6 md:p-6 lg:p-8 transition-colors duration-300 group-hover:bg-white/[0.02] h-full"
+                className="flex flex-col items-center xl:items-start p-4 md:p-5 lg:p-6 transition-colors duration-300 group-hover:bg-white/[0.02] h-full"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
                 {/* Icon Section */}
-                <div className="relative mb-4">
+                <div className="relative mb-3">
                   {/* Soft blue radial glow behind icon */}
                   <div className="absolute inset-0 bg-blue-500/30 blur-[20px] rounded-full scale-150 opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
                   

@@ -1357,7 +1357,7 @@ export default function Home() {
         <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile dark:hidden" />
 
         {/* Layer 2: Hero Content */}
-        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[80px] xl:pt-[90px] lg:pb-2 flex flex-col h-full min-h-[100vh] lg:h-full lg:min-h-[100vh] pointer-events-none">
+        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-16 pb-2 lg:pt-[50px] xl:pt-[60px] lg:pb-0 flex flex-col h-full min-h-[100vh] lg:h-full lg:min-h-[100vh] pointer-events-none">
           
           <div className="flex flex-col md:flex-row items-center w-full my-auto pb-6 lg:pb-2 pointer-events-none">
             <motion.div 
