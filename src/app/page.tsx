@@ -1357,9 +1357,9 @@ export default function Home() {
         <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile dark:hidden" />
 
         {/* Layer 2: Hero Content */}
-        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-32 pb-8 lg:pt-[100px] xl:pt-[120px] lg:pb-4 flex flex-col h-full min-h-[100vh] lg:h-full lg:min-h-[100vh] pointer-events-none">
+        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[80px] xl:pt-[90px] lg:pb-2 flex flex-col h-full min-h-[100vh] lg:h-full lg:min-h-[100vh] pointer-events-none">
           
-          <div className="flex flex-col md:flex-row items-center w-full my-auto pb-12 lg:pb-4 pointer-events-none">
+          <div className="flex flex-col md:flex-row items-center w-full my-auto pb-6 lg:pb-2 pointer-events-none">
             <motion.div 
               variants={enterpriseContainer}
               initial="hidden"
@@ -1369,7 +1369,7 @@ export default function Home() {
             >
               
               {/* 1. BADGE/PILL */}
-              <motion.div variants={enterpriseItem} className="flex items-center gap-2.5 bg-[#EEF3FF] border border-[#D6E4FF] dark:bg-white/5 dark:border-white/10 rounded-full px-4 py-1.5 mb-6 lg:mb-3 shadow-sm backdrop-blur-md">
+              <motion.div variants={enterpriseItem} className="flex items-center gap-2.5 bg-[#EEF3FF] border border-[#D6E4FF] dark:bg-white/5 dark:border-white/10 rounded-full px-4 py-1.5 mb-4 lg:mb-2 shadow-sm backdrop-blur-md">
                 <div className="relative flex h-2 w-2 items-center justify-center">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75 dark:bg-[#5EC8FF]"></span>
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-[#5EC8FF]"></span>
@@ -1391,12 +1391,12 @@ export default function Home() {
               </motion.h1>
 
               {/* 3. PARAGRAPH */}
-              <motion.p variants={enterpriseItem} className="mt-4 lg:mt-3 text-gray-600 dark:text-[#B8C0CC] text-lg md:text-[18px] lg:text-[16px] xl:text-[18px] leading-[1.5] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
+              <motion.p variants={enterpriseItem} className="mt-3 lg:mt-2 text-gray-600 dark:text-[#B8C0CC] text-lg md:text-[18px] lg:text-[16px] xl:text-[18px] leading-[1.5] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
                 Enterprise IT consulting and engineering for organizations across Ireland, Europe, the Middle East, and India — architecting resilient systems, accelerating delivery, and turning complex technology challenges into measurable business outcomes.
               </motion.p>
 
               {/* 4. BUTTON ROW */}
-              <motion.div variants={enterpriseItem} className="mt-6 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center md:justify-start">
+              <motion.div variants={enterpriseItem} className="mt-4 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center md:justify-start">
                 <button className="text-base bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full py-[12px] px-[24px] lg:py-[10px] lg:px-[24px] shadow-sm flex items-center justify-center transition-colors w-full sm:w-auto">
                   Get Started <span className="ml-2 font-normal">→</span>
                 </button>
