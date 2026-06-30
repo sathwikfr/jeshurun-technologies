@@ -1348,7 +1348,7 @@ export default function Home() {
 
               <div className="flex flex-col items-center md:items-start w-full gap-4 lg:gap-5 2xl:gap-6">
                 {/* 2. MAIN HEADING */}
-                <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[42px] md:text-[52px] lg:text-[42px] xl:text-[48px] leading-[1.05] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+                <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[44px] md:text-[54px] lg:text-[44px] xl:text-[50px] leading-[1.05] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
                   <span className="block">Empowering</span>
                   <span className="block">Your</span>
                   <span 
