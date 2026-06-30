@@ -166,18 +166,29 @@ ${formData.message}
           </motion.p>
 
           {/* TRUST STRIP */}
-          <motion.div 
-            variants={item}
+          <div 
             className="pt-6 mt-4 border-t border-dashed border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest"
           >
-            <span>2017 Established</span>
-            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
-            <span>9+ Years Experience</span>
-            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
-            <span>Global Delivery</span>
-            <span className="hidden sm:inline text-slate-300 dark:text-slate-700">•</span>
-            <span>24/7 Support</span>
-          </motion.div>
+            {[
+              "2017 Established",
+              "9+ Years Experience",
+              "Global Delivery",
+              "24/7 Support"
+            ].map((stat, idx, arr) => (
+              <span key={idx} className="flex items-center gap-x-6">
+                <motion.span 
+                  variants={item}
+                  whileHover={{ scale: 1.05, color: "#2563eb" }} 
+                  className="cursor-default transition-colors duration-200"
+                >
+                  {stat}
+                </motion.span>
+                {idx < arr.length - 1 && (
+                  <motion.span variants={item} className="hidden sm:inline text-slate-300 dark:text-slate-700">•</motion.span>
+                )}
+              </span>
+            ))}
+          </div>
         </motion.div>
 
 
@@ -191,7 +202,7 @@ ${formData.message}
             transition={{ type: "spring", stiffness: 90, damping: 22, delay: 0.2 }}
             className="lg:col-span-7"
           >
-            <Card className="shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 bg-[#FFFFFF] dark:bg-[#111827] rounded-3xl overflow-hidden">
+            <Card className="shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 bg-[#FFFFFF] dark:bg-[#111827] rounded-3xl overflow-hidden hover-card-effect">
               <CardHeader className="space-y-2 p-6 md:p-8">
                 <CardTitle className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                   Start a Conversation
@@ -355,7 +366,7 @@ ${formData.message}
             className="lg:col-span-5 space-y-6"
           >
             {/* COMPANY OVERVIEW */}
-            <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
+            <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-md hover-card-effect transition-all duration-300">
               <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2 border-b border-[rgba(15,23,42,0.08)] dark:border-slate-800 pb-3 mb-4">
                 <Building2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 Company Overview
@@ -383,7 +394,7 @@ ${formData.message}
             </SpotlightCard>
 
             {/* GLOBAL HEADQUARTERS CARD WITH MAP */}
-            <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300">
+            <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-md hover-card-effect transition-all duration-300">
               <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2 border-b border-[rgba(15,23,42,0.08)] dark:border-slate-800 pb-3 mb-4">
                 <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 Global Headquarters
@@ -432,7 +443,7 @@ ${formData.message}
           viewport={{ once: true, margin: "-40px" }}
           className="max-w-5xl mx-auto mb-16"
         >
-          <div className="bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md transition-all duration-300">
+          <div className="bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md hover-card-effect transition-all duration-300">
             <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
               <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center justify-center gap-2">
                 <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />

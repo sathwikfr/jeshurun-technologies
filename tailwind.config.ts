@@ -7,7 +7,23 @@ export default <Config>{
     './public/**/*.html',
   ],
   theme: {
-    extend: {},
+    extend: {
+      keyframes: {
+        'text-gradient': {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center',
+          },
+        },
+      },
+      animation: {
+        'text-gradient': 'text-gradient 4s ease infinite',
+      },
+    },
   },
   plugins: [],
 };

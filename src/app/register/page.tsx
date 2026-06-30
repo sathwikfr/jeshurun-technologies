@@ -53,7 +53,7 @@ export default function Register() {
         transition={{ type: "spring", stiffness: 100, damping: 20 }}
         className="w-full max-w-md"
       >
-        <Card className="shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-border bg-card rounded-3xl overflow-hidden p-2">
+        <Card className="shadow-[0_20px_50px_rgba(0,0,0,0.03)] border border-border bg-card rounded-3xl overflow-hidden p-2 hover-card-effect">
           <CardHeader className="space-y-2 text-center pb-6 pt-8">
             <CardTitle className="text-3xl font-extrabold text-[#0A1F44] tracking-tight">Create Account</CardTitle>
             <CardDescription className="text-muted-foreground font-semibold">Join the enterprise platform</CardDescription>

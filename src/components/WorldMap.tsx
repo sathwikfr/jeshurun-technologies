@@ -1,10 +1,43 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { worldMapPath, WORLD_MAP_WIDTH, WORLD_MAP_HEIGHT } from "@/lib/worldMapPath";
 import { Briefcase, Layers, Globe, Headset } from "lucide-react";
+import { useInView } from "framer-motion";
 
-export function WorldMap({ isAmbient = false }: { isAmbient?: boolean }) {
+export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?: boolean, forceDark?: boolean }) {
+  const [isDarkMode, setIsDarkMode] = useState(forceDark ? true : false);
+  const [hoveredCity, setHoveredCity] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (forceDark) {
+      setIsDarkMode(true);
+      return;
+    }
+    // Check initial state
+    setIsDarkMode(document.documentElement.classList.contains("dark"));
+    
+    // Watch for class changes on the html element
+    const observer = new MutationObserver(() => {
+      setIsDarkMode(document.documentElement.classList.contains("dark"));
+    });
+    
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, [forceDark]);
+
+  const svgRef = useRef<SVGSVGElement>(null);
+  const isInView = useInView(svgRef, { once: false, margin: "200px" });
+
+  useEffect(() => {
+    if (svgRef.current) {
+      if (isInView) {
+        svgRef.current.unpauseAnimations();
+      } else {
+        svgRef.current.pauseAnimations();
+      }
+    }
+  }, [isInView]);
   // Generate a randomized tiling pattern to simulate LED brightness variation.
   // The tile is large enough (100x100) to hide repetition.
   const DOT_SPACING = 5;
@@ -29,9 +62,11 @@ export function WorldMap({ isAmbient = false }: { isAmbient?: boolean }) {
         const opacityOptions = [0.4, 0.6, 0.8, 1.0];
         const opacity = opacityOptions[Math.floor(pseudoRandom(seed1) * opacityOptions.length)];
         
-        // Colors: Vivid cyan-blue
+        // Colors
         const isBright = pseudoRandom(seed2) < 0.15;
-        const color = isBright ? "#5EC8FF" : "#3FA9F5";
+        const color = isDarkMode 
+          ? (isBright ? "#5EC8FF" : "#3FA9F5") 
+          : "#1E40AF"; // deeper blue in light mode
         
         // Dot diameter 1.5 - 2px -> Radius 0.75 - 1.0
         let r = 0.85;
@@ -41,17 +76,56 @@ export function WorldMap({ isAmbient = false }: { isAmbient?: boolean }) {
       }
     }
     return dots;
-  }, []);
+  }, [isDarkMode]);
+
+  const cities = [
+    // Tier 2 (Partner Hubs)
+    { name: "LONDON", tier: 2, x: 418, y: 146, offsetX: -16, offsetY: 0, anchor: "end" as const, fontSize: 5.5, labelW: 34, dotR: 2, info: "European Hub" },
+    { name: "DÜSSELDORF", tier: 2, x: 435, y: 145, offsetX: 10, offsetY: -8, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 2, info: "Partner Hub" },
+    { name: "FRANKFURT", tier: 2, x: 440, y: 148, offsetX: 14, offsetY: 12, anchor: "start" as const, fontSize: 5.5, labelW: 46, dotR: 2, info: "FinTech Hub" },
+    { name: "BOSTON", tier: 2, x: 246, y: 155, offsetX: -12, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 36, dotR: 2.5, info: "North American HQ" },
+    { name: "NEW YORK", tier: 2, x: 240, y: 160, offsetX: 12, offsetY: -12, anchor: "start" as const, fontSize: 5.5, labelW: 44, dotR: 2.5, info: "Financial Hub" },
+    { name: "SAN FRANCISCO", tier: 2, x: 155, y: 165, offsetX: 12, offsetY: 4, anchor: "start" as const, fontSize: 5.5, labelW: 66, dotR: 2.5, info: "West Coast Hub" },
+    { name: "DUBAI", tier: 2, x: 540, y: 220, offsetX: -10, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 2.5, info: "MEA Hub" },
+    { name: "HYDERABAD", tier: 2, x: 630, y: 240, offsetX: -12, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 48, dotR: 2.5, info: "APAC Engineering" },
+    { name: "SINGAPORE", tier: 2, x: 700, y: 280, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 48, dotR: 2.5, info: "APAC Hub" },
+    { name: "TOKYO", tier: 2, x: 730, y: 180, offsetX: -12, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 32, dotR: 2.5, info: "East Asia Operations" },
+    // Tier 3 (Decorative Cities)
+    { name: "PARIS", tier: 3, x: 425, y: 155, offsetX: -8, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 1.5, info: "Regional Office" },
+    { name: "AMSTERDAM", tier: 3, x: 430, y: 141, offsetX: 4, offsetY: -18, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "Data Center" },
+    { name: "SÃO PAULO", tier: 3, x: 310, y: 350, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "South American Hub" },
+    { name: "JOHANNESBURG", tier: 3, x: 440, y: 340, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 68, dotR: 1.5, info: "African Hub" },
+    { name: "SYDNEY", tier: 3, x: 760, y: 410, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 40, dotR: 1.5, info: "Oceania Hub" },
+    { name: "TORONTO", tier: 3, x: 230, y: 145, offsetX: -10, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 44, dotR: 1.5, info: "Canadian Office" }
+  ];
+
+  const getArcControlPoint = (startX: number, startY: number, endX: number, endY: number) => {
+    const midX = (startX + endX) / 2;
+    const midY = (startY + endY) / 2;
+    const dx = endX - startX;
+    const dy = endY - startY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist === 0) return { x: midX, y: midY };
+    const nx = -dy / dist;
+    const ny = dx / dist;
+    const bow = dist * 0.2;
+    if (ny > 0) {
+      return { x: midX - nx * bow, y: midY - ny * bow };
+    }
+    return { x: midX + nx * bow, y: midY + ny * bow };
+  };
 
   return (
     <div 
       className={
         isAmbient
           ? "absolute inset-0 w-full h-full flex flex-col items-center justify-center z-0 overflow-hidden pointer-events-none opacity-[0.08] dark:opacity-[0.12] grayscale mix-blend-screen"
-          : "absolute bottom-0 md:inset-y-0 right-0 w-full h-[400px] md:h-full md:w-[55%] flex flex-col items-center justify-end md:justify-center z-10 overflow-hidden pointer-events-none pb-10 md:pb-0"
+          : "absolute inset-0 w-full h-full flex flex-col items-center justify-end md:justify-center z-10 overflow-hidden pointer-events-none pb-10 md:pb-0"
       }
       style={isAmbient ? {} : {
-        background: 'radial-gradient(ellipse at 40% 30%, #142848 0%, #0A1830 50%, #050810 100%)'
+        background: 'radial-gradient(ellipse at 40% 30%, #142848 0%, #0A1830 50%, #050810 100%)',
+        maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)'
       }}
     >
       {/* Contained Light Bloom - Illuminating from the left edge of the map panel */}
@@ -68,13 +142,14 @@ export function WorldMap({ isAmbient = false }: { isAmbient?: boolean }) {
           }}
         />
       )}
-      {/* Width 75-80% of right hero section */}
-      <div className={isAmbient ? "relative w-full aspect-[860/560] scale-[1.8] md:scale-150" : "relative w-[78%] aspect-[860/560]"}>
+      {/* Size and position the map to anchor to the right and spill over to the left behind text */}
+      <div className={isAmbient ? "absolute inset-0 w-full h-full scale-[1.8] md:scale-150" : "absolute right-[-20%] md:right-[-5%] lg:right-[0%] top-[55%] md:top-[60%] lg:top-[55%] -translate-y-1/2 w-[140%] md:w-[75%] lg:w-[60%] xl:w-[65%] aspect-[860/560]"}>
         <svg 
+          ref={svgRef}
           viewBox={`0 0 ${WORLD_MAP_WIDTH} ${WORLD_MAP_HEIGHT}`} 
           className="w-full h-full"
           preserveAspectRatio="xMidYMid meet"
-          style={{ mixBlendMode: 'screen' }}
+          style={{ mixBlendMode: 'screen', '--animation-state': isInView ? 'running' : 'paused' } as React.CSSProperties}
         >
           <defs>
             {/* 1. SVG Dot Mask (Halftone Pattern) */}
@@ -130,54 +205,31 @@ export function WorldMap({ isAmbient = false }: { isAmbient?: boolean }) {
             </mask>
 
             <radialGradient id="dublin-glow-1" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
-              <stop offset="100%" stopColor="#5EC8FF" stopOpacity="0" />
+              <stop offset="0%" stopColor={isDarkMode ? "#ffffff" : "#1E5FFF"} stopOpacity="0.9" />
+              <stop offset="100%" stopColor={isDarkMode ? "#5EC8FF" : "rgba(30,95,255,0.6)"} stopOpacity="0" />
             </radialGradient>
             <radialGradient id="dublin-glow-2" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#5EC8FF" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#3FA9F5" stopOpacity="0" />
+              <stop offset="0%" stopColor={isDarkMode ? "#5EC8FF" : "#1E5FFF"} stopOpacity="0.6" />
+              <stop offset="100%" stopColor={isDarkMode ? "#3FA9F5" : "rgba(30,95,255,0.6)"} stopOpacity="0" />
             </radialGradient>
             <radialGradient id="dublin-glow-3" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#3FA9F5" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#3FA9F5" stopOpacity="0" />
+              <stop offset="0%" stopColor={isDarkMode ? "#3FA9F5" : "#1E5FFF"} stopOpacity="0.4" />
+              <stop offset="100%" stopColor={isDarkMode ? "#3FA9F5" : "rgba(30,95,255,0.6)"} stopOpacity="0" />
             </radialGradient>
             <radialGradient id="dest-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#5EC8FF" stopOpacity="0.4" />
-              <stop offset="100%" stopColor="#3FA9F5" stopOpacity="0" />
+              <stop offset="0%" stopColor={isDarkMode ? "#ffffff" : "#1E5FFF"} stopOpacity="0.8" />
+              <stop offset="50%" stopColor={isDarkMode ? "#5EC8FF" : "rgba(30,95,255,0.8)"} stopOpacity="0.6" />
+              <stop offset="100%" stopColor={isDarkMode ? "#3FA9F5" : "rgba(30,95,255,0.6)"} stopOpacity="0" />
             </radialGradient>
 
-            {/* Brighter arcs starting and ending strong (all routing rightward/eastward) */}
-            <linearGradient id="arc-berlin" x1="405" y1="135" x2="450" y2="150" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-              <stop offset="50%" stopColor="#6FD3FF" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
-            </linearGradient>
-            <linearGradient id="arc-capetown" x1="405" y1="135" x2="460" y2="380" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-              <stop offset="50%" stopColor="#6FD3FF" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
-            </linearGradient>
-            <linearGradient id="arc-lagos" x1="405" y1="135" x2="440" y2="270" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-              <stop offset="50%" stopColor="#6FD3FF" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
-            </linearGradient>
-            <linearGradient id="arc-tokyo" x1="405" y1="135" x2="720" y2="180" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-              <stop offset="50%" stopColor="#6FD3FF" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
-            </linearGradient>
-            <linearGradient id="arc-sydney" x1="405" y1="135" x2="750" y2="420" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-              <stop offset="50%" stopColor="#6FD3FF" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
-            </linearGradient>
-            <linearGradient id="arc-riyadh" x1="405" y1="135" x2="520" y2="220" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-              <stop offset="50%" stopColor="#6FD3FF" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#ffffff" stopOpacity="1" />
-            </linearGradient>
+            {/* Dynamic Arcs for the 13 cities */}
+            {cities.map((city, i) => (
+              <linearGradient key={`arc-grad-${i}`} id={`arc-grad-${i}`} x1="405" y1="135" x2={city.x} y2={city.y} gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
+                <stop offset="50%" stopColor={isDarkMode ? "#6FD3FF" : "#1E5FFF"} stopOpacity={isDarkMode ? "0.4" : "0.7"} />
+                <stop offset="100%" stopColor="#ffffff" stopOpacity="0.8" />
+              </linearGradient>
+            ))}
           </defs>
 
           {/* Render the Base SVG World Map with Halftone Pattern, Glow, and Edge Fade */}
@@ -225,140 +277,252 @@ export function WorldMap({ isAmbient = false }: { isAmbient?: boolean }) {
               .destination-dot {
                 animation: pulseDot 3s ease-in-out infinite;
               }
+              @keyframes pulsePartnerRing {
+                0% { transform: scale(1); opacity: 0.6; }
+                100% { transform: scale(2.5); opacity: 0; }
+              }
+              .partner-radar-ring {
+                animation: pulsePartnerRing 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+              }
+              .radar-ring, .radar-ring-delayed, .radar-ring-delayed-2, .animated-arc, .destination-dot, .partner-radar-ring {
+                animation-play-state: var(--animation-state, running);
+              }
             `}
           </style>
 
-          {/* Arcs Container (Strictly routed rightward) */}
+          {/* Dynamic Arcs */}
           <g filter="url(#arc-glow)">
-            <path d="M 405 135 Q 430 130 450 150" fill="none" stroke="url(#arc-berlin)" strokeWidth="2.5" className="animated-arc" style={{ animationDelay: '0s' }} />
-            <path d="M 405 135 Q 440 250 460 380" fill="none" stroke="url(#arc-capetown)" strokeWidth="2.5" className="animated-arc" style={{ animationDelay: '0.6s' }} />
-            <path d="M 405 135 Q 456 193 440 270" fill="none" stroke="url(#arc-lagos)" strokeWidth="2.5" className="animated-arc" style={{ animationDelay: '1.2s' }} />
-            <path d="M 405 135 Q 573 78 720 180" fill="none" stroke="url(#arc-tokyo)" strokeWidth="2.5" className="animated-arc" style={{ animationDelay: '1.8s' }} />
-            <path d="M 405 135 Q 648 191 750 420" fill="none" stroke="url(#arc-sydney)" strokeWidth="2.5" className="animated-arc" style={{ animationDelay: '2.4s' }} />
-            <path d="M 405 135 Q 480 150 520 220" fill="none" stroke="url(#arc-riyadh)" strokeWidth="2.5" className="animated-arc" style={{ animationDelay: '3.0s' }} />
+            {cities.map((city, i) => {
+              const cp = getArcControlPoint(405, 135, city.x, city.y);
+              const isTier2 = city.tier === 2;
+              return (
+                <path 
+                  key={`arc-path-${i}`}
+                  d={`M 405 135 Q ${cp.x} ${cp.y} ${city.x} ${city.y}`} 
+                  fill="none" 
+                  stroke={`url(#arc-grad-${i})`} 
+                  strokeWidth="2" 
+                  className={isTier2 ? "animated-arc" : ""} 
+                  style={{ 
+                    animationDelay: isTier2 ? `${i * 0.7}s` : '0s',
+                    opacity: isTier2 ? 1 : 0.4
+                  }} 
+                />
+              );
+            })}
           </g>
 
-          {/* Scattered Bright Sparkle Dots (Circuit Nodes) */}
+          {/* Dynamic Destination Nodes & Labels */}
           <g>
-            {[
-              {x: 150, y: 150}, {x: 180, y: 120}, {x: 200, y: 200}, {x: 250, y: 160},
-              {x: 270, y: 300}, {x: 300, y: 380}, {x: 320, y: 280},
-              {x: 450, y: 100}, {x: 480, y: 200}, {x: 420, y: 320}, {x: 500, y: 300}, {x: 480, y: 400},
-              {x: 550, y: 150}, {x: 600, y: 200}, {x: 650, y: 120}, {x: 700, y: 160}, {x: 720, y: 250}, {x: 750, y: 200},
-              {x: 780, y: 380}, {x: 720, y: 400}, {x: 800, y: 450}
-            ].map((p, i) => (
-              <g key={`sparkle-${i}`}>
-                <circle cx={p.x} cy={p.y} r="10" fill="url(#dest-glow)" opacity="0.6" />
-                <circle cx={p.x} cy={p.y} r={2 + (i % 3)} fill="#ffffff" opacity="0.9" />
+            {cities.map((city, i) => (
+              <g key={`city-node-${i}`}>
+                {/* Invisible larger hit area for easier hovering */}
+                <circle cx={city.x} cy={city.y} r="16" fill="transparent" />
+                {/* Glow */}
+                <circle cx={city.x} cy={city.y} r="14" fill="url(#dest-glow)" opacity={city.tier === 2 ? "0.9" : "0.3"} />
+                {/* Core dot */}
+                <circle 
+                  cx={city.x} cy={city.y} r={city.dotR} 
+                  fill={isDarkMode ? "#ffffff" : "#1E5FFF"} 
+                  className={city.tier === 2 ? "destination-dot" : ""} 
+                  style={{ transformOrigin: `${city.x}px ${city.y}px`, animationDelay: `${i * 0.3}s` }} 
+                />
+                {/* Partner Hub Radar Ring */}
+                {city.tier === 2 && (
+                  <circle 
+                    cx={city.x} cy={city.y} r="6" 
+                    fill="none" 
+                    stroke={isDarkMode ? "#5EC8FF" : "#1E5FFF"} 
+                    strokeWidth="1.5" 
+                    className="partner-radar-ring"
+                    style={{ transformOrigin: `${city.x}px ${city.y}px`, animationDelay: `${i * 0.4}s` }}
+                  />
+                )}
+                {/* Connecting Line */}
+                <line 
+                  x1={city.x} y1={city.y} 
+                  x2={
+                    city.anchor === 'start' ? city.x + city.offsetX - 2 : city.x + city.offsetX + 2
+                  } 
+                  y2={city.y + city.offsetY - 2} 
+                  stroke={isDarkMode ? "rgba(94, 200, 255, 0.3)" : "rgba(30, 95, 255, 0.3)"} 
+                  strokeWidth="0.5" 
+                />
+                
+                {/* Futuristic Holographic Pill Background */}
+                <rect 
+                  x={
+                    city.anchor === 'start' ? city.x + city.offsetX - 3 : city.x + city.offsetX - city.labelW + 3
+                  }
+                  y={city.y + city.offsetY - 6.5}
+                  width={city.labelW}
+                  height="9"
+                  rx="2.5"
+                  fill={isDarkMode ? "rgba(11, 18, 32, 0.85)" : "rgba(255, 255, 255, 0.95)"}
+                  stroke={isDarkMode ? "rgba(94, 200, 255, 0.5)" : "rgba(30, 95, 255, 0.4)"}
+                  strokeWidth="0.5"
+                />
+
+                {/* Label */}
+                <text 
+                  x={city.x + city.offsetX} 
+                  y={city.y + city.offsetY} 
+                  fill={isDarkMode ? "#ffffff" : "#0F172A"} 
+                  fontSize={city.fontSize} 
+                  fontFamily="Inter, system-ui, sans-serif"
+                  fontWeight="800" 
+                  letterSpacing="0.8" 
+                  textAnchor={city.anchor}
+                  style={{ textShadow: isDarkMode ? '0px 1px 3px rgba(0,0,0,0.5)' : 'none' }}
+                >
+                  {city.name}
+                </text>
               </g>
             ))}
           </g>
 
-          {/* Jagged Lightning/Circuit Streaks */}
-          <g filter="url(#arc-glow)">
-            {[
-              "M 150 150 L 160 130 L 180 135 L 200 120",
-              "M 300 380 L 310 350 L 290 330 L 315 310",
-              "M 450 100 L 470 110 L 480 90 L 500 105",
-              "M 420 320 L 435 340 L 425 360 L 440 380",
-              "M 600 200 L 620 180 L 640 190 L 660 170",
-              "M 700 160 L 710 140 L 730 150 L 750 130",
-              "M 780 380 L 760 400 L 770 420 L 750 440",
-              "M 250 160 L 260 140 L 240 130",
-              "M 650 120 L 670 110 L 680 130",
-              "M 480 400 L 490 380 L 510 390",
-              "M 200 200 L 210 180 L 230 190"
-            ].map((d, i) => (
-              <path key={`streak-${i}`} d={d} fill="none" stroke="rgba(200,230,255,0.7)" strokeWidth="1" strokeLinejoin="round" />
-            ))}
-          </g>
-
-          {/* Destination Nodes */}
+          {/* Partner Hub Data Signals */}
           <g>
-            <circle cx="450" cy="150" r="15" fill="url(#dest-glow)" />
-            <circle cx="450" cy="150" r="3" fill="#ffffff" className="destination-dot" style={{ transformOrigin: '450px 150px', animationDelay: '2s' }} />
-            
-            <circle cx="460" cy="380" r="15" fill="url(#dest-glow)" />
-            <circle cx="460" cy="380" r="3" fill="#ffffff" className="destination-dot" style={{ transformOrigin: '460px 380px', animationDelay: '2.6s' }} />
-            
-            <circle cx="440" cy="270" r="15" fill="url(#dest-glow)" />
-            <circle cx="440" cy="270" r="3" fill="#ffffff" className="destination-dot" style={{ transformOrigin: '440px 270px', animationDelay: '0.2s' }} />
-            
-            <circle cx="720" cy="180" r="15" fill="url(#dest-glow)" />
-            <circle cx="720" cy="180" r="3" fill="#ffffff" className="destination-dot" style={{ transformOrigin: '720px 180px', animationDelay: '0.8s' }} />
-            
-            <circle cx="750" cy="420" r="15" fill="url(#dest-glow)" />
-            <circle cx="750" cy="420" r="3" fill="#ffffff" className="destination-dot" style={{ transformOrigin: '750px 420px', animationDelay: '1.4s' }} />
-
-            <circle cx="520" cy="220" r="15" fill="url(#dest-glow)" />
-            <circle cx="520" cy="220" r="3" fill="#ffffff" className="destination-dot" style={{ transformOrigin: '520px 220px', animationDelay: '2.0s' }} />
+            {cities.map((city, i) => {
+              if (city.tier !== 2) return null;
+              const cp = getArcControlPoint(405, 135, city.x, city.y);
+              const pathData = `M 405 135 Q ${cp.x} ${cp.y} ${city.x} ${city.y}`;
+              
+              return (
+                <g key={`signal-${i}`}>
+                  {[0, 1, 2, 3].map((trail) => {
+                    const delay = (i * 0.45) + (trail * 0.08); // Stagger start time based on city index
+                    return (
+                      <circle 
+                        key={trail}
+                        r={trail === 0 ? 2 : 1.5 - trail * 0.3} 
+                        fill={isDarkMode ? "#ffffff" : "#5EC8FF"} 
+                        filter={trail === 0 ? "url(#arc-glow)" : ""}
+                        opacity="0"
+                      >
+                        <animateMotion
+                          path={pathData}
+                          dur="3.2s"
+                          begin={`${delay}s`}
+                          repeatCount="indefinite"
+                        />
+                        <animate
+                          attributeName="opacity"
+                          values={`0; ${1 - trail * 0.25}; ${0.8 - trail * 0.2}; 0`}
+                          keyTimes="0; 0.1; 0.8; 1"
+                          dur="3.2s"
+                          begin={`${delay}s`}
+                          repeatCount="indefinite"
+                        />
+                      </circle>
+                    );
+                  })}
+                </g>
+              );
+            })}
           </g>
 
           {/* DUBLIN Anchor Node */}
-          <g>
+          <g
+            className="pointer-events-auto cursor-pointer"
+            onMouseEnter={() => setHoveredCity("DUBLIN")}
+            onMouseLeave={() => setHoveredCity(null)}
+          >
+            {/* Invisible hit area */}
+            <circle cx="405" cy="135" r="25" fill="transparent" />
+            
             {/* Multi-layer radiant glow */}
-            <circle cx="405" cy="135" r="70" fill="url(#dublin-glow-3)" />
-            <circle cx="405" cy="135" r="40" fill="url(#dublin-glow-2)" />
-            <circle cx="405" cy="135" r="20" fill="url(#dublin-glow-1)" />
+            <circle cx="405" cy="135" r="85" fill="url(#dublin-glow-3)" />
+            <circle cx="405" cy="135" r="50" fill="url(#dublin-glow-2)" />
+            <circle cx="405" cy="135" r="25" fill="url(#dublin-glow-1)" />
             
             {/* Radar rings */}
-            <circle cx="405" cy="135" r="10" fill="none" stroke="#ffffff" strokeWidth="1.5" className="radar-ring" />
-            <circle cx="405" cy="135" r="10" fill="none" stroke="#ffffff" strokeWidth="1.5" className="radar-ring-delayed" />
+            <circle cx="405" cy="135" r="10" fill="none" stroke={isDarkMode ? "#ffffff" : "#1E5FFF"} strokeWidth="1.5" className="radar-ring" />
+            <circle cx="405" cy="135" r="10" fill="none" stroke={isDarkMode ? "#ffffff" : "#1E5FFF"} strokeWidth="1.5" className="radar-ring-delayed" />
             
             {/* Core bright dot */}
-            <circle cx="405" cy="135" r="5" fill="#ffffff" />
+            <circle cx="405" cy="135" r="5" fill={isDarkMode ? "#ffffff" : "#1E5FFF"} />
             
+            {/* Line connecting to pill */}
+            <line x1="405" y1="135" x2="415" y2="103" stroke={isDarkMode ? "rgba(94, 200, 255, 0.6)" : "rgba(30, 95, 255, 0.6)"} strokeWidth="0.5" />
+
+            {/* Dublin Pill Background (Holographic Blue) */}
+            <rect 
+              x="410" 
+              y="97.5" 
+              width="65" 
+              height="11" 
+              rx="2.5" 
+              fill={isDarkMode ? "rgba(11, 18, 32, 0.85)" : "rgba(255, 255, 255, 0.95)"} 
+              stroke={isDarkMode ? "rgba(94, 200, 255, 0.8)" : "rgba(30, 95, 255, 0.8)"}
+              strokeWidth="0.5"
+            />
+            
+            {/* Inner Pill Dot */}
+            <circle cx="415" cy="103" r="1.5" fill={isDarkMode ? "#ffffff" : "#1E5FFF"} />
+
             {/* Label */}
             <text 
-              x="405" y="105" 
-              fill="#ffffff" 
-              fontSize="12" 
-              fontWeight="bold" 
-              letterSpacing="2" 
+              x="445" y="105.5" 
+              fill={isDarkMode ? "#ffffff" : "#1E5FFF"} 
+              fontSize="5.5" 
+              fontFamily="Inter, system-ui, sans-serif"
+              fontWeight="800" 
+              letterSpacing="0.8" 
               textAnchor="middle" 
+              style={{ textShadow: isDarkMode ? '0px 1px 3px rgba(0,0,0,0.8)' : 'none' }}
             >
-              DUBLIN
+              DUBLIN (HQ)
             </text>
           </g>
+
+          {/* Hover Tooltip Overlay for HQ */}
+          {hoveredCity === 'DUBLIN' && (
+            (() => {
+              const target = { name: 'DUBLIN', x: 405, y: 135, info: 'Global Headquarters' } as any;
+              
+              return (
+                <g pointerEvents="none">
+                  {/* Tooltip Background */}
+                  <rect 
+                    x={target.x + 10} 
+                    y={target.y - 35} 
+                    width="110" 
+                    height="32" 
+                    rx="4" 
+                    fill={isDarkMode ? "rgba(11, 18, 32, 0.9)" : "rgba(255, 255, 255, 0.95)"} 
+                    stroke={isDarkMode ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.1)"}
+                  />
+                  {/* City Name */}
+                  <text 
+                    x={target.x + 18} 
+                    y={target.y - 21} 
+                    fill={isDarkMode ? "#5EC8FF" : "#1E5FFF"} 
+                    fontSize="9" 
+                    fontFamily="Inter, system-ui, sans-serif"
+                    fontWeight="bold"
+                    letterSpacing="0.5"
+                  >
+                    {target.name}
+                  </text>
+                  {/* Info text */}
+                  <text 
+                    x={target.x + 18} 
+                    y={target.y - 10} 
+                    fill={isDarkMode ? "#E2E8F0" : "#334155"} 
+                    fontSize="7.5" 
+                    fontFamily="Inter, system-ui, sans-serif"
+                  >
+                    {target.info}
+                  </text>
+                </g>
+              );
+            })()
+          )}
         </svg>
       </div>
 
-      {/* ═══════ HERO STATS CARDS (Dark Glass Overlay) ═══════ */}
-      {!isAmbient && (
-        <div className="absolute bottom-6 md:bottom-10 left-6 md:left-[11%] z-30 max-w-[calc(100%-48px)] md:max-w-none">
-        <div className="flex flex-row overflow-x-auto md:grid md:grid-cols-4 gap-3 w-full scrollbar-hide pb-2 md:pb-0 snap-x">
-          
-          {/* Card 1 */}
-          <div className="snap-start shrink-0 w-[140px] md:w-[150px] bg-[#0A1428]/50 backdrop-blur-md border border-white/10 rounded-[10px] p-3.5 flex flex-col justify-start text-left">
-            <Briefcase className="w-4 h-4 md:w-[18px] md:h-[18px] text-white mb-2" />
-            <div className="text-[20px] md:text-[22px] font-bold text-white leading-none mb-1">150+</div>
-            <div className="text-[9px] md:text-[10px] font-semibold text-white/70 uppercase tracking-wider leading-[1.2]">Projects<br/>Delivered</div>
-          </div>
 
-          {/* Card 2 */}
-          <div className="snap-start shrink-0 w-[140px] md:w-[150px] bg-[#0A1428]/50 backdrop-blur-md border border-white/10 rounded-[10px] p-3.5 flex flex-col justify-start text-left">
-            <Layers className="w-4 h-4 md:w-[18px] md:h-[18px] text-white mb-2" />
-            <div className="text-[20px] md:text-[22px] font-bold text-white leading-none mb-1">20+</div>
-            <div className="text-[9px] md:text-[10px] font-semibold text-white/70 uppercase tracking-wider leading-[1.2]">Technology<br/>Domains</div>
-          </div>
-
-          {/* Card 3 */}
-          <div className="snap-start shrink-0 w-[140px] md:w-[150px] bg-[#0A1428]/50 backdrop-blur-md border border-white/10 rounded-[10px] p-3.5 flex flex-col justify-start text-left">
-            <Globe className="w-4 h-4 md:w-[18px] md:h-[18px] text-white mb-2" />
-            <div className="text-[20px] md:text-[22px] font-bold text-white leading-none mb-1">6</div>
-            <div className="text-[9px] md:text-[10px] font-semibold text-white/70 uppercase tracking-wider leading-[1.2]">Global Delivery<br/>Hubs</div>
-          </div>
-
-          {/* Card 4 */}
-          <div className="snap-start shrink-0 w-[140px] md:w-[150px] bg-[#0A1428]/50 backdrop-blur-md border border-white/10 rounded-[10px] p-3.5 flex flex-col justify-start text-left">
-            <Headset className="w-4 h-4 md:w-[18px] md:h-[18px] text-white mb-2" />
-            <div className="text-[20px] md:text-[22px] font-bold text-white leading-none mb-1">24/7</div>
-            <div className="text-[9px] md:text-[10px] font-semibold text-white/70 uppercase tracking-wider leading-[1.2]">Enterprise<br/>Support</div>
-          </div>
-
-        </div>
-      </div>
-      )}
     </div>
   );
 }

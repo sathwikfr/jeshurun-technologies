@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, Clock, Calendar, Tag, Loader2 } from "lucide-react";
+import { SpotlightCard } from "@/components/SpotlightCard";
 
 const categories = ["All", "Cloud", "AI & Automation", "Security", "Infrastructure", "Consulting"];
 
@@ -120,6 +122,7 @@ interface FormattedPost {
 }
 
 export default function BlogPage() {
+  const router = useRouter();
   const [activeCategory, setActiveCategory] = useState("All");
   const [posts, setPosts] = useState<FormattedPost[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -293,8 +296,8 @@ export default function BlogPage() {
               >
                 {rest.map((post) => (
                   <motion.div key={post.id} variants={item}>
-                    <Link href={post.href} className="group block h-full">
-                      <div className="h-full flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] hover:border-primary/35 hover:scale-[1.02] transition-all duration-300">
+                    <div onClick={() => router.push(post.href)} className="group block h-full cursor-pointer outline-none">
+                      <SpotlightCard className="h-full flex flex-col p-0 hover-card-effect overflow-hidden">
                         {/* Color bar */}
                         <div className={`h-1.5 bg-gradient-to-r ${post.gradient}`} />
 
@@ -328,8 +331,8 @@ export default function BlogPage() {
                             <ArrowRight className="w-4 h-4 text-muted-foreground/60 group-hover:text-[#0057D9] group-hover:translate-x-0.5 transition-all duration-200" />
                           </div>
                         </div>
-                      </div>
-                    </Link>
+                      </SpotlightCard>
+                    </div>
                   </motion.div>
                 ))}
               </motion.div>

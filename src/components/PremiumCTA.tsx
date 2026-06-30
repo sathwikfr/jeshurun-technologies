@@ -59,10 +59,10 @@ const CTA_DATA: Record<CTAVariant, {
     titleTop: "Ready to Partner with",
     titleHighlight: "Jeshurun Technologies?",
     description: "Discuss your technology, cloud, infrastructure, cybersecurity, or digital transformation goals with our consulting team.",
-    primaryButtonText: "Explore Services",
-    primaryButtonHref: "/services",
-    secondaryButtonText: "View Case Studies",
-    secondaryButtonHref: "/case-studies",
+    primaryButtonText: "Contact Us",
+    primaryButtonHref: "/contact",
+    secondaryButtonText: "Explore Services",
+    secondaryButtonHref: "/services",
   },
   "case-studies": {
     titleTop: "See Real Impact.",
@@ -88,7 +88,7 @@ export function PremiumCTA({ variant }: PremiumCTAProps) {
   const data = CTA_DATA[variant];
 
   return (
-    <section className="w-full py-16 md:py-20 relative z-10 bg-background overflow-hidden">
+    <section className="w-full py-16 md:py-20 relative z-10 bg-transparent overflow-hidden">
       <div className="container px-6 sm:px-8 mx-auto relative z-10 flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

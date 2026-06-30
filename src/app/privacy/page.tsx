@@ -86,7 +86,7 @@ export default function PrivacyPolicy() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.05, duration: 0.5 }}
-                    className="p-8 border border-border rounded-2xl bg-[#F8FAFC]/30 hover:bg-card shadow-[0_8px_30px_rgb(0,0,0,0.005)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-all duration-300 group"
+                    className="p-8 border border-border rounded-2xl bg-[#F8FAFC]/30 hover:bg-card shadow-[0_8px_30px_rgb(0,0,0,0.005)] hover-card-effect group"
                   >
                     <div className="flex items-start gap-4">
                       <div className="h-10 w-10 shrink-0 rounded-xl bg-[#0057D9]/10 text-[#0057D9] flex items-center justify-center group-hover:bg-[#0057D9]/20 group-hover:scale-[1.02] transition-all duration-300">

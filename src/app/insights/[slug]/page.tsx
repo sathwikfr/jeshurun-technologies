@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, User, ShieldAlert, ArrowRight } from "lucide-react";
+import { SpotlightCard } from "@/components/SpotlightCard";
 import { insightsData, InsightArticle } from "@/lib/insightsData";
 
 export default function InsightArticlePage() {
@@ -193,7 +194,7 @@ export default function InsightArticlePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
           {/* Table of Contents - Sidebar */}
           <aside className="lg:col-span-3 lg:block hidden">
-            <div className="sticky top-28 p-6 bg-card border border-border rounded-3xl space-y-5">
+            <SpotlightCard className="sticky top-28 p-0 space-y-5">
               <h4 className="text-xs font-black uppercase text-foreground tracking-wider pb-3 border-b border-border/60">
                 Table of Contents
               </h4>
@@ -223,7 +224,7 @@ export default function InsightArticlePage() {
                   </a>
                 ))}
               </nav>
-            </div>
+            </SpotlightCard>
           </aside>
 
           {/* Article Text Content */}
@@ -273,7 +274,7 @@ export default function InsightArticlePage() {
               <div
                 key={rel.slug}
                 onClick={(e) => handleRelatedClick(e, rel.slug)}
-                className="group relative flex flex-col bg-card border border-border rounded-3xl overflow-hidden transition-all duration-300 hover:border-[#2563EB] hover:shadow-[0_12px_24px_rgba(37,99,235,0.05)] cursor-pointer"
+                className="group relative flex flex-col bg-card border border-border rounded-3xl overflow-hidden hover-card-effect cursor-pointer"
               >
                 {/* Header Image */}
                 <div className="h-48 w-full overflow-hidden relative bg-slate-950">

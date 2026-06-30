@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
 import { 
   Cloud, Database, ShieldCheck, Cpu, Network, Workflow, ArrowRight,
   Code2, Settings, Calculator, DollarSign, Clock,  BarChart3,
   Globe,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import Link from "next/link";
 import { SpotlightCard } from "@/components/SpotlightCard";
@@ -66,6 +67,8 @@ const SDLC_STAGES = [
 ];
 
 export default function Technology() {
+  const router = useRouter();
+
   const technologies = [
     {
       title: "Cloud Solutions",
@@ -111,6 +114,37 @@ export default function Technology() {
     }
   ];
 
+  const capabilityMap: Record<string, string> = {
+    "Enterprise Architecture": "network-infrastructure",
+    "High-Availability Cloud": "cloud-solutions",
+    "DevSecOps": "devops",
+    "AI Automation": "ai-machine-learning",
+    "Data Engineering": "data-management",
+    "Zero-Trust Security": "cybersecurity"
+  };
+
+  const [activeCapability, setActiveCapability] = useState<string | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveCapability(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0.1 }
+    );
+
+    Object.values(capabilityMap).forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center bg-transparent min-h-screen">
       
@@ -151,13 +185,53 @@ export default function Technology() {
               Leveraging cutting-edge technologies to architect resilient, high-performance enterprise solutions
             </motion.p>
 
-            {/* Static Capability Strip */}
-            <motion.div variants={item} className="flex flex-wrap justify-center gap-3 mt-12 pt-8 border-t border-border w-full">
-              {["Enterprise Architecture", "High-Availability Cloud", "DevSecOps", "AI Automation", "Data Engineering", "Zero-Trust Security"].map((capability) => (
-                <span key={capability} className="px-5 py-2.5 rounded-full bg-card border border-border text-sm font-bold text-foreground hover:border-primary/30 hover:bg-muted/30 transition-colors shadow-sm">
-                  {capability}
-                </span>
-              ))}
+            {/* Capability Strip */}
+            <motion.div variants={item} className="w-full mt-12 pt-8 border-t border-border">
+              <div className="flex flex-wrap justify-center gap-3 w-full">
+                {Object.keys(capabilityMap).map((capability, idx) => {
+                  const targetId = capabilityMap[capability];
+                  const isActive = activeCapability === targetId;
+
+                  return (
+                    <motion.button 
+                      key={capability}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 + idx * 0.1, duration: 0.5, type: "spring", stiffness: 100 }}
+                      whileHover={{ 
+                        y: -3, 
+                        scale: 1.03,
+                        boxShadow: "0 10px 24px rgba(30,95,255,0.2)",
+                        borderColor: "#1E5FFF",
+                        backgroundColor: "rgba(30,95,255,0.05)",
+                        color: "#1E5FFF"
+                      }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => {
+                        const el = document.getElementById(targetId);
+                        if (el) {
+                          const y = el.getBoundingClientRect().top + window.scrollY - 120;
+                          window.scrollTo({ top: y, behavior: "smooth" });
+                        }
+                      }}
+                      className={`relative px-5 py-2.5 rounded-full border text-sm font-bold transition-colors duration-300 outline-none ${
+                        isActive 
+                          ? "border-[#1E5FFF] bg-[#EEF3FF] dark:bg-[#1E5FFF]/10 text-[#1E5FFF]" 
+                          : "bg-card border-border text-foreground shadow-sm"
+                      }`}
+                    >
+                      {isActive && (
+                        <motion.div 
+                          className="absolute inset-0 rounded-full shadow-[0_0_15px_rgba(30,95,255,0.4)]"
+                          animate={{ opacity: [0.4, 1, 0.4] }}
+                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                      )}
+                      <span className="relative z-10">{capability}</span>
+                    </motion.button>
+                  );
+                })}
+              </div>
             </motion.div>
           </div>
         </motion.div>
@@ -174,9 +248,10 @@ export default function Technology() {
             className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
           >
             {technologies.map((tech) => (
-              <motion.div key={tech.title} variants={item}>
-                <SpotlightCard className="h-full border border-border bg-card group hover:border-primary/30 flex flex-col p-0 rounded-2xl overflow-hidden transition-all duration-300">
-                  {/* Top card banner image */}
+              <motion.div key={tech.title} variants={item} className="h-full" id={tech.slug}>
+                <div onClick={() => router.push(`/technology/${tech.slug}`)} className="block h-full cursor-pointer outline-none">
+                  <SpotlightCard className="h-full border border-border bg-card group flex flex-col p-0 rounded-2xl overflow-hidden hover-card-effect">
+                    {/* Top card banner image */}
                   <div className="h-48 w-full overflow-hidden relative border-b border-border">
                     <img
                       src={tech.image}
@@ -203,15 +278,15 @@ export default function Technology() {
                     </div>
                     
                     <div className="pt-6 border-t border-border mt-6">
-                      <Link
-                        href={`/technology/${tech.slug}`}
+                      <span
                         className="inline-flex items-center gap-2 text-base font-bold text-primary hover:text-primary/80 group-hover:translate-x-1 transition-all duration-200"
                       >
                         Explore Technology <ArrowRight className="w-4 h-4" />
-                      </Link>
+                      </span>
                     </div>
                   </div>
                 </SpotlightCard>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -239,46 +314,94 @@ export default function Technology() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 items-center justify-items-center"
+            className="flex flex-col space-y-16 max-w-5xl mx-auto w-full mt-12"
           >
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <AwsLogo className="h-12 w-auto" />
+            {/* Cloud Platforms */}
+            <div className="space-y-6">
+              <h4 className="text-sm font-black uppercase tracking-widest text-muted-foreground/80 border-b border-border/60 pb-2 text-left">
+                Cloud Platforms
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <AwsLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">AWS</span>
+                </SpotlightCard>
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <AzureLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">Azure</span>
+                </SpotlightCard>
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <GcpLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">Google Cloud</span>
+                </SpotlightCard>
+              </div>
             </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <AzureLogo className="h-12 w-auto" />
+
+            {/* Engineering */}
+            <div className="space-y-6">
+              <h4 className="text-sm font-black uppercase tracking-widest text-muted-foreground/80 border-b border-border/60 pb-2 text-left">
+                Engineering
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <ReactLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">React</span>
+                </SpotlightCard>
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <NextJsLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">Next.js</span>
+                </SpotlightCard>
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <NodeJsLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">Node.js</span>
+                </SpotlightCard>
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <PythonLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">Python</span>
+                </SpotlightCard>
+              </div>
             </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <GcpLogo className="h-12 w-auto" />
+
+            {/* DevOps & Infrastructure */}
+            <div className="space-y-6">
+              <h4 className="text-sm font-black uppercase tracking-widest text-muted-foreground/80 border-b border-border/60 pb-2 text-left">
+                DevOps & Infrastructure
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <KubernetesLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">Kubernetes</span>
+                </SpotlightCard>
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <DockerLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">Docker</span>
+                </SpotlightCard>
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <TerraformLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">Terraform</span>
+                </SpotlightCard>
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <GithubActionsLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">GitHub Actions</span>
+                </SpotlightCard>
+              </div>
             </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <KubernetesLogo className="h-12 w-auto" />
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <DockerLogo className="h-12 w-auto" />
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <TerraformLogo className="h-12 w-auto" />
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <GithubActionsLogo className="h-12 w-auto" />
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <KafkaLogo className="h-12 w-auto" />
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <PostgresLogo className="h-12 w-auto" />
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <ReactLogo className="h-12 w-auto" />
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <NextJsLogo className="h-12 w-auto" />
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100">
-              <NodeJsLogo className="h-12 w-auto" />
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-[1.05] opacity-70 hover:opacity-100 col-span-2 sm:col-span-1">
-              <PythonLogo className="h-12 w-auto" />
+            
+            {/* Data & Events */}
+            <div className="space-y-6">
+              <h4 className="text-sm font-black uppercase tracking-widest text-muted-foreground/80 border-b border-border/60 pb-2 text-left">
+                Data & Events
+              </h4>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <PostgresLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">PostgreSQL</span>
+                </SpotlightCard>
+                <SpotlightCard className="group relative flex flex-col items-center justify-center p-6 bg-[#F5F7FA] dark:bg-card border border-[#E6E9F0] dark:border-white/10 rounded-2xl cursor-pointer hover-card-effect select-none overflow-hidden">
+                  <KafkaLogo className="h-12 w-auto transition-transform duration-300 group-hover:-translate-y-1" />
+                  <span className="text-xs font-bold text-foreground mt-4 transition-transform duration-300 group-hover:-translate-y-1">Apache Kafka</span>
+                </SpotlightCard>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -286,16 +409,14 @@ export default function Technology() {
 
       {/* ═══════ DELIVERY METHODOLOGY ═══════ */}
       <MethodologyTimeline
-        badge="PROCESS"
+        badge="DELIVERY METHOD"
         title="Enterprise Delivery Methodology"
-        subtitle="How we transform technology strategy into secure, scalable, enterprise-grade platforms."
+        subtitle="Standardized phases designed to translate business strategy into secure, high-availability technical operations."
         steps={SDLC_STAGES}
+        variant="cards"
       />
 
 
-
-      {/* ═══════ FINAL CTA ═══════ */}
-      <PremiumCTA variant="technology" />
     </div>
   );
 }

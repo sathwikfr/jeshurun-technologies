@@ -2,6 +2,7 @@
 
 import { use, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
   ArrowLeft,
@@ -18,8 +19,8 @@ import {
   X as XIcon,
   Lock,
 } from "lucide-react";
-import { PremiumCTA } from "@/components/PremiumCTA";
 import { SpotlightCard } from "@/components/SpotlightCard";
+import { PremiumCTA } from "@/components/PremiumCTA";
 import { CloudROICalculator } from "@/components/CloudROICalculator";
 
 const container: Variants = {
@@ -778,6 +779,7 @@ export default function TechDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
+  const router = useRouter();
   const tech = techData[slug];
 
   if (!tech) {
@@ -852,7 +854,7 @@ export default function TechDetailPage({
               variants={fadeUp}
               className="h-full"
             >
-              <SpotlightCard className="p-6 bg-card border border-border shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 space-y-1.5 rounded-2xl h-full">
+              <SpotlightCard className="p-6 bg-card border border-border shadow-sm hover-card-effect space-y-1.5 rounded-2xl h-full">
                 <div
                   className={`text-3xl font-black min-h-[40px] flex items-center ${metric.value ? 'text-primary' : 'text-muted-foreground/60'}`}
                 >
@@ -876,7 +878,7 @@ export default function TechDetailPage({
         <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
           {/* Left: Strategic Overview (7 cols) */}
           <div className="lg:col-span-7 space-y-6">
-            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 rounded-2xl space-y-4">
+            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border shadow-sm hover-card-effect rounded-2xl space-y-4">
               <div
                 className="h-14 w-14 rounded-2xl flex items-center justify-center mb-2 bg-primary/10 text-primary"
               >
@@ -890,7 +892,7 @@ export default function TechDetailPage({
               </p>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 rounded-2xl space-y-4">
+            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border shadow-sm hover-card-effect rounded-2xl space-y-4">
               <h3 className="text-xl font-bold text-foreground">
                 Practice Capabilities
               </h3>
@@ -915,7 +917,7 @@ export default function TechDetailPage({
 
           {/* Right: Benefits Card (5 cols) */}
           <motion.div variants={fadeUp} className="lg:col-span-5 h-full">
-            <SpotlightCard className="p-6 sm:p-8 border border-border bg-card hover:border-primary/20 flex flex-col h-full rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md">
+            <SpotlightCard className="p-6 sm:p-8 border border-border bg-card hover-card-effect flex flex-col h-full rounded-2xl shadow-sm">
               <h3 className="text-xl font-extrabold text-foreground tracking-tight pb-4">
                 Technology Advantages
               </h3>
@@ -1028,7 +1030,7 @@ export default function TechDetailPage({
           transition={{ type: "spring" as const, stiffness: 80, damping: 22 }}
         >
           {/* Enterprise Case Study Preview */}
-          <div className="relative rounded-3xl overflow-hidden bg-card border border-border shadow-md">
+          <SpotlightCard className="p-0">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--primary),0.05)_0%,transparent_60%)] pointer-events-none" />
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12">
               
@@ -1114,7 +1116,7 @@ export default function TechDetailPage({
                 </div>
               </div>
             </div>
-          </div>
+          </SpotlightCard>
         </motion.div>
         {/* ── Section 3: FAQ Accordion ── */}
         <motion.div
@@ -1190,7 +1192,7 @@ export default function TechDetailPage({
                 desc: "We deploy real-time alerts, cost telemetry, and guarantee 99.9% uptime compliance."
               }
             ].map((step, i) => (
-              <SpotlightCard key={i} className="p-6 bg-card border border-border rounded-2xl space-y-4 hover:border-primary/30 hover:shadow-md transition-all duration-300">
+              <SpotlightCard key={i} className="p-6 bg-card border border-border rounded-2xl space-y-4 hover-card-effect">
                 <div className="text-4xl font-black text-primary/20">
                   {step.num}
                 </div>
@@ -1229,8 +1231,8 @@ export default function TechDetailPage({
             className="grid grid-cols-1 md:grid-cols-3 gap-5"
           >
             {tech.related.map((rel) => (
-              <Link key={rel.href} href={rel.href} className="group block">
-                <div className="h-full p-6 bg-card border border-border rounded-2xl hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] hover:border-primary/35 hover:scale-[1.01] transition-all duration-300">
+              <div key={rel.href} onClick={() => router.push(rel.href)} className="group block cursor-pointer outline-none">
+                <SpotlightCard className="h-full p-0">
                   <h4 className="text-base font-extrabold text-foreground group-hover:text-primary transition-colors duration-200 mb-2">
                     {rel.title}
                   </h4>
@@ -1243,17 +1245,13 @@ export default function TechDetailPage({
                     Explore{" "}
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
                   </div>
-                </div>
-              </Link>
+                </SpotlightCard>
+              </div>
             ))}
           </motion.div>
 
           {/* ═══════ CLOUD ROI CALCULATOR ═══════ */}
-          {slug === "cloud-solutions" && (
-            <div className="pt-16 pb-8">
-              <CloudROICalculator />
-            </div>
-          )}
+          {/* Removed as requested */}
 
           {/* CTA Banner */}
           <div className="-mx-6 sm:-mx-8">

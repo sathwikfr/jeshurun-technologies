@@ -7,7 +7,7 @@ interface HeaderLogoProps {
   className?: string;
 }
 
-export function HeaderLogo({ className = "h-14 w-auto" }: HeaderLogoProps) {
+export const HeaderLogo = React.memo(function HeaderLogo({ className = "h-14 w-auto" }: HeaderLogoProps) {
   return (
     <Link href="/" className="flex items-center select-none cursor-pointer">
       <svg 
@@ -36,4 +36,4 @@ export function HeaderLogo({ className = "h-14 w-auto" }: HeaderLogoProps) {
       </svg>
     </Link>
   );
-}
+});

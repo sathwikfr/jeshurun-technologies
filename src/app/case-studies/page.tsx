@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, MapPin, LineChart } from "lucide-react";
+import Image from "next/image";
+import { Check, ArrowRight, Activity, Zap, Cpu, Server, Database, Globe, Network, Lock, Code2, LineChart, PieChart, TrendingUp, BarChart3, Users, DollarSign, Target, Award, Compass, Search } from "lucide-react";
+import { SpotlightCard } from "@/components/SpotlightCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { Button } from "@/components/ui/button";
 
@@ -97,11 +100,78 @@ const CASE_STUDIES = [
 
 const FILTERS = ["All", "Financial Services", "Healthcare", "Retail", "Manufacturing", "Logistics", "SaaS"];
 
+function CaseStudyCard({ study, onClick }: { study: typeof CASE_STUDIES[0], onClick: () => void }) {
+  return (
+    <div onClick={onClick} className="w-full h-full cursor-pointer outline-none flex flex-col">
+      <SpotlightCard className="flex-1 flex flex-col p-0 hover-card-effect overflow-hidden group">
+        {/* Image Header */}
+        <div className="relative w-full h-48 md:h-64 overflow-hidden bg-slate-900 shrink-0">
+          <Image 
+            src={study.image} 
+            alt={study.title}
+            fill
+            className="object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
+        </div>
+        
+        {/* Content Body */}
+        <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+          <div>
+            <h3 className="font-extrabold text-foreground tracking-tight leading-tight mb-4 group-hover:text-[#2563EB] transition-colors text-2xl md:text-3xl text-left">
+              {study.title}
+            </h3>
+            
+            <div className="space-y-3 mb-6 text-left">
+              <div>
+                <strong className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Challenge</strong>
+                <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-2">
+                  {study.challenge}
+                </p>
+              </div>
+              <div>
+                <strong className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Solution</strong>
+                <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-2">
+                  {study.solution}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-border flex items-center justify-between mt-auto">
+            <span className="text-xs font-semibold text-muted-foreground">
+              {study.industry}
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#2563EB] hover:text-[#2563EB]/80 transition-colors">
+              Explore Case Study <ArrowRight size={12} />
+            </span>
+          </div>
+        </div>
+      </SpotlightCard>
+    </div>
+  );
+}
+
 /* ─── MAIN COMPONENT ─── */
 export default function CaseStudiesPage() {
+  const router = useRouter();
   const [activeFilter, setActiveFilter] = useState("All");
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const [mounted, setMounted] = useState(false);
 
-  const filteredStudies = CASE_STUDIES.filter((study) => {
+  useEffect(() => {
+    setFeaturedIndex(Math.floor(Math.random() * CASE_STUDIES.length));
+    setMounted(true);
+  }, []);
+
+  const featuredStudy = CASE_STUDIES[featuredIndex];
+
+  const filteredStudies = CASE_STUDIES.filter((study, index) => {
+    // Exclude the featured study from the grid
+    if (mounted && index === featuredIndex) return false;
+    if (!mounted && index === 0) return false;
+    
+    // Apply category filter
     return activeFilter === "All" || study.industry === activeFilter;
   });
 
@@ -138,7 +208,7 @@ export default function CaseStudiesPage() {
                 Enterprise Proof Points
               </motion.div>
               <motion.h1 variants={item} className="text-5xl sm:text-6xl md:text-7xl font-serif tracking-tight leading-none">
-                <span className="text-foreground">Proven Enterprise</span>{' '}
+                <span className="text-blue-600 dark:text-blue-500">Proven Enterprise</span>{' '}
                 <br className="hidden sm:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4]">
                   Transformations
@@ -150,60 +220,13 @@ export default function CaseStudiesPage() {
             </div>
 
             {/* Right Featured Case Study */}
-            <motion.div variants={item} className="w-full relative">
-              <div className="group relative bg-card rounded-3xl overflow-hidden border border-border shadow-[0_8px_30px_rgba(15,23,42,0.08)] flex flex-col">
-                {/* Image Header */}
-                <div className="relative w-full h-48 md:h-64 overflow-hidden bg-slate-900">
-                  <img 
-                    src="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80" 
-                    alt="Global Banking Platform Modernization"
-                    className="w-full h-full object-cover opacity-90 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
-                  
-                  {/* Top Badges */}
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    <span className="px-2.5 py-1 rounded-md bg-[#0F172A] border border-white/10 text-[10px] font-bold text-white uppercase tracking-wider">
-                      Financial Services
-                    </span>
-                  </div>
-                </div>
-
-                {/* Content Body */}
-                <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-extrabold text-foreground tracking-tight leading-tight mb-4 text-2xl md:text-3xl text-left">
-                      Global Banking Platform Modernization
-                    </h3>
-                    
-                    <div className="space-y-3 mb-6 text-left">
-                      <div>
-                        <strong className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Challenge</strong>
-                        <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-2">
-                          High maintenance costs and peak-hour downtime from legacy monolithic systems.
-                        </p>
-                      </div>
-                      <div>
-                        <strong className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Solution</strong>
-                        <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-2">
-                          Migrated core services to AWS using a Kubernetes microservices architecture.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-border flex items-center justify-between mt-6">
-                    <span className="text-xs font-semibold text-muted-foreground">
-                      Financial Services
-                    </span>
-                    <Link 
-                      href="/case-studies/finance-modernization"
-                      className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#2563EB] hover:text-[#2563EB]/80 transition-colors"
-                    >
-                      Explore Case Study <ArrowRight size={12} />
-                    </Link>
-                  </div>
-                </div></div>
+            <motion.div variants={item} className="w-full relative flex justify-center lg:justify-end">
+              <div className="w-full max-w-[500px]">
+                <CaseStudyCard 
+                  study={featuredStudy} 
+                  onClick={() => router.push(`/case-studies/${featuredStudy.id}`)} 
+                />
+              </div>
             </motion.div>
           </div>
         </motion.div>
@@ -247,12 +270,12 @@ export default function CaseStudiesPage() {
           {/* Bento Grid */}
           <motion.div 
             layout
-            className="grid grid-cols-1 md:grid-cols-12 gap-6 max-w-6xl mx-auto"
+            className="flex flex-col md:flex-row md:flex-wrap gap-6 max-w-6xl mx-auto w-full justify-start items-stretch"
           >
             <AnimatePresence mode="popLayout">
               {filteredStudies.map((study) => {
                 // Determine responsive column span based on size type
-                const colSpanClass = "md:col-span-6";
+                const colSpanClass = "w-full md:w-[calc(50%-12px)]";
 
                 return (
                   <motion.div
@@ -262,55 +285,12 @@ export default function CaseStudiesPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 200, damping: 25 }}
-                    className={`group relative bg-card rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] hover:border-primary/35 transition-all duration-500 flex flex-col ${colSpanClass}`}
+                    className={`${colSpanClass} flex`}
                   >
-                    {/* Image Header */}
-                    <div className="relative w-full h-48 md:h-64 overflow-hidden bg-slate-900">
-                      <img 
-                        src={study.image} 
-                        alt={study.title}
-                        loading="lazy"
-                        className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
-                      
-                      {/* Removed Top Badges */}
-                    </div>
-                    {/* Content Body */}
-                    <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
-                      <div>
-                        <h3 className="font-extrabold text-foreground tracking-tight leading-tight mb-4 group-hover:text-[#2563EB] transition-colors text-2xl md:text-3xl text-left">
-                          {study.title}
-                        </h3>
-                        
-                        <div className="space-y-3 mb-6 text-left">
-                          <div>
-                            <strong className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Challenge</strong>
-                            <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-2">
-                              {study.challenge}
-                            </p>
-                          </div>
-                          <div>
-                            <strong className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Solution</strong>
-                            <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-2">
-                              {study.solution}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="pt-4 border-t border-border flex items-center justify-between mt-6">
-                        <span className="text-xs font-semibold text-muted-foreground">
-                          {study.industry}
-                        </span>
-                        <Link 
-                          href={`/case-studies/${study.id}`}
-                          className="inline-flex items-center gap-1.5 text-xs font-extrabold text-[#2563EB] hover:text-[#2563EB]/80 transition-colors"
-                        >
-                          Explore Case Study <ArrowRight size={12} />
-                        </Link>
-                      </div>
-                    </div>
+                    <CaseStudyCard 
+                      study={study} 
+                      onClick={() => router.push(`/case-studies/${study.id}`)} 
+                    />
                   </motion.div>
                 );
               })}

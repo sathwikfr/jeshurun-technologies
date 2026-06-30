@@ -1,5 +1,7 @@
 "use client";
 
+import { useState, useEffect } from "react";
+
 import { motion, type Variants } from "framer-motion";
 import {
   Check,
@@ -14,6 +16,7 @@ import {
   Milestone,
 } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { CloudROICalculator } from "@/components/CloudROICalculator";
@@ -119,6 +122,37 @@ export default function Services() {
     },
   ];
 
+  const router = useRouter();
+
+  const capabilityMap: Record<string, string> = {
+    "Enterprise Transformation": "it-consulting",
+    "Delivery Excellence": "project-management",
+    "Quality Assurance": "test-management",
+    "Cloud & Infrastructure": "infrastructure-management"
+  };
+
+  const [activeCapability, setActiveCapability] = useState<string | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveCapability(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-20% 0px -60% 0px", threshold: 0.1 }
+    );
+
+    Object.values(capabilityMap).forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center bg-transparent min-h-screen">
       {/* Header Banner */}
@@ -159,13 +193,53 @@ export default function Services() {
               infrastructure design
             </motion.p>
             
-            {/* Static Capability Strip */}
-            <motion.div variants={item} className="flex flex-wrap justify-center gap-3 mt-12 pt-8 border-t border-border w-full">
-              {["Enterprise Transformation", "Delivery Excellence", "Quality Assurance", "Cloud & Infrastructure"].map((capability) => (
-                <span key={capability} className="px-5 py-2.5 rounded-full bg-card border border-border text-sm font-bold text-foreground hover:border-primary/30 hover:bg-muted/30 transition-colors shadow-sm">
-                  {capability}
-                </span>
-              ))}
+            {/* Capability Strip */}
+            <motion.div variants={item} className="w-full mt-12 pt-8 border-t border-border">
+              <div className="flex flex-wrap justify-center gap-3 w-full">
+                {Object.keys(capabilityMap).map((capability, idx) => {
+                  const targetId = capabilityMap[capability];
+                  const isActive = activeCapability === targetId;
+
+                  return (
+                    <motion.button 
+                      key={capability}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4 + idx * 0.1, duration: 0.5, type: "spring", stiffness: 100 }}
+                      whileHover={{ 
+                        y: -3, 
+                        scale: 1.03,
+                        boxShadow: "0 10px 24px rgba(30,95,255,0.2)",
+                        borderColor: "#1E5FFF",
+                        backgroundColor: "rgba(30,95,255,0.05)",
+                        color: "#1E5FFF"
+                      }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => {
+                        const el = document.getElementById(targetId);
+                        if (el) {
+                          const y = el.getBoundingClientRect().top + window.scrollY - 120;
+                          window.scrollTo({ top: y, behavior: "smooth" });
+                        }
+                      }}
+                      className={`relative px-5 py-2.5 rounded-full border text-sm font-bold transition-colors duration-300 outline-none ${
+                        isActive 
+                          ? "border-[#1E5FFF] bg-[#EEF3FF] dark:bg-[#1E5FFF]/10 text-[#1E5FFF]" 
+                          : "bg-card border-border text-foreground shadow-sm"
+                      }`}
+                    >
+                      {isActive && (
+                        <motion.div 
+                          className="absolute inset-0 rounded-full shadow-[0_0_15px_rgba(30,95,255,0.4)]"
+                          animate={{ opacity: [0.4, 1, 0.4] }}
+                          transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                        />
+                      )}
+                      <span className="relative z-10">{capability}</span>
+                    </motion.button>
+                  );
+                })}
+              </div>
             </motion.div>
           </div>
         </motion.div>
@@ -182,61 +256,62 @@ export default function Services() {
             className="grid gap-8 md:grid-cols-2"
           >
             {servicesList.map((service) => (
-              <motion.div key={service.title} variants={item} className="h-full">
-                <SpotlightCard className="flex flex-col h-full border border-border border-l-4 border-l-primary bg-card group hover:border-primary/30 rounded-2xl overflow-hidden p-0 transition-all duration-300 hover:scale-[1.015]">
-                  {/* Top card banner image */}
-                  <div className="h-48 w-full overflow-hidden relative border-b border-border ">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent" />
-                  </div>
+              <motion.div key={service.title} variants={item} className="h-full" id={service.slug}>
+                <div onClick={() => router.push(`/services/${service.slug}`)} className="block h-full outline-none">
+                  <SpotlightCard className="flex flex-col h-full border border-border bg-card group rounded-2xl overflow-hidden p-0 hover-card-effect cursor-pointer">
+                    {/* Top card banner image */}
+                    <div className="h-48 w-full overflow-hidden relative border-b border-border ">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover object-center group-hover:scale-[1.03] transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/20 via-transparent to-transparent" />
+                    </div>
 
-                  {/* Card Content */}
-                  <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
-                    <div>
-                      <div className="flex items-center justify-between pb-6">
-                        <h3 className="text-3xl font-extrabold text-foreground tracking-tight">
-                          {service.title}
-                        </h3>
-                        <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-[1.02] transition-all duration-300">
-                          {service.icon}
+                    {/* Card Content */}
+                    <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center justify-between pb-6">
+                          <h3 className="text-3xl font-extrabold text-foreground tracking-tight">
+                            {service.title}
+                          </h3>
+                          <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:scale-[1.02] transition-all duration-300">
+                            {service.icon}
+                          </div>
+                        </div>
+                        <div className="space-y-6">
+                          <p className="text-muted-foreground text-lg leading-relaxed font-medium">
+                            {service.description}
+                          </p>
+
+                          <ul className="space-y-4 pt-6 border-t border-border ">
+                            {service.features.map((feature, idx) => (
+                              <li
+                                key={idx}
+                                className="flex items-center text-base font-semibold text-foreground "
+                              >
+                                <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0">
+                                  <Check className="w-4 h-4 text-primary" />
+                                </span>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
                         </div>
                       </div>
-                      <div className="space-y-6">
-                        <p className="text-muted-foreground text-lg leading-relaxed font-medium">
-                          {service.description}
-                        </p>
 
-                        <ul className="space-y-4 pt-6 border-t border-border ">
-                          {service.features.map((feature, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-center text-base font-semibold text-foreground "
-                            >
-                              <span className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 flex-shrink-0">
-                                <Check className="w-4 h-4 text-primary" />
-                              </span>
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
+                      <div className="pt-6 border-t border-border mt-6">
+                        <span
+                          className="inline-flex items-center gap-2 text-base font-bold text-primary group-hover:text-primary/80 group-hover:translate-x-1 transition-all duration-200"
+                        >
+                          Explore Practice Area{" "}
+                          <ArrowRight className="w-4 h-4" />
+                        </span>
                       </div>
                     </div>
-
-                    <div className="pt-6 border-t border-border mt-6">
-                      <Link
-                        href={`/services/${service.slug}`}
-                        className="inline-flex items-center gap-2 text-base font-bold text-primary hover:text-primary/80 group-hover:translate-x-1 transition-all duration-200"
-                      >
-                        Explore Practice Area{" "}
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                    </div>
-                  </div>
-                </SpotlightCard>
+                  </SpotlightCard>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -250,71 +325,13 @@ export default function Services() {
         steps={methodology}
       />
 
-      {/* Why Clients Choose Jeshurun */}
-      <section className="w-full py-20 md:py-32 bg-card relative border-t border-border">
-        <div className="container px-6 sm:px-8 mx-auto max-w-5xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            className="text-center space-y-4 mb-16"
-          >
-            <h2 className="text-3xl md:text-5xl font-black text-foreground tracking-tight">
-              Why Clients Choose Jeshurun
-            </h2>
-            <p className="text-muted-foreground text-lg font-medium max-w-2xl mx-auto">
-              Delivering enterprise resilience, scalable architecture, and continuous quality.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="p-8 rounded-2xl border border-border bg-background shadow-sm hover:shadow-md hover:border-primary/30 hover:scale-[1.01] transition-all duration-300 group"
-            >
-              <div className="text-4xl font-black text-primary mb-2">150+</div>
-              <div className="text-lg font-bold text-foreground">Successful Engagements</div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="p-8 rounded-2xl border border-border bg-background shadow-sm hover:shadow-md hover:border-primary/30 hover:scale-[1.01] transition-all duration-300 group"
-            >
-              <div className="text-4xl font-black text-primary mb-2">Enterprise</div>
-              <div className="text-lg font-bold text-foreground">Delivery Framework</div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="p-8 rounded-2xl border border-border bg-background shadow-sm hover:shadow-md hover:border-primary/30 hover:scale-[1.01] transition-all duration-300 group"
-            >
-              <div className="text-4xl font-black text-primary mb-2">Certified</div>
-              <div className="text-lg font-bold text-foreground">Consulting Teams</div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="p-8 rounded-2xl border border-border bg-background shadow-sm hover:shadow-md hover:border-primary/30 hover:scale-[1.01] transition-all duration-300 group"
-            >
-              <div className="text-4xl font-black text-primary mb-2">24/7</div>
-              <div className="text-lg font-bold text-foreground">Strategic Support</div>
-            </motion.div>
-          </div>
+      {/* Cloud ROI Calculator */}
+      <div className="bg-background pt-8 pb-20">
+        <div className="container mx-auto px-6 sm:px-8">
+          <CloudROICalculator />
         </div>
-      </section>
+      </div>
 
-      <PremiumCTA variant="services" />
     </div>
   );
 }

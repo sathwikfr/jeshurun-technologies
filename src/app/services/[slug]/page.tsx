@@ -2,6 +2,7 @@
 
 import { use, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
   ArrowLeft,
@@ -370,6 +371,7 @@ export default function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
+  const router = useRouter();
   const service = servicesData[slug];
 
   if (!service) {
@@ -436,7 +438,7 @@ export default function ServiceDetailPage({
               variants={fadeUp}
               className="h-full"
             >
-              <SpotlightCard className="p-6 bg-muted/30 dark:bg-card border border-border shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 space-y-1.5 rounded-2xl h-full">
+              <SpotlightCard className="p-6 bg-muted/30 dark:bg-card border border-border shadow-sm hover-card-effect space-y-1.5 rounded-2xl h-full">
                 <div className={`text-3xl font-black min-h-[40px] flex items-center ${metric.value ? 'text-primary' : 'text-muted-foreground/60'}`}>
                   {metric.value ? (
                     metric.value
@@ -501,7 +503,7 @@ export default function ServiceDetailPage({
 
           {/* Right: Benefits & SLA Cards (5 cols) */}
           <motion.div variants={fadeUp} className="lg:col-span-5 h-full">
-            <SpotlightCard className="p-6 sm:p-8 border border-border bg-card hover:border-primary/20 flex flex-col h-full rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md">
+            <SpotlightCard className="p-6 sm:p-8 border border-border bg-card hover-card-effect flex flex-col h-full rounded-2xl shadow-sm">
               <h3 className="text-2xl font-extrabold text-foreground tracking-tight pb-4">
                 Operational Benefits
               </h3>
@@ -707,8 +709,8 @@ export default function ServiceDetailPage({
 
           <motion.div variants={fadeUp} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {service.related.map((rel) => (
-              <Link key={rel.href} href={rel.href} className="group block">
-                <div className="h-full p-8 bg-card border border-border rounded-2xl hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] hover:border-primary/35 hover:scale-[1.02] transition-all duration-300">
+              <div key={rel.href} onClick={() => router.push(rel.href)} className="group block cursor-pointer outline-none">
+                <SpotlightCard className="h-full p-8 bg-card border border-border rounded-2xl hover-card-effect">
                   <h4 className="text-lg font-extrabold text-foreground group-hover:text-primary transition-colors duration-200 mb-2">
                     {rel.title}
                   </h4>
@@ -718,17 +720,13 @@ export default function ServiceDetailPage({
                   <div className="flex items-center gap-1 mt-6 text-sm font-bold text-primary">
                     Explore <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
                   </div>
-                </div>
-              </Link>
+                </SpotlightCard>
+              </div>
             ))}
           </motion.div>
 
           {/* ═══════ CLOUD ROI CALCULATOR ═══════ */}
-          {(slug === "infrastructure-management" || slug === "it-consulting") && (
-            <div className="pt-16 pb-8">
-              <CloudROICalculator />
-            </div>
-          )}
+          {/* Removed as requested */}
 
           {/* CTA Banner */}
           <div className="-mx-6 sm:-mx-8">

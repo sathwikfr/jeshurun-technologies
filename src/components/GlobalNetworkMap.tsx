@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, memo } from "react";
 import { worldMapPath, WORLD_MAP_WIDTH, WORLD_MAP_HEIGHT } from "@/lib/worldMapPath";
 import { useReducedMotion } from "framer-motion";
 
@@ -63,6 +63,171 @@ interface Props {
   isHeroButtonHovered?: boolean;
 }
 
+type ActivePacket = { id: string; routeIndex: number; duration: number; delayOffset: number };
+type ActiveSpark = { id: string; routeIndex: number };
+
+const NetworkOverlay = memo(({ 
+  prefersReducedMotion, hoveredNode, activeRoutes, activePackets, hqSparks, destSparks, setHoveredNode 
+}: { 
+  prefersReducedMotion: boolean | null, hoveredNode: NodeData | null, activeRoutes: number[], activePackets: ActivePacket[], hqSparks: ActiveSpark[], destSparks: ActiveSpark[], setHoveredNode: (node: NodeData) => void 
+}) => {
+  return (
+        <svg 
+          width="100%" height="100%" 
+          viewBox="0 0 860 560" 
+          preserveAspectRatio="xMidYMid meet"
+          style={{ filter: "drop-shadow(0 0 30px rgba(0,0,0,0.5))" }}
+        >
+          <defs>
+            <filter id="glow-bloom" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+            <filter id="glow-intense" x="-100%" y="-100%" width="300%" height="300%">
+              <feGaussianBlur stdDeviation="4" result="blur1" />
+              <feGaussianBlur stdDeviation="10" result="blur2" />
+              <feGaussianBlur stdDeviation="20" result="blur3" />
+              <feMerge>
+                <feMergeNode in="blur3" />
+                <feMergeNode in="blur2" />
+                <feMergeNode in="blur1" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* LAYER 1: Routes and Packets */}
+          <g>
+            {ROUTES.map((route, i) => {
+              const targetNode = NODES.find(n => n.id === route.target)!;
+              const hqNode = NODES.find(n => n.isHQ)!;
+              
+              const isHovered = hoveredNode && (hoveredNode.id === route.target || hoveredNode.isHQ);
+              const isDimmed = hoveredNode && !isHovered;
+              const isActive = activeRoutes.includes(i);
+              
+              const pathData = `M ${hqNode.x} ${hqNode.y} Q ${route.cp[0]} ${route.cp[1]} ${targetNode.x} ${targetNode.y}`;
+              
+              return (
+                <g key={route.target} style={{ opacity: isDimmed ? 0.1 : 1, transition: 'opacity 0.3s ease-in-out' }}>
+                  <path id={`route-${i}`} d={pathData} fill="none" stroke="transparent" strokeWidth="0" />
+                  
+                  {/* Outer Wide Glow */}
+                  <path d={pathData} fill="none" stroke="#22D3FF" strokeWidth="8" opacity={isActive ? 0.15 : 0} filter="url(#glow-intense)" style={{ transition: 'opacity 0.3s ease-in-out' }} />
+                  {/* Medium Core Bloom */}
+                  <path d={pathData} fill="none" stroke="#22D3FF" strokeWidth="4" opacity={isActive ? 0.4 : 0.1} filter="url(#glow-intense)" style={{ transition: 'opacity 0.3s ease-in-out' }} />
+                  {/* Sharp Bright Core */}
+                  <path d={pathData} fill="none" stroke="#66F2FF" strokeWidth={isHovered ? "2" : "1"} opacity={isActive || isHovered ? 0.7 : 0.2} style={{ transition: 'opacity 0.3s ease-in-out' }} />
+                  
+                  {!isDimmed && !prefersReducedMotion && activePackets.filter(p => p.routeIndex === i).map(packet => (
+                    <g key={packet.id} filter="url(#glow-intense)">
+                      {/* Leading Solid Packet */}
+                      <circle r="4.5" fill="#ffffff">
+                        <animateMotion 
+                          dur={`${packet.duration}s`} 
+                          begin="0s" 
+                          calcMode="spline" 
+                          keyTimes="0; 1"
+                          keySplines="0.42 0 0.58 1" 
+                          fill="freeze"
+                        >
+                          <mpath href={`#route-${i}`} />
+                        </animateMotion>
+                      </circle>
+                      {/* Fibre-Optic Trailing Wave */}
+                      <path d="M -50,0 L 0,0" stroke="#22D3FF" strokeWidth="3.5" strokeLinecap="round" opacity="0.8">
+                        <animateMotion 
+                          dur={`${packet.duration}s`} 
+                          begin="0s" 
+                          calcMode="spline" 
+                          keyTimes="0; 1"
+                          keySplines="0.42 0 0.58 1" 
+                          rotate="auto"
+                          fill="freeze"
+                        >
+                          <mpath href={`#route-${i}`} />
+                        </animateMotion>
+                      </path>
+                    </g>
+                  ))}
+                </g>
+              );
+            })}
+          </g>
+          {/* LAYER 2: Nodes and Arrival Sparks */}
+          <g>
+            {NODES.map((node, i) => {
+              const isHQFocus = hoveredNode?.isHQ;
+              const isHovered = hoveredNode?.id === node.id || isHQFocus;
+              const isDimmed = hoveredNode && hoveredNode.id !== node.id && !isHQFocus;
+              
+              // Target sparks
+              const targetSparks = destSparks.filter(s => ROUTES[s.routeIndex].target === node.id);
+              const isDestinationIlluminated = targetSparks.length > 0;
+              
+              return (
+                <g 
+                  key={node.id} 
+                  style={{ opacity: isDimmed ? 0.15 : 1, transition: 'all 0.3s ease-in-out', transformOrigin: `${node.x}px ${node.y}px` }}
+                  onMouseEnter={() => setHoveredNode(node)}
+                  className="outline-none cursor-pointer"
+                  tabIndex={0}
+                  role="button"
+                >
+                  {/* HQ Radar Rings & HQ Central Glow */}
+                  {node.isHQ && (
+                    <g style={{ animation: 'hqCoreBreathe 8s ease-in-out infinite' }}>
+                      <circle cx={node.x} cy={node.y} r="15" fill="none" stroke="#22D3FF" strokeWidth="2" className="radar-ring" style={{ '--delay': '0s', '--duration': '7s', '--max-opacity': '0.7' } as React.CSSProperties} />
+                      <circle cx={node.x} cy={node.y} r="25" fill="none" stroke="#22D3FF" strokeWidth="1" filter="url(#glow-bloom)" className="radar-ring" style={{ '--delay': '2s', '--duration': '8s', '--max-opacity': '0.4' } as React.CSSProperties} />
+                      <circle cx={node.x} cy={node.y} r="40" fill="none" stroke="#22D3FF" strokeWidth="0.5" filter="blur(2px)" className="radar-ring" style={{ '--delay': '4s', '--duration': '9s', '--max-opacity': '0.2' } as React.CSSProperties} />
+                      
+                      {/* Massive Background Flare */}
+                      <circle cx={node.x} cy={node.y} r="35" fill="#22D3FF" opacity="0.2" filter="url(#glow-intense)" />
+                      {/* Inner HQ Flare */}
+                      <circle cx={node.x} cy={node.y} r="18" fill="#22D3FF" opacity={hqSparks.length > 0 ? 0.9 : 0.6} filter="url(#glow-intense)" style={{ transition: 'opacity 0.2s ease-out' }} />
+                      
+                      {/* Dynamic HQ Charge Pulses Synced with Packets */}
+                      {hqSparks.map((spark) => (
+                        <circle key={spark.id} cx={node.x} cy={node.y} r="22" fill="#66F2FF" filter="url(#glow-intense)" opacity="0" style={{ transformOrigin: 'center', animation: `nodeCharge 0.35s ease-out forwards` }} />
+                      ))}
+                    </g>
+                  )}
+
+                  {/* Secondary Node Static Glows */}
+                  {!node.isHQ && (
+                    <circle cx={node.x} cy={node.y} r="8" fill="#22D3FF" opacity={isHovered || isDestinationIlluminated ? 0.8 : 0.15} filter="url(#glow-intense)" style={{ transition: 'opacity 0.2s ease-out' }} />
+                  )}
+
+                  {/* Magnetic Interaction Hitbox */}
+                  <circle id={`node-magnetic-${node.id}`} cx={node.x} cy={node.y} r="15" fill="transparent" />
+
+                  {/* Sharp White Core */}
+                  <circle cx={node.x} cy={node.y} r={node.isHQ ? 4.5 : 2.5} fill="#ffffff" filter="url(#glow-intense)" />
+
+                  {/* Arrival Sparks (Destination Branches) */}
+                  {!node.isHQ && (
+                    <g transform={`translate(${node.x}, ${node.y})`}>
+                      {targetSparks.map((spark) => (
+                        <path 
+                          key={spark.id}
+                          d="M0,-3 L0,-10 M3,0 L10,0 M0,3 L0,10 M-3,0 L-10,0 M2,2 L6,6 M-2,-2 L-6,-6 M2,-2 L6,-6 M-2,2 L-6,6" 
+                          stroke="#66F2FF" strokeWidth="1.5" strokeLinecap="round" 
+                          opacity="0"
+                          style={{ transformOrigin: '0 0', animation: `sparkFlash 0.3s ease-out forwards` }}
+                        />
+                      ))}
+                    </g>
+                  )}
+
+
+                </g>
+              );
+            })}
+          </g>
+        </svg>
+  );
+});
+
 export function GlobalNetworkMap({ isHeroButtonHovered }: Props = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -78,6 +243,7 @@ export function GlobalNetworkMap({ isHeroButtonHovered }: Props = {}) {
   const [destSparks, setDestSparks] = useState<ActiveSpark[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isMapVisible, setIsMapVisible] = useState(false);
   const mouseRef = useRef({ x: -1, y: -1, svgX: -1, svgY: -1 });
   
   useEffect(() => {
@@ -271,9 +437,11 @@ export function GlobalNetworkMap({ isHeroButtonHovered }: Props = {}) {
 
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
+        setIsMapVisible(true);
         startTime = performance.now();
         animationFrameId = requestAnimationFrame(draw);
       } else {
+        setIsMapVisible(false);
         cancelAnimationFrame(animationFrameId);
       }
     }, { threshold: 0.1 });
@@ -289,7 +457,7 @@ export function GlobalNetworkMap({ isHeroButtonHovered }: Props = {}) {
 
   // Orchestrate independent route lifecycles
   useEffect(() => {
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || !isMapVisible) return;
     
     let isSubscribed = true;
     const timeouts = new Map<number, NodeJS.Timeout>();
@@ -357,7 +525,7 @@ export function GlobalNetworkMap({ isHeroButtonHovered }: Props = {}) {
       isSubscribed = false;
       timeouts.forEach(clearTimeout);
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, isMapVisible]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!containerRef.current) return;
@@ -397,6 +565,7 @@ export function GlobalNetworkMap({ isHeroButtonHovered }: Props = {}) {
         .dublin-halo {
            transform-origin: 417px 128px;
            animation: dublinPulse 6s ease-in-out infinite;
+           will-change: transform, opacity;
         }
         @keyframes sparkFlash {
           0% { opacity: 0; transform: scale(0.5); }
@@ -444,159 +613,15 @@ export function GlobalNetworkMap({ isHeroButtonHovered }: Props = {}) {
         />
 
         {/* 2. SVG Overlay for Routes and Nodes */}
-        <svg 
-          width="100%" height="100%" 
-          viewBox="0 0 860 560" 
-          preserveAspectRatio="xMidYMid meet"
-          style={{ filter: "drop-shadow(0 0 30px rgba(0,0,0,0.5))" }}
-        >
-          <defs>
-            <filter id="glow-bloom" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="3" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
-            <filter id="glow-intense" x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="4" result="blur1" />
-              <feGaussianBlur stdDeviation="10" result="blur2" />
-              <feGaussianBlur stdDeviation="20" result="blur3" />
-              <feMerge>
-                <feMergeNode in="blur3" />
-                <feMergeNode in="blur2" />
-                <feMergeNode in="blur1" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* LAYER 1: Routes and Packets */}
-          <g>
-            {ROUTES.map((route, i) => {
-              const targetNode = NODES.find(n => n.id === route.target)!;
-              const hqNode = NODES.find(n => n.isHQ)!;
-              
-              const isHovered = hoveredNode && (hoveredNode.id === route.target || hoveredNode.isHQ);
-              const isDimmed = hoveredNode && !isHovered;
-              const isActive = activeRoutes.includes(i);
-              
-              const pathData = `M ${hqNode.x} ${hqNode.y} Q ${route.cp[0]} ${route.cp[1]} ${targetNode.x} ${targetNode.y}`;
-              
-              return (
-                <g key={route.target} style={{ opacity: isDimmed ? 0.1 : 1, transition: 'opacity 0.3s ease-in-out' }}>
-                  <path id={`route-${i}`} d={pathData} fill="none" stroke="transparent" strokeWidth="0" />
-                  
-                  {/* Outer Wide Glow */}
-                  <path d={pathData} fill="none" stroke="#22D3FF" strokeWidth="8" opacity={isActive ? 0.15 : 0} filter="url(#glow-intense)" style={{ transition: 'opacity 0.3s ease-in-out' }} />
-                  {/* Medium Core Bloom */}
-                  <path d={pathData} fill="none" stroke="#22D3FF" strokeWidth="4" opacity={isActive ? 0.4 : 0.1} filter="url(#glow-intense)" style={{ transition: 'opacity 0.3s ease-in-out' }} />
-                  {/* Sharp Bright Core */}
-                  <path d={pathData} fill="none" stroke="#66F2FF" strokeWidth={isHovered ? "2" : "1"} opacity={isActive || isHovered ? 0.7 : 0.2} style={{ transition: 'opacity 0.3s ease-in-out' }} />
-                  
-                  {!isDimmed && !prefersReducedMotion && activePackets.filter(p => p.routeIndex === i).map(packet => (
-                    <g key={packet.id} filter="url(#glow-intense)">
-                      {/* Leading Solid Packet */}
-                      <circle r="4.5" fill="#ffffff">
-                        <animateMotion 
-                          dur={`${packet.duration}s`} 
-                          begin="0s" 
-                          calcMode="spline" 
-                          keyTimes="0; 1"
-                          keySplines="0.42 0 0.58 1" 
-                          fill="freeze"
-                        >
-                          <mpath href={`#route-${i}`} />
-                        </animateMotion>
-                      </circle>
-                      {/* Fibre-Optic Trailing Wave */}
-                      <path d="M -50,0 L 0,0" stroke="#22D3FF" strokeWidth="3.5" strokeLinecap="round" opacity="0.8">
-                        <animateMotion 
-                          dur={`${packet.duration}s`} 
-                          begin="0s" 
-                          calcMode="spline" 
-                          keyTimes="0; 1"
-                          keySplines="0.42 0 0.58 1" 
-                          rotate="auto"
-                          fill="freeze"
-                        >
-                          <mpath href={`#route-${i}`} />
-                        </animateMotion>
-                      </path>
-                    </g>
-                  ))}
-                </g>
-              );
-            })}
-          </g>
-          {/* LAYER 2: Nodes and Arrival Sparks */}
-          <g>
-            {NODES.map((node, i) => {
-              const isHQFocus = hoveredNode?.isHQ;
-              const isHovered = hoveredNode?.id === node.id || isHQFocus;
-              const isDimmed = hoveredNode && hoveredNode.id !== node.id && !isHQFocus;
-              
-              // Target sparks
-              const targetSparks = destSparks.filter(s => ROUTES[s.routeIndex].target === node.id);
-              const isDestinationIlluminated = targetSparks.length > 0;
-              
-              return (
-                <g 
-                  key={node.id} 
-                  style={{ opacity: isDimmed ? 0.15 : 1, transition: 'all 0.3s ease-in-out', transformOrigin: `${node.x}px ${node.y}px` }}
-                  onMouseEnter={() => setHoveredNode(node)}
-                  className="outline-none cursor-pointer"
-                  tabIndex={0}
-                  role="button"
-                >
-                  {/* HQ Radar Rings & HQ Central Glow */}
-                  {node.isHQ && (
-                    <g style={{ animation: 'hqCoreBreathe 8s ease-in-out infinite' }}>
-                      <circle cx={node.x} cy={node.y} r="15" fill="none" stroke="#22D3FF" strokeWidth="2" className="radar-ring" style={{ '--delay': '0s', '--duration': '7s', '--max-opacity': '0.7' } as React.CSSProperties} />
-                      <circle cx={node.x} cy={node.y} r="25" fill="none" stroke="#22D3FF" strokeWidth="1" filter="url(#glow-bloom)" className="radar-ring" style={{ '--delay': '2s', '--duration': '8s', '--max-opacity': '0.4' } as React.CSSProperties} />
-                      <circle cx={node.x} cy={node.y} r="40" fill="none" stroke="#22D3FF" strokeWidth="0.5" filter="blur(2px)" className="radar-ring" style={{ '--delay': '4s', '--duration': '9s', '--max-opacity': '0.2' } as React.CSSProperties} />
-                      
-                      {/* Massive Background Flare */}
-                      <circle cx={node.x} cy={node.y} r="35" fill="#22D3FF" opacity="0.2" filter="url(#glow-intense)" />
-                      {/* Inner HQ Flare */}
-                      <circle cx={node.x} cy={node.y} r="18" fill="#22D3FF" opacity={hqSparks.length > 0 ? 0.9 : 0.6} filter="url(#glow-intense)" style={{ transition: 'opacity 0.2s ease-out' }} />
-                      
-                      {/* Dynamic HQ Charge Pulses Synced with Packets */}
-                      {hqSparks.map((spark) => (
-                        <circle key={spark.id} cx={node.x} cy={node.y} r="22" fill="#66F2FF" filter="url(#glow-intense)" opacity="0" style={{ transformOrigin: 'center', animation: `nodeCharge 0.35s ease-out forwards` }} />
-                      ))}
-                    </g>
-                  )}
-
-                  {/* Secondary Node Static Glows */}
-                  {!node.isHQ && (
-                    <circle cx={node.x} cy={node.y} r="8" fill="#22D3FF" opacity={isHovered || isDestinationIlluminated ? 0.8 : 0.15} filter="url(#glow-intense)" style={{ transition: 'opacity 0.2s ease-out' }} />
-                  )}
-
-                  {/* Magnetic Interaction Hitbox */}
-                  <circle id={`node-magnetic-${node.id}`} cx={node.x} cy={node.y} r="15" fill="transparent" />
-
-                  {/* Sharp White Core */}
-                  <circle cx={node.x} cy={node.y} r={node.isHQ ? 4.5 : 2.5} fill="#ffffff" filter="url(#glow-intense)" />
-
-                  {/* Arrival Sparks (Destination Branches) */}
-                  {!node.isHQ && (
-                    <g transform={`translate(${node.x}, ${node.y})`}>
-                      {targetSparks.map((spark) => (
-                        <path 
-                          key={spark.id}
-                          d="M0,-3 L0,-10 M3,0 L10,0 M0,3 L0,10 M-3,0 L-10,0 M2,2 L6,6 M-2,-2 L-6,-6 M2,-2 L6,-6 M-2,2 L-6,6" 
-                          stroke="#66F2FF" strokeWidth="1.5" strokeLinecap="round" 
-                          opacity="0"
-                          style={{ transformOrigin: '0 0', animation: `sparkFlash 0.3s ease-out forwards` }}
-                        />
-                      ))}
-                    </g>
-                  )}
-
-
-                </g>
-              );
-            })}
-          </g>
-        </svg>
+        <NetworkOverlay 
+          prefersReducedMotion={prefersReducedMotion}
+          hoveredNode={hoveredNode}
+          activeRoutes={activeRoutes}
+          activePackets={activePackets}
+          hqSparks={hqSparks}
+          destSparks={destSparks}
+          setHoveredNode={setHoveredNode}
+        />
       </div>
 
       {/* Tooltip HTML Overlay */}

@@ -250,8 +250,8 @@
 
   /* Moving Light Sweep for Cards */
   @keyframes cardSweep {
-    0% { transform: translateX(-150%) skewX(-15deg); }
-    100% { transform: translateX(250%) skewX(-15deg); }
+    0% { transform: translateX(-300%) skewX(-15deg); }
+    100% { transform: translateX(300%) skewX(-15deg); }
   }
   .card-sweep-container {
     overflow: hidden;
@@ -263,7 +263,7 @@
     width: 30%;
     height: 100%;
     background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transform: translateX(-150%) skewX(-15deg);
+    transform: translateX(-300%) skewX(-15deg);
     pointer-events: none;
     z-index: 5;
   }
@@ -348,6 +348,18 @@
   .hero-transition {
     transition: all 500ms ease;
   }
+
+  .hover-card-effect {
+    transition: all 250ms ease !important;
+  }
+  .hover-card-effect:hover {
+    border-color: #1E5FFF !important;
+    transform: translateY(-3.5px) !important;
+    box-shadow: 0 12px 24px rgba(30, 95, 255, 0.15), 0 0 40px rgba(30, 95, 255, 0.12) !important;
+  }
+  .dark .hover-card-effect:hover {
+    box-shadow: 0 12px 24px rgba(30, 95, 255, 0.30), 0 0 60px rgba(30, 95, 255, 0.25) !important;
+  }
 }
 
 @keyframes ambient-shift {
@@ -380,15 +392,6 @@
   100% { transform: translateX(-50%); }
 }
 
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 30s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
 
 /* Globe-specific keyframes */
 @keyframes globe-pulse {

@@ -1,14 +1,10 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import sgMail from "@sendgrid/mail";
 import { prisma } from "@/lib/prisma";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
-// Set up SendGrid if API key is provided
-if (process.env.SENDGRID_API_KEY) {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-}
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 export async function POST(request: Request) {
   try {
@@ -115,48 +111,28 @@ ${message}
       </div>
     `;
 
-    if (process.env.GMAIL_USER && process.env.GMAIL_PASS) {
+    if (resend) {
       try {
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: process.env.GMAIL_USER,
-            pass: process.env.GMAIL_PASS,
-          },
+        const { data, error } = await resend.emails.send({
+          from: "onboarding@resend.dev",
+          to: ["info@jeshuruntech.com"],
+          replyTo: email,
+          subject: `[Website Contact Form] Submission from ${firstName} ${lastName}`,
+          text: mailText,
+          html: mailHtml,
         });
 
-        const mailOptions = {
-          from: `"Jeshurun Contact Gateway" <${process.env.GMAIL_USER}>`,
-          to: recipient,
-          replyTo: email,
-          subject: `[Website Contact Form] Submission from ${firstName} ${lastName}`,
-          text: mailText,
-          html: mailHtml,
-        };
-
-        await transporter.sendMail(mailOptions);
-        emailSent = true;
-        console.log("Email sent successfully via Gmail SMTP to:", recipient);
+        if (error) {
+          console.error("Failed to send contact notification email via Resend:", error);
+        } else {
+          emailSent = true;
+          console.log("Email sent successfully via Resend:", data);
+        }
       } catch (err) {
-        console.error("Failed to send contact notification email via Gmail SMTP:", err);
+        console.error("Failed to send contact notification email via Resend:", err);
       }
-    } else if (process.env.SENDGRID_API_KEY) {
-      try {
-        const msg = {
-          to: recipient,
-          from: sender,
-          replyTo: email,
-          subject: `[Website Contact Form] Submission from ${firstName} ${lastName}`,
-          text: mailText,
-          html: mailHtml,
-        };
-
-        await sgMail.send(msg);
-        emailSent = true;
-        console.log("Email sent successfully via SendGrid to:", recipient);
-      } catch (err) {
-        console.error("Failed to send contact notification email via SendGrid:", err);
-      }
+    } else {
+      console.warn("RESEND_API_KEY is not set. Email was not sent.");
     }
 
     return NextResponse.json({

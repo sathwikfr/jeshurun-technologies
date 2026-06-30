@@ -244,7 +244,7 @@ export default function SoftwareDetailPage({
               variants={fadeUp}
               className="h-full"
             >
-              <SpotlightCard className="p-6 bg-muted/30 dark:bg-card border border-border rounded-2xl shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300 space-y-1.5 h-full">
+              <SpotlightCard className="p-6 bg-muted/30 dark:bg-card border border-border rounded-2xl shadow-sm hover-card-effect space-y-1.5 h-full">
                 <div className="text-3xl font-black min-h-[40px] flex items-center text-primary">
                   {metric.value ? (
                     metric.value
@@ -310,7 +310,7 @@ export default function SoftwareDetailPage({
 
           {/* Right: Benefits & SLA Cards (5 cols) */}
           <motion.div variants={fadeUp} className="lg:col-span-5 h-full">
-            <SpotlightCard className="p-6 sm:p-8 border border-border bg-card hover:border-primary/20 flex flex-col h-full rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md">
+            <SpotlightCard className="p-6 sm:p-8 border border-border bg-card hover-card-effect flex flex-col h-full rounded-2xl shadow-sm">
               <h3 className="text-xl font-extrabold text-foreground tracking-tight pb-4">
                 Business Impact
               </h3>

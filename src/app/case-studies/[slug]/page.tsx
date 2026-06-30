@@ -3,7 +3,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { ArrowLeft, Calendar, User, ShieldAlert, ArrowRight, MapPin, Briefcase } from "lucide-react";
+import { Calendar, Clock, Share2, Tag, ArrowLeft, ArrowRight, Play, Quote, MapPin, Briefcase, User, ShieldAlert } from "lucide-react";
+import { SpotlightCard } from "@/components/SpotlightCard";
 import { caseStudiesData, CaseStudyArticle } from "@/lib/caseStudiesData";
 
 export default function CaseStudyArticlePage() {
@@ -206,7 +207,7 @@ export default function CaseStudyArticlePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
           {/* Table of Contents - Sidebar */}
           <aside className="lg:col-span-3 lg:block hidden">
-            <div className="sticky top-28 p-6 bg-card border border-border rounded-3xl space-y-5">
+            <SpotlightCard className="sticky top-28 p-0 space-y-5 hover-card-effect overflow-hidden">
               <h4 className="text-xs font-black uppercase text-foreground tracking-wider pb-3 border-b border-border/60 text-left">
                 Case Study Outline
               </h4>
@@ -236,7 +237,7 @@ export default function CaseStudyArticlePage() {
                   </a>
                 ))}
               </nav>
-            </div>
+            </SpotlightCard>
           </aside>
 
           {/* Article Text Content */}

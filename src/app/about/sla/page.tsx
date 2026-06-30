@@ -199,7 +199,7 @@ export default function SlaPage() {
               {/* Grid of SLA Metrics */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {slaPillars.map((item, idx) => (
-                  <div key={idx} className="space-y-2 p-5 rounded-2xl bg-background dark:bg-slate-900/40 border border-border dark:border-border">
+                  <div key={idx} className="space-y-2 p-5 rounded-2xl bg-background dark:bg-slate-900/40 border border-border dark:border-border hover-card-effect">
                     <span className="text-lg font-extrabold text-[#0057D9] dark:text-[#60A5FA]">
                       {item.metric}
                     </span>
@@ -412,7 +412,7 @@ export default function SlaPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="p-6 bg-background dark:bg-slate-900 border border-border dark:border-border rounded-2xl text-center space-y-3 shadow-[0_4px_15px_rgba(0,0,0,0.005)] hover:shadow-md transition-shadow"
+                  className="p-6 bg-background dark:bg-slate-900 border border-border dark:border-border rounded-2xl text-center space-y-3 hover-card-effect"
                 >
                   <div className="mx-auto h-12 w-12 rounded-xl bg-card dark:bg-slate-950 flex items-center justify-center shadow-inner border border-border dark:border-border">
                     {acc.icon}

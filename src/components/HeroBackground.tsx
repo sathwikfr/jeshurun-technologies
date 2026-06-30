@@ -2,10 +2,14 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
+import { useInView } from "framer-motion";
 
 export function HeroBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDark, setIsDark] = useState(false);
+  const isInView = useInView(canvasRef, { margin: "200px" });
+  const isInViewRef = useRef(isInView);
+  useEffect(() => { isInViewRef.current = isInView; }, [isInView]);
 
   // Monitor dark mode changes
   useEffect(() => {
@@ -165,6 +169,8 @@ export function HeroBackground() {
     const animate = (time: number) => {
       animationId = requestAnimationFrame(animate);
 
+      if (!isInViewRef.current) return;
+
       // Throttle framerate
       const elapsed = time - lastTime;
       if (elapsed < fpsInterval) return;
@@ -217,15 +223,24 @@ export function HeroBackground() {
     };
   }, [isDark]);
 
-  // Exact 1:1 split background gradient
-  const splitGradient = `
+  // Dynamic background gradient based on theme - contrast boosted slightly
+  const splitGradient = isDark ? `
     radial-gradient(ellipse 120% 120% at 20% 40%,
       #ffffff 0%,
-      #ffffff 35%,
-      #f1f5f9 52%,
-      #38bdf8 65%,
-      #030712 88%,
+      #ffffff 32%,
+      #f1f5f9 49%,
+      #38bdf8 62%,
+      #030712 85%,
       #020617 100%
+    )
+  ` : `
+    radial-gradient(ellipse 120% 120% at 20% 40%,
+      #ffffff 0%,
+      #ffffff 32%,
+      #f8fafc 49%,
+      #e0f2fe 62%,
+      #f1f5f9 85%,
+      #ffffff 100%
     )
   `;
 
@@ -236,6 +251,36 @@ export function HeroBackground() {
         background: splitGradient,
       }}
     >
+      {/* Layer 1.5 — Atmospheric Polish (Vignette, Depth, Bottom Transition) */}
+      <div className="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none z-0">
+        
+        {/* Vignette - dimming extreme top-left and bottom-left to soften uniform brightness */}
+        <div 
+          className="absolute top-0 left-0 w-[35%] h-[35%]"
+          style={{ background: `radial-gradient(circle at top left, ${isDark ? "rgba(0,0,0,0.07)" : "rgba(0,0,0,0.03)"} 0%, transparent 70%)` }}
+        />
+        <div 
+          className="absolute bottom-0 left-0 w-[35%] h-[35%]"
+          style={{ background: `radial-gradient(circle at bottom left, ${isDark ? "rgba(0,0,0,0.07)" : "rgba(0,0,0,0.03)"} 0%, transparent 70%)` }}
+        />
+
+        {/* Faint Warm-to-Cool Depth Gradient */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse 100% 100% at 20% 40%, rgba(255, 248, 240, 0.08) 0%, rgba(59, 130, 246, 0.04) 45%, transparent 80%)"
+          }}
+        />
+
+        {/* Bottom Edge Smoothing - settling into theme background */}
+        <div 
+          className="absolute bottom-0 left-0 w-full h-[25%]"
+          style={{
+            background: `linear-gradient(to top, ${isDark ? "#020617" : "#ffffff"} 0%, transparent 100%)`
+          }}
+        />
+      </div>
+
       {/* CSS Animations style block */}
       <style>{`
         @keyframes glowMotionScattering {

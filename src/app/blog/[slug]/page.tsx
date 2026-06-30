@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, User, ShieldAlert } from "lucide-react";
+import { SpotlightCard } from "@/components/SpotlightCard";
 
 export const dynamic = "force-dynamic";
 
@@ -137,7 +138,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Article Content Layout */}
       <div className="container px-6 sm:px-8 mx-auto -mt-8 relative z-20">
-        <div className="max-w-3xl mx-auto bg-card border border-border p-8 sm:p-12 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.02)]">
+        <SpotlightCard className="max-w-3xl mx-auto p-8 sm:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.02)] hover-card-effect">
           
           {post.excerpt && (
             <div className="text-lg font-bold text-foreground leading-relaxed border-b border-border pb-6 mb-6">
@@ -166,8 +167,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <ShieldAlert className="w-3.5 h-3.5 text-[#0057D9]" /> SLA SECURE REPORT
             </div>
           </div>
-
-        </div>
+        </SpotlightCard>
       </div>
 
     </div>
