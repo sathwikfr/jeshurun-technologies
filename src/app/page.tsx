@@ -1380,9 +1380,8 @@ export default function Home() {
               </motion.div>
 
               {/* 2. MAIN HEADING */}
-              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[52px] md:text-[64px] lg:text-[52px] xl:text-[60px] leading-[1.0] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
-                <span>Empowering</span>
-                <span>Your</span>
+              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[44px] md:text-[56px] lg:text-[48px] xl:text-[52px] leading-[1.05] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+                <span>Empowering Your</span>
                 <span 
                   className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 dark:from-[#3B82F6] dark:to-[#22D3EE]"
                 >
