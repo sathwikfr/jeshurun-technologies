@@ -79,24 +79,22 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
   }, [isDarkMode]);
 
   const cities = [
-    // Tier 2 (Partner Hubs)
-    { name: "LONDON", tier: 2, x: 430, y: 138, offsetX: -16, offsetY: 0, anchor: "end" as const, fontSize: 5.5, labelW: 34, dotR: 2, info: "European Hub" },
-    { name: "DÜSSELDORF", tier: 2, x: 444, y: 139, offsetX: 10, offsetY: -8, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 2, info: "Partner Hub" },
-    { name: "FRANKFURT", tier: 2, x: 448, y: 142, offsetX: 14, offsetY: 12, anchor: "start" as const, fontSize: 5.5, labelW: 46, dotR: 2, info: "FinTech Hub" },
-    { name: "BOSTON", tier: 2, x: 275, y: 163, offsetX: -12, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 36, dotR: 2.5, info: "North American HQ" },
-    { name: "NEW YORK", tier: 2, x: 267, y: 167, offsetX: 12, offsetY: -12, anchor: "start" as const, fontSize: 5.5, labelW: 44, dotR: 2.5, info: "Financial Hub" },
-    { name: "SAN FRANCISCO", tier: 2, x: 158, y: 175, offsetX: 12, offsetY: 4, anchor: "start" as const, fontSize: 5.5, labelW: 66, dotR: 2.5, info: "West Coast Hub" },
-    { name: "DUBAI", tier: 2, x: 558, y: 210, offsetX: -10, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 2.5, info: "MEA Hub" },
-    { name: "HYDERABAD", tier: 2, x: 615, y: 232, offsetX: -12, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 48, dotR: 2.5, info: "APAC Engineering" },
-    { name: "SINGAPORE", tier: 2, x: 678, y: 276, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 48, dotR: 2.5, info: "APAC Hub" },
-    { name: "TOKYO", tier: 2, x: 743, y: 181, offsetX: -12, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 32, dotR: 2.5, info: "East Asia Operations" },
-    // Tier 3 (Decorative Cities)
-    { name: "PARIS", tier: 3, x: 435, y: 145, offsetX: -8, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 1.5, info: "Regional Office" },
-    { name: "AMSTERDAM", tier: 3, x: 440, y: 136, offsetX: 4, offsetY: -18, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "Data Center" },
-    { name: "SÃO PAULO", tier: 3, x: 322, y: 345, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "South American Hub" },
-    { name: "JOHANNESBURG", tier: 3, x: 495, y: 353, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 68, dotR: 1.5, info: "African Hub" },
-    { name: "SYDNEY", tier: 3, x: 771, y: 374, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 40, dotR: 1.5, info: "Oceania Hub" },
-    { name: "TORONTO", tier: 3, x: 258, y: 159, offsetX: -10, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 44, dotR: 1.5, info: "Canadian Office" }
+    { name: "LONDON", isHub: true, x: 430, y: 138, offsetX: -16, offsetY: 0, anchor: "end" as const, fontSize: 5.5, labelW: 34, dotR: 2, info: "European Hub" },
+    { name: "DÜSSELDORF", isHub: true, x: 444, y: 139, offsetX: 10, offsetY: -8, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 2, info: "Partner Hub" },
+    { name: "FRANKFURT", isHub: false, x: 448, y: 142, offsetX: 14, offsetY: 12, anchor: "start" as const, fontSize: 5.5, labelW: 46, dotR: 1.5, info: "FinTech Hub" },
+    { name: "BOSTON", isHub: true, x: 275, y: 163, offsetX: -12, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 36, dotR: 2, info: "North American HQ" },
+    { name: "NEW YORK", isHub: true, x: 267, y: 167, offsetX: 12, offsetY: -12, anchor: "start" as const, fontSize: 5.5, labelW: 44, dotR: 2, info: "Financial Hub" },
+    { name: "SAN FRANCISCO", isHub: false, x: 158, y: 175, offsetX: 12, offsetY: 4, anchor: "start" as const, fontSize: 5.5, labelW: 66, dotR: 1.5, info: "West Coast Hub" },
+    { name: "DUBAI", isHub: false, x: 558, y: 210, offsetX: -10, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 1.5, info: "MEA Hub" },
+    { name: "HYDERABAD", isHub: true, x: 615, y: 232, offsetX: -12, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 48, dotR: 2, info: "APAC Engineering" },
+    { name: "SINGAPORE", isHub: false, x: 678, y: 276, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 48, dotR: 1.5, info: "APAC Hub" },
+    { name: "TOKYO", isHub: true, x: 743, y: 181, offsetX: -12, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 32, dotR: 2, info: "East Asia Operations" },
+    { name: "PARIS", isHub: false, x: 435, y: 145, offsetX: -8, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 1.5, info: "Regional Office" },
+    { name: "AMSTERDAM", isHub: false, x: 440, y: 136, offsetX: 4, offsetY: -18, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "Data Center" },
+    { name: "SÃO PAULO", isHub: false, x: 322, y: 345, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "South American Hub" },
+    { name: "JOHANNESBURG", isHub: false, x: 495, y: 353, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 68, dotR: 1.5, info: "African Hub" },
+    { name: "SYDNEY", isHub: false, x: 771, y: 374, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 40, dotR: 1.5, info: "Oceania Hub" },
+    { name: "TORONTO", isHub: false, x: 258, y: 159, offsetX: -10, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 44, dotR: 1.5, info: "Canadian Office" }
   ];
 
   const getArcControlPoint = (startX: number, startY: number, endX: number, endY: number) => {
@@ -294,7 +292,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
           <g filter="url(#arc-glow)">
             {cities.map((city, i) => {
               const cp = getArcControlPoint(417, 133, city.x, city.y);
-              const isTier2 = city.tier === 2;
+              const isHub = city.isHub;
               return (
                 <path 
                   key={`arc-path-${i}`}
@@ -302,10 +300,10 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
                   fill="none" 
                   stroke={`url(#arc-grad-${i})`} 
                   strokeWidth="2" 
-                  className={isTier2 ? "animated-arc" : ""} 
+                  className={isHub ? "animated-arc" : ""} 
                   style={{ 
-                    animationDelay: isTier2 ? `${i * 0.7}s` : '0s',
-                    opacity: isTier2 ? 1 : 0.4
+                    animationDelay: isHub ? `${i * 0.7}s` : '0s',
+                    opacity: isHub ? 1 : 0.4
                   }} 
                 />
               );
@@ -319,16 +317,16 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
                 {/* Invisible larger hit area for easier hovering */}
                 <circle cx={city.x} cy={city.y} r="16" fill="transparent" />
                 {/* Glow */}
-                <circle cx={city.x} cy={city.y} r="14" fill="url(#dest-glow)" opacity={city.tier === 2 ? "0.9" : "0.3"} />
+                <circle cx={city.x} cy={city.y} r="14" fill="url(#dest-glow)" opacity={city.isHub ? "0.9" : "0"} />
                 {/* Core dot */}
                 <circle 
                   cx={city.x} cy={city.y} r={city.dotR} 
                   fill={isDarkMode ? "#ffffff" : "#1E5FFF"} 
-                  className={city.tier === 2 ? "destination-dot" : ""} 
+                  className={city.isHub ? "destination-dot" : ""} 
                   style={{ transformOrigin: `${city.x}px ${city.y}px`, animationDelay: `${i * 0.3}s` }} 
                 />
                 {/* Partner Hub Radar Ring */}
-                {city.tier === 2 && (
+                {city.isHub && (
                   <circle 
                     cx={city.x} cy={city.y} r="6" 
                     fill="none" 
@@ -384,7 +382,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
           {/* Partner Hub Data Signals */}
           <g>
             {cities.map((city, i) => {
-              if (city.tier !== 2) return null;
+              if (!city.isHub) return null;
               const cp = getArcControlPoint(417, 133, city.x, city.y);
               const pathData = `M 417 133 Q ${cp.x} ${cp.y} ${city.x} ${city.y}`;
               
