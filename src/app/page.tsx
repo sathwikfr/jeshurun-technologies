@@ -1380,7 +1380,7 @@ export default function Home() {
               </motion.div>
 
               {/* 2. MAIN HEADING */}
-              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[52px] md:text-[72px] lg:text-[64px] xl:text-[76px] leading-[1.05] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+              <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[42px] md:text-[60px] lg:text-[52px] xl:text-[60px] leading-[1.05] flex flex-col m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
                 <span>Empowering</span>
                 <span>Your</span>
                 <span 
@@ -1391,16 +1391,16 @@ export default function Home() {
               </motion.h1>
 
               {/* 3. PARAGRAPH */}
-              <motion.p variants={enterpriseItem} className="mt-4 lg:mt-3 text-gray-600 dark:text-[#B8C0CC] text-xl md:text-[22px] lg:text-[20px] xl:text-[22px] leading-[1.6] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
+              <motion.p variants={enterpriseItem} className="mt-4 lg:mt-3 text-gray-600 dark:text-[#B8C0CC] text-lg md:text-[18px] lg:text-[16px] xl:text-[18px] leading-[1.5] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
                 Enterprise IT consulting and engineering for organizations across Ireland, Europe, the Middle East, and India — architecting resilient systems, accelerating delivery, and turning complex technology challenges into measurable business outcomes.
               </motion.p>
 
               {/* 4. BUTTON ROW */}
               <motion.div variants={enterpriseItem} className="mt-6 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center md:justify-start">
-                <button className="text-xl bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full py-[16px] px-[32px] lg:py-[14px] lg:px-[28px] shadow-sm flex items-center justify-center transition-colors w-full sm:w-auto">
+                <button className="text-base bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full py-[12px] px-[24px] lg:py-[10px] lg:px-[24px] shadow-sm flex items-center justify-center transition-colors w-full sm:w-auto">
                   Get Started <span className="ml-2 font-normal">→</span>
                 </button>
-                <button className="text-xl bg-transparent hover:bg-gray-50 text-[#0B1220] border-[#9CA7B5] dark:hover:bg-white/5 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-[16px] px-[32px] lg:py-[14px] lg:px-[28px] flex items-center justify-center transition-colors w-full sm:w-auto">
+                <button className="text-base bg-transparent hover:bg-gray-50 text-[#0B1220] border-[#9CA7B5] dark:hover:bg-white/5 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-[12px] px-[24px] lg:py-[10px] lg:px-[24px] flex items-center justify-center transition-colors w-full sm:w-auto">
                   Explore Services <span className="ml-2 font-normal">→</span>
                 </button>
               </motion.div>
