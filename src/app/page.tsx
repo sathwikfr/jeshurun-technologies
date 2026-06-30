@@ -510,57 +510,34 @@ function EnterpriseClientsViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   
-  return (
-    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
-      <style>{`
-        @keyframes orbitRotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        @keyframes orbitRotateReverse {
-          0% { transform: rotate(360deg); }
-          100% { transform: rotate(0deg); }
-        }
-      `}</style>
-      
-      {/* Background soft glow */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center">
-         <div className="w-16 h-16 rounded-full bg-blue-400/10 dark:bg-blue-500/10 blur-xl" />
-      </div>
+  // Use first 5 logos to create the overlapping avatar row
+  const displayLogos = trustLogos.slice(0, 5);
 
-      {/* Main Hub */}
-      <div className="absolute z-20 w-2.5 h-2.5 rounded-full bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,0.6)]" />
-      
-      {/* 14 Orbiting Client Nodes */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center">
-        {/* Track 1 - Inner (4 clients) */}
-        <div className="absolute flex items-center justify-center w-[36px] h-[36px] border border-blue-300/30 dark:border-blue-500/20 rounded-full" 
-             style={{ animation: "orbitRotate 8s linear infinite", animationPlayState: isInView ? "running" : "paused" }}>
-          <div className="absolute -top-[3px] w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_5px_rgba(59,130,246,0.8)]" />
-          <div className="absolute -bottom-[3px] w-1 h-1 rounded-full bg-blue-400" />
-          <div className="absolute -left-[3px] w-1 h-1 rounded-full bg-sky-400" />
-          <div className="absolute -right-[3px] w-1.5 h-1.5 rounded-full bg-indigo-500" />
-        </div>
-        
-        {/* Track 2 - Middle (6 clients) */}
-        <div className="absolute flex items-center justify-center w-[64px] h-[64px] border border-blue-300/20 dark:border-blue-500/10 rounded-full"
-             style={{ animation: "orbitRotateReverse 12s linear infinite", animationPlayState: isInView ? "running" : "paused" }}>
-          <div className="absolute -top-[2px] left-[12px] w-1.5 h-1.5 rounded-full bg-blue-500" />
-          <div className="absolute -top-[2px] right-[12px] w-1 h-1 rounded-full bg-indigo-400" />
-          <div className="absolute -bottom-[2px] left-[12px] w-1 h-1 rounded-full bg-sky-500" />
-          <div className="absolute -bottom-[2px] right-[12px] w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_4px_rgba(96,165,250,0.8)]" />
-          <div className="absolute top-[26px] -left-[3px] w-1.5 h-1.5 rounded-full bg-indigo-500" />
-          <div className="absolute top-[26px] -right-[3px] w-1 h-1 rounded-full bg-blue-400" />
-        </div>
-        
-        {/* Track 3 - Outer (4 clients) */}
-        <div className="absolute flex items-center justify-center w-[92px] h-[92px] border border-blue-300/10 dark:border-blue-500/5 rounded-full"
-             style={{ animation: "orbitRotate 18s linear infinite", animationPlayState: isInView ? "running" : "paused" }}>
-          <div className="absolute -top-[3px] w-1 h-1 rounded-full bg-blue-400" />
-          <div className="absolute -bottom-[3px] w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.6)]" />
-          <div className="absolute -left-[3px] w-1 h-1 rounded-full bg-indigo-400" />
-          <div className="absolute -right-[3px] w-1.5 h-1.5 rounded-full bg-blue-500" />
-        </div>
+  return (
+    <div ref={ref} className="w-full h-16 flex items-center justify-start relative mt-3 bg-transparent overflow-hidden">
+      <div className="flex items-center justify-center -space-x-3 px-2">
+        {displayLogos.map((logo, index) => (
+          <div 
+            key={logo.name}
+            className="w-10 h-10 rounded-full border-2 border-[#F8FAFC] dark:border-[#0F172A] bg-white dark:bg-white flex items-center justify-center overflow-hidden shadow-sm relative transition-all duration-300 hover:-translate-y-1 hover:z-50"
+            style={{
+              opacity: isInView ? 1 : 0,
+              transform: isInView ? 'scale(1)' : 'scale(0.8)',
+              transition: `all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 0.1}s`,
+              zIndex: 10 - index
+            }}
+            title={logo.name}
+          >
+            <div className="relative w-7 h-7 flex items-center justify-center">
+              <Image 
+                src={logo.src}
+                alt={logo.name}
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
