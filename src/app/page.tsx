@@ -1326,13 +1326,13 @@ export default function Home() {
         {/* Layer 2: Hero Content */}
         <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[110px] xl:pt-[120px] 2xl:pt-[160px] flex flex-col min-h-screen justify-between pointer-events-none">
           
-          <div className="flex flex-col md:flex-row items-center md:items-stretch w-full flex-1 pb-6 lg:pb-8 xl:pb-10 2xl:pb-20 pointer-events-none">
+          <div className="flex flex-col md:flex-row items-center md:items-stretch w-full flex-1 pb-2 lg:pb-4 xl:pb-6 2xl:pb-20 pointer-events-none">
             <motion.div 
               variants={enterpriseContainer}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-10px" }}
-              className="flex flex-col justify-center gap-6 md:gap-8 lg:gap-8 2xl:gap-12 items-center md:items-start text-center md:text-left w-full md:w-[60%] lg:w-[50%] h-full pointer-events-auto"
+              className="flex flex-col justify-center gap-5 md:gap-6 lg:gap-5 xl:gap-6 2xl:gap-12 items-center md:items-start text-center md:text-left w-full md:w-[60%] lg:w-[50%] h-full pointer-events-auto"
             >
               
               {/* 1. BADGE/PILL */}
@@ -1346,7 +1346,7 @@ export default function Home() {
                 </span>
               </motion.div>
 
-              <div className="flex flex-col items-center md:items-start w-full gap-4 lg:gap-5 2xl:gap-6">
+              <div className="flex flex-col items-center md:items-start w-full gap-3 lg:gap-4 2xl:gap-6">
                 {/* 2. MAIN HEADING */}
                 <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[44px] md:text-[54px] lg:text-[44px] xl:text-[50px] leading-[1.05] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
                   <span className="block">Empowering</span>
