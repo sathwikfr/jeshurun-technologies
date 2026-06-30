@@ -1324,15 +1324,15 @@ export default function Home() {
         <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile dark:hidden" />
 
         {/* Layer 2: Hero Content */}
-        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-6 lg:pt-[100px] xl:pt-[120px] 2xl:pt-[160px] flex flex-col min-h-screen justify-between pointer-events-none">
+        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[80px] xl:pt-[90px] 2xl:pt-[160px] flex flex-col min-h-screen justify-between pointer-events-none">
           
-          <div className="flex flex-col md:flex-row items-center md:items-stretch w-full flex-1 pb-10 lg:pb-12 xl:pb-14 2xl:pb-20 pointer-events-none">
+          <div className="flex flex-col md:flex-row items-center md:items-stretch w-full flex-1 pb-6 lg:pb-8 xl:pb-10 2xl:pb-20 pointer-events-none">
             <motion.div 
               variants={enterpriseContainer}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-10px" }}
-              className="flex flex-col justify-center gap-8 md:gap-10 lg:gap-12 items-center md:items-start text-center md:text-left w-full md:w-[60%] lg:w-[50%] h-full pointer-events-auto"
+              className="flex flex-col justify-center gap-6 md:gap-8 lg:gap-8 2xl:gap-12 items-center md:items-start text-center md:text-left w-full md:w-[60%] lg:w-[50%] h-full pointer-events-auto"
             >
               
               {/* 1. BADGE/PILL */}
@@ -1346,13 +1346,13 @@ export default function Home() {
                 </span>
               </motion.div>
 
-              <div className="flex flex-col items-center md:items-start w-full gap-5 lg:gap-6">
+              <div className="flex flex-col items-center md:items-start w-full gap-4 lg:gap-5 2xl:gap-6">
                 {/* 2. MAIN HEADING */}
                 <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[42px] md:text-[52px] lg:text-[42px] xl:text-[48px] leading-[1.05] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
                   <span className="block">Empowering</span>
                   <span className="block">Your</span>
                   <span 
-                    className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 dark:from-[#3B82F6] dark:to-[#22D3EE] block mt-1 lg:mt-2"
+                    className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 dark:from-[#3B82F6] dark:to-[#22D3EE] block mt-1 2xl:mt-2"
                   >
                     Digital Future
                   </span>
