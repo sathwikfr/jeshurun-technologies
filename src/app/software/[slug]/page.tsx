@@ -1,8 +1,8 @@
 "use client";
 
-import { use } from "react";
+import { use, useState } from "react";
 import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
   ArrowLeft,
   Check,
@@ -12,6 +12,9 @@ import {
   Server,
   Terminal,
   Cpu,
+  X as XIcon,
+  ChevronDown,
+  Quote,
 } from "lucide-react";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { SpotlightCard } from "@/components/SpotlightCard";
@@ -45,6 +48,19 @@ const softwareData: Record<
     features: string[];
     benefits: string[];
     metrics: { label: string; value: string }[];
+    ctaTitleTop?: string;
+    ctaTitleHighlight?: string;
+    ctaDescription?: string;
+    comparison: { without: string; with: string }[];
+    testimonial: {
+      quote: string;
+      author: string;
+      role: string;
+      company: string;
+      stat: string;
+      statLabel: string;
+    };
+    faqs: { q: string; a: string }[];
   }
 > = {
   "cloud-native": {
@@ -74,6 +90,28 @@ const softwareData: Record<
       { label: "Cost Reduction", value: "30%" },
       { label: "Deployment Speed", value: "4x" },
     ],
+    ctaTitleTop: "Ready to Build",
+    ctaTitleHighlight: "Resilient, Cloud-Native Systems?",
+    ctaDescription: "Discuss your architecture goals with our engineers and design hyper-scalable microservices built for the cloud.",
+    comparison: [
+      { without: "Monolithic bottlenecks during traffic spikes", with: "Elastic microservices that autoscale instantly" },
+      { without: "High infrastructure costs for idle capacity", with: "Optimized serverless resource allocation" },
+      { without: "Slow, risky monolithic deployments", with: "Automated, zero-downtime canary releases" },
+      { without: "Vendor lock-in with single providers", with: "Portable Kubernetes-native workloads" },
+    ],
+    testimonial: {
+      quote: "Migrating to a cloud-native architecture with Jeshurun was a game changer. Our system now handles 10x the load during peak events seamlessly.",
+      author: "Sarah Jenkins",
+      role: "VP of Engineering",
+      company: "Fintech Global",
+      stat: "10x",
+      statLabel: "Scalability Increase",
+    },
+    faqs: [
+      { q: "Do you support AWS, Azure, and GCP?", a: "Yes, our cloud-native solutions are built on Kubernetes and Terraform, allowing for multi-cloud or agnostic deployments depending on your enterprise needs." },
+      { q: "How long does a typical migration take?", a: "Depending on the complexity of the monolith, phased migrations generally run between 3 to 9 months, prioritizing high-impact services first." },
+      { q: "How do you ensure data consistency across microservices?", a: "We utilize event-driven architectures with Kafka and implement Saga patterns to guarantee distributed transaction integrity." },
+    ],
   },
   "legacy-modernization": {
     title: "Legacy Modernization",
@@ -101,6 +139,28 @@ const softwareData: Record<
       { label: "Downtime Risk", value: "0%" },
       { label: "Performance Boost", value: "2x" },
       { label: "Maintenance Drop", value: "40%" },
+    ],
+    ctaTitleTop: "Ready to Modernize",
+    ctaTitleHighlight: "Your Legacy Systems?",
+    ctaDescription: "Discuss your current stack with our consultants and design a modernization roadmap that minimizes risk and disruption.",
+    comparison: [
+      { without: "High maintenance costs for outdated code", with: "Modern, maintainable API-first architectures" },
+      { without: "Severe security vulnerabilities", with: "Enterprise-grade compliance and security" },
+      { without: "Inability to integrate with modern tools", with: "Seamless ecosystem integrations via REST/GraphQL" },
+      { without: "Risk of complete system failure", with: "Highly available, distributed deployments" },
+    ],
+    testimonial: {
+      quote: "The Jeshurun team successfully untangled a 15-year-old monolith without a single minute of unexpected downtime. Our release velocity has doubled.",
+      author: "Michael Chang",
+      role: "Chief Technology Officer",
+      company: "HealthCore Systems",
+      stat: "0 min",
+      statLabel: "Unexpected Downtime",
+    },
+    faqs: [
+      { q: "What is the Strangler Fig pattern?", a: "It's a modernization strategy where we gradually replace specific pieces of functionality in a legacy system with new applications and services, minimizing risk." },
+      { q: "Do we need to freeze feature development during modernization?", a: "No. By using API gateways and modularization, your teams can continue building new features in parallel with the modernization effort." },
+      { q: "What happens to our legacy database?", a: "We employ data synchronization tools to keep the legacy and modern databases in sync until the final cutover is complete." },
     ],
   },
   "mobile-architecture": {
@@ -130,6 +190,28 @@ const softwareData: Record<
       { label: "Crash-Free Rate", value: "99.9%" },
       { label: "Time to Market", value: "-30%" },
     ],
+    ctaTitleTop: "Ready to Build",
+    ctaTitleHighlight: "Your Next Mobile Experience?",
+    ctaDescription: "Discuss your product vision with our mobile architects and design an application built for performance and scale.",
+    comparison: [
+      { without: "Fragmented codebases for iOS and Android", with: "Unified, cross-platform code architecture" },
+      { without: "Poor offline functionality", with: "Robust offline data synchronization" },
+      { without: "Inconsistent user experiences", with: "Native-feeling, responsive UI components" },
+      { without: "Security risks with local storage", with: "Encrypted, MDM-compliant data handling" },
+    ],
+    testimonial: {
+      quote: "Our field technicians rely heavily on offline capabilities. The mobile architecture designed by Jeshurun has virtually eliminated data sync conflicts.",
+      author: "David Ross",
+      role: "Director of Field Operations",
+      company: "Logistics Plus",
+      stat: "99%",
+      statLabel: "Sync Success Rate",
+    },
+    faqs: [
+      { q: "Do you build native or cross-platform apps?", a: "We specialize in both, but heavily leverage React Native and Flutter for enterprises looking to maximize efficiency without compromising performance." },
+      { q: "How do you handle offline functionality?", a: "We use local-first database solutions like WatermelonDB or Realm, coupled with background sync queues to ensure data integrity when connectivity returns." },
+      { q: "Are your mobile apps secure enough for healthcare/finance?", a: "Yes. We implement certificate pinning, biometric authentication, and strict Keychain/Keystore encryption to meet compliance standards." },
+    ],
   },
   "enterprise-api": {
     title: "Enterprise API",
@@ -158,6 +240,28 @@ const softwareData: Record<
       { label: "Data Throughput", value: "10k/s" },
       { label: "System Uptime", value: "99.99%" },
     ],
+    ctaTitleTop: "Ready to Connect",
+    ctaTitleHighlight: "Your Enterprise Systems?",
+    ctaDescription: "Discuss your integration needs with our API engineers and design a connectivity layer built for security and scale.",
+    comparison: [
+      { without: "Point-to-point integration spaghetti", with: "Centralized, federated API gateways" },
+      { without: "Over-fetching and slow client performance", with: "Optimized GraphQL querying" },
+      { without: "Batch processing delays", with: "Real-time, event-driven streaming" },
+      { without: "Inconsistent API security policies", with: "Unified authentication and rate-limiting" },
+    ],
+    testimonial: {
+      quote: "The federated GraphQL layer completely transformed how our frontend teams consume data. Development cycles are significantly faster now.",
+      author: "Elena Rodriguez",
+      role: "Lead Software Architect",
+      company: "E-Commerce Enterprise",
+      stat: "3x",
+      statLabel: "Development Velocity",
+    },
+    faqs: [
+      { q: "When should we use GraphQL vs REST?", a: "GraphQL is excellent for complex client applications needing flexible data fetching, while REST remains ideal for simpler, caching-heavy, or server-to-server integrations." },
+      { q: "What event streaming platforms do you use?", a: "We predominantly build on Apache Kafka for high-throughput enterprise streaming, and RabbitMQ for complex routing and task queues." },
+      { q: "How do you manage API versioning?", a: "We advocate for non-breaking API evolution (especially with GraphQL), but support standard URI or Header-based versioning for REST endpoints." },
+    ],
   },
 };
 
@@ -171,6 +275,44 @@ const iconMap = {
   ),
   Server: <Server className="w-8 h-8 text-[#2563EB] dark:text-[#60A5FA]" />,
 };
+
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border border-border rounded-xl overflow-hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-muted/50 transition-colors duration-200 gap-4"
+      >
+        <span className="text-sm font-bold text-foreground leading-snug">
+          {q}
+        </span>
+        <motion.span
+          animate={{ rotate: open ? 180 : 0 }}
+          transition={{ duration: 0.22 }}
+          className="shrink-0 text-muted-foreground"
+        >
+          <ChevronDown className="w-5 h-5" />
+        </motion.span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <p className="px-6 pb-5 text-sm text-muted-foreground leading-relaxed font-medium border-t border-border pt-4">
+              {a}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
 
 export default function SoftwareDetailPage({
   params,
@@ -244,7 +386,7 @@ export default function SoftwareDetailPage({
               variants={fadeUp}
               className="h-full"
             >
-              <SpotlightCard className="p-6 bg-muted/30 dark:bg-card border border-border rounded-2xl shadow-sm hover-card-effect space-y-1.5 h-full">
+              <SpotlightCard className="p-6 bg-card border border-border rounded-2xl shadow-sm hover-card-effect space-y-1.5 h-full">
                 <div className="text-3xl font-black min-h-[40px] flex items-center text-primary">
                   {metric.value ? (
                     metric.value
@@ -347,6 +489,185 @@ export default function SoftwareDetailPage({
           </motion.div>
         </motion.div>
 
+        {/* ── Section 1: VS Comparison Table ── */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-8 pt-8"
+        >
+          <motion.div variants={fadeUp} className="text-center space-y-3">
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/10"
+            >
+              Impact Comparison
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+              Without Us vs. With Jeshurun
+            </h2>
+            <p className="text-muted-foreground font-medium text-sm max-w-xl mx-auto">
+              See the real operational difference our {category.title} practice
+              makes for enterprise clients.
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="overflow-hidden rounded-2xl border border-border shadow-sm"
+          >
+            {/* Header */}
+            <div className="grid grid-cols-2 bg-card">
+              <div className="px-6 py-4 flex items-center gap-2">
+                <XIcon className="w-4 h-4 text-red-400" />
+                <span className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+                  Without Jeshurun
+                </span>
+              </div>
+              <div className="px-6 py-4 flex items-center gap-2 border-l border-border">
+                <Check className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-extrabold uppercase tracking-widest text-foreground">
+                  With Jeshurun
+                </span>
+              </div>
+            </div>
+            {/* Rows */}
+            {category.comparison.map((row, i) => (
+              <div
+                key={i}
+                className={`grid grid-cols-2 border-t border-border ${i % 2 === 0 ? "bg-card" : "bg-muted/10"}`}
+              >
+                <div className="px-6 py-4 flex items-start gap-3 border-r border-border">
+                  <span className="w-5 h-5 rounded-full bg-red-50 flex items-center justify-center mt-0.5 shrink-0">
+                    <XIcon className="w-3 h-3 text-red-400" />
+                  </span>
+                  <span className="text-sm text-muted-foreground font-medium leading-snug">
+                    {row.without}
+                  </span>
+                </div>
+                <div className="px-6 py-4 flex items-start gap-3">
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center mt-0.5 shrink-0">
+                    <Check className="w-3 h-3 text-emerald-500" />
+                  </span>
+                  <span className="text-sm text-foreground font-bold leading-snug">
+                    {row.with}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* ── Section 2: Case Study / Testimonial ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ type: "spring" as const, stiffness: 80, damping: 22 }}
+          className="pt-8"
+        >
+          <SpotlightCard className="p-0">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--primary),0.05)_0%,transparent_60%)] pointer-events-none" />
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12">
+              
+              {/* Left Side: Case Study Card (40%) */}
+              <div className="lg:col-span-5 bg-muted/20 border-b lg:border-b-0 lg:border-r border-border p-8 sm:p-12 space-y-8">
+                <div className="space-y-2">
+                  <span className="px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest bg-primary/10 text-primary rounded-full shadow-sm">
+                    CLIENT SUCCESS STORY
+                  </span>
+                  <h3 className="text-2xl font-black text-foreground pt-2">
+                    {category.title} Delivery
+                  </h3>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-6">
+                  <div className="space-y-1">
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Industry</div>
+                    <div className="text-sm font-extrabold text-foreground">Enterprise Software</div>
+                  </div>
+                  <div className="space-y-1">
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Region</div>
+                    <div className="text-sm font-extrabold text-foreground">Global</div>
+                  </div>
+                </div>
+
+                <div className="space-y-1 border-t border-border pt-6">
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold pb-2">Business Outcomes</div>
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-3">
+                      <Check className="w-4 h-4 text-emerald-500" />
+                      <span className="text-sm font-bold text-foreground">High ROI</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <Check className="w-4 h-4 text-emerald-500" />
+                      <span className="text-sm font-bold text-foreground">Reduced Complexity</span>
+                    </li>
+                    <li className="flex items-center gap-3">
+                      <Check className="w-4 h-4 text-emerald-500" />
+                      <span className="text-sm font-bold text-foreground">Scalable Architecture</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Right Side: Client Testimonial (60%) */}
+              <div className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center space-y-10">
+                <Quote className="w-10 h-10 text-primary opacity-20" />
+                <p className="text-foreground text-xl sm:text-2xl font-medium leading-relaxed italic">
+                  &ldquo;{category.testimonial.quote}&rdquo;
+                </p>
+                
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-8 border-t border-border">
+                  <div className="flex items-center gap-5">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center font-black text-lg text-primary-foreground bg-primary shadow-md shrink-0">
+                      {category.testimonial.author.split(" ").map(n => n[0]).join("")}
+                    </div>
+                    <div>
+                      <p className="text-base font-black text-foreground tracking-tight">
+                        {category.testimonial.author}
+                      </p>
+                      <p className="text-xs text-muted-foreground font-bold uppercase tracking-wide">
+                        {category.testimonial.role} · {category.testimonial.company}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="sm:text-right">
+                    <div className="text-2xl font-black text-foreground">{category.testimonial.stat}</div>
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{category.testimonial.statLabel}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SpotlightCard>
+        </motion.div>
+
+        {/* ── Section 3: FAQ Accordion ── */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-6 pt-8"
+        >
+          <motion.div variants={fadeUp} className="space-y-2">
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/10"
+            >
+              Common Questions
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+              Frequently Asked Questions
+            </h2>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="space-y-3 max-w-3xl">
+            {category.faqs.map((faq, i) => (
+              <FAQItem key={i} q={faq.q} a={faq.a} />
+            ))}
+          </motion.div>
+        </motion.div>
+
         {/* ── CTA Banner ── */}
         <motion.div
           variants={container}
@@ -356,7 +677,12 @@ export default function SoftwareDetailPage({
           className="pt-12"
         >
           <div className="-mx-6 sm:-mx-12">
-            <PremiumCTA variant="software" />
+            <PremiumCTA 
+              variant="software" 
+              titleTop={category.ctaTitleTop}
+              titleHighlight={category.ctaTitleHighlight}
+              description={category.ctaDescription}
+            />
           </div>
         </motion.div>
       </div>

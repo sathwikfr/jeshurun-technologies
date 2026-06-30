@@ -62,6 +62,9 @@ const servicesData: Record<
     faqs: { q: string; a: string }[];
     related: { title: string; href: string; desc: string }[];
     ctaLabel: string;
+    ctaTitleTop?: string;
+    ctaTitleHighlight?: string;
+    ctaDescription?: string;
     accentColor: string;
     caseStudies: {
       client: string;
@@ -119,6 +122,9 @@ const servicesData: Record<
       { title: "Technology: Cloud Solutions", href: "/technology/cloud-solutions", desc: "Build robust cloud infrastructure" }
     ],
     ctaLabel: "Schedule an IT Assessment",
+    ctaTitleTop: "Ready to Architect Your",
+    ctaTitleHighlight: "Technology Roadmap?",
+    ctaDescription: "Discuss your enterprise challenge with our strategists and design a forward-looking IT roadmap aligned to your core business objectives.",
     accentColor: "#0057D9",
     caseStudies: [
       {
@@ -180,6 +186,9 @@ const servicesData: Record<
       { title: "Technology: DevOps", href: "/technology/devops", desc: "Automate delivery pipelines for faster releases" }
     ],
     ctaLabel: "Discuss Your Project",
+    ctaTitleTop: "Ready to Deliver Your Next",
+    ctaTitleHighlight: "Enterprise Initiative?",
+    ctaDescription: "Discuss your project scope with our certified delivery experts and build an execution plan engineered for on-time, high-impact outcomes.",
     accentColor: "#4F46E5",
     caseStudies: [
       {
@@ -241,6 +250,9 @@ const servicesData: Record<
       { title: "Technology: DevOps", href: "/technology/devops", desc: "Embed automated tests in your CI/CD" }
     ],
     ctaLabel: "Audit Your QA Pipeline",
+    ctaTitleTop: "Ready to Build a",
+    ctaTitleHighlight: "Zero-Defect Pipeline?",
+    ctaDescription: "Discuss your quality assurance needs with our test architects and design an automated testing framework built for reliability at scale.",
     accentColor: "#DC2626",
     caseStudies: [
       {
@@ -302,6 +314,9 @@ const servicesData: Record<
       { title: "Technology: Network Infrastructure", href: "/technology/network-infrastructure", desc: "Optimize edge CDNs and SD-WANs" }
     ],
     ctaLabel: "Optimize Your Infrastructure",
+    ctaTitleTop: "Ready to Modernize",
+    ctaTitleHighlight: "Your Infrastructure?",
+    ctaDescription: "Discuss your infrastructure challenge with our consultants and design a resilient, secure roadmap for your cloud and systems environment.",
     accentColor: "#059669",
     caseStudies: [
       {
@@ -438,7 +453,7 @@ export default function ServiceDetailPage({
               variants={fadeUp}
               className="h-full"
             >
-              <SpotlightCard className="p-6 bg-muted/30 dark:bg-card border border-border shadow-sm hover-card-effect space-y-1.5 rounded-2xl h-full">
+              <SpotlightCard className="p-6 bg-card border border-border shadow-sm hover-card-effect space-y-1.5 rounded-2xl h-full">
                 <div className={`text-3xl font-black min-h-[40px] flex items-center ${metric.value ? 'text-primary' : 'text-muted-foreground/60'}`}>
                   {metric.value ? (
                     metric.value
@@ -698,39 +713,18 @@ export default function ServiceDetailPage({
           viewport={{ once: true, margin: "-60px" }}
           className="space-y-8"
         >
-          <motion.div variants={fadeUp}>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border mb-3 bg-primary/5 text-primary border-primary/10">
-              Related Practices
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
-              Explore Connected Services
-            </h2>
-          </motion.div>
-
-          <motion.div variants={fadeUp} className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {service.related.map((rel) => (
-              <div key={rel.href} onClick={() => router.push(rel.href)} className="group block cursor-pointer outline-none">
-                <SpotlightCard className="h-full p-8 bg-card border border-border rounded-2xl hover-card-effect">
-                  <h4 className="text-lg font-extrabold text-foreground group-hover:text-primary transition-colors duration-200 mb-2">
-                    {rel.title}
-                  </h4>
-                  <p className="text-base text-muted-foreground font-medium leading-relaxed">
-                    {rel.desc}
-                  </p>
-                  <div className="flex items-center gap-1 mt-6 text-sm font-bold text-primary">
-                    Explore <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
-                  </div>
-                </SpotlightCard>
-              </div>
-            ))}
-          </motion.div>
 
           {/* ═══════ CLOUD ROI CALCULATOR ═══════ */}
           {/* Removed as requested */}
 
           {/* CTA Banner */}
           <div className="-mx-6 sm:-mx-8">
-            <PremiumCTA variant="services" />
+            <PremiumCTA 
+              variant="services" 
+              titleTop={service.ctaTitleTop}
+              titleHighlight={service.ctaTitleHighlight}
+              description={service.ctaDescription}
+            />
           </div>
         </motion.div>
       </div>

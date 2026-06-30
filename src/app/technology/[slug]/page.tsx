@@ -65,6 +65,9 @@ const techData: Record<
     faqs: { q: string; a: string }[];
     related: { title: string; href: string; desc: string }[];
     ctaLabel: string;
+    ctaTitleTop?: string;
+    ctaTitleHighlight?: string;
+    ctaDescription?: string;
     image: string;
     accentColor: string;
     caseStudies: {
@@ -172,6 +175,9 @@ const techData: Record<
       },
     ],
     ctaLabel: "Get a Cloud Architecture Audit",
+    ctaTitleTop: "Ready to Scale",
+    ctaTitleHighlight: "Your Cloud Infrastructure?",
+    ctaDescription: "Discuss your environment with our cloud architects and design a multi-cloud strategy built on AWS, Azure, or Google Cloud Platform.",
     caseStudies: [
       {
         client: "SaaS Enterprise",
@@ -277,6 +283,9 @@ const techData: Record<
       },
     ],
     ctaLabel: "Book a Data Architecture Review",
+    ctaTitleTop: "Ready to Unlock",
+    ctaTitleHighlight: "the Value of Your Data?",
+    ctaDescription: "Discuss your data challenges with our consultants and design a governance and management strategy built for enterprise scale.",
     caseStudies: [
       {
         client: "E-Commerce Group",
@@ -386,6 +395,9 @@ const techData: Record<
       },
     ],
     ctaLabel: "Schedule a Security Audit",
+    ctaTitleTop: "Ready to Strengthen",
+    ctaTitleHighlight: "Your Security Posture?",
+    ctaDescription: "Discuss your risk landscape with our security experts and design a defense strategy built to protect your enterprise.",
     caseStudies: [
       {
         client: "Healthcare Network",
@@ -495,6 +507,9 @@ const techData: Record<
       },
     ],
     ctaLabel: "Explore an AI Proof of Concept",
+    ctaTitleTop: "Ready to Operationalize",
+    ctaTitleHighlight: "AI in Your Enterprise?",
+    ctaDescription: "Discuss your use case with our AI specialists and design a machine learning strategy built for measurable business impact.",
     caseStudies: [
       {
         client: "Fintech Startup",
@@ -600,6 +615,9 @@ const techData: Record<
       },
     ],
     ctaLabel: "Get a Network Assessment",
+    ctaTitleTop: "Ready to Build a",
+    ctaTitleHighlight: "Resilient Network Foundation?",
+    ctaDescription: "Discuss your connectivity needs with our network engineers and design infrastructure built for performance and reliability.",
     caseStudies: [
       {
         client: "Global Logistics",
@@ -709,6 +727,9 @@ const techData: Record<
       },
     ],
     ctaLabel: "Audit Your CI/CD Pipeline",
+    ctaTitleTop: "Ready to Accelerate",
+    ctaTitleHighlight: "Your Delivery Pipelines?",
+    ctaDescription: "Discuss your release process with our DevOps engineers and design a CI/CD pipeline built for speed and stability.",
     caseStudies: [
       {
         client: "Media Platform",
@@ -1255,7 +1276,12 @@ export default function TechDetailPage({
 
           {/* CTA Banner */}
           <div className="-mx-6 sm:-mx-8">
-            <PremiumCTA variant="technology" />
+            <PremiumCTA 
+              variant="technology"
+              titleTop={tech.ctaTitleTop}
+              titleHighlight={tech.ctaTitleHighlight}
+              description={tech.ctaDescription}
+            />
           </div>
         </motion.div>
       </div>

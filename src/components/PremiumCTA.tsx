@@ -8,6 +8,9 @@ export type CTAVariant = "services" | "technology" | "software" | "about" | "cas
 
 export interface PremiumCTAProps {
   variant: CTAVariant;
+  titleTop?: string;
+  titleHighlight?: string;
+  description?: string;
 }
 
 const CTA_DATA: Record<CTAVariant, {
@@ -84,8 +87,11 @@ const CTA_DATA: Record<CTAVariant, {
   }
 };
 
-export function PremiumCTA({ variant }: PremiumCTAProps) {
+export function PremiumCTA({ variant, titleTop: customTitleTop, titleHighlight: customTitleHighlight, description: customDescription }: PremiumCTAProps) {
   const data = CTA_DATA[variant];
+  const titleTop = customTitleTop || data.titleTop;
+  const titleHighlight = customTitleHighlight || data.titleHighlight;
+  const description = customDescription || data.description;
 
   return (
     <section className="w-full py-16 md:py-20 relative z-10 bg-transparent overflow-hidden">
@@ -115,13 +121,13 @@ export function PremiumCTA({ variant }: PremiumCTAProps) {
           
           <div className="relative z-10 space-y-5">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground tracking-tight leading-[1.15]">
-              {data.titleTop} <br />
+              {titleTop} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-                {data.titleHighlight}
+                {titleHighlight}
               </span>
             </h2>
             <p className="text-muted-foreground text-sm md:text-base font-medium leading-relaxed max-w-lg mx-auto">
-              {data.description}
+              {description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
               <Link href={data.primaryButtonHref}>

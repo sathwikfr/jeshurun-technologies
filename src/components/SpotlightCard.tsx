@@ -41,10 +41,9 @@ export function SpotlightCard({ children, className = "", tiltEffect = false, bo
         handleMouseLeave();
         if (props.onMouseLeave) props.onMouseLeave(e);
       }}
-      className={`card-sweep-container relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:scale-[1.02] hover:border-primary/35 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] ${className}`}
+      className={`relative overflow-hidden rounded-2xl border border-border p-6 transition-all duration-300 hover:scale-[1.02] hover:border-primary/35 hover:shadow-[0_8px_30px_rgba(15,23,42,0.08)] ${className}`}
       {...props}
     >
-      <div className="card-sweep-highlight" />
       {/* Spotlight highlight background */}
       <div
         className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-300"
@@ -53,20 +52,7 @@ export function SpotlightCard({ children, className = "", tiltEffect = false, bo
           background: `radial-gradient(400px circle at ${coords.x}px ${coords.y}px, rgba(var(--primary), 0.04), transparent 80%)`,
         }}
       />
-      {/* Magical Border Glow tracking the cursor along the border */}
-      {borderGlow && (
-        <div
-          className="pointer-events-none absolute -inset-[1px] rounded-2xl opacity-0 transition-opacity duration-300 z-20"
-          style={{
-            opacity: isHovered ? 1 : 0,
-            background: `radial-gradient(300px circle at ${coords.x}px ${coords.y}px, #1d4ed8, transparent 100%)`,
-            padding: "2px",
-            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-            WebkitMaskComposite: "xor",
-            maskComposite: "exclude"
-          }}
-        />
-      )}
+
       <div className="relative z-10 h-full flex flex-col">
         {children}
       </div>

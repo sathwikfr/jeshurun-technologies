@@ -391,6 +391,16 @@ export default function Software() {
         />
       </div>
 
+      {/* ═══════ LIGHTWEIGHT CLOSING ═══════ */}
+      <div className="container px-6 sm:px-8 mx-auto pb-16 pt-8 text-center border-t border-border mt-12">
+        <p className="text-sm font-medium text-muted-foreground">
+          Have a project in mind? Explore our capabilities above or{" "}
+          <Link href="/contact" className="text-primary hover:underline font-bold transition-all">
+            talk to our team.
+          </Link>
+        </p>
+      </div>
+
     </div>
   );
 }

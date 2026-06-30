@@ -14,7 +14,7 @@ export function Footer() {
           <div className="md:col-span-5 space-y-5">
             <HeaderLogo className="h-10 w-auto" />
             <p className="text-sm text-foreground leading-relaxed max-w-sm font-medium">
-              Empowering global organizations through next-generation software solutions, advanced IT consulting, and robust infrastructure management.
+              Architecting resilient systems and delivering mission-critical technology solutions for organizations across Ireland, Europe, and beyond.
             </p>
             <div className="flex space-x-4 pt-2">
               <Link href="#" aria-label="Facebook" className="h-9 w-9 bg-card border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-[#0057D9] hover:border-[#0057D9] hover:shadow-sm transition-all duration-300">

@@ -326,10 +326,20 @@ export default function Services() {
       />
 
       {/* Cloud ROI Calculator */}
-      <div className="bg-background pt-8 pb-20">
+      <div className="bg-background pt-8 pb-12">
         <div className="container mx-auto px-6 sm:px-8">
           <CloudROICalculator />
         </div>
+      </div>
+
+      {/* ═══════ LIGHTWEIGHT CLOSING ═══════ */}
+      <div className="container px-6 sm:px-8 mx-auto pb-16 pt-8 text-center border-t border-border mt-12">
+        <p className="text-sm font-medium text-muted-foreground">
+          Not sure where to start? Explore our practice areas above or{" "}
+          <Link href="/contact" className="text-primary hover:underline font-bold transition-all">
+            get in touch.
+          </Link>
+        </p>
       </div>
 
     </div>

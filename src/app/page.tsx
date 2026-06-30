@@ -326,7 +326,7 @@ function InsightCard({ insight }: InsightCardProps) {
                 transition={{ duration: 0.2 }}
                 className="flex items-center justify-between text-[11px] text-muted-foreground font-semibold"
               >
-                <span>{insight.readTime} • {insight.date}</span>
+                <span>{insight.date}</span>
                 <span className="inline-flex items-center gap-1 text-[11px] text-muted-foreground/60 group-hover:text-[#2563EB] transition-colors duration-300">
                   Hover to read &rarr;
                 </span>
@@ -340,7 +340,7 @@ function InsightCard({ insight }: InsightCardProps) {
                 transition={{ duration: 0.2 }}
                 className="flex items-center justify-between text-xs text-[#2563EB] font-bold"
               >
-                <span>Estimated: {insight.readTime.split(' ')[0]} Min</span>
+                <span>{insight.date}</span>
                 <span className="inline-flex items-center gap-1">
                   Click to read more &rarr;
                 </span>
@@ -506,28 +506,52 @@ const trustLogos = [
 
 // --- MICRO-VISUALIZATION COMPONENTS FOR TECH STAT CARDS ---
 function EnterpriseClientsViz() {
-  const logos = trustLogos.slice(0, 5);
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div className="flex items-center mt-3 h-8 w-full max-w-[120px]">
-      {logos.map((logo, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, x: -10 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
-          viewport={{ once: false, amount: 0.8 }}
-          className="w-7 h-7 rounded-full border-[1.5px] border-card bg-white dark:bg-white shadow-sm flex items-center justify-center -ml-2.5 first:ml-0 relative overflow-hidden"
-          style={{ zIndex: 5 - i }}
-        >
-          <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 3, delay: i * 0.5, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
-            className="w-full h-full relative"
-          >
-            <Image src={logo.src} alt={logo.name} fill className="object-contain p-1" />
-          </motion.div>
-        </motion.div>
-      ))}
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+      <style>{`
+        @keyframes pulseClient {
+          0%, 100% { opacity: 0.4; transform: scale(1); box-shadow: 0 0 0 rgba(37,99,235,0); }
+          50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 6px rgba(37,99,235,0.6); }
+        }
+        @keyframes beamMove {
+          0% { stroke-dashoffset: 40; opacity: 0; }
+          20%, 80% { opacity: 1; }
+          100% { stroke-dashoffset: -40; opacity: 0; }
+        }
+      `}</style>
+      
+      {/* Network Map / SVG */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        <svg className="w-full h-full" viewBox="0 0 160 64" strokeWidth="1">
+          {/* Static Graph Lines */}
+          <g className="stroke-[#2563EB] opacity-20 dark:opacity-40" fill="none">
+            <path d="M 80 32 L 30 20" />
+            <path d="M 80 32 L 40 50" />
+            <path d="M 80 32 L 130 15" />
+            <path d="M 80 32 L 140 45" />
+          </g>
+          {/* Animated Beams */}
+          <g className="stroke-[#3B82F6] dark:stroke-[#60A5FA]" fill="none" strokeWidth="1.5" strokeDasharray="10 30" strokeLinecap="round">
+            <path d="M 80 32 L 30 20" style={{ animation: "beamMove 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 80 32 L 40 50" style={{ animation: "beamMove 2.5s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 80 32 L 130 15" style={{ animation: "beamMove 2.2s linear infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 80 32 L 140 45" style={{ animation: "beamMove 1.8s linear infinite 0.2s", animationPlayState: isInView ? "running" : "paused" }} />
+          </g>
+        </svg>
+      </div>
+
+      {/* Nodes */}
+      <div className="absolute inset-0 z-10">
+        <div className="absolute left-[calc(50%-4px)] top-[calc(50%-4px)] w-2 h-2 rounded-full bg-[#2563EB] z-20 shadow-[0_0_8px_#2563EB]" />
+        
+        {/* Client Nodes */}
+        <div className="absolute left-[28px] top-[18px] w-1.5 h-1.5 rounded-full bg-white dark:bg-slate-800 border border-[#2563EB]" style={{ animation: "pulseClient 3s infinite 0.2s", animationPlayState: isInView ? "running" : "paused" }} />
+        <div className="absolute left-[38px] top-[48px] w-1.5 h-1.5 rounded-full bg-white dark:bg-slate-800 border border-[#2563EB]" style={{ animation: "pulseClient 3s infinite 1.1s", animationPlayState: isInView ? "running" : "paused" }} />
+        <div className="absolute left-[128px] top-[13px] w-1.5 h-1.5 rounded-full bg-white dark:bg-slate-800 border border-[#2563EB]" style={{ animation: "pulseClient 3s infinite 0.7s", animationPlayState: isInView ? "running" : "paused" }} />
+        <div className="absolute left-[138px] top-[43px] w-1.5 h-1.5 rounded-full bg-white dark:bg-slate-800 border border-[#2563EB]" style={{ animation: "pulseClient 3s infinite 2s", animationPlayState: isInView ? "running" : "paused" }} />
+      </div>
     </div>
   );
 }
@@ -536,43 +560,100 @@ function SLAUptimeViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="flex items-center mt-3 h-5 w-full max-w-[120px] bg-slate-100 dark:bg-slate-800/60 rounded-full overflow-hidden border border-slate-200 dark:border-slate-700/50 relative">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes slideRight {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(200%); }
+        @keyframes serverPing {
+          0%, 80%, 100% { opacity: 0.3; }
+          90% { opacity: 1; box-shadow: 0 0 8px #22C55E; }
+        }
+        @keyframes scanLine {
+          0% { transform: translateX(-100%); opacity: 0; }
+          10%, 90% { opacity: 1; }
+          100% { transform: translateX(200%); opacity: 0; }
         }
       `}</style>
-      <div
-        style={{ animation: "slideRight 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }}
-        className="absolute top-0 bottom-0 w-1/2 flex items-center justify-center opacity-90"
-      >
-        <div className="w-full h-full bg-gradient-to-r from-transparent via-[#22C55E]/40 to-transparent absolute inset-0" />
-        <div className="w-1.5 h-3.5 bg-[#22C55E] rounded-full shadow-[0_0_8px_2px_rgba(34,197,94,0.8)] relative z-10" />
+      
+      {/* Background Matrix */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center gap-3">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="flex flex-col gap-1.5">
+            {[...Array(3)].map((_, j) => (
+              <div 
+                key={j} 
+                className="w-4 h-1.5 rounded-[1px] bg-[#22C55E]"
+                style={{
+                  animation: "serverPing 4s infinite",
+                  animationDelay: `${(i * 3 + j) * 0.15}s`,
+                  animationPlayState: isInView ? "running" : "paused",
+                  opacity: 0.3
+                }}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Scanner Effect */}
+      <div className="absolute inset-y-0 w-8 bg-gradient-to-r from-transparent via-[#22C55E]/20 to-transparent z-10"
+           style={{ animation: "scanLine 3s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+           
+      {/* 99.9% Badge */}
+      <div className="absolute z-20 px-1.5 py-0.5 bg-white dark:bg-[#0B1220] border border-[#22C55E]/40 rounded text-[8px] font-bold text-[#22C55E] tracking-wider shadow-[0_0_10px_rgba(34,197,94,0.15)]">
+        UP
       </div>
     </div>
   );
 }
 
 function ExperienceTimelineViz() {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div className="flex items-center justify-between mt-3 h-6 w-full max-w-[120px] relative">
-      <div className="absolute inset-x-0 h-1 bg-slate-200 dark:bg-slate-800/80 rounded-full overflow-hidden">
-        {/* Static fill */}
-        <div className="h-full w-full bg-[#2563EB]/80" />
-        
-        {/* Shimmer / Glow pulse */}
-        <motion.div
-          initial={{ x: "-100%" }}
-          whileInView={{ x: "100%" }}
-          transition={{ duration: 2.5, ease: "easeInOut", repeat: Number.POSITIVE_INFINITY }}
-          viewport={{ once: false }}
-          className="absolute inset-0 w-1/2 bg-gradient-to-r from-transparent via-white/50 to-transparent"
-        />
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+      <style>{`
+        @keyframes drawTimeline {
+          0% { stroke-dashoffset: 150; }
+          50%, 100% { stroke-dashoffset: 0; }
+        }
+        @keyframes popNode {
+          0%, 10% { transform: scale(0); opacity: 0; }
+          30%, 100% { transform: scale(1.2); opacity: 1; }
+        }
+      `}</style>
+      
+      {/* SVG Path */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        <svg className="w-full h-full" viewBox="0 0 160 64" strokeWidth="2">
+          {/* Background Track */}
+          <path d="M 30 32 L 130 32" className="stroke-[#3B82F6] opacity-20" fill="none" strokeLinecap="round" />
+          
+          {/* Animated Fill */}
+          <path 
+            d="M 30 32 L 130 32" 
+            className="stroke-[#2563EB] dark:stroke-[#60A5FA]" 
+            fill="none" 
+            strokeLinecap="round" 
+            strokeDasharray="150"
+            style={{ animation: "drawTimeline 4s ease-out infinite", animationPlayState: isInView ? "running" : "paused" }} 
+          />
+        </svg>
       </div>
-      {[...Array(5)].map((_, i) => (
-        <div key={i} className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 z-10 relative" />
-      ))}
+
+      {/* Nodes */}
+      <div className="absolute inset-0 z-10 flex items-center justify-between px-7">
+        {[...Array(4)].map((_, i) => (
+          <div 
+            key={i} 
+            className="w-2.5 h-2.5 rounded-full bg-white dark:bg-[#0F172A] border-2 border-[#2563EB] shadow-[0_0_5px_rgba(37,99,235,0.5)]"
+            style={{ 
+              animation: "popNode 4s ease-out infinite", 
+              animationDelay: `${0.5 + i * 0.4}s`,
+              animationPlayState: isInView ? "running" : "paused",
+              opacity: 0
+            }}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -580,34 +661,48 @@ function ExperienceTimelineViz() {
 function CertifiedEngineersViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
-  const skills = [
-    { Icon: Cloud, color: "text-[#1E5FFF]", bg: "bg-[#1E5FFF]/10 dark:bg-[#1E5FFF]/20", border: "border-[#1E5FFF]/20" },
-    { Icon: Code, color: "text-[#0EA5E9]", bg: "bg-[#0EA5E9]/10 dark:bg-[#0EA5E9]/20", border: "border-[#0EA5E9]/20" },
-    { Icon: ShieldCheck, color: "text-[#16A34A]", bg: "bg-[#16A34A]/10 dark:bg-[#16A34A]/20", border: "border-[#16A34A]/20" },
-  ];
   return (
-    <div ref={ref} className="flex items-center justify-between mt-3 h-8 w-full max-w-[100px] relative">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes floatBob {
-          0%, 100% { transform: translateY(-3px); }
-          50% { transform: translateY(3px); }
+        @keyframes certSpin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        @keyframes certPop {
+          0%, 100% { transform: translateY(0); box-shadow: 0 0 0 rgba(0,0,0,0); }
+          50% { transform: translateY(-4px); box-shadow: 0 4px 10px rgba(14,165,233,0.3); }
         }
       `}</style>
-      <div className="absolute left-4 right-4 h-[1px] border-t border-dashed border-slate-300 dark:border-slate-700/50 top-1/2 -translate-y-1/2 z-0" />
-      {skills.map(({ Icon, color, bg, border }, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.4, delay: i * 0.15 }}
-          viewport={{ once: false, amount: 0.8 }}
-          className={`w-7 h-7 rounded-md flex items-center justify-center shadow-sm relative z-10 border ${bg} ${border} ${color}`}
-        >
-          <div style={{ animation: `floatBob 2.5s ease-in-out infinite ${i * 0.6}s`, animationPlayState: isInView ? "running" : "paused" }}>
-            <Icon className="w-3.5 h-3.5" />
-          </div>
-        </motion.div>
-      ))}
+
+      {/* Background Orbit/Lines */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        <svg className="w-full h-full" viewBox="0 0 160 64">
+           <path d="M 80 40 C 50 40, 20 20, 50 20 C 80 20, 110 20, 110 40 C 140 40, 140 20, 110 20" fill="none" className="stroke-[#0EA5E9] opacity-20" strokeWidth="1" strokeDasharray="4 4" />
+        </svg>
+      </div>
+
+      <div className="absolute inset-0 z-10 flex items-center justify-center gap-4">
+        {/* Code Eng */}
+        <div className="w-7 h-7 rounded bg-white dark:bg-[#0B1220] border border-[#0EA5E9]/50 flex items-center justify-center relative"
+             style={{ animation: "certPop 3s ease-in-out infinite 0s", animationPlayState: isInView ? "running" : "paused" }}>
+           <Code className="w-3.5 h-3.5 text-[#0EA5E9]" />
+           <div className="absolute -inset-1 border border-[#0EA5E9]/20 rounded border-dashed" style={{ animation: "certSpin 8s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+        </div>
+        
+        {/* Cloud Eng */}
+        <div className="w-8 h-8 rounded bg-white dark:bg-[#0B1220] border border-[#3B82F6]/50 flex items-center justify-center relative z-20"
+             style={{ animation: "certPop 3s ease-in-out infinite 1s", animationPlayState: isInView ? "running" : "paused" }}>
+           <Cloud className="w-4 h-4 text-[#3B82F6]" />
+           <div className="absolute -inset-1 border border-[#3B82F6]/30 rounded-md border-dashed" style={{ animation: "certSpin 10s linear infinite reverse", animationPlayState: isInView ? "running" : "paused" }} />
+        </div>
+        
+        {/* Security Eng */}
+        <div className="w-7 h-7 rounded bg-white dark:bg-[#0B1220] border border-[#16A34A]/50 flex items-center justify-center relative"
+             style={{ animation: "certPop 3s ease-in-out infinite 2s", animationPlayState: isInView ? "running" : "paused" }}>
+           <ShieldCheck className="w-3.5 h-3.5 text-[#16A34A]" />
+           <div className="absolute -inset-1 border border-[#16A34A]/20 rounded border-dashed" style={{ animation: "certSpin 8s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+        </div>
+      </div>
     </div>
   );
 }
@@ -617,46 +712,58 @@ function ITConsultingViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2">
+    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes roadPulse {
-          0% { stroke-dashoffset: 200; opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { stroke-dashoffset: -200; opacity: 0; }
+        @keyframes networkPulse {
+          0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(30, 95, 255, 0.1); }
+          50% { transform: scale(1.1); box-shadow: 0 0 20px rgba(30, 95, 255, 0.4); }
         }
-        @keyframes labelFade {
-          0%, 100% { opacity: 0.3; transform: translateY(2px); }
-          50% { opacity: 1; transform: translateY(0); color: #1E5FFF; }
-        }
-        @keyframes ambientGlow {
-          0%, 100% { filter: drop-shadow(0 0 2px rgba(30, 95, 255, 0.2)); }
-          50% { filter: drop-shadow(0 0 8px rgba(30, 95, 255, 0.6)); }
+        @keyframes flowData {
+          0% { stroke-dashoffset: 100; opacity: 0; }
+          20%, 80% { opacity: 1; }
+          100% { stroke-dashoffset: -100; opacity: 0; }
         }
       `}</style>
-      <svg className="absolute inset-0 w-full h-full overflow-visible z-0" viewBox="0 0 200 80" preserveAspectRatio="none">
-        <path d="M 10 60 L 50 30 L 100 50 L 150 20 L 190 40" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-slate-200 dark:text-slate-700/60" />
-        <path d="M 10 60 L 50 30 L 100 50 L 150 20 L 190 40" fill="none" stroke="#1E5FFF" strokeWidth="2.5" 
-          strokeDasharray="40 400"
-          strokeLinecap="round"
-          style={{ animation: "roadPulse 4s linear infinite", animationPlayState: isInView ? "running" : "paused" }}
-          className="drop-shadow-[0_0_6px_#1E5FFF]"
-        />
-      </svg>
-      {[ 
-        { x: "10px", y: "60px", delay: "0.2s", label: "DISCOVER" },
-        { x: "50px", y: "30px", delay: "0.9s", label: "PLAN" },
-        { x: "100px", y: "50px", delay: "1.8s", label: "ALIGN" },
-        { x: "150px", y: "20px", delay: "2.7s", label: "DEPLOY" },
-        { x: "190px", y: "40px", delay: "3.4s", label: "SCALE" },
-      ].map((pos, i) => (
-        <div key={i} className="absolute z-10 flex flex-col items-center" style={{ left: pos.x, top: pos.y, transform: "translate(-50%, -50%)" }}>
-           <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-[#1E5FFF] bg-card" style={{ animation: "ambientGlow 3s ease-in-out infinite", animationDelay: pos.delay, animationPlayState: isInView ? "running" : "paused" }} />
-           <div className="absolute top-3.5 text-[8px] font-bold tracking-wider text-slate-400 dark:text-slate-500 whitespace-nowrap" style={{ animation: `labelFade 4s ease-in-out infinite ${pos.delay}`, animationPlayState: isInView ? "running" : "paused" }}>
-             {pos.label}
-           </div>
-        </div>
-      ))}
+      
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        <svg className="w-full h-full" viewBox="0 0 200 96" strokeWidth="1.5">
+          {/* Static paths */}
+          <g className="stroke-[#1E5FFF] opacity-20 dark:opacity-40" fill="none">
+            <path d="M 100 48 L 40 25" />
+            <path d="M 100 48 L 160 25" />
+            <path d="M 100 48 L 40 75" />
+            <path d="M 100 48 L 160 75" />
+          </g>
+          {/* Animated data pulses */}
+          <g className="stroke-[#22D3EE] dark:stroke-[#3B82F6]" strokeWidth="2" fill="none" strokeDasharray="15 150" strokeLinecap="round">
+            <path d="M 100 48 L 40 25" style={{ animation: "flowData 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 100 48 L 160 25" style={{ animation: "flowData 2.5s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 100 48 L 40 75" style={{ animation: "flowData 2.2s linear infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 100 48 L 160 75" style={{ animation: "flowData 2.8s linear infinite 1.5s", animationPlayState: isInView ? "running" : "paused" }} />
+          </g>
+          {/* Outer Nodes */}
+          <g className="fill-[#1E5FFF]">
+            <circle cx="40" cy="25" r="3" />
+            <circle cx="160" cy="25" r="3" />
+            <circle cx="40" cy="75" r="3" />
+            <circle cx="160" cy="75" r="3" />
+          </g>
+        </svg>
+      </div>
+
+      {/* Center Node */}
+      <div 
+        className="relative z-10 w-10 h-10 bg-white dark:bg-[#0B1220] border border-[#1E5FFF]/50 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(30,95,255,0.2)] dark:shadow-[0_0_15px_rgba(30,95,255,0.4)]"
+        style={{ animation: "networkPulse 3s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }}
+      >
+        <div className="w-4 h-4 bg-gradient-to-br from-[#22D3EE] to-[#1E5FFF] rounded-full" />
+      </div>
+      
+      {/* Node Labels */}
+      <div className="absolute top-[8px] left-[15px] text-[8px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">DISCOVER</div>
+      <div className="absolute top-[8px] right-[25px] text-[8px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">PLAN</div>
+      <div className="absolute bottom-[8px] left-[25px] text-[8px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">ALIGN</div>
+      <div className="absolute bottom-[8px] right-[15px] text-[8px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">SCALE</div>
     </div>
   );
 }
@@ -665,57 +772,44 @@ function ProjectManagementViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-start justify-between max-w-[200px] gap-2 relative mt-2">
+    <div ref={ref} className="w-full h-24 flex flex-col justify-center px-4 py-2 max-w-[200px] relative mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes cardMove {
-          0%, 15% { transform: translate(0px, 0px); opacity: 1; }
-          20%, 35% { transform: translate(32px, -8px) rotate(4deg) scale(1.05); opacity: 0.9; box-shadow: 0 4px 12px rgba(30,95,255,0.2); }
-          40%, 75% { transform: translate(66px, 12px); opacity: 1; }
-          80%, 100% { transform: translate(66px, 12px); opacity: 0; }
+        @keyframes barFill {
+          0%, 10% { transform: scaleX(0); opacity: 0; }
+          30%, 90% { transform: scaleX(1); opacity: 1; }
+          100% { transform: scaleX(0); opacity: 0; }
         }
-        @keyframes pulseCol {
-          0%, 100% { background-color: rgba(30, 95, 255, 0.05); }
-          50% { background-color: rgba(30, 95, 255, 0.15); }
+        @keyframes floatTask {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-3px); }
         }
       `}</style>
-      {[...Array(3)].map((_, i) => (
-        <div key={i} className="flex-1 h-full bg-slate-100/80 dark:bg-slate-800/40 rounded-lg p-2 flex flex-col gap-1.5 border border-slate-200/80 dark:border-slate-700/50 overflow-hidden relative">
-           <div className="w-full h-1.5 bg-slate-300/80 dark:bg-slate-600 rounded-sm mb-1" />
-           {i === 0 && (
-             <>
-               <div className="w-full h-6 bg-white dark:bg-slate-700 rounded-md shadow-sm border border-slate-200 dark:border-slate-600 opacity-30 p-1 flex flex-col gap-1">
-                 <div className="w-3/4 h-1 bg-[#1E5FFF]/30 rounded-full" />
-                 <div className="w-1/2 h-1 bg-slate-200 dark:bg-slate-600 rounded-full" />
-               </div>
-             </>
-           )}
-           {i === 1 && (
-             <>
-               <div className="w-full h-6 bg-white dark:bg-slate-700 rounded-md shadow-sm border border-slate-200 dark:border-slate-600 opacity-60 p-1 flex flex-col gap-1">
-                 <div className="w-2/3 h-1 bg-[#22C55E]/40 rounded-full" />
-                 <div className="w-1/2 h-1 bg-slate-200 dark:bg-slate-600 rounded-full" />
-               </div>
-               <div className="w-full h-6 bg-white dark:bg-slate-700 rounded-md shadow-sm border border-slate-200 dark:border-slate-600 opacity-20 p-1 flex flex-col gap-1" />
-             </>
-           )}
-           {i === 2 && (
-             <>
-               <div className="w-full h-6 bg-white dark:bg-slate-700 rounded-md shadow-sm border border-slate-200 dark:border-slate-600 opacity-90 p-1 flex flex-col gap-1">
-                 <div className="w-full h-1 bg-slate-200 dark:bg-slate-600 rounded-full" />
-                 <div className="w-1/3 h-1 bg-[#22C55E]/80 rounded-full" />
-               </div>
-             </>
-           )}
-           {/* Active column indicator */}
-           {i === 1 && <div className="absolute inset-0 z-0 pointer-events-none" style={{ animation: "pulseCol 4s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }} />}
+      
+      {/* Background grid */}
+      <div className="absolute inset-0 opacity-10 dark:opacity-20 flex justify-between px-6 py-2">
+        <div className="w-px h-full bg-[#1E5FFF]" />
+        <div className="w-px h-full bg-[#1E5FFF]" />
+        <div className="w-px h-full bg-[#1E5FFF]" />
+        <div className="w-px h-full bg-[#1E5FFF]" />
+      </div>
+
+      <div className="flex flex-col gap-3 z-10 w-full relative">
+        {/* Row 1 */}
+        <div className="w-full h-3 bg-slate-200/50 dark:bg-slate-800/50 rounded-sm relative flex items-center px-1">
+          <div className="absolute left-1 h-1.5 w-[40%] bg-gradient-to-r from-[#1E5FFF] to-[#22D3EE] rounded-sm origin-left shadow-[0_0_8px_rgba(30,95,255,0.4)]" style={{ animation: "barFill 4s ease-out infinite", animationPlayState: isInView ? "running" : "paused" }} />
+          <div className="absolute left-[45%] w-[30%] h-4 bg-white dark:bg-[#0B1220] rounded-sm border border-slate-300 dark:border-slate-600 shadow-sm" style={{ animation: "floatTask 3s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }} />
         </div>
-      ))}
-      <div 
-        className="absolute top-[32px] left-[8px] w-[30%] h-6 bg-white dark:bg-slate-700 border border-[#1E5FFF]/60 rounded-md shadow-[0_2px_8px_rgba(30,95,255,0.15)] z-10 p-1 flex flex-col gap-1"
-        style={{ animation: "cardMove 5s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }}
-      >
-        <div className="w-3/4 h-1 bg-[#1E5FFF] rounded-full" />
-        <div className="w-1/2 h-1 bg-slate-200 dark:bg-slate-500 rounded-full" />
+        
+        {/* Row 2 */}
+        <div className="w-full h-3 bg-slate-200/50 dark:bg-slate-800/50 rounded-sm relative flex items-center px-1">
+          <div className="absolute left-[30%] h-1.5 w-[50%] bg-gradient-to-r from-[#A855F7] to-[#EC4899] rounded-sm origin-left shadow-[0_0_8px_rgba(168,85,247,0.4)]" style={{ animation: "barFill 4s ease-out infinite 0.8s", animationPlayState: isInView ? "running" : "paused" }} />
+        </div>
+        
+        {/* Row 3 */}
+        <div className="w-full h-3 bg-slate-200/50 dark:bg-slate-800/50 rounded-sm relative flex items-center px-1">
+          <div className="absolute left-[10%] h-1.5 w-[70%] bg-gradient-to-r from-[#22C55E] to-[#10B981] rounded-sm origin-left shadow-[0_0_8px_rgba(34,197,94,0.4)]" style={{ animation: "barFill 4s ease-out infinite 1.5s", animationPlayState: isInView ? "running" : "paused" }} />
+          <div className="absolute left-[85%] w-2 h-2 rounded-full bg-[#22C55E] shadow-[0_0_5px_#22C55E]" style={{ animation: "floatTask 3s ease-in-out infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
+        </div>
       </div>
     </div>
   );
@@ -725,71 +819,48 @@ function TestManagementViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-between gap-4 max-w-[200px] mt-2 relative">
+    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes testPop {
-          0%, 15% { transform: scale(0); opacity: 0; }
-          20%, 90% { transform: scale(1); opacity: 1; }
-          95%, 100% { transform: scale(0); opacity: 0; }
+        @keyframes scanSweep {
+          0%, 10% { transform: translateX(-100%); opacity: 0; }
+          20% { opacity: 1; }
+          80% { opacity: 1; }
+          90%, 100% { transform: translateX(250%); opacity: 0; }
         }
-        @keyframes lineFill {
-          0%, 15% { transform: scaleX(0); }
-          25%, 90% { transform: scaleX(1); }
-          95%, 100% { transform: scaleX(0); }
+        @keyframes passGlow {
+          0%, 15% { background-color: rgba(51, 65, 85, 0.1); box-shadow: none; border-color: transparent; }
+          20%, 90% { background-color: #10B981; box-shadow: 0 0 10px rgba(16,185,129,0.5); border-color: #34D399; }
+          95%, 100% { background-color: rgba(51, 65, 85, 0.1); box-shadow: none; border-color: transparent; }
         }
-        @keyframes counterTick {
-          0% { content: "0%"; color: #64748b; }
-          25% { content: "25%"; color: #64748b; }
-          50% { content: "50%"; color: #64748b; }
-          75% { content: "75%"; color: #64748b; }
-          85%, 90% { content: "100%"; color: #22c55e; }
-          95%, 100% { content: "0%"; color: #64748b; }
-        }
-        @keyframes counterTickDark {
-          0% { content: "0%"; color: #94a3b8; }
-          25% { content: "25%"; color: #94a3b8; }
-          50% { content: "50%"; color: #94a3b8; }
-          75% { content: "75%"; color: #94a3b8; }
-          85%, 90% { content: "100%"; color: #4ade80; }
-          95%, 100% { content: "0%"; color: #94a3b8; }
-        }
-        .animate-counter::after {
-          content: "0%";
-          animation: counterTick 5s steps(1) infinite;
-        }
-        .dark .animate-counter::after {
-          animation: counterTickDark 5s steps(1) infinite;
+        @keyframes checkmarkPop {
+          0%, 20% { transform: scale(0) rotate(-45deg); opacity: 0; }
+          25%, 90% { transform: scale(1) rotate(0); opacity: 1; }
+          95%, 100% { transform: scale(0) rotate(45deg); opacity: 0; }
         }
       `}</style>
-      <div className="flex-1 flex flex-col justify-between h-full py-1">
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="flex items-center gap-2.5">
-            <div className="w-3.5 h-3.5 rounded-[4px] border-[1.5px] border-slate-300 dark:border-slate-600 flex items-center justify-center relative shrink-0">
-              <div 
-                style={{ animation: `testPop 5s ease-out infinite ${i * 0.8}s`, animationPlayState: isInView ? "running" : "paused" }}
-                className="absolute inset-0 bg-[#22C55E] rounded-[2px] flex items-center justify-center shadow-[0_0_8px_rgba(34,197,94,0.4)]"
-              >
-                <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-            </div>
-            <div className="flex-1 h-1.5 bg-slate-200 dark:bg-slate-700/50 rounded-full relative overflow-hidden">
-              <div 
-                className="absolute inset-0 bg-[#1E5FFF] origin-left"
-                style={{ animation: `lineFill 5s ease-out infinite ${i * 0.8}s`, animationPlayState: isInView ? "running" : "paused" }}
-              />
-            </div>
+
+      {/* Grid Background */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-10 dark:opacity-20">
+        <div className="w-full h-full border-[0.5px] border-[#10B981] [background-image:linear-gradient(#10B981_0.5px,transparent_0.5px),linear-gradient(90deg,#10B981_0.5px,transparent_0.5px)] [background-size:16px_16px]" />
+      </div>
+
+      <div className="flex items-center gap-3 z-10 w-full px-6 relative">
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="flex-1 aspect-square rounded-md bg-slate-300 dark:bg-slate-700/50 border border-slate-400 dark:border-slate-600 flex items-center justify-center relative overflow-hidden transition-all duration-300"
+            style={{ animation: `passGlow 4s ease-out infinite ${i * 0.3}s`, animationPlayState: isInView ? "running" : "paused" }}>
+            {/* Checkmark Icon */}
+            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}
+              style={{ animation: `checkmarkPop 4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite ${i * 0.3}s`, animationPlayState: isInView ? "running" : "paused" }}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
           </div>
         ))}
-      </div>
-      <div className="w-12 h-12 rounded-full border-[3px] border-slate-100 dark:border-slate-800 flex items-center justify-center shrink-0 shadow-inner relative bg-card">
-        <svg className="absolute inset-0 w-full h-full -rotate-90">
-          <circle cx="21" cy="21" r="18" fill="none" stroke="#22C55E" strokeWidth="3" strokeDasharray="113" strokeDashoffset="113"
-             style={{ animation: "lineFill 5s ease-in-out infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }}
-          />
-        </svg>
-        <span className="text-[12px] font-black animate-counter" style={{ animationPlayState: isInView ? "running" : "paused" }} />
+        
+        {/* Scanner Line */}
+        <div 
+          className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-[#22D3EE] to-transparent shadow-[0_0_15px_#22D3EE] z-20 left-4"
+          style={{ animation: "scanSweep 4s linear infinite", animationPlayState: isInView ? "running" : "paused" }}
+        />
       </div>
     </div>
   );
@@ -799,45 +870,55 @@ function InfrastructureViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2">
+    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes nodePulseLg {
-          0%, 100% { transform: scale(0.9); box-shadow: 0 0 0px rgba(30,95,255,0); }
-          50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(30,95,255,0.6); }
+        @keyframes serverPulse {
+          0%, 100% { opacity: 0.4; }
+          50% { opacity: 1; box-shadow: 0 0 12px rgba(34, 197, 94, 0.6); }
         }
-        @keyframes packetMove1 {
-          0% { stroke-dashoffset: 100; opacity: 0; }
+        @keyframes dataLink {
+          0% { stroke-dashoffset: 60; opacity: 0; }
           20%, 80% { opacity: 1; }
-          100% { stroke-dashoffset: -100; opacity: 0; }
+          100% { stroke-dashoffset: -60; opacity: 0; }
         }
       `}</style>
+      
+      {/* Background connections */}
       <div className="absolute inset-0 z-0 flex items-center justify-center">
-        <svg className="w-[180px] h-[80px] overflow-visible stroke-slate-200 dark:stroke-slate-700/60" strokeWidth="1.5">
-          <path d="M 90 40 L 20 20 M 90 40 L 20 60 M 90 40 L 160 20 M 90 40 L 160 60 M 20 20 L 20 60 M 160 20 L 160 60 M 90 10 L 90 40" fill="none" />
-          <path d="M 20 20 L 90 40 L 160 60" fill="none" stroke="#1E5FFF" strokeWidth="2.5" strokeDasharray="30 200" style={{ animation: "packetMove1 3s linear infinite", animationPlayState: isInView ? "running" : "paused" }} className="drop-shadow-[0_0_4px_#1E5FFF]" />
-          <path d="M 160 20 L 90 40 L 20 60" fill="none" stroke="#22C55E" strokeWidth="2.5" strokeDasharray="30 200" style={{ animation: "packetMove1 3.5s linear infinite 1s", animationPlayState: isInView ? "running" : "paused" }} className="drop-shadow-[0_0_4px_#22C55E]" />
-          <path d="M 90 10 L 90 40" fill="none" stroke="#1E5FFF" strokeWidth="2.5" strokeDasharray="20 100" style={{ animation: "packetMove1 2s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
+        <svg className="w-full h-full" viewBox="0 0 200 96" strokeWidth="1.5">
+          <g className="stroke-[#1E5FFF] opacity-20 dark:opacity-40" fill="none">
+            <path d="M 60 48 L 140 30" />
+            <path d="M 60 48 L 140 66" />
+          </g>
+          <g className="stroke-[#22C55E]" strokeWidth="2" fill="none" strokeDasharray="10 60" strokeLinecap="round">
+            <path d="M 60 48 L 140 30" style={{ animation: "dataLink 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 60 48 L 140 66" style={{ animation: "dataLink 2.5s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
+          </g>
         </svg>
       </div>
-      {[
-        { x: "20px", y: "20px", type: "small" },
-        { x: "20px", y: "60px", type: "small" },
-        { x: "160px", y: "20px", type: "small" },
-        { x: "160px", y: "60px", type: "small" },
-        { x: "90px", y: "10px", type: "small" },
-        { x: "90px", y: "40px", type: "large" },
-      ].map((pos, i) => (
-        <div 
-          key={i} 
-          className={`absolute bg-card border-[1.5px] border-[#1E5FFF] z-10 flex items-center justify-center ${pos.type === "large" ? 'w-4 h-4 rounded-md' : 'w-2.5 h-2.5 rounded-full'}`}
-          style={{ left: pos.x, top: pos.y, transform: "translate(-50%, -50%)" }}
-        >
-          <div 
-            className={`bg-[#1E5FFF] ${pos.type === "large" ? 'w-2 h-2 rounded-sm' : 'w-full h-full rounded-full'}`}
-            style={{ animation: pos.type === "large" ? "nodePulseLg 3s ease-in-out infinite" : "none", animationPlayState: isInView ? "running" : "paused" }}
-          />
+
+      <div className="flex items-center justify-between w-full px-10 z-10">
+        {/* Main Server Node */}
+        <div className="w-10 h-16 bg-white dark:bg-[#0B1220] border border-slate-300 dark:border-[#1E5FFF]/50 rounded-md shadow-lg flex flex-col justify-evenly px-1.5 py-1 z-10 relative">
+          <div className="absolute -inset-1 bg-gradient-to-r from-[#1E5FFF]/0 via-[#1E5FFF]/10 to-[#1E5FFF]/0 blur-sm rounded-lg" />
+          {[0, 1, 2, 3].map(i => (
+            <div key={i} className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-sm flex items-center px-1 gap-1">
+              <div className="w-1 h-1 rounded-full bg-[#22C55E]" style={{ animation: `serverPulse ${2 + i * 0.5}s ease-in-out infinite`, animationPlayState: isInView ? "running" : "paused" }} />
+              <div className="flex-1 h-0.5 bg-slate-200 dark:bg-slate-600 rounded-full" />
+            </div>
+          ))}
         </div>
-      ))}
+
+        {/* Child Nodes */}
+        <div className="flex flex-col gap-3 z-10">
+          <div className="w-8 h-6 bg-white dark:bg-[#0B1220] border border-slate-300 dark:border-[#22C55E]/50 rounded-md shadow-md flex flex-col justify-center px-1.5 gap-1">
+             <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" style={{ animation: "serverPulse 2s ease-in-out infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
+          </div>
+          <div className="w-8 h-6 bg-white dark:bg-[#0B1220] border border-slate-300 dark:border-[#22C55E]/50 rounded-md shadow-md flex flex-col justify-center px-1.5 gap-1">
+             <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" style={{ animation: "serverPulse 3s ease-in-out infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -846,46 +927,50 @@ function SoftwareEngineeringViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex flex-col justify-start bg-[#F8FAFC] dark:bg-[#0F172A] rounded-lg px-4 py-3 max-w-[200px] border border-slate-200 dark:border-slate-700/60 shadow-inner relative overflow-hidden mt-2">
+    <div ref={ref} className="w-full h-24 flex flex-col justify-start px-3 py-2 max-w-[200px] border border-slate-200 dark:border-slate-700/60 shadow-inner relative mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden">
       <style>{`
-        @keyframes typeLine1 { 0%, 10% { width: 0; opacity: 1; } 30%, 100% { width: 100%; opacity: 1; } }
-        @keyframes typeLine2 { 0%, 35% { width: 0; opacity: 0; } 36% { opacity: 1; } 55%, 100% { width: 100%; opacity: 1; } }
-        @keyframes typeLine3 { 0%, 60% { width: 0; opacity: 0; } 61% { opacity: 1; } 80%, 100% { width: 100%; opacity: 1; } }
-        @keyframes cursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        @keyframes successFlash { 0%, 80% { opacity: 0; transform: scale(0.5); } 85%, 95% { opacity: 1; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes scrollCode {
+          0% { transform: translateY(0); }
+          20%, 30% { transform: translateY(-16px); }
+          50%, 60% { transform: translateY(-32px); }
+          80%, 90% { transform: translateY(-48px); }
+          100% { transform: translateY(-64px); }
+        }
+        @keyframes compileGlow {
+          0%, 100% { box-shadow: 0 0 0px rgba(34, 197, 94, 0); border-color: rgba(51, 65, 85, 0.2); }
+          50% { box-shadow: 0 0 15px rgba(34, 197, 94, 0.3); border-color: rgba(34, 197, 94, 0.6); }
+        }
+        @keyframes cursorBlink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
       `}</style>
-      <div className="flex items-center gap-1.5 mb-2.5 opacity-60">
-        <div className="w-2 h-2 rounded-full bg-[#EF4444]" />
-        <div className="w-2 h-2 rounded-full bg-[#EAB308]" />
-        <div className="w-2 h-2 rounded-full bg-[#22C55E]" />
+
+      {/* Editor Header */}
+      <div className="flex items-center justify-between w-full border-b border-slate-300 dark:border-slate-700/50 pb-1.5 mb-1.5 z-10">
+        <div className="flex items-center gap-1">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#EF4444]" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#EAB308]" />
+          <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
+        </div>
+        <div className="text-[6px] text-slate-500 dark:text-slate-400 font-mono tracking-wider">main.rs</div>
       </div>
-      <div className="flex flex-col gap-1.5 font-mono text-[10px] tracking-tight text-left">
-        <div className="relative flex items-center h-3 w-fit">
-          <span className="text-[#1E5FFF] font-bold mr-1.5">&gt;</span>
-          <div className="relative inline-flex items-center overflow-hidden">
-            <span className="text-slate-700 dark:text-slate-300 whitespace-nowrap pr-1">sys.init()</span>
-            <div className="absolute top-0 bottom-0 right-0 bg-[#F8FAFC] dark:bg-[#0F172A] origin-left" style={{ left: 0, animation: "typeLine1 5s steps(10, end) infinite", animationPlayState: isInView ? "running" : "paused" }} />
-          </div>
+
+      {/* Code Area */}
+      <div className="relative flex-1 w-full overflow-hidden font-mono text-[7px] leading-[14px] text-slate-700 dark:text-slate-300 z-10"
+           style={{ animation: "compileGlow 4s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused", border: "1px solid", borderRadius: "4px", padding: "2px 4px" }}>
+        
+        <div className="absolute top-0 left-0 right-0 flex flex-col"
+             style={{ animation: "scrollCode 10s steps(4, end) infinite", animationPlayState: isInView ? "running" : "paused" }}>
+          
+          <div className="flex"><span className="text-[#A855F7]">fn</span>&nbsp;<span className="text-[#1E5FFF] dark:text-[#3B82F6]">main</span>()&nbsp;&#123;</div>
+          <div className="flex pl-2"><span className="text-[#10B981]">let</span>&nbsp;sys&nbsp;=&nbsp;System::new();</div>
+          <div className="flex pl-2">sys.optimize();</div>
+          <div className="flex pl-2 text-[#F59E0B]">sys.deploy()</div>
+          <div className="flex">&#125;</div>
+          <div className="flex"><span className="text-slate-400 dark:text-slate-500">// Build success</span></div>
+          <div className="flex"><span className="text-[#1E5FFF] dark:text-[#3B82F6]">&gt;</span><span className="w-1 h-2 bg-slate-500 dark:bg-slate-300 ml-0.5 mt-0.5" style={{ animation: "cursorBlink 1s step-end infinite" }} /></div>
         </div>
-        <div className="relative flex items-center h-3 w-fit">
-          <span className="text-[#1E5FFF] font-bold mr-1.5">&gt;</span>
-          <div className="relative inline-flex items-center overflow-hidden">
-            <span className="text-slate-700 dark:text-slate-300 whitespace-nowrap pr-1">build_pkg()</span>
-            <div className="absolute top-0 bottom-0 right-0 bg-[#F8FAFC] dark:bg-[#0F172A] origin-left" style={{ left: 0, animation: "typeLine2 5s steps(10, end) infinite", animationPlayState: isInView ? "running" : "paused" }} />
-          </div>
-        </div>
-        <div className="relative flex items-center h-3 w-fit">
-          <span className="text-[#1E5FFF] font-bold mr-1.5">&gt;</span>
-          <div className="relative inline-flex items-center overflow-hidden">
-            <span className="text-slate-700 dark:text-slate-300 whitespace-nowrap pr-1">deploy()</span>
-            <div className="absolute top-0 bottom-0 right-0 bg-[#F8FAFC] dark:bg-[#0F172A] origin-left" style={{ left: 0, animation: "typeLine3 5s steps(10, end) infinite", animationPlayState: isInView ? "running" : "paused" }} />
-          </div>
-          <div className="w-1.5 h-3 bg-[#1E5FFF] ml-1" style={{ animation: "cursorBlink 0.8s step-end infinite", animationPlayState: isInView ? "running" : "paused" }} />
-        </div>
-      </div>
-      <div className="absolute bottom-3 right-3 flex items-center gap-1.5">
-        <div className="text-[#22C55E] text-[8px] font-bold uppercase tracking-wider" style={{ opacity: 0, animation: "successFlash 5s ease-out infinite", animationPlayState: isInView ? "running" : "paused" }}>SUCCESS</div>
-        <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E] shadow-[0_0_6px_#22C55E]" style={{ opacity: 0, animation: "successFlash 5s ease-out infinite", animationPlayState: isInView ? "running" : "paused" }} />
       </div>
     </div>
   );
@@ -895,45 +980,54 @@ function CloudTransformationViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex flex-col items-center justify-start relative max-w-[200px] overflow-hidden mt-2 pt-2">
+    <div ref={ref} className="w-full h-24 flex items-center justify-between px-4 max-w-[200px] relative mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes cloudFloat {
-          0%, 100% { transform: translateY(0); filter: drop-shadow(0 4px 12px rgba(30, 95, 255, 0.4)); }
-          50% { transform: translateY(-4px); filter: drop-shadow(0 8px 20px rgba(30, 95, 255, 0.6)); }
-        }
-        @keyframes particleUpLarge {
-          0% { transform: translateY(30px) scale(0.5); opacity: 0; }
+        @keyframes uploadData {
+          0% { transform: translateY(20px) translateX(-10px) scale(0.8); opacity: 0; }
           20% { opacity: 1; }
           80% { opacity: 1; }
-          100% { transform: translateY(0px) scale(1); opacity: 0; }
+          100% { transform: translateY(-20px) translateX(10px) scale(1); opacity: 0; }
         }
-        @keyframes lineDash {
-          0% { stroke-dashoffset: 40; }
-          100% { stroke-dashoffset: 0; }
+        @keyframes cloudPulse {
+          0%, 100% { filter: drop-shadow(0 0 5px rgba(30, 95, 255, 0.2)); transform: translateY(0); }
+          50% { filter: drop-shadow(0 0 15px rgba(30, 95, 255, 0.5)); transform: translateY(-2px); }
+        }
+        @keyframes serverOn {
+          0%, 100% { opacity: 0.3; }
+          50% { opacity: 1; }
         }
       `}</style>
-      <div className="absolute inset-0 z-0">
-        <svg className="w-full h-full stroke-[#1E5FFF]/20" strokeWidth="1.5">
-          {[ 
-            { x1: "20%", x2: "40%" },
-            { x1: "50%", x2: "50%" },
-            { x1: "80%", x2: "60%" }
-          ].map((line, i) => (
-             <line key={i} x1={line.x1} y1="100%" x2={line.x2} y2="40%" strokeDasharray="4 4" style={{ animation: "lineDash 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
-          ))}
-        </svg>
-      </div>
-      <div className="relative z-10 text-[#1E5FFF] bg-white dark:bg-slate-800 rounded-full p-2 border border-[#1E5FFF]/30" style={{ animation: "cloudFloat 4s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }}>
-        <Cloud className="w-8 h-8" fill="currentColor" fillOpacity={0.2} />
-      </div>
-      <div className="absolute inset-x-0 bottom-2 flex justify-center gap-4">
-        {[0, 1, 2, 3, 4].map((i) => (
-          <div 
-            key={i}
-            className="w-1.5 h-1.5 bg-[#1E5FFF] rounded-full shadow-[0_0_6px_#1E5FFF]"
-            style={{ animation: `particleUpLarge 2.5s ease-in infinite ${i * 0.4}s`, animationPlayState: isInView ? "running" : "paused", opacity: 0 }}
-          />
+
+      {/* Local Server (Left) */}
+      <div className="flex flex-col gap-1.5 z-10">
+        {[0, 1].map(i => (
+          <div key={i} className="w-8 h-3.5 bg-white dark:bg-[#0B1220] border border-slate-300 dark:border-slate-600 rounded flex items-center px-1 shadow-sm relative">
+            <div className="w-1 h-1 rounded-full bg-[#1E5FFF]" style={{ animation: "serverOn 2s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }} />
+          </div>
         ))}
+      </div>
+
+      {/* Migration Stream (Center) */}
+      <div className="absolute inset-0 flex items-center justify-center z-0">
+         {/* Particles */}
+         {[0, 1, 2, 3].map(i => (
+           <div 
+             key={i}
+             className="absolute w-2 h-2 rounded bg-gradient-to-tr from-[#1E5FFF] to-[#22D3EE] shadow-[0_0_8px_rgba(30,95,255,0.6)]"
+             style={{ 
+               animation: `uploadData ${2 + i * 0.5}s ease-in-out infinite ${i * 0.4}s`,
+               animationPlayState: isInView ? "running" : "paused",
+               opacity: 0
+             }}
+           />
+         ))}
+      </div>
+
+      {/* Cloud Environment (Right) */}
+      <div className="relative z-10 text-[#1E5FFF] bg-white dark:bg-[#0B1220] rounded-xl p-1.5 border border-[#1E5FFF]/40 shadow-md flex items-center justify-center"
+           style={{ animation: "cloudPulse 4s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }}>
+        <Cloud className="w-7 h-7" />
+        <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#22C55E] rounded-full border-2 border-white dark:border-[#0F172A]" />
       </div>
     </div>
   );
@@ -943,45 +1037,107 @@ function AISolutionsViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2">
+    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes neuralFire {
-          0%, 100% { opacity: 0.2; transform: scale(0.8); background-color: transparent; }
-          20%, 40% { opacity: 1; transform: scale(1.3); background-color: #1E5FFF; box-shadow: 0 0 10px #1E5FFF; }
+        @keyframes aiPulse {
+          0%, 100% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.2), inset 0 0 10px rgba(168, 85, 247, 0.1); }
+          50% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.5), inset 0 0 15px rgba(168, 85, 247, 0.3); }
         }
-        @keyframes pathFire {
-          0%, 100% { opacity: 0.1; filter: drop-shadow(0 0 0px #1E5FFF); }
-          20%, 40% { opacity: 1; filter: drop-shadow(0 0 4px #1E5FFF); }
+        @keyframes dataPacket {
+          0% { stroke-dashoffset: 100; opacity: 0; }
+          10%, 90% { opacity: 1; }
+          100% { stroke-dashoffset: -100; opacity: 0; }
         }
       `}</style>
+      
+      {/* Circuit Traces */}
       <div className="absolute inset-0 z-0 flex items-center justify-center">
-        <svg className="w-[180px] h-[80px] overflow-visible" strokeWidth="1.5">
-          {[
-            { x1: "15%", y1: "50%", x2: "40%", y2: "20%", delay: "0s" },
-            { x1: "15%", y1: "50%", x2: "40%", y2: "80%", delay: "0.2s" },
-            { x1: "40%", y1: "20%", x2: "65%", y2: "50%", delay: "0.4s" },
-            { x1: "40%", y1: "80%", x2: "65%", y2: "50%", delay: "0.6s" },
-            { x1: "65%", y1: "50%", x2: "90%", y2: "20%", delay: "0.8s" },
-            { x1: "65%", y1: "50%", x2: "90%", y2: "80%", delay: "1.0s" },
-          ].map((line, i) => (
-             <line key={i} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="#1E5FFF" style={{ opacity: 0.1, animation: `pathFire 3s ease-in-out infinite ${line.delay}`, animationPlayState: isInView ? "running" : "paused" }} />
-          ))}
+        <svg className="w-full h-full" viewBox="0 0 200 96" strokeWidth="1">
+          {/* Static Background Traces */}
+          <g className="stroke-[#1E5FFF] opacity-20 dark:opacity-40" fill="none">
+            {/* Top Left */}
+            <path d="M 0 20 L 40 20 L 60 35" />
+            <path d="M 0 35 L 30 35 L 50 48" />
+            {/* Top Right */}
+            <path d="M 200 20 L 160 20 L 140 35" />
+            <path d="M 200 35 L 170 35 L 150 48" />
+            {/* Bottom Left */}
+            <path d="M 0 76 L 40 76 L 60 61" />
+            <path d="M 0 61 L 30 61 L 50 48" />
+            {/* Bottom Right */}
+            <path d="M 200 76 L 160 76 L 140 61" />
+            <path d="M 200 61 L 170 61 L 150 48" />
+            
+            {/* Additional verticalish lines */}
+            <path d="M 70 0 L 70 15 L 80 25" />
+            <path d="M 130 0 L 130 15 L 120 25" />
+            <path d="M 70 96 L 70 81 L 80 71" />
+            <path d="M 130 96 L 130 81 L 120 71" />
+          </g>
+
+          {/* Animated Data Packets */}
+          <g className="stroke-[#A855F7] dark:stroke-[#22D3EE]" strokeWidth="1.5" fill="none" strokeDasharray="15 150" strokeLinecap="round">
+            <path d="M 0 20 L 40 20 L 60 35" style={{ animation: "dataPacket 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 200 76 L 160 76 L 140 61" style={{ animation: "dataPacket 2.5s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 0 61 L 30 61 L 50 48" style={{ animation: "dataPacket 2.2s linear infinite 1.2s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 130 0 L 130 15 L 120 25" style={{ animation: "dataPacket 1.8s linear infinite 0.8s", animationPlayState: isInView ? "running" : "paused" }} />
+          </g>
+
+          {/* Glowing Nodes */}
+          <g className="fill-[#A855F7] dark:fill-[#3B82F6]" opacity="0.8">
+            <circle cx="20" cy="20" r="1.5" />
+            <circle cx="15" cy="35" r="1.5" />
+            <circle cx="180" cy="20" r="1.5" />
+            <circle cx="185" cy="35" r="1.5" />
+            <circle cx="20" cy="76" r="1.5" />
+            <circle cx="15" cy="61" r="1.5" />
+            <circle cx="180" cy="76" r="1.5" />
+            <circle cx="185" cy="61" r="1.5" />
+          </g>
         </svg>
       </div>
-      {[
-        { left: "15%", top: "50%", delay: "0s" },
-        { left: "40%", top: "20%", delay: "0.2s" },
-        { left: "40%", top: "80%", delay: "0.2s" },
-        { left: "65%", top: "50%", delay: "0.6s" },
-        { left: "90%", top: "20%", delay: "0.8s" },
-        { left: "90%", top: "80%", delay: "1.0s" },
-      ].map((pos, i) => (
-        <div 
-          key={i} 
-          className="absolute w-2 h-2 bg-card border-[1.5px] border-[#1E5FFF] rounded-full z-10 transition-colors"
-          style={{ left: pos.left, top: pos.top, transform: "translate(-50%, -50%)", animation: `neuralFire 3s ease-in-out infinite ${pos.delay}`, animationPlayState: isInView ? "running" : "paused" }}
-        />
-      ))}
+
+      {/* Central Chip */}
+      <div 
+        className="relative z-10 w-[42px] h-[42px] bg-white dark:bg-[#0A0F1C] border border-purple-400 dark:border-[#A855F7] flex items-center justify-center rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.15)] dark:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
+        style={{ animation: "aiPulse 3s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }}
+      >
+        {/* Inner glow frame */}
+        <div className="absolute inset-[2px] border border-purple-300/50 dark:border-[#22D3EE]/30 rounded-[1px]" />
+        
+        {/* Text */}
+        <span className="text-xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-br from-purple-600 to-cyan-500 dark:from-white dark:to-[#A855F7]">
+          AI
+        </span>
+
+        {/* Chip Pins (Top & Bottom) */}
+        <div className="absolute -top-[4px] inset-x-1 flex justify-evenly">
+          <div className="w-[1.5px] h-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="w-[1.5px] h-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="w-[1.5px] h-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="w-[1.5px] h-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+        </div>
+        <div className="absolute -bottom-[4px] inset-x-1 flex justify-evenly">
+          <div className="w-[1.5px] h-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="w-[1.5px] h-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="w-[1.5px] h-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="w-[1.5px] h-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+        </div>
+        
+        {/* Chip Pins (Left & Right) */}
+        <div className="absolute -left-[4px] inset-y-1 flex flex-col justify-evenly">
+          <div className="h-[1.5px] w-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="h-[1.5px] w-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="h-[1.5px] w-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="h-[1.5px] w-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+        </div>
+        <div className="absolute -right-[4px] inset-y-1 flex flex-col justify-evenly">
+          <div className="h-[1.5px] w-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="h-[1.5px] w-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="h-[1.5px] w-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+          <div className="h-[1.5px] w-[4px] bg-purple-400 dark:bg-[#3B82F6]" />
+        </div>
+      </div>
     </div>
   );
 }
@@ -990,47 +1146,57 @@ function DevOpsViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-between relative max-w-[200px] mt-2">
+    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
-        @keyframes pipelineSweep {
-          0% { transform: translateX(-100%); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translateX(500%); opacity: 0; }
+        @keyframes drawInfinity {
+          0% { stroke-dashoffset: 300; opacity: 0; }
+          10%, 90% { opacity: 1; }
+          100% { stroke-dashoffset: 0; opacity: 0; }
         }
-        @keyframes stageActive {
-          0%, 100% { border-color: transparent; }
-          15%, 35% { border-color: #1E5FFF; box-shadow: 0 0 12px rgba(30, 95, 255, 0.4); }
+        @keyframes pulseNode {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 5px rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4); }
+          50% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 15px rgba(34, 197, 94, 0.6); border-color: rgba(34, 197, 94, 1); }
         }
-        @keyframes iconSpin {
-          0% { transform: rotate(0deg); opacity: 0.2; }
-          15%, 35% { transform: rotate(180deg); opacity: 1; color: #1E5FFF; }
-          50%, 100% { transform: rotate(360deg); opacity: 0.2; }
+        @keyframes pulseNodeBlue {
+          0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 5px rgba(30, 95, 255, 0.2); border-color: rgba(30, 95, 255, 0.4); }
+          50% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 15px rgba(30, 95, 255, 0.6); border-color: rgba(30, 95, 255, 1); }
         }
       `}</style>
-      <div className="absolute left-2 right-2 h-1.5 bg-slate-200 dark:bg-slate-700/50 rounded-full overflow-hidden">
-        <div 
-          className="w-1/4 h-full bg-[#1E5FFF] shadow-[0_0_10px_#1E5FFF]"
-          style={{ animation: "pipelineSweep 4s linear infinite", animationPlayState: isInView ? "running" : "paused" }}
-        />
+      
+      {/* Infinity Loop SVG */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        <svg className="w-[120px] h-[60px] overflow-visible" viewBox="0 0 120 60">
+           {/* Static Track */}
+           <path 
+             d="M 30 30 C 30 10, 60 10, 60 30 C 60 50, 90 50, 90 30 C 90 10, 60 10, 60 30 C 60 50, 30 50, 30 30 Z" 
+             fill="none" 
+             strokeWidth="3" 
+             className="stroke-slate-200 dark:stroke-slate-700/60" 
+           />
+           {/* Animated Stream */}
+           <path 
+             d="M 30 30 C 30 10, 60 10, 60 30 C 60 50, 90 50, 90 30 C 90 10, 60 10, 60 30 C 60 50, 30 50, 30 30 Z" 
+             fill="none" 
+             strokeWidth="4" 
+             className="stroke-[#22C55E]" 
+             strokeLinecap="round"
+             strokeDasharray="40 260"
+             style={{ animation: "drawInfinity 3s linear infinite", animationPlayState: isInView ? "running" : "paused", filter: "drop-shadow(0 0 4px #22C55E)" }}
+           />
+        </svg>
       </div>
-      {[0, 1, 2, 3, 4].map((i) => (
-        <div 
-          key={i}
-          className="w-6 h-6 bg-card border-[2px] border-slate-200 dark:border-slate-700 rounded-full relative z-10 flex items-center justify-center overflow-hidden transition-colors"
-          style={{ animation: `stageActive 4s ease-in-out infinite ${i * 0.8}s`, animationPlayState: isInView ? "running" : "paused" }}
-        >
-          {i === 4 ? (
-             <svg className="w-3 h-3 text-slate-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3} style={{ animation: `iconSpin 4s ease-in-out infinite ${i * 0.8}s`, animationPlayState: isInView ? "running" : "paused" }}>
-               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-             </svg>
-          ) : (
-             <svg className="w-3 h-3 text-slate-300 dark:text-slate-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} style={{ animation: `iconSpin 4s ease-in-out infinite ${i * 0.8}s`, animationPlayState: isInView ? "running" : "paused" }}>
-               <path strokeLinecap="round" strokeLinejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-             </svg>
-          )}
-        </div>
-      ))}
+
+      {/* Nodes */}
+      <div className="absolute inset-0 z-10">
+         {/* Build Node */}
+         <div className="absolute w-6 h-6 rounded-full bg-white dark:bg-[#0B1220] border-2 border-[#22C55E] flex items-center justify-center" style={{ animation: "pulseNode 3s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused", left: "calc(50% - 30px)", top: "50%" }}>
+           <Code className="w-3 h-3 text-[#22C55E]" />
+         </div>
+         {/* Deploy Node */}
+         <div className="absolute w-6 h-6 rounded-full bg-white dark:bg-[#0B1220] border-2 border-[#1E5FFF] flex items-center justify-center" style={{ animation: "pulseNodeBlue 3s ease-in-out infinite 1.5s", animationPlayState: isInView ? "running" : "paused", left: "calc(50% + 30px)", top: "50%" }}>
+           <Cloud className="w-3 h-3 text-[#1E5FFF]" />
+         </div>
+      </div>
     </div>
   );
 }
@@ -1125,14 +1291,14 @@ export default function Home() {
     },
     {
       title: "Cloud Transformation",
-      desc: "Seamless cloud migrations and multi-cloud strategies optimized for performance and cost.",
+      desc: "Architecting resilient multi-cloud environments and accelerating migration to modernize enterprise infrastructure.",
       icon: <Cloud className="w-6 h-6" />,
       href: "/technology/cloud-solutions",
       viz: CloudTransformationViz
     },
     {
       title: "AI Solutions",
-      desc: "Intelligent automation, predictive analytics, and generative AI pipelines for business growth.",
+      desc: "Deploying predictive models and generative AI pipelines to automate workflows and unlock operational intelligence.",
       icon: <Cpu className="w-6 h-6" />,
       href: "/technology/ai-machine-learning",
       viz: AISolutionsViz
@@ -1206,7 +1372,7 @@ export default function Home() {
 
               {/* 3. PARAGRAPH */}
               <motion.p variants={enterpriseItem} className="mt-6 lg:mt-4 text-gray-600 dark:text-[#B8C0CC] text-lg md:text-[19px] lg:text-[17px] xl:text-[18px] leading-[1.6] max-w-[480px] lg:max-w-[440px] xl:max-w-[500px]">
-                Expert IT consulting and technology solutions tailored to accelerate innovation, improve operational efficiency, and drive measurable business growth.
+                Enterprise IT consulting and engineering for organizations across Ireland, Europe, the Middle East, and India — architecting resilient systems, accelerating delivery, and turning complex technology challenges into measurable business outcomes.
               </motion.p>
 
               {/* 4. BUTTON ROW */}
@@ -1225,56 +1391,64 @@ export default function Home() {
           </div>
           
           {/* 5. STATS CARDS (Bottom Aligned) */}
-          <div className="w-full mt-auto relative z-30 pointer-events-auto">
+          <div className="w-full mt-auto relative z-30 pointer-events-auto pb-6 lg:pb-8">
             <motion.div 
               variants={enterpriseContainer}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-50px" }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full pb-4 md:pb-0"
+              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 w-full"
             >
               
               {/* Card 1 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[16px] p-4 lg:p-3 xl:p-4 flex flex-col justify-start text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm">
-                  <div className="w-9 h-9 md:w-11 md:h-11 lg:w-9 lg:h-9 xl:w-10 xl:h-10 rounded-xl bg-[#1E5FFF]/10 flex items-center justify-center mb-3 lg:mb-2 text-[#1E5FFF]">
-                    <Briefcase className="w-4 h-4 md:w-5 md:h-5" />
+                <SpotlightCard borderGlow={false} className="relative w-full !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-start text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
+                      <Briefcase className="w-4 h-4" />
+                    </div>
+                    <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={150} suffix="+" delay={0} /></div>
                   </div>
-                  <div className="text-[24px] md:text-[28px] lg:text-[18px] xl:text-[22px] font-bold text-[#0B1220] dark:text-white leading-none mb-1.5 lg:mb-1"><AnimatedCounter target={150} suffix="+" delay={0} /></div>
-                  <div className="text-[10px] md:text-[11px] lg:text-[10px] xl:text-[11px] font-semibold text-gray-500 uppercase tracking-wider leading-[1.3]">Projects<br/>Delivered</div>
+                  <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Projects Delivered</div>
                 </SpotlightCard>
               </motion.div>
 
               {/* Card 2 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[16px] p-4 lg:p-3 xl:p-4 flex flex-col justify-start text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm">
-                  <div className="w-9 h-9 md:w-11 md:h-11 lg:w-9 lg:h-9 xl:w-10 xl:h-10 rounded-xl bg-[#1E5FFF]/10 flex items-center justify-center mb-3 lg:mb-2 text-[#1E5FFF]">
-                    <Layers className="w-4 h-4 md:w-5 md:h-5" />
+                <SpotlightCard borderGlow={false} className="relative w-full !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-start text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
+                      <Layers className="w-4 h-4" />
+                    </div>
+                    <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={20} suffix="+" delay={150} /></div>
                   </div>
-                  <div className="text-[24px] md:text-[28px] lg:text-[18px] xl:text-[22px] font-bold text-[#0B1220] dark:text-white leading-none mb-1.5 lg:mb-1"><AnimatedCounter target={20} suffix="+" delay={150} /></div>
-                  <div className="text-[10px] md:text-[11px] lg:text-[10px] xl:text-[11px] font-semibold text-gray-500 uppercase tracking-wider leading-[1.3]">Technology<br/>Domains</div>
+                  <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Technology Domains</div>
                 </SpotlightCard>
               </motion.div>
 
               {/* Card 3 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[16px] p-4 lg:p-3 xl:p-4 flex flex-col justify-start text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm">
-                  <div className="w-9 h-9 md:w-11 md:h-11 lg:w-9 lg:h-9 xl:w-10 xl:h-10 rounded-xl bg-[#1E5FFF]/10 flex items-center justify-center mb-3 lg:mb-2 text-[#1E5FFF]">
-                    <Globe className="w-4 h-4 md:w-5 md:h-5" />
+                <SpotlightCard borderGlow={false} className="relative w-full !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-start text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
+                      <Globe className="w-4 h-4" />
+                    </div>
+                    <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={6} delay={300} /></div>
                   </div>
-                  <div className="text-[24px] md:text-[28px] lg:text-[18px] xl:text-[22px] font-bold text-[#0B1220] dark:text-white leading-none mb-1.5 lg:mb-1"><AnimatedCounter target={6} delay={300} /></div>
-                  <div className="text-[10px] md:text-[11px] lg:text-[10px] xl:text-[11px] font-semibold text-gray-500 uppercase tracking-wider leading-[1.3]">Global Delivery<br/>Hubs</div>
+                  <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Global Delivery Hubs</div>
                 </SpotlightCard>
               </motion.div>
 
               {/* Card 4 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[16px] p-4 lg:p-3 xl:p-4 flex flex-col justify-start text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm">
-                  <div className="w-9 h-9 md:w-11 md:h-11 lg:w-9 lg:h-9 xl:w-10 xl:h-10 rounded-xl bg-[#1E5FFF]/10 flex items-center justify-center mb-3 lg:mb-2 text-[#1E5FFF]">
-                    <Headset className="w-4 h-4 md:w-5 md:h-5" />
+                <SpotlightCard borderGlow={false} className="relative w-full !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-start text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
+                      <Headset className="w-4 h-4" />
+                    </div>
+                    <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={24} suffix="/7" delay={450} /></div>
                   </div>
-                  <div className="text-[24px] md:text-[28px] lg:text-[18px] xl:text-[22px] font-bold text-[#0B1220] dark:text-white leading-none mb-1.5 lg:mb-1"><AnimatedCounter target={24} suffix="/7" delay={450} /></div>
-                  <div className="text-[10px] md:text-[11px] lg:text-[10px] xl:text-[11px] font-semibold text-gray-500 uppercase tracking-wider leading-[1.3]">Enterprise<br/>Support</div>
+                  <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Enterprise Support</div>
                 </SpotlightCard>
               </motion.div>
 
@@ -1290,8 +1464,8 @@ export default function Home() {
       <section className="w-full py-16 md:py-20 relative z-10 bg-white dark:bg-background">
         <div className="container px-6 sm:px-8 mx-auto space-y-8">
           <div className="text-center">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">Trusted Technology Partner</h2>
-            <p className="text-muted-foreground text-sm font-medium max-w-lg mx-auto">Empowering enterprise brands across Ireland and Europe with innovative technology solutions.</p>
+            <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">Trusted by Enterprise Leaders</h2>
+            <p className="text-muted-foreground text-sm font-medium max-w-lg mx-auto">Partnering with global organizations across pharmaceuticals, telecommunications, and insurance to deliver mission-critical technology systems.</p>
           </div>
 
           <div 
@@ -1342,18 +1516,18 @@ export default function Home() {
             {services.map((service) => (
               <motion.div key={service.title} variants={enterpriseItem}>
                 <div onClick={() => router.push(service.href)} className="block cursor-pointer outline-none h-full">
-                  <SpotlightCard borderGlow={false} className="h-full flex flex-col p-7 space-y-4 border border-border bg-card group rounded-2xl hover-card-effect">
-                  <div className="h-11 w-11 rounded-xl bg-[#2563EB]/10 text-[#2563EB] flex items-center justify-center group-hover:bg-[#2563EB]/20 group-hover:scale-[1.02] transition-all duration-300">
+                  <SpotlightCard borderGlow={false} className="h-full flex flex-col p-7 border border-border bg-card group rounded-2xl hover-card-effect">
+                  <div className="h-11 w-11 rounded-xl bg-[#2563EB]/10 text-[#2563EB] flex items-center justify-center group-hover:bg-[#2563EB]/20 group-hover:scale-[1.02] transition-all duration-300 mb-4">
                     {service.icon}
                   </div>
-                  <h3 className="text-lg font-bold text-foreground">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <h3 className="text-lg font-bold text-foreground mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                     {service.desc}
                   </p>
-                  <div className="w-full py-1">
+                  <div className="w-full mt-auto mb-4 shrink-0 flex items-center justify-center">
                     {service.viz && <service.viz />}
                   </div>
-                  <span className="text-[#2563EB] font-bold text-sm hover:underline mt-auto inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform duration-300">
+                  <span className="text-[#2563EB] font-bold text-sm hover:underline inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform duration-300">
                     Learn more &rarr;
                   </span>
                 </SpotlightCard>
@@ -1367,9 +1541,9 @@ export default function Home() {
 
 
       {/* ═══════ TECHNOLOGY ECOSYSTEM ═══════ */}
-      <section className="w-full py-20 md:py-32 relative z-10 border-t border-border bg-[#F8FAFC] dark:bg-background overflow-hidden">
+      <section className="w-full py-20 md:py-32 relative z-10 border-t border-border bg-[#F8FAFC] dark:bg-background">
         <div className="container px-6 sm:px-8 mx-auto space-y-12">
-          <div className="text-center md:text-left max-w-3xl space-y-4">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
             <h2 className="text-xs font-bold uppercase tracking-widest text-[#2563EB] bg-[#2563EB]/10 inline-block px-3 py-1 rounded-full mb-2">Technology Ecosystem</h2>
             <h3 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Enterprise-Grade Technology Stack</h3>
             <p className="text-muted-foreground text-lg font-medium leading-relaxed">Industry-leading tools and platforms powering our consulting and delivery capabilities.</p>
@@ -1379,47 +1553,66 @@ export default function Home() {
             {/* Left: Stats Box */}
             <div className="lg:col-span-5 flex items-start">
               <div className="w-full grid grid-cols-2 gap-4">
-                <SpotlightCard borderGlow={false} className="flex flex-col justify-between shadow-sm hover-card-effect p-6">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center mb-6">
-                    <Users size={20} />
+                <SpotlightCard borderGlow={false} className="flex flex-col shadow-sm hover-card-effect p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
+                      <Users size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-2xl font-black text-foreground leading-none"><AnimatedCounter target={stats.clientsCount} /></h4>
+                    </div>
                   </div>
                   <div className="w-full">
-                    <h4 className="text-3xl font-black text-foreground mb-1"><AnimatedCounter target={stats.clientsCount} /></h4>
-                    <p className="text-sm font-bold text-foreground">Enterprise Clients</p>
-                    <p className="text-[11px] text-muted-foreground mt-1">across Ireland & Europe</p>
+                    <p className="text-xs font-bold text-foreground">Enterprise Clients</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5 mb-2">across Ireland & Europe</p>
                     <EnterpriseClientsViz />
                   </div>
                 </SpotlightCard>
-                <SpotlightCard borderGlow={false} className="flex flex-col justify-between shadow-sm hover-card-effect p-6">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center mb-6">
-                    <Award size={20} />
+
+                <SpotlightCard borderGlow={false} className="flex flex-col shadow-sm hover-card-effect p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
+                      <Award size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-2xl font-black text-foreground leading-none"><AnimatedCounter target={99.9} suffix="%" /></h4>
+                    </div>
                   </div>
                   <div className="w-full">
-                    <h4 className="text-3xl font-black text-foreground mb-1"><AnimatedCounter target={99.9} suffix="%" /></h4>
-                    <p className="text-sm font-bold text-foreground">SLA Uptime</p>
-                    <p className="text-[11px] text-muted-foreground mt-1">guaranteed availability</p>
+                    <p className="text-xs font-bold text-foreground">SLA Uptime</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5 mb-2">guaranteed availability</p>
                     <SLAUptimeViz />
                   </div>
                 </SpotlightCard>
-                <SpotlightCard borderGlow={false} className="flex flex-col justify-between shadow-sm hover-card-effect p-6">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center mb-6">
-                    <Clock size={20} />
+
+                <SpotlightCard borderGlow={false} className="flex flex-col shadow-sm hover-card-effect p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
+                      <Clock size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-2xl font-black text-foreground leading-none"><AnimatedCounter target={stats.experienceYears} suffix="+" /></h4>
+                    </div>
                   </div>
                   <div className="w-full">
-                    <h4 className="text-3xl font-black text-foreground mb-1"><AnimatedCounter target={stats.experienceYears} /></h4>
-                    <p className="text-sm font-bold text-foreground">Years Experience</p>
-                    <p className="text-[11px] text-muted-foreground mt-1">in enterprise IT</p>
+                    <p className="text-xs font-bold text-foreground">Years Experience</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5 mb-2">in enterprise IT</p>
                     <ExperienceTimelineViz />
                   </div>
                 </SpotlightCard>
-                <SpotlightCard borderGlow={false} className="flex flex-col justify-between shadow-sm hover-card-effect p-6">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center mb-6">
-                    <Briefcase size={20} />
+
+                <SpotlightCard borderGlow={false} className="flex flex-col shadow-sm hover-card-effect p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
+                      <Briefcase size={18} />
+                    </div>
+                    <div>
+                      <h4 className="text-2xl font-black text-foreground leading-none"><AnimatedCounter target={stats.engineersCount} /></h4>
+                    </div>
                   </div>
                   <div className="w-full">
-                    <h4 className="text-3xl font-black text-foreground mb-1"><AnimatedCounter target={stats.engineersCount} /></h4>
-                    <p className="text-sm font-bold text-foreground">Certified Engineers</p>
-                    <p className="text-[11px] text-muted-foreground mt-1">across disciplines</p>
+                    <p className="text-xs font-bold text-foreground">Certified Engineers</p>
+                    <p className="text-[10px] text-muted-foreground mt-0.5 mb-2">across disciplines</p>
                     <CertifiedEngineersViz />
                   </div>
                 </SpotlightCard>
@@ -1486,11 +1679,6 @@ export default function Home() {
       </section>
 
       <PremiumCTA variant="home" />
-
-      {/* ═══════ FOOTER ═══════ */}
-      <footer className="w-full py-12 border-t border-border bg-background text-center">
-        <p className="text-muted-foreground text-sm">© 2026 Jeshurun. All rights reserved.</p>
-      </footer>
     </div>
   );
 }
