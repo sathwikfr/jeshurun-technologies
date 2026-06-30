@@ -165,18 +165,18 @@ export function HeroStatsPanel() {
 
               {/* Metric Item */}
               <motion.div 
-                className="flex flex-col items-center xl:items-start p-4 md:p-5 lg:p-6 transition-colors duration-300 group-hover:bg-white/[0.02] h-full"
+                className="flex flex-col items-center xl:items-start p-3 md:p-4 lg:p-5 transition-colors duration-300 group-hover:bg-white/[0.02] h-full"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               >
                 {/* Icon Section */}
-                <div className="relative mb-3">
+                <div className="relative mb-2">
                   {/* Soft blue radial glow behind icon */}
                   <div className="absolute inset-0 bg-blue-500/30 blur-[20px] rounded-full scale-150 opacity-50 group-hover:opacity-80 transition-opacity duration-500" />
                   
                   {/* Icon Container with breathing glow */}
                   <motion.div 
-                    className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#2563EB]/15 border border-[#60A5FA]/35"
+                    className="relative flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full bg-[#2563EB]/15 border border-[#60A5FA]/35"
                     animate={{ boxShadow: ["0 0 0px rgba(96,165,250,0)", "0 0 15px rgba(96,165,250,0.3)", "0 0 0px rgba(96,165,250,0)"] }}
                     transition={{ duration: 6, ease: "easeInOut", repeat: Infinity }}
                   >
@@ -186,18 +186,18 @@ export function HeroStatsPanel() {
 
                 {/* Number */}
                 <motion.div 
-                  className="text-[32px] md:text-[36px] lg:text-[40px] font-bold text-white leading-none tracking-tight mb-2 group-hover:scale-[1.03] origin-center xl:origin-left transition-transform duration-300"
+                  className="text-[24px] md:text-[28px] lg:text-[32px] font-bold text-white leading-none tracking-tight mb-1 group-hover:scale-[1.03] origin-center xl:origin-left transition-transform duration-300"
                 >
                   <AnimatedCounter target={stat.number} suffix={stat.suffix} delay={stat.delay} />
                 </motion.div>
 
                 {/* Label */}
-                <div className="text-[10px] md:text-[11px] font-bold text-gray-400 uppercase tracking-[2px] leading-tight mb-2 text-center xl:text-left">
+                <div className="text-[9px] md:text-[10px] font-bold text-gray-400 uppercase tracking-[1px] md:tracking-[2px] leading-tight mb-1 md:mb-2 text-center xl:text-left">
                   {stat.label}
                 </div>
 
                 {/* Description */}
-                <div className="text-[13px] md:text-[14px] text-gray-500 leading-snug text-center xl:text-left">
+                <div className="text-[11px] md:text-[12px] text-gray-500 leading-snug text-center xl:text-left">
                   {stat.description}
                 </div>
               </motion.div>
