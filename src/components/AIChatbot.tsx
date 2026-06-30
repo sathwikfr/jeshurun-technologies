@@ -24,10 +24,14 @@ const INITIAL_MESSAGE: Message = {
 
 export function AIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const isOpenRef = useRef(false);
+  useEffect(() => { isOpenRef.current = isOpen; }, [isOpen]);
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [hasUnread, setHasUnread] = useState(true);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   // Initialize on mount and restore session
@@ -45,6 +49,7 @@ export function AIChatbot() {
         // Only restore if less than 10 minutes have passed
         if (now - lastUpdated < 10 * 60 * 1000 && Array.isArray(savedMessages) && savedMessages.length > 0) {
           initialMessages = savedMessages;
+          setHasUnread(false);
         } else {
           sessionStorage.removeItem("jeshurun_chat_session");
         }
@@ -116,6 +121,10 @@ export function AIChatbot() {
 
   const streamReply = (fullText: string, quickReplies: string[], currentMessages: Message[]) => {
     setIsTyping(false);
+    
+    if (!isOpenRef.current) {
+      setHasUnread(true);
+    }
     
     // Add empty assistant message placeholder to stream into
     const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -334,11 +343,16 @@ export function AIChatbot() {
         >
           <Button 
             className="h-14 w-14 rounded-full shadow-[0_10px_30px_rgba(0,87,217,0.25)] bg-[#0057D9] hover:bg-[#2563EB] text-white flex items-center justify-center transition-colors duration-300 relative group" 
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setIsOpen(true);
+              setHasUnread(false);
+            }}
             aria-label="Toggle Chatbot"
           >
             <MessageSquare className="w-6 h-6" />
-            <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+            {hasUnread && (
+              <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+            )}
           </Button>
         </motion.div>
       )}
