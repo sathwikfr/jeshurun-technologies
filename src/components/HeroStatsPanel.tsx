@@ -44,6 +44,7 @@ const statsData = [
     number: 150,
     suffix: "+",
     label: "PROJECTS DELIVERED",
+    description: "Successful engagements across industries.",
     delay: 0,
   },
   {
@@ -52,6 +53,7 @@ const statsData = [
     number: 20,
     suffix: "+",
     label: "TECHNOLOGY DOMAINS",
+    description: "Deep expertise in modern enterprise stacks.",
     delay: 150,
   },
   {
@@ -60,6 +62,7 @@ const statsData = [
     number: 6,
     suffix: "",
     label: "GLOBAL DELIVERY HUBS",
+    description: "Distributed engineering across timezones.",
     delay: 300,
   },
   {
@@ -68,6 +71,7 @@ const statsData = [
     number: 24,
     suffix: "/7",
     label: "ENTERPRISE SUPPORT",
+    description: "Continuous monitoring and proactive reliability.",
     delay: 450,
   },
 ];
@@ -88,23 +92,26 @@ export function HeroStatsPanel() {
           {statsData.map((stat, i) => (
             <motion.div 
               key={stat.id} 
-              className="flex flex-col items-center justify-center p-2 md:p-3 lg:p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/5"
+              className="flex flex-col items-center justify-center p-3 md:p-4 lg:p-5 transition-colors hover:bg-black/5 dark:hover:bg-white/5"
               whileHover={{ y: -2 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="flex flex-col xl:flex-row items-center gap-2 xl:gap-3 text-center xl:text-left">
+              <div className="flex flex-col xl:flex-row items-center xl:items-start gap-3 xl:gap-4 text-center xl:text-left">
                 {/* Icon Container */}
-                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0 shadow-[inset_0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_10px_rgba(255,255,255,0.05)]">
+                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0 shadow-[inset_0_0_10px_rgba(0,0,0,0.05)] dark:shadow-[inset_0_0_10px_rgba(255,255,255,0.05)] mt-1">
                   {stat.icon}
                 </div>
                 
                 {/* Text Layout */}
                 <div className="flex flex-col">
-                  <div className="text-lg md:text-xl font-extrabold text-slate-900 dark:text-white leading-none tracking-tight mb-1 drop-shadow-md">
+                  <div className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white leading-none tracking-tight mb-1 drop-shadow-md">
                     <AnimatedCounter target={stat.number} suffix={stat.suffix} delay={stat.delay} />
                   </div>
-                  <div className="text-[8px] md:text-[9px] font-bold text-slate-700 dark:text-slate-200 uppercase tracking-widest leading-none drop-shadow-md">
+                  <div className="text-[9px] md:text-[10px] font-bold text-slate-700 dark:text-slate-200 uppercase tracking-widest leading-none drop-shadow-md mb-1.5">
                     {stat.label}
+                  </div>
+                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-snug max-w-[180px]">
+                    {stat.description}
                   </div>
                 </div>
               </div>
