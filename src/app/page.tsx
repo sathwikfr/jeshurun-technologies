@@ -1338,7 +1338,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════
           HERO CANVAS
       ═══════════════════════════════════════════════════ */}
-      <section id="hero-section" className="relative w-full min-h-[100vh] lg:h-[100vh] lg:max-h-[100vh] lg:min-h-0 flex flex-col justify-center overflow-hidden bg-white dark:bg-[#050810]" onMouseMove={handleMouseMove}>
+      <section id="hero-section" className="relative w-full min-h-[100vh] flex flex-col justify-center overflow-hidden bg-white dark:bg-[#050810]" onMouseMove={handleMouseMove}>
         <style>{`
           .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.8) 40%, rgba(245,248,255,0.4) 55%, transparent 75%); }
           .scrim-mobile { background: linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 60%, transparent 100%); }
@@ -1357,9 +1357,9 @@ export default function Home() {
         <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile dark:hidden" />
 
         {/* Layer 2: Hero Content */}
-        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-32 pb-8 lg:pt-[100px] xl:pt-[120px] lg:pb-4 flex flex-col h-full min-h-[100vh] lg:h-full lg:min-h-[100vh] pointer-events-none">
+        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[80px] xl:pt-[100px] lg:pb-2 flex flex-col min-h-[100vh] justify-center pointer-events-none">
           
-          <div className="flex flex-col md:flex-row items-center w-full my-auto pb-12 lg:pb-4 pointer-events-none">
+          <div className="flex flex-col md:flex-row items-center w-full my-auto pb-6 lg:pb-2 pointer-events-none">
             <motion.div 
               variants={enterpriseContainer}
               initial="hidden"
