@@ -236,7 +236,6 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
             <path 
               d={worldMapPath} 
               fill="url(#led-dot-pattern)" 
-              filter="url(#bloom-glow)"
             />
           </g>
 
