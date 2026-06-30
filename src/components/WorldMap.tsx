@@ -80,23 +80,23 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
 
   const cities = [
     // Tier 2 (Partner Hubs)
-    { name: "LONDON", tier: 2, x: 418, y: 146, offsetX: -16, offsetY: 0, anchor: "end" as const, fontSize: 5.5, labelW: 34, dotR: 2, info: "European Hub" },
-    { name: "DÜSSELDORF", tier: 2, x: 435, y: 145, offsetX: 10, offsetY: -8, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 2, info: "Partner Hub" },
-    { name: "FRANKFURT", tier: 2, x: 440, y: 148, offsetX: 14, offsetY: 12, anchor: "start" as const, fontSize: 5.5, labelW: 46, dotR: 2, info: "FinTech Hub" },
-    { name: "BOSTON", tier: 2, x: 246, y: 155, offsetX: -12, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 36, dotR: 2.5, info: "North American HQ" },
-    { name: "NEW YORK", tier: 2, x: 240, y: 160, offsetX: 12, offsetY: -12, anchor: "start" as const, fontSize: 5.5, labelW: 44, dotR: 2.5, info: "Financial Hub" },
-    { name: "SAN FRANCISCO", tier: 2, x: 155, y: 165, offsetX: 12, offsetY: 4, anchor: "start" as const, fontSize: 5.5, labelW: 66, dotR: 2.5, info: "West Coast Hub" },
-    { name: "DUBAI", tier: 2, x: 540, y: 220, offsetX: -10, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 2.5, info: "MEA Hub" },
-    { name: "HYDERABAD", tier: 2, x: 630, y: 240, offsetX: -12, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 48, dotR: 2.5, info: "APAC Engineering" },
-    { name: "SINGAPORE", tier: 2, x: 700, y: 280, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 48, dotR: 2.5, info: "APAC Hub" },
-    { name: "TOKYO", tier: 2, x: 730, y: 180, offsetX: -12, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 32, dotR: 2.5, info: "East Asia Operations" },
+    { name: "LONDON", tier: 2, x: 430, y: 138, offsetX: -16, offsetY: 0, anchor: "end" as const, fontSize: 5.5, labelW: 34, dotR: 2, info: "European Hub" },
+    { name: "DÜSSELDORF", tier: 2, x: 444, y: 139, offsetX: 10, offsetY: -8, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 2, info: "Partner Hub" },
+    { name: "FRANKFURT", tier: 2, x: 448, y: 142, offsetX: 14, offsetY: 12, anchor: "start" as const, fontSize: 5.5, labelW: 46, dotR: 2, info: "FinTech Hub" },
+    { name: "BOSTON", tier: 2, x: 275, y: 163, offsetX: -12, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 36, dotR: 2.5, info: "North American HQ" },
+    { name: "NEW YORK", tier: 2, x: 267, y: 167, offsetX: 12, offsetY: -12, anchor: "start" as const, fontSize: 5.5, labelW: 44, dotR: 2.5, info: "Financial Hub" },
+    { name: "SAN FRANCISCO", tier: 2, x: 158, y: 175, offsetX: 12, offsetY: 4, anchor: "start" as const, fontSize: 5.5, labelW: 66, dotR: 2.5, info: "West Coast Hub" },
+    { name: "DUBAI", tier: 2, x: 558, y: 210, offsetX: -10, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 2.5, info: "MEA Hub" },
+    { name: "HYDERABAD", tier: 2, x: 615, y: 232, offsetX: -12, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 48, dotR: 2.5, info: "APAC Engineering" },
+    { name: "SINGAPORE", tier: 2, x: 678, y: 276, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 48, dotR: 2.5, info: "APAC Hub" },
+    { name: "TOKYO", tier: 2, x: 743, y: 181, offsetX: -12, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 32, dotR: 2.5, info: "East Asia Operations" },
     // Tier 3 (Decorative Cities)
-    { name: "PARIS", tier: 3, x: 425, y: 155, offsetX: -8, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 1.5, info: "Regional Office" },
-    { name: "AMSTERDAM", tier: 3, x: 430, y: 141, offsetX: 4, offsetY: -18, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "Data Center" },
-    { name: "SÃO PAULO", tier: 3, x: 310, y: 350, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "South American Hub" },
-    { name: "JOHANNESBURG", tier: 3, x: 490, y: 340, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 68, dotR: 1.5, info: "African Hub" },
-    { name: "SYDNEY", tier: 3, x: 740, y: 390, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 40, dotR: 1.5, info: "Oceania Hub" },
-    { name: "TORONTO", tier: 3, x: 230, y: 145, offsetX: -10, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 44, dotR: 1.5, info: "Canadian Office" }
+    { name: "PARIS", tier: 3, x: 435, y: 145, offsetX: -8, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 1.5, info: "Regional Office" },
+    { name: "AMSTERDAM", tier: 3, x: 440, y: 136, offsetX: 4, offsetY: -18, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "Data Center" },
+    { name: "SÃO PAULO", tier: 3, x: 322, y: 345, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "South American Hub" },
+    { name: "JOHANNESBURG", tier: 3, x: 495, y: 353, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 68, dotR: 1.5, info: "African Hub" },
+    { name: "SYDNEY", tier: 3, x: 771, y: 374, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 40, dotR: 1.5, info: "Oceania Hub" },
+    { name: "TORONTO", tier: 3, x: 258, y: 159, offsetX: -10, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 44, dotR: 1.5, info: "Canadian Office" }
   ];
 
   const getArcControlPoint = (startX: number, startY: number, endX: number, endY: number) => {
@@ -224,7 +224,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
 
             {/* Dynamic Arcs for the 13 cities */}
             {cities.map((city, i) => (
-              <linearGradient key={`arc-grad-${i}`} id={`arc-grad-${i}`} x1="405" y1="135" x2={city.x} y2={city.y} gradientUnits="userSpaceOnUse">
+              <linearGradient key={`arc-grad-${i}`} id={`arc-grad-${i}`} x1="417" y1="133" x2={city.x} y2={city.y} gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
                 <stop offset="50%" stopColor={isDarkMode ? "#6FD3FF" : "#1E5FFF"} stopOpacity={isDarkMode ? "0.4" : "0.7"} />
                 <stop offset="100%" stopColor="#ffffff" stopOpacity="0.8" />
@@ -250,15 +250,15 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
                 100% { transform: scale(3.5); opacity: 0; }
               }
               .radar-ring {
-                transform-origin: 405px 135px;
+                transform-origin: 417px 133px;
                 animation: pulseRing 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
               }
               .radar-ring-delayed {
-                transform-origin: 405px 135px;
+                transform-origin: 417px 133px;
                 animation: pulseRing 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite 1s;
               }
               .radar-ring-delayed-2 {
-                transform-origin: 405px 135px;
+                transform-origin: 417px 133px;
                 animation: pulseRing 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite 2s;
               }
               @keyframes drawArc {
@@ -293,12 +293,12 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
           {/* Dynamic Arcs */}
           <g filter="url(#arc-glow)">
             {cities.map((city, i) => {
-              const cp = getArcControlPoint(405, 135, city.x, city.y);
+              const cp = getArcControlPoint(417, 133, city.x, city.y);
               const isTier2 = city.tier === 2;
               return (
                 <path 
                   key={`arc-path-${i}`}
-                  d={`M 405 135 Q ${cp.x} ${cp.y} ${city.x} ${city.y}`} 
+                  d={`M 417 133 Q ${cp.x} ${cp.y} ${city.x} ${city.y}`} 
                   fill="none" 
                   stroke={`url(#arc-grad-${i})`} 
                   strokeWidth="2" 
@@ -385,8 +385,8 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
           <g>
             {cities.map((city, i) => {
               if (city.tier !== 2) return null;
-              const cp = getArcControlPoint(405, 135, city.x, city.y);
-              const pathData = `M 405 135 Q ${cp.x} ${cp.y} ${city.x} ${city.y}`;
+              const cp = getArcControlPoint(417, 133, city.x, city.y);
+              const pathData = `M 417 133 Q ${cp.x} ${cp.y} ${city.x} ${city.y}`;
               
               return (
                 <g key={`signal-${i}`}>
@@ -429,27 +429,27 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
             onMouseLeave={() => setHoveredCity(null)}
           >
             {/* Invisible hit area */}
-            <circle cx="405" cy="135" r="25" fill="transparent" />
+            <circle cx="417" cy="133" r="25" fill="transparent" />
             
             {/* Multi-layer radiant glow */}
-            <circle cx="405" cy="135" r="85" fill="url(#dublin-glow-3)" />
-            <circle cx="405" cy="135" r="50" fill="url(#dublin-glow-2)" />
-            <circle cx="405" cy="135" r="25" fill="url(#dublin-glow-1)" />
+            <circle cx="417" cy="133" r="85" fill="url(#dublin-glow-3)" />
+            <circle cx="417" cy="133" r="50" fill="url(#dublin-glow-2)" />
+            <circle cx="417" cy="133" r="25" fill="url(#dublin-glow-1)" />
             
             {/* Radar rings */}
-            <circle cx="405" cy="135" r="10" fill="none" stroke={isDarkMode ? "#ffffff" : "#1E5FFF"} strokeWidth="1.5" className="radar-ring" />
-            <circle cx="405" cy="135" r="10" fill="none" stroke={isDarkMode ? "#ffffff" : "#1E5FFF"} strokeWidth="1.5" className="radar-ring-delayed" />
+            <circle cx="417" cy="133" r="10" fill="none" stroke={isDarkMode ? "#ffffff" : "#1E5FFF"} strokeWidth="1.5" className="radar-ring" />
+            <circle cx="417" cy="133" r="10" fill="none" stroke={isDarkMode ? "#ffffff" : "#1E5FFF"} strokeWidth="1.5" className="radar-ring-delayed" />
             
             {/* Core bright dot */}
-            <circle cx="405" cy="135" r="5" fill={isDarkMode ? "#ffffff" : "#1E5FFF"} />
+            <circle cx="417" cy="133" r="5" fill={isDarkMode ? "#ffffff" : "#1E5FFF"} />
             
             {/* Line connecting to pill */}
-            <line x1="405" y1="135" x2="415" y2="103" stroke={isDarkMode ? "rgba(94, 200, 255, 0.6)" : "rgba(30, 95, 255, 0.6)"} strokeWidth="0.5" />
+            <line x1="417" y1="133" x2="427" y2="101" stroke={isDarkMode ? "rgba(94, 200, 255, 0.6)" : "rgba(30, 95, 255, 0.6)"} strokeWidth="0.5" />
 
             {/* Dublin Pill Background (Holographic Blue) */}
             <rect 
-              x="410" 
-              y="97.5" 
+              x="422" 
+              y="95.5" 
               width="65" 
               height="11" 
               rx="2.5" 
@@ -459,11 +459,11 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
             />
             
             {/* Inner Pill Dot */}
-            <circle cx="415" cy="103" r="1.5" fill={isDarkMode ? "#ffffff" : "#1E5FFF"} />
+            <circle cx="427" cy="101" r="1.5" fill={isDarkMode ? "#ffffff" : "#1E5FFF"} />
 
             {/* Label */}
             <text 
-              x="445" y="105.5" 
+              x="454.5" y="103.5" 
               fill={isDarkMode ? "#ffffff" : "#1E5FFF"} 
               fontSize="5.5" 
               fontFamily="Inter, system-ui, sans-serif"
@@ -479,7 +479,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
           {/* Hover Tooltip Overlay for HQ */}
           {hoveredCity === 'DUBLIN' && (
             (() => {
-              const target = { name: 'DUBLIN', x: 405, y: 135, info: 'Global Headquarters' } as any;
+              const target = { name: 'DUBLIN', x: 417, y: 133, info: 'Global Headquarters' } as any;
               
               return (
                 <g pointerEvents="none">
