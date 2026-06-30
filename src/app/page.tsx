@@ -1347,15 +1347,15 @@ export default function Home() {
         <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile dark:hidden" />
 
         {/* Layer 2: Hero Content */}
-        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-6 lg:pt-[100px] xl:pt-[120px] flex flex-col min-h-screen justify-between pointer-events-none">
+        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-6 lg:pt-[100px] xl:pt-[120px] 2xl:pt-[160px] flex flex-col min-h-screen justify-between pointer-events-none">
           
-          <div className="flex flex-col md:flex-row items-center md:items-stretch w-full flex-1 pb-10 lg:pb-12 pointer-events-none">
+          <div className="flex flex-col md:flex-row items-center md:items-stretch w-full flex-1 pb-10 lg:pb-12 xl:pb-14 2xl:pb-20 pointer-events-none">
             <motion.div 
               variants={enterpriseContainer}
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, margin: "-10px" }}
-              className="flex flex-col justify-between items-center md:items-start text-center md:text-left w-full md:w-[60%] lg:w-[50%] h-full pointer-events-auto pt-4 md:pt-10"
+              className="flex flex-col justify-between items-center md:items-start text-center md:text-left w-full md:w-[60%] lg:w-[50%] h-full pointer-events-auto pt-4 md:pt-10 2xl:pt-14"
             >
               
               {/* 1. BADGE/PILL */}
