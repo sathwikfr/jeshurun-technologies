@@ -94,8 +94,8 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
     { name: "PARIS", tier: 3, x: 425, y: 155, offsetX: -8, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 1.5, info: "Regional Office" },
     { name: "AMSTERDAM", tier: 3, x: 430, y: 141, offsetX: 4, offsetY: -18, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "Data Center" },
     { name: "SÃO PAULO", tier: 3, x: 310, y: 350, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "South American Hub" },
-    { name: "JOHANNESBURG", tier: 3, x: 440, y: 340, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 68, dotR: 1.5, info: "African Hub" },
-    { name: "SYDNEY", tier: 3, x: 760, y: 410, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 40, dotR: 1.5, info: "Oceania Hub" },
+    { name: "JOHANNESBURG", tier: 3, x: 490, y: 340, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 68, dotR: 1.5, info: "African Hub" },
+    { name: "SYDNEY", tier: 3, x: 740, y: 390, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 40, dotR: 1.5, info: "Oceania Hub" },
     { name: "TORONTO", tier: 3, x: 230, y: 145, offsetX: -10, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 44, dotR: 1.5, info: "Canadian Office" }
   ];
 
