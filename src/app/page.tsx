@@ -1421,53 +1421,61 @@ export default function Home() {
               
               {/* Card 1 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-center text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
-                      <Briefcase className="w-4 h-4" />
+                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                  <div className="my-auto w-full">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
+                        <Briefcase className="w-4 h-4" />
+                      </div>
+                      <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={150} suffix="+" delay={0} /></div>
                     </div>
-                    <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={150} suffix="+" delay={0} /></div>
+                    <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Projects Delivered</div>
                   </div>
-                  <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Projects Delivered</div>
                 </SpotlightCard>
               </motion.div>
 
               {/* Card 2 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-center text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
-                      <Layers className="w-4 h-4" />
+                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                  <div className="my-auto w-full">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
+                        <Layers className="w-4 h-4" />
+                      </div>
+                      <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={20} suffix="+" delay={150} /></div>
                     </div>
-                    <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={20} suffix="+" delay={150} /></div>
+                    <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Technology Domains</div>
                   </div>
-                  <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Technology Domains</div>
                 </SpotlightCard>
               </motion.div>
 
               {/* Card 3 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-center text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
-                      <Globe className="w-4 h-4" />
+                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                  <div className="my-auto w-full">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
+                        <Globe className="w-4 h-4" />
+                      </div>
+                      <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={6} delay={300} /></div>
                     </div>
-                    <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={6} delay={300} /></div>
+                    <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Global Delivery Hubs</div>
                   </div>
-                  <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Global Delivery Hubs</div>
                 </SpotlightCard>
               </motion.div>
 
               {/* Card 4 */}
               <motion.div variants={enterpriseItem}>
-                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 flex flex-col justify-center text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
-                      <Headset className="w-4 h-4" />
+                <SpotlightCard borderGlow={false} className="relative w-full min-h-[100px] md:min-h-[120px] lg:min-h-[130px] !bg-white/70 dark:!bg-slate-900/70 backdrop-blur-md border border-gray-200/50 dark:border-slate-800/50 rounded-[12px] p-3 lg:p-4 text-left cursor-pointer h-full hover-card-effect overflow-hidden shadow-sm transition-all duration-300">
+                  <div className="my-auto w-full">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 rounded-lg bg-[#1E5FFF]/10 flex items-center justify-center text-[#1E5FFF] shrink-0">
+                        <Headset className="w-4 h-4" />
+                      </div>
+                      <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={24} suffix="/7" delay={450} /></div>
                     </div>
-                    <div className="text-[20px] lg:text-[24px] font-bold text-[#0B1220] dark:text-white leading-none"><AnimatedCounter target={24} suffix="/7" delay={450} /></div>
+                    <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Enterprise Support</div>
                   </div>
-                  <div className="text-[10px] lg:text-[11px] font-bold text-gray-500 uppercase tracking-widest leading-[1.3]">Enterprise Support</div>
                 </SpotlightCard>
               </motion.div>
 
