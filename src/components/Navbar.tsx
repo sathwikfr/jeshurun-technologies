@@ -552,7 +552,7 @@ export function Navbar() {
               <Search className="absolute left-3 w-4 h-4 text-muted-foreground group-focus-within:text-[#2563EB] transition-colors" />
               <input
                 type="text"
-                placeholder="Search (⌘K)…"
+                placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="h-10 pl-9 pr-4 rounded-xl text-[13px] font-medium bg-slate-100 dark:bg-slate-900 border border-transparent focus:border-[#2563EB]/40 focus:bg-card dark:focus:bg-slate-950 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] outline-none w-28 md:w-32 lg:w-40 focus:w-32 md:focus:w-40 lg:focus:w-52 transition-all duration-300 placeholder:text-muted-foreground text-slate-900 dark:text-white"
