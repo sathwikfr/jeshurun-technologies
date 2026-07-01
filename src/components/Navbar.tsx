@@ -831,6 +831,70 @@ export function Navbar() {
             className="md:hidden border-b border-border dark:border-border bg-card/95 dark:bg-slate-950/95 backdrop-blur-md overflow-hidden"
           >
             <div className="px-6 py-6 space-y-4">
+              {/* Mobile Search Input */}
+              <div className="relative flex items-center w-full mb-4">
+                <Search className="absolute left-3 w-4 h-4 text-muted-foreground transition-colors" />
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="h-10 pl-9 pr-4 rounded-xl text-[13px] font-medium bg-slate-100 dark:bg-slate-900 border border-transparent focus:border-[#2563EB]/40 focus:bg-card dark:focus:bg-slate-950 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] outline-none w-full placeholder:text-muted-foreground text-slate-900 dark:text-white"
+                  aria-label="Search site"
+                />
+                
+                {/* Search Results Dropdown inside Mobile Menu */}
+                <AnimatePresence>
+                  {searchQuery.length > 0 && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 5, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 5, scale: 0.95 }}
+                      className="absolute top-12 left-0 right-0 bg-card dark:bg-slate-900 border border-border rounded-xl shadow-lg overflow-hidden flex flex-col max-h-[250px] z-50"
+                    >
+                      {(() => {
+                        const query = searchQuery.toLowerCase();
+                        const results = searchIndex.filter(item => 
+                          item.title.toLowerCase().includes(query) || 
+                          item.desc.toLowerCase().includes(query)
+                        );
+
+                        if (results.length === 0) {
+                          return (
+                            <div className="p-3 text-center text-xs text-muted-foreground">
+                              No results found for &quot;{searchQuery}&quot;
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div className="overflow-y-auto p-2 flex flex-col gap-1">
+                            {results.map((result, idx) => (
+                              <Link 
+                                key={idx} 
+                                href={result.href}
+                                onClick={() => {
+                                  setSearchQuery("");
+                                  setIsMobileOpen(false);
+                                }}
+                                className="flex flex-col p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                              >
+                                <span className="text-xs font-bold text-foreground dark:text-white">
+                                  {result.title}
+                                </span>
+                                <span className="text-[10px] text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
+                                  {result.desc}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                        );
+                      })()}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               {navItems.map((item) => {
                 const isActive =
                   pathname === item.href ||
