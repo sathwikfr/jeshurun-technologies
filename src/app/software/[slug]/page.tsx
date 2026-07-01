@@ -517,16 +517,16 @@ export default function SoftwareDetailPage({
             className="overflow-hidden rounded-2xl border border-border shadow-sm"
           >
             {/* Header */}
-            <div className="grid grid-cols-2 bg-card">
-              <div className="px-6 py-4 flex items-center gap-2">
-                <XIcon className="w-4 h-4 text-red-400" />
-                <span className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+            <div className="grid grid-cols-2">
+              <div className="px-6 py-4 flex items-center gap-2 bg-red-50/60 dark:bg-red-950/20">
+                <XIcon className="w-4 h-4 text-red-500" />
+                <span className="text-xs font-extrabold uppercase tracking-widest text-red-600 dark:text-red-400">
                   Without Jeshurun
                 </span>
               </div>
-              <div className="px-6 py-4 flex items-center gap-2 border-l border-border">
-                <Check className="w-4 h-4 text-emerald-400" />
-                <span className="text-xs font-extrabold uppercase tracking-widest text-foreground">
+              <div className="px-6 py-4 flex items-center gap-2 border-l border-border bg-emerald-50/60 dark:bg-emerald-950/20">
+                <Check className="w-4 h-4 text-emerald-500" />
+                <span className="text-xs font-extrabold uppercase tracking-widest text-emerald-700 dark:text-emerald-400">
                   With Jeshurun
                 </span>
               </div>
@@ -614,7 +614,7 @@ export default function SoftwareDetailPage({
               {/* Right Side: Client Testimonial (60%) */}
               <div className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center space-y-10">
                 <Quote className="w-10 h-10 text-primary opacity-20" />
-                <p className="text-foreground text-xl sm:text-2xl font-medium leading-relaxed italic">
+                <p className="text-foreground text-xl sm:text-2xl font-medium leading-relaxed italic opacity-90">
                   &ldquo;{category.testimonial.quote}&rdquo;
                 </p>
                 

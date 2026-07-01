@@ -128,7 +128,14 @@ ${formData.message}
 
   return (
     <div className="relative min-h-screen pt-24 pb-16 overflow-hidden bg-[#FAFBFD] dark:bg-[#0F172A] text-slate-900 dark:text-slate-100 transition-colors duration-300">
-      
+      {/* Premium radial gradient background */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 20% -10%, rgba(37,99,235,0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 110%, rgba(6,182,212,0.05) 0%, transparent 60%)"
+        }}
+        aria-hidden="true"
+      />
 
 
       <div className="container px-6 sm:px-8 mx-auto relative z-10">
@@ -152,9 +159,9 @@ ${formData.message}
             variants={item}
             className="text-5xl sm:text-6xl md:text-7xl font-serif tracking-tight leading-none text-slate-900 dark:text-white"
           >
-            <span className="text-blue-600 dark:text-blue-500">Let's Build Your</span>{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-              Digital Future
+            <span className="text-slate-900 dark:text-white">Mission-Critical</span>{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
+              Technology. Delivered.
             </span>
           </motion.h1>
           
@@ -162,7 +169,7 @@ ${formData.message}
             variants={item}
             className="text-muted-foreground text-lg sm:text-xl md:text-2xl leading-relaxed font-semibold max-w-2xl mx-auto"
           >
-            Partner with Jeshurun Technologies to modernize infrastructure, accelerate cloud adoption, and drive measurable business outcomes.
+            Trusted by pharma, telecoms, and insurance enterprises globally — tell us your challenge and a senior consultant will respond within 2 business hours.
           </motion.p>
 
           {/* TRUST STRIP */}
@@ -213,13 +220,23 @@ ${formData.message}
               </CardHeader>
               <CardContent className="px-6 pb-6 md:px-8 md:pb-8">
                 {submitResult && (
-                  <div className={`p-4 mb-6 rounded-2xl border text-sm font-semibold transition-all ${
-                    submitResult.success 
-                      ? "bg-emerald-50/50 border-emerald-200/50 text-emerald-800 dark:bg-emerald-950/20 dark:border-emerald-900/30 dark:text-emerald-400"
-                      : "bg-rose-50/50 border-rose-200/50 text-rose-800 dark:bg-rose-950/20 dark:border-rose-900/30 dark:text-rose-400"
-                  }`}>
-                    {submitResult.message}
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.35 }}
+                    className={`flex items-start gap-3 p-4 mb-6 rounded-2xl border text-sm font-semibold ${
+                      submitResult.success
+                        ? "bg-emerald-50 border-emerald-200 text-emerald-800 dark:bg-emerald-950/30 dark:border-emerald-800/40 dark:text-emerald-300"
+                        : "bg-rose-50 border-rose-200 text-rose-800 dark:bg-rose-950/30 dark:border-rose-800/40 dark:text-rose-300"
+                    }`}
+                  >
+                    <span className={`shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white text-xs mt-0.5 ${
+                      submitResult.success ? 'bg-emerald-500' : 'bg-rose-500'
+                    }`}>
+                      {submitResult.success ? '✓' : '✕'}
+                    </span>
+                    <span>{submitResult.message}</span>
+                  </motion.div>
                 )}
                 
                 <form onSubmit={handleSubmit} className="space-y-5">

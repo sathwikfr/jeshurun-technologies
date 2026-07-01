@@ -56,7 +56,7 @@ const menuData = {
     },
     tabs: [
       {
-        title: "Cloud-Native",
+        title: "Cloud-Native Engineering",
         desc: "Architecting resilient, hyper-scalable microservices.",
         href: "/software/cloud-native",
         features: [
@@ -78,7 +78,7 @@ const menuData = {
         ],
       },
       {
-        title: "Mobile Architecture",
+        title: "Mobile Experience Architecture",
         desc: "Enterprise-grade native and cross-platform mobile apps.",
         href: "/software/mobile-architecture",
         features: [
@@ -89,7 +89,7 @@ const menuData = {
         ],
       },
       {
-        title: "Enterprise API",
+        title: "Enterprise API & Data Pipelines",
         desc: "Building robust GraphQL and REST APIs alongside real-time data streaming.",
         href: "/software/enterprise-api",
         features: [
@@ -217,7 +217,7 @@ const menuData = {
         ],
       },
       {
-        title: "DevOps Solutions",
+        title: "DevOps",
         desc: "Streamlined development and deployment pipelines for faster delivery.",
         href: "/technology/devops",
         features: [
@@ -242,10 +242,10 @@ const searchIndex = [
   { title: "Contact Us", desc: "Get in touch with our team.", href: "/contact" },
 
   // Software Subpages
-  { title: "Cloud-Native", desc: "Architecting resilient, hyper-scalable microservices.", href: "/software/cloud-native" },
+  { title: "Cloud-Native Engineering", desc: "Architecting resilient, hyper-scalable microservices.", href: "/software/cloud-native" },
   { title: "Legacy Modernization", desc: "Refactoring and migrating monolithic systems.", href: "/software/legacy-modernization" },
-  { title: "Mobile Architecture", desc: "Enterprise-grade native and cross-platform mobile apps.", href: "/software/mobile-architecture" },
-  { title: "Enterprise API", desc: "Building robust GraphQL and REST APIs alongside real-time data streaming.", href: "/software/enterprise-api" },
+  { title: "Mobile Experience Architecture", desc: "Enterprise-grade native and cross-platform mobile apps.", href: "/software/mobile-architecture" },
+  { title: "Enterprise API & Data Pipelines", desc: "Building robust GraphQL and REST APIs alongside real-time data streaming.", href: "/software/enterprise-api" },
   
   // Technology Subpages
   { title: "Cloud Solutions", desc: "Scalable cloud infrastructure using AWS, Azure, and Google Cloud Platform.", href: "/technology/cloud-solutions" },
@@ -253,7 +253,7 @@ const searchIndex = [
   { title: "Cybersecurity", desc: "Comprehensive security solutions to protect your digital assets and user data.", href: "/technology/cybersecurity" },
   { title: "AI & Machine Learning", desc: "Intelligent automation and predictive analytics for business growth.", href: "/technology/ai-machine-learning" },
   { title: "Network Infrastructure", desc: "Robust network design and optimization for seamless connectivity.", href: "/technology/network-infrastructure" },
-  { title: "DevOps Solutions", desc: "Streamlined development and deployment pipelines for faster delivery.", href: "/technology/devops" },
+  { title: "DevOps", desc: "Streamlined development and deployment pipelines for faster delivery.", href: "/technology/devops" },
 
   // Services Subpages
   { title: "IT Consulting", desc: "Strategic technology planning to align your IT initiatives with key business metrics and maximize ROI.", href: "/services/it-consulting" },
@@ -488,7 +488,7 @@ export function Navbar() {
                           } else if (item.label === "Technology") {
                             setActiveSubTab("Cloud Solutions");
                           } else if (item.label === "Software") {
-                            setActiveSubTab("Cloud-Native");
+                            setActiveSubTab("Cloud-Native Engineering");
                           }
                         }
                       }}
@@ -552,10 +552,10 @@ export function Navbar() {
               <Search className="absolute left-3 w-4 h-4 text-muted-foreground group-focus-within:text-[#2563EB] transition-colors" />
               <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search (⌘K)…"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="h-10 pl-9 pr-4 rounded-xl text-[13px] font-medium bg-slate-100 dark:bg-slate-900 border border-transparent focus:border-[#2563EB]/30 focus:bg-card dark:focus:bg-slate-950 outline-none w-28 md:w-32 lg:w-40 focus:w-32 md:focus:w-40 lg:focus:w-48 transition-all duration-300 placeholder:text-muted-foreground text-slate-900 dark:text-white"
+                className="h-10 pl-9 pr-4 rounded-xl text-[13px] font-medium bg-slate-100 dark:bg-slate-900 border border-transparent focus:border-[#2563EB]/40 focus:bg-card dark:focus:bg-slate-950 focus:shadow-[0_0_0_3px_rgba(37,99,235,0.12)] outline-none w-28 md:w-32 lg:w-40 focus:w-32 md:focus:w-40 lg:focus:w-52 transition-all duration-300 placeholder:text-muted-foreground text-slate-900 dark:text-white"
                 aria-label="Search site"
               />
               <AnimatePresence>
@@ -621,10 +621,10 @@ export function Navbar() {
               return (
                 <Link
                   href="/contact"
-                  className="inline-flex items-center gap-2 h-10 px-5 rounded-full text-[13px] font-bold text-white bg-[#1E5FFF] whitespace-nowrap hover:bg-[#154fe5] shadow-[0_4px_14px_rgba(30,95,255,0.3)] transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 h-10 px-5 rounded-full text-[13px] font-bold text-white bg-[#1E5FFF] whitespace-nowrap hover:bg-[#2563EB] shadow-[0_4px_16px_rgba(30,95,255,0.4)] hover:shadow-[0_6px_22px_rgba(30,95,255,0.55)] transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5"
                 >
                   <span>Contact Us</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
+                  <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
               );
             })()}

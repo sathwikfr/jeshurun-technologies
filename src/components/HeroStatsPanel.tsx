@@ -17,9 +17,10 @@ function AnimatedCounter({ target, suffix = "", prefix = "", delay = 0 }: { targ
 
   useEffect(() => {
     if (isInView) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         motionValue.set(target);
       }, delay);
+      return () => clearTimeout(timer);
     }
   }, [isInView, motionValue, target, delay]);
 
@@ -40,91 +41,107 @@ function AnimatedCounter({ target, suffix = "", prefix = "", delay = 0 }: { targ
 const statsData = [
   {
     id: 1,
-    icon: <Briefcase className="w-4 h-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" strokeWidth={1.5} />,
+    icon: <Briefcase className="w-4 h-4" strokeWidth={1.5} />,
     number: 150,
     suffix: "+",
     label: "PROJECTS DELIVERED",
     description: "Successful engagements across industries.",
     delay: 0,
+    accentColor: "from-blue-500 to-blue-600",
+    iconBg: "bg-blue-500/10 dark:bg-blue-400/10",
+    iconColor: "text-blue-600 dark:text-blue-400",
+    borderHover: "hover:border-l-blue-500",
   },
   {
     id: 2,
-    icon: <Layers className="w-4 h-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" strokeWidth={1.5} />,
+    icon: <Layers className="w-4 h-4" strokeWidth={1.5} />,
     number: 20,
     suffix: "+",
     label: "TECHNOLOGY DOMAINS",
     description: "Deep expertise in modern enterprise stacks.",
     delay: 150,
+    accentColor: "from-indigo-500 to-indigo-600",
+    iconBg: "bg-indigo-500/10 dark:bg-indigo-400/10",
+    iconColor: "text-indigo-600 dark:text-indigo-400",
+    borderHover: "hover:border-l-indigo-500",
   },
   {
     id: 3,
-    icon: <Globe className="w-4 h-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" strokeWidth={1.5} />,
+    icon: <Globe className="w-4 h-4" strokeWidth={1.5} />,
     number: 6,
     suffix: "",
     label: "GLOBAL DELIVERY HUBS",
     description: "Distributed engineering across timezones.",
     delay: 300,
+    accentColor: "from-cyan-500 to-cyan-600",
+    iconBg: "bg-cyan-500/10 dark:bg-cyan-400/10",
+    iconColor: "text-cyan-600 dark:text-cyan-400",
+    borderHover: "hover:border-l-cyan-500",
   },
   {
     id: 4,
-    icon: <Headset className="w-4 h-4 text-blue-600 dark:text-blue-400 drop-shadow-sm" strokeWidth={1.5} />,
+    icon: <Headset className="w-4 h-4" strokeWidth={1.5} />,
     number: 24,
     suffix: "/7",
     label: "ENTERPRISE SUPPORT",
     description: "Continuous monitoring and proactive reliability.",
     delay: 450,
+    accentColor: "from-emerald-500 to-emerald-600",
+    iconBg: "bg-emerald-500/10 dark:bg-emerald-400/10",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
+    borderHover: "hover:border-l-emerald-500",
   },
 ];
 
 export function HeroStatsPanel() {
   return (
-    <div className="w-full relative z-30 pointer-events-auto flex justify-center pb-4">
-      {/* 
-        ONE UNIFIED DASHBOARD STRIP
-      */}
+    <div className="w-full relative z-30 pointer-events-auto flex justify-center pb-4 sm:pb-6">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full rounded-xl bg-white/40 dark:bg-[#0B1220]/40 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm overflow-hidden"
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+        className="w-full rounded-2xl bg-white/50 dark:bg-[#080f1f]/60 backdrop-blur-xl border border-black/8 dark:border-white/10 shadow-xl overflow-hidden"
       >
-        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-black/10 dark:divide-white/10">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-black/8 dark:divide-white/8">
           {statsData.map((stat, i) => (
-            <motion.div 
-              key={stat.id} 
-              className="flex flex-col items-center justify-center p-3 lg:p-4 transition-colors hover:bg-black/5 dark:hover:bg-white/5 min-w-0"
+            <motion.div
+              key={stat.id}
+              className={`group relative flex flex-col items-center justify-center p-4 lg:p-5 xl:p-6 transition-all duration-300 hover:bg-black/[0.03] dark:hover:bg-white/[0.03] min-w-0 border-l-2 border-l-transparent ${stat.borderHover} cursor-default`}
               whileHover={{ y: -2 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="flex flex-col xl:flex-row items-center xl:items-start gap-2 xl:gap-3 text-center xl:text-left min-w-0 w-full">
+              {/* Subtle stat-specific top accent line on hover */}
+              <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${stat.accentColor} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+
+              <div className="flex flex-col xl:flex-row items-center xl:items-start gap-2.5 xl:gap-4 text-center xl:text-left min-w-0 w-full">
                 {/* Icon Container */}
-                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10 dark:bg-blue-400/10 shrink-0 mt-1">
-                  {/* Soft pulsing breathing glow */}
-                  <motion.div 
-                    className="absolute inset-0 rounded-full bg-blue-500 dark:bg-blue-400 blur-md"
-                    animate={{ 
-                      scale: [1, 1.3, 1],
-                      opacity: [0.1, 0.3, 0.1]
+                <div className={`relative flex items-center justify-center w-10 h-10 rounded-xl ${stat.iconBg} shrink-0`}>
+                  {/* Breathing glow */}
+                  <motion.div
+                    className={`absolute inset-0 rounded-xl bg-gradient-to-br ${stat.accentColor} blur-md`}
+                    animate={{
+                      scale: [1, 1.4, 1],
+                      opacity: [0.08, 0.22, 0.08]
                     }}
                     transition={{
-                      duration: 3,
+                      duration: 3.5,
                       repeat: Infinity,
                       ease: "easeInOut",
-                      delay: i * 0.4
+                      delay: i * 0.5
                     }}
                   />
-                  <div className="relative z-10">{stat.icon}</div>
+                  <div className={`relative z-10 ${stat.iconColor}`}>{stat.icon}</div>
                 </div>
-                
+
                 {/* Text Layout */}
                 <div className="flex flex-col min-w-0">
-                  <div className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white leading-none tracking-tight mb-1 drop-shadow-md">
+                  <div className="text-xl md:text-2xl font-extrabold text-slate-900 dark:text-white leading-none tracking-tight mb-1">
                     <AnimatedCounter target={stat.number} suffix={stat.suffix} delay={stat.delay} />
                   </div>
-                  <div className="text-[9px] md:text-[10px] font-bold text-slate-700 dark:text-slate-200 uppercase tracking-widest leading-none drop-shadow-md mb-1.5">
+                  <div className="text-[9px] md:text-[10px] font-bold text-slate-600 dark:text-slate-300 uppercase tracking-widest leading-none mb-1.5">
                     {stat.label}
                   </div>
-                  <div className="text-xs md:text-sm text-slate-600 dark:text-slate-400 leading-snug w-full truncate xl:whitespace-normal xl:overflow-visible text-wrap">
+                  <div className="text-xs text-slate-500 dark:text-slate-400 leading-snug hidden xl:block">
                     {stat.description}
                   </div>
                 </div>

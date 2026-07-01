@@ -97,7 +97,14 @@ export default function AboutPage() {
 
   return (
     <div className="relative min-h-screen pt-24 pb-16 overflow-hidden bg-background text-foreground transition-colors duration-300">
-      
+      {/* Premium radial gradient background */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{
+          background: "radial-gradient(ellipse 70% 50% at 30% -5%, rgba(37,99,235,0.06) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 90% 80%, rgba(6,182,212,0.04) 0%, transparent 55%)"
+        }}
+        aria-hidden="true"
+      />
 
 
       <div className="container px-6 sm:px-8 mx-auto relative z-10">
@@ -121,9 +128,10 @@ export default function AboutPage() {
             variants={item}
             className="text-4xl sm:text-5xl md:text-6xl font-serif tracking-tight leading-[1.15] text-foreground"
           >
-            <span className="text-blue-600 dark:text-blue-500">Enterprise Consulting.</span> <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
-              Cloud Transformation. <br className="hidden sm:block" /> Digital Innovation.
+            <span className="text-slate-900 dark:text-white block">Where Mission-Critical</span>
+            <span className="text-slate-900 dark:text-white block">Enterprise Technology</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 block">
+              Gets Delivered.
             </span>
           </motion.h1>
           
@@ -131,7 +139,7 @@ export default function AboutPage() {
             variants={item}
             className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-medium"
           >
-            Helping organizations modernize technology, accelerate delivery, and build resilient digital platforms for long-term growth.
+            45+ certified engineers. 99.9% SLA uptime. Serving pharma, telecoms, and insurance leaders across Ireland, Europe, the Middle East, and India since 2017.
           </motion.p>
         </motion.div>
 

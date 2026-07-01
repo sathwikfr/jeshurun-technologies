@@ -1,112 +1,248 @@
 import Link from "next/link";
 import { HeaderLogo } from "@/components/HeaderLogo";
+import { ArrowRight, Mail, MapPin, ExternalLink } from "lucide-react";
+
+const footerLinks = {
+  services: [
+    { label: "IT Consulting", href: "/services/it-consulting" },
+    { label: "Project Management", href: "/services/project-management" },
+    { label: "Test Management", href: "/services/test-management" },
+    { label: "Infrastructure", href: "/services/infrastructure-management" },
+  ],
+  company: [
+    { label: "About Us", href: "/about" },
+    { label: "Technology", href: "/technology" },
+    { label: "Software", href: "/software" },
+    { label: "Case Studies", href: "/case-studies" },
+    { label: "Careers", href: "/careers" },
+  ],
+  resources: [
+    { label: "Insights & Research", href: "/insights" },
+    { label: "Contact", href: "/contact" },
+    { label: "Privacy Policy", href: "/privacy" },
+    { label: "Terms of Service", href: "/terms" },
+  ],
+};
+
+const trustBadges = [
+  { label: "SLA Guaranteed", value: "99.9% Uptime" },
+  { label: "Experience", value: "9+ Years" },
+  { label: "Engineers", value: "45+ Certified" },
+  { label: "Global Hubs", value: "6 Locations" },
+];
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-background border-t border-border text-muted-foreground mt-auto relative overflow-hidden">
-      {/* Premium Radial Glow */}
-      <div className="absolute inset-0 pointer-events-none z-0" style={{ background: 'radial-gradient(circle at top center, rgba(37, 99, 235, 0.06), transparent 60%)' }} />
-      
-      <div className="container mx-auto px-6 sm:px-8 py-16 md:py-20 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
-          
-          {/* Logo & Description */}
-          <div className="md:col-span-5 space-y-5">
-            <HeaderLogo className="h-10 w-auto" />
-            <p className="text-sm text-foreground leading-relaxed max-w-sm font-medium">
-              Architecting resilient systems and delivering mission-critical technology solutions for organizations across Ireland, Europe, and beyond.
-            </p>
-            <div className="flex space-x-4 pt-2">
-              <Link href="#" aria-label="Facebook" className="h-9 w-9 bg-card border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-[#0057D9] hover:border-[#0057D9] hover:shadow-sm transition-all duration-300">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                  <rect x="2" y="9" width="4" height="12" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </Link>
-              <Link href="#" aria-label="Twitter" className="h-9 w-9 bg-card border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-[#0057D9] hover:border-[#0057D9] hover:shadow-sm transition-all duration-300">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                </svg>
-              </Link>
-              <Link href="#" aria-label="LinkedIn" className="h-9 w-9 bg-card border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-[#0057D9] hover:border-[#0057D9] hover:shadow-sm transition-all duration-300">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                </svg>
-              </Link>
-              <Link href="#" aria-label="Email Us" className="h-9 w-9 bg-card border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-[#0057D9] hover:border-[#0057D9] hover:shadow-sm transition-all duration-300">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect width="20" height="16" x="2" y="4" rx="2" />
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                </svg>
-              </Link>
+    <footer className="bg-background border-t border-border text-muted-foreground relative overflow-hidden mt-auto">
+      {/* Premium top gradient border */}
+      <div
+        className="absolute top-0 left-0 right-0 h-px"
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(37,99,235,0.5) 30%, rgba(6,182,212,0.6) 60%, transparent 100%)",
+        }}
+        aria-hidden="true"
+      />
+
+      {/* Ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{ background: "radial-gradient(ellipse at top center, rgba(37, 99, 235, 0.05) 0%, transparent 55%)" }}
+        aria-hidden="true"
+      />
+
+      {/* ── Newsletter CTA Strip ── */}
+      <div className="relative z-10 border-b border-border/60">
+        <div className="container mx-auto px-6 sm:px-8 py-10 md:py-12">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-1 max-w-md">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-2">
+                <span className="w-4 h-px bg-primary" />
+                Stay Connected
+              </div>
+              <h3 className="text-xl font-extrabold text-foreground tracking-tight">
+                Enterprise Technology Insights
+              </h3>
+              <p className="text-sm text-muted-foreground font-medium leading-relaxed">
+                Research reports, cloud strategies, and digital transformation briefs — delivered to your inbox.
+              </p>
             </div>
+            <Link
+              href="/contact"
+              className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-all duration-300 shadow-[0_4px_16px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_24px_rgba(37,99,235,0.5)] hover:scale-[1.02] shrink-0"
+            >
+              <Mail className="w-4 h-4" aria-hidden="true" />
+              Get in Touch
+              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+            </Link>
           </div>
-          
-          {/* Services Section */}
-          <div className="md:col-span-2 space-y-4">
-            <h4 className="font-bold text-foreground text-sm uppercase tracking-wider">Services</h4>
-            <div className="h-[2px] bg-slate-300 w-8 mb-4" /> {/* Subtle horizontal accent line */}
-            <ul className="space-y-3 text-sm font-semibold">
-              <li>
-                <Link href="/services/it-consulting" className="hover:text-[#0057D9] transition-colors duration-200">IT Consulting</Link>
-              </li>
-              <li>
-                <Link href="/services/project-management" className="hover:text-[#0057D9] transition-colors duration-200">Project Management</Link>
-              </li>
-              <li>
-                <Link href="/services/test-management" className="hover:text-[#0057D9] transition-colors duration-200">Test Management</Link>
-              </li>
-              <li>
-                <Link href="/services/infrastructure-management" className="hover:text-[#0057D9] transition-colors duration-200">Infrastructure</Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Company Section */}
-          <div className="md:col-span-2 space-y-4">
-            <h4 className="font-bold text-foreground text-sm uppercase tracking-wider">Company</h4>
-            <div className="h-[2px] bg-slate-300 w-8 mb-4" /> {/* Subtle horizontal accent line */}
-            <ul className="space-y-3 text-sm font-semibold">
-              <li>
-                <Link href="/about" className="hover:text-[#0057D9] transition-colors duration-200">About Us</Link>
-              </li>
-              <li>
-                <Link href="/technology" className="hover:text-[#0057D9] transition-colors duration-200">Technology</Link>
-              </li>
-              <li>
-                <Link href="/software" className="hover:text-[#0057D9] transition-colors duration-200">Software</Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[#0057D9] transition-colors duration-200">Contact</Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Contact Section */}
-          <div className="md:col-span-3 space-y-4">
-            <h4 className="font-bold text-foreground text-sm uppercase tracking-wider">Contact</h4>
-            <div className="h-[2px] bg-slate-300 w-8 mb-4" /> {/* Subtle horizontal accent line */}
-            <ul className="space-y-3 text-sm font-semibold text-foreground">
-              <li className="leading-relaxed">
-                Dublin, IRELAND
-              </li>
-              <li>
-                <a href="mailto:info@jeshuruntech.com" className="hover:text-[#0057D9] transition-colors duration-200">
+        </div>
+      </div>
+
+      {/* ── Main Footer Grid ── */}
+      <div className="container mx-auto px-6 sm:px-8 py-14 md:py-18 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+
+          {/* Brand Column */}
+          <div className="md:col-span-4 space-y-6">
+            <HeaderLogo className="h-10 w-auto" />
+            <p className="text-sm text-foreground/80 leading-relaxed max-w-sm font-medium">
+              Architecting resilient systems and delivering mission-critical technology solutions for organizations across Ireland, Europe, the Middle East, and India.
+            </p>
+
+            {/* Contact Info */}
+            <div className="space-y-3">
+              <div className="flex items-start gap-2.5 text-sm font-medium">
+                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-primary" aria-hidden="true" />
+                <span className="text-foreground/80">Dublin, Ireland</span>
+              </div>
+              <div className="flex items-start gap-2.5 text-sm font-medium">
+                <Mail className="w-4 h-4 mt-0.5 shrink-0 text-primary" aria-hidden="true" />
+                <a
+                  href="mailto:info@jeshuruntech.com"
+                  className="text-foreground/80 hover:text-primary transition-colors duration-200 link-underline"
+                >
                   info@jeshuruntech.com
                 </a>
-              </li>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-3 pt-1">
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/company/jeshurun-technologies"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Jeshurun Technologies on LinkedIn"
+                className="group h-9 w-9 bg-card border border-border rounded-xl flex items-center justify-center text-muted-foreground hover:text-[#0A66C2] hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/5 hover:shadow-[0_4px_12px_rgba(10,102,194,0.2)] transition-all duration-300"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              </a>
+              {/* Twitter / X */}
+              <a
+                href="#"
+                aria-label="Jeshurun Technologies on X (Twitter)"
+                className="group h-9 w-9 bg-card border border-border rounded-xl flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-border/80 hover:bg-muted/20 transition-all duration-300"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.213 5.567zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+              {/* Email */}
+              <a
+                href="mailto:info@jeshuruntech.com"
+                aria-label="Email Jeshurun Technologies"
+                className="group h-9 w-9 bg-card border border-border rounded-xl flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 hover:shadow-[0_4px_12px_rgba(37,99,235,0.15)] transition-all duration-300"
+              >
+                <Mail className="w-4 h-4" aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+
+          {/* Services Column */}
+          <div className="md:col-span-2 space-y-5">
+            <div>
+              <h4 className="font-extrabold text-foreground text-xs uppercase tracking-widest mb-1">Services</h4>
+              <div className="h-[2px] w-8 bg-gradient-to-r from-primary to-primary/20 rounded-full" />
+            </div>
+            <ul className="space-y-3">
+              {footerLinks.services.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors duration-200 link-underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company Column */}
+          <div className="md:col-span-3 space-y-5">
+            <div>
+              <h4 className="font-extrabold text-foreground text-xs uppercase tracking-widest mb-1">Company</h4>
+              <div className="h-[2px] w-8 bg-gradient-to-r from-primary to-primary/20 rounded-full" />
+            </div>
+            <ul className="space-y-3">
+              {footerLinks.company.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors duration-200 link-underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Resources Column */}
+          <div className="md:col-span-3 space-y-5">
+            <div>
+              <h4 className="font-extrabold text-foreground text-xs uppercase tracking-widest mb-1">Resources</h4>
+              <div className="h-[2px] w-8 bg-gradient-to-r from-primary to-primary/20 rounded-full" />
+            </div>
+            <ul className="space-y-3">
+              {footerLinks.resources.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors duration-200 link-underline"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
         </div>
 
-        {/* Bottom copyright line */}
-        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-sm font-semibold text-muted-foreground gap-4">
-          <p className="text-center md:text-left">&copy; {new Date().getFullYear()} Jeshurun Technologies. All rights reserved.</p>
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-            <Link href="/privacy" className="underline text-[#0057D9] hover:text-[#2563EB] transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="underline text-[#0057D9] hover:text-[#2563EB] transition-colors">Terms of Service</Link>
+        {/* ── Trust Badges Row ── */}
+        <div className="mt-14 pt-8 border-t border-border/50">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {trustBadges.map((badge) => (
+              <div
+                key={badge.label}
+                className="flex flex-col items-center justify-center py-3 px-4 rounded-xl bg-muted/20 border border-border/60 text-center hover:border-primary/20 hover:bg-primary/3 transition-all duration-300 group"
+              >
+                <span className="text-base font-extrabold text-foreground group-hover:text-primary transition-colors duration-200">
+                  {badge.value}
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mt-0.5">
+                  {badge.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Bottom copyright bar ── */}
+        <div className="mt-8 pt-6 border-t border-border/40 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm font-medium text-muted-foreground">
+          <p className="text-center sm:text-left">
+            &copy; {currentYear} Jeshurun Technologies Ltd. All rights reserved.
+          </p>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs">
+            <Link href="/privacy" className="hover:text-primary transition-colors duration-200 link-underline">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-primary transition-colors duration-200 link-underline">
+              Terms of Service
+            </Link>
+            <a
+              href="https://www.jeshurun.ie"
+              className="inline-flex items-center gap-1 hover:text-primary transition-colors duration-200"
+            >
+              jeshurun.ie
+              <ExternalLink className="w-3 h-3" aria-hidden="true" />
+            </a>
           </div>
         </div>
       </div>

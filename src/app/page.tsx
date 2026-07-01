@@ -174,6 +174,7 @@ function TechCard({ tech }: { tech: typeof refinedTechCategories[0]["items"][0] 
           src={tech.image}
           alt={tech.name}
           fill
+          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
           className="object-cover opacity-[0.04] dark:opacity-[0.06] group-hover:opacity-[0.16] dark:group-hover:opacity-[0.24] scale-[1.02] group-hover:scale-[1.12] transition-all duration-500 ease-out pointer-events-none"
         />
         {/* Color overlay matching tech color */}
@@ -245,7 +246,7 @@ function InsightCard({ insight }: InsightCardProps) {
   };
   return (
     <div
-      className="group relative flex flex-col rounded-3xl border border-border bg-card transition-all h-[440px] shadow-sm hover-card-effect cursor-pointer select-none overflow-hidden"
+      className="group relative flex flex-col rounded-3xl border border-border bg-card transition-all min-h-[440px] shadow-sm hover-card-effect cursor-pointer select-none overflow-hidden"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
@@ -1263,7 +1264,7 @@ export default function Home() {
       viz: TestManagementViz
     },
     {
-      title: "Infrastructure",
+      title: "Infrastructure Management",
       desc: "Optimized, secure network architectures and server migrations built for scale.",
       icon: <Monitor className="w-6 h-6" />,
       href: "/services/infrastructure-management",
@@ -1342,36 +1343,44 @@ export default function Home() {
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-[#5EC8FF]"></span>
                 </div>
                 <span className="text-[13px] lg:text-[14px] font-bold text-blue-700 dark:text-white tracking-wider uppercase">
-                  Global Enterprise Consulting
+                  Enterprise Technology Partner
                 </span>
               </motion.div>
 
               <div className="flex flex-col items-center md:items-start w-full gap-3 lg:gap-4 2xl:gap-6">
                 {/* 2. MAIN HEADING */}
-                <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[44px] md:text-[54px] lg:text-[44px] xl:text-[50px] leading-[1.05] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
-                  <span className="block">Empowering</span>
-                  <span className="block">Your</span>
-                  <span 
-                    className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-400 dark:from-[#3B82F6] dark:to-[#22D3EE] block mt-1 2xl:mt-2"
+                <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[44px] md:text-[54px] lg:text-[44px] xl:text-[52px] leading-[1.05] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+                  <span className="block">Mission-Critical</span>
+                  <span className="block">Technology for</span>
+                  <span
+                    className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 dark:from-[#3B82F6] dark:via-[#60A5FA] dark:to-[#22D3EE] block mt-1 2xl:mt-2"
                   >
-                    Digital Future
+                    Global Enterprise.
                   </span>
                 </motion.h1>
 
                 {/* 3. PARAGRAPH */}
                 <motion.p variants={enterpriseItem} className="text-gray-600 dark:text-[#B8C0CC] text-base md:text-lg lg:text-[16px] xl:text-[18px] leading-[1.6] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
-                  Enterprise IT consulting and engineering for organizations across Ireland, Europe, the Middle East, and India — architecting resilient systems, accelerating delivery, and turning complex technology challenges into measurable business outcomes.
+                  Trusted by pharma, telecoms, and insurance leaders across Ireland, Europe, the Middle East, and India — we architect resilient systems, enforce 99.9% SLA uptime, and deliver complex technology programmes on time, at scale.
                 </motion.p>
               </div>
 
               {/* 4. BUTTON ROW */}
               <motion.div variants={enterpriseItem} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center md:justify-start">
-                <button className="text-[15px] md:text-base bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-full py-3 px-7 lg:py-3.5 lg:px-8 shadow-sm flex items-center justify-center transition-colors w-full sm:w-auto">
-                  Get Started <span className="ml-2 font-normal">→</span>
-                </button>
-                <button className="text-[15px] md:text-base bg-transparent hover:bg-gray-50 text-[#0B1220] border-[#9CA7B5] dark:hover:bg-white/5 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-3 px-7 lg:py-3.5 lg:px-8 flex items-center justify-center transition-colors w-full sm:w-auto">
-                  Explore Services <span className="ml-2 font-normal">→</span>
-                </button>
+                <Link
+                  href="/contact"
+                  aria-label="Start a project with Jeshurun Technologies"
+                  className="text-[15px] md:text-base bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold rounded-full py-3 px-7 lg:py-3.5 lg:px-8 shadow-[0_4px_20px_rgba(37,99,235,0.45)] hover:shadow-[0_6px_28px_rgba(37,99,235,0.55)] flex items-center justify-center transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
+                >
+                  Start a Project <span className="ml-2" aria-hidden="true">→</span>
+                </Link>
+                <Link
+                  href="/services"
+                  aria-label="Explore our enterprise services"
+                  className="text-[15px] md:text-base bg-transparent hover:bg-white/80 text-[#0B1220] border-[#9CA7B5] dark:hover:bg-white/8 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-3 px-7 lg:py-3.5 lg:px-8 flex items-center justify-center transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
+                >
+                  Our Services <span className="ml-2" aria-hidden="true">→</span>
+                </Link>
               </motion.div>
             </motion.div>
             
@@ -1388,10 +1397,13 @@ export default function Home() {
 
 
       {/* ═══════ TRUSTED PARTNERS SECTION ═══════ */}
-      <section className="w-full py-16 md:py-20 relative z-10 bg-white dark:bg-background">
+      <section className="w-full py-16 md:py-20 relative z-10 bg-white dark:bg-background" aria-label="Trusted Partners">
         <div className="container px-6 sm:px-8 mx-auto space-y-8">
-          <div className="text-center">
-            <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">Trusted by Enterprise Leaders</h2>
+          <div className="text-center space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-muted/60 text-muted-foreground border border-border mb-1">
+              Our Clients
+            </div>
+            <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Trusted by Enterprise Leaders</h2>
             <p className="text-muted-foreground text-sm font-medium max-w-lg mx-auto">Partnering with global organizations across pharmaceuticals, telecommunications, and insurance to deliver mission-critical technology systems.</p>
           </div>
 
@@ -1403,7 +1415,7 @@ export default function Home() {
               WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
             }}
           >
-            <div className={`flex w-max animate-[marquee_30s_linear_infinite] hover:[animation-play-state:paused] will-change-transform`} style={{ animationPlayState: isMarqueeInView ? "running" : "paused" }}>
+            <div className="flex w-max will-change-transform" style={{ animation: 'marquee 30s linear infinite', animationPlayState: isMarqueeInView ? 'running' : 'paused' }} onMouseEnter={(e) => (e.currentTarget.style.animationPlayState = 'paused')} onMouseLeave={(e) => (e.currentTarget.style.animationPlayState = isMarqueeInView ? 'running' : 'paused')}>
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex items-center gap-20 pr-20">
                   {trustLogos.map((logo, index) => (
@@ -1426,9 +1438,14 @@ export default function Home() {
 
 
       {/* ═══════ SERVICES SECTION — 8 SERVICES ═══════ */}
-      <section className="w-full py-20 md:py-32 relative z-10 bg-card border-t border-border">
-        <div className="container px-6 sm:px-8 mx-auto space-y-12">
+      <section className="w-full py-20 md:py-32 relative z-10 bg-card border-t border-border overflow-hidden" aria-label="Core Competencies">
+        {/* Subtle radial gradient background */}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37,99,235,0.04) 0%, transparent 60%)' }} aria-hidden="true" />
+        <div className="container px-6 sm:px-8 mx-auto space-y-12 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary/8 text-primary border border-primary/15 mb-2">
+              What We Do
+            </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Core Competencies</h2>
             <p className="text-muted-foreground text-lg font-medium">Comprehensive services tailored to meet complex, multi-national enterprise requirements.</p>
           </div>
@@ -1442,9 +1459,9 @@ export default function Home() {
           >
             {services.map((service) => (
               <motion.div key={service.title} variants={enterpriseItem}>
-                <div onClick={() => router.push(service.href)} className="block cursor-pointer outline-none h-full">
+                <div onClick={() => router.push(service.href)} className="block cursor-pointer outline-none h-full" role="link" aria-label={`Learn more about ${service.title}`}>
                   <SpotlightCard borderGlow={false} className="h-full flex flex-col p-7 border border-border bg-card group rounded-2xl hover-card-effect">
-                  <div className="h-11 w-11 rounded-xl bg-[#2563EB]/10 text-[#2563EB] flex items-center justify-center group-hover:bg-[#2563EB]/20 group-hover:scale-[1.02] transition-all duration-300 mb-4">
+                  <div className="h-11 w-11 rounded-xl bg-[#2563EB]/10 text-[#2563EB] flex items-center justify-center group-hover:bg-[#2563EB]/20 group-hover:scale-[1.05] transition-all duration-300 mb-4">
                     {service.icon}
                   </div>
                   <h3 className="text-lg font-bold text-foreground mb-3">{service.title}</h3>
@@ -1454,25 +1471,35 @@ export default function Home() {
                   <div className="w-full mt-auto mb-4 shrink-0 flex items-center justify-center">
                     {service.viz && <service.viz />}
                   </div>
-                  <span className="text-[#2563EB] font-bold text-sm hover:underline inline-flex items-center gap-1 group-hover:translate-x-0.5 transition-transform duration-300">
-                    Learn more &rarr;
+                  <span className="text-[#2563EB] font-bold text-sm inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
+                    Learn more <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                   </span>
                 </SpotlightCard>
                 </div>
               </motion.div>
             ))}
           </motion.div>
+
+          {/* View All Services link */}
+          <div className="flex justify-center pt-4">
+            <Link href="/services" className="group inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors duration-200">
+              View All Services
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
 
 
 
       {/* ═══════ TECHNOLOGY ECOSYSTEM ═══════ */}
-      <section className="w-full py-20 md:py-32 relative z-10 border-t border-border bg-[#F8FAFC] dark:bg-background">
+      <section className="w-full py-20 md:py-32 relative z-10 border-t border-border bg-[#F8FAFC] dark:bg-background" aria-label="Technology Ecosystem">
         <div className="container px-6 sm:px-8 mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#2563EB] bg-[#2563EB]/10 inline-block px-3 py-1 rounded-full mb-2">Technology Ecosystem</h2>
-            <h3 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Enterprise-Grade Technology Stack</h3>
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2563EB]/8 text-[#2563EB] border border-[#2563EB]/15 mb-2">
+              Technology Ecosystem
+            </div>
+            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Enterprise-Grade Technology Stack</h2>
             <p className="text-muted-foreground text-lg font-medium leading-relaxed">Industry-leading tools and platforms powering our consulting and delivery capabilities.</p>
           </div>
 
@@ -1551,7 +1578,7 @@ export default function Home() {
               {/* Cloud Platforms & Engineering (First 2 categories) */}
               {refinedTechCategories.slice(0, 2).map((cat) => (
                 <div key={cat.category} className="space-y-3">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground/80 border-b border-border/60 pb-1.5 font-mono">
+                  <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground border-b-2 border-primary/20 pb-2 font-mono">
                     {cat.category}
                   </h4>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -1566,7 +1593,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {refinedTechCategories.slice(2, 4).map((cat) => (
                   <div key={cat.category} className="space-y-3">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground/80 border-b border-border/60 pb-1.5 font-mono">
+                    <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground border-b-2 border-primary/20 pb-2 font-mono">
                       {cat.category}
                     </h4>
                     <div className="grid grid-cols-3 gap-3">
@@ -1584,15 +1611,15 @@ export default function Home() {
 
 
       {/* ═══════ CORPORATE INTELLIGENCE (INSIGHTS & RESEARCH REPORTS) ═══════ */}
-      <section id="corporate-intelligence" className="w-full py-20 md:py-32 relative z-10 bg-background border-t border-border">
+      <section id="corporate-intelligence" className="w-full py-20 md:py-32 relative z-10 bg-background border-t border-border" aria-label="Corporate Intelligence">
         <div className="container px-6 sm:px-8 mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <h2 className="text-xs font-bold uppercase tracking-widest text-[#2563EB] bg-[#2563EB]/10 inline-block px-3 py-1 rounded-full mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2563EB]/8 text-[#2563EB] border border-[#2563EB]/15 mb-2">
               Corporate Intelligence
+            </div>
+            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">
+              Insights &amp; Research Reports
             </h2>
-            <h3 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">
-              Insights & Research Reports
-            </h3>
             <p className="text-muted-foreground text-lg font-medium">
               Explore our latest engineering audits, AI telemetry models, and digital transformation guides.
             </p>
@@ -1601,6 +1628,13 @@ export default function Home() {
             {insightsData.map((insight) => (
               <InsightCard key={insight.slug} insight={insight} />
             ))}
+          </div>
+          {/* View All Insights */}
+          <div className="flex justify-center pt-4">
+            <Link href="/insights" className="group inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors duration-200">
+              View All Insights
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>
