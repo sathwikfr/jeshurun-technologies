@@ -24,12 +24,6 @@ const footerLinks = {
   ],
 };
 
-const trustBadges = [
-  { label: "SLA Guaranteed", value: "99.9% Uptime" },
-  { label: "Experience", value: "9+ Years" },
-  { label: "Engineers", value: "45+ Certified" },
-  { label: "Global Hubs", value: "6 Locations" },
-];
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -203,25 +197,6 @@ export function Footer() {
             </ul>
           </div>
 
-        </div>
-
-        {/* ── Trust Badges Row ── */}
-        <div className="mt-14 pt-8 border-t border-border/50">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {trustBadges.map((badge) => (
-              <div
-                key={badge.label}
-                className="flex flex-col items-center justify-center py-3 px-4 rounded-xl bg-muted/20 border border-border/60 text-center hover:border-primary/20 hover:bg-primary/3 transition-all duration-300 group"
-              >
-                <span className="text-base font-extrabold text-foreground group-hover:text-primary transition-colors duration-200">
-                  {badge.value}
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground mt-0.5">
-                  {badge.label}
-                </span>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* ── Bottom copyright bar ── */}

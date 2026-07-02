@@ -2,7 +2,6 @@
 
 import { use, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
   ArrowLeft,
@@ -14,15 +13,12 @@ import {
   ChevronDown,
   ArrowRight,
   ChevronRight,
-  Quote,
   X as XIcon,
 } from "lucide-react";
 import { PremiumCTA } from "@/components/PremiumCTA";
-import { SpotlightCard } from "@/components/SpotlightCard";
-import { CloudROICalculator } from "@/components/CloudROICalculator";
 
 /* ==========================================================================
- EDITABLE SERVICES DATA DICTIONARY
+ ANIMATION VARIANTS
  ========================================================================== */
 
 const container: Variants = {
@@ -37,6 +33,10 @@ const fadeUp: Variants = {
     transition: { type: "spring" as const, stiffness: 90, damping: 22 },
   },
 };
+
+/* ==========================================================================
+ EDITABLE SERVICES DATA DICTIONARY
+ ========================================================================== */
 
 const servicesData: Record<
   string,
@@ -107,19 +107,19 @@ const servicesData: Record<
       { without: "Ad-hoc technology adoption without alignment", with: "Strategic roadmaps aligned with business goals" },
       { without: "Accumulating technical debt and legacy systems", with: "Modernized architectures and reduced debt" },
       { without: "Siloed engineering teams with low velocity", with: "Accelerated digital product delivery" },
-      { without: "Compliance risks and security vulnerabilities", with: "Strict governance and SLA compliance" }
+      { without: "Compliance risks and security vulnerabilities", with: "Strict governance and SLA compliance" },
     ],
     testimonial: { quote: "", author: "", role: "", company: "", stat: "", statLabel: "" },
     faqs: [
       { q: "How long does a typical IT assessment take?", a: "A comprehensive assessment takes 2-4 weeks depending on the complexity of your systems." },
       { q: "Do you assist with implementing the recommendations?", a: "Yes, our team can help execute the roadmap from architecture design to final delivery." },
       { q: "What frameworks do you use for enterprise architecture?", a: "We leverage TOGAF, Zachman, and modern agile architecture principles." },
-      { q: "How do you ensure alignment with business goals?", a: "We start with executive workshops to define KPIs before evaluating any technology." }
+      { q: "How do you ensure alignment with business goals?", a: "We start with executive workshops to define KPIs before evaluating any technology." },
     ],
     related: [
       { title: "Project Management", href: "/services/project-management", desc: "Execute your IT roadmap with agile methodologies" },
       { title: "Infrastructure Management", href: "/services/infrastructure-management", desc: "Deploy your modernized architecture to the cloud" },
-      { title: "Technology: Cloud Solutions", href: "/technology/cloud-solutions", desc: "Build robust cloud infrastructure" }
+      { title: "Technology: Cloud Solutions", href: "/technology/cloud-solutions", desc: "Build robust cloud infrastructure" },
     ],
     ctaLabel: "Schedule an IT Assessment",
     ctaTitleTop: "Ready to Architect Your",
@@ -171,19 +171,19 @@ const servicesData: Record<
       { without: "Missed deadlines and budget overruns", with: "Highly predictable on-time release schedules" },
       { without: "Poor communication and scope creep", with: "Improved stakeholder alignment and feedback" },
       { without: "Unidentified risks causing major delays", with: "Proactive cross-functional risk mitigations" },
-      { without: "Opaque development progress", with: "Transparent engineering velocity metrics" }
+      { without: "Opaque development progress", with: "Transparent engineering velocity metrics" },
     ],
     testimonial: { quote: "", author: "", role: "", company: "", stat: "", statLabel: "" },
     faqs: [
       { q: "Do you use Agile, Scrum, or Waterfall?", a: "We primarily use Agile/Scrum for software development, but we tailor our methodology to your organizational needs." },
       { q: "Can you manage offshore and distributed teams?", a: "Yes, our project managers are experienced in aligning global teams across multiple time zones." },
       { q: "What project management tools do you use?", a: "We are proficient in Jira, Asana, Azure DevOps, and Monday.com, among others." },
-      { q: "How do you handle scope changes during a project?", a: "We use structured change control processes within agile sprints to evaluate impact before approving changes." }
+      { q: "How do you handle scope changes during a project?", a: "We use structured change control processes within agile sprints to evaluate impact before approving changes." },
     ],
     related: [
       { title: "IT Consulting", href: "/services/it-consulting", desc: "Define the strategic roadmap for your projects" },
       { title: "Test Management", href: "/services/test-management", desc: "Ensure quality delivery of your managed projects" },
-      { title: "Technology: DevOps", href: "/technology/devops", desc: "Automate delivery pipelines for faster releases" }
+      { title: "Technology: DevOps", href: "/technology/devops", desc: "Automate delivery pipelines for faster releases" },
     ],
     ctaLabel: "Discuss Your Project",
     ctaTitleTop: "Ready to Deliver Your Next",
@@ -235,19 +235,19 @@ const servicesData: Record<
       { without: "Critical regression bugs reaching production", with: "Zero critical bugs with automated QA pipelines" },
       { without: "Slow manual testing bottlenecks", with: "Drastically shortened feedback loops for devs" },
       { without: "System crashes under high user traffic", with: "Consistent performance validated by load tests" },
-      { without: "Lack of audit trails for compliance", with: "Full compliance with automated test logs" }
+      { without: "Lack of audit trails for compliance", with: "Full compliance with automated test logs" },
     ],
     testimonial: { quote: "", author: "", role: "", company: "", stat: "", statLabel: "" },
     faqs: [
       { q: "Do you provide automated or manual testing?", a: "We specialize in automated testing pipelines, but we also conduct exploratory manual testing for complex user journeys." },
       { q: "What testing frameworks do you use?", a: "We use Cypress, Playwright, Selenium, Jest, and custom load testing tools like JMeter." },
       { q: "Can you integrate testing into our existing CI/CD?", a: "Absolutely. We build test harnesses that seamlessly integrate into GitHub Actions, GitLab CI, or Jenkins." },
-      { q: "How do you handle mobile app testing?", a: "We use Appium and real-device cloud platforms like BrowserStack for comprehensive mobile QA." }
+      { q: "How do you handle mobile app testing?", a: "We use Appium and real-device cloud platforms like BrowserStack for comprehensive mobile QA." },
     ],
     related: [
       { title: "Project Management", href: "/services/project-management", desc: "Integrate QA smoothly into agile sprints" },
       { title: "Infrastructure Management", href: "/services/infrastructure-management", desc: "Ensure stable test environments" },
-      { title: "Technology: DevOps", href: "/technology/devops", desc: "Embed automated tests in your CI/CD" }
+      { title: "Technology: DevOps", href: "/technology/devops", desc: "Embed automated tests in your CI/CD" },
     ],
     ctaLabel: "Audit Your QA Pipeline",
     ctaTitleTop: "Ready to Build a",
@@ -299,19 +299,19 @@ const servicesData: Record<
       { without: "Frequent downtime from server failures", with: "High reliability with automated failovers" },
       { without: "Manual scaling during traffic spikes", with: "Instant horizontal autoscaling capabilities" },
       { without: "High, unoptimized monthly cloud bills", with: "Optimized compute resources and lower costs" },
-      { without: "Vulnerable, exposed network endpoints", with: "Secure subnets and strict firewall borders" }
+      { without: "Vulnerable, exposed network endpoints", with: "Secure subnets and strict firewall borders" },
     ],
     testimonial: { quote: "", author: "", role: "", company: "", stat: "", statLabel: "" },
     faqs: [
       { q: "Which cloud providers do you manage?", a: "We provide comprehensive management for AWS, Microsoft Azure, and Google Cloud Platform." },
       { q: "Do you offer 24/7 infrastructure support?", a: "Yes, our SLAs include round-the-clock monitoring, alerts, and incident response." },
       { q: "How do you optimize cloud costs?", a: "We perform continuous audits to identify underutilized resources, right-size instances, and leverage reserved instances." },
-      { q: "Can you help with disaster recovery planning?", a: "Yes, we design multi-region geographic failovers with strict RTO and RPO guarantees." }
+      { q: "Can you help with disaster recovery planning?", a: "Yes, we design multi-region geographic failovers with strict RTO and RPO guarantees." },
     ],
     related: [
       { title: "IT Consulting", href: "/services/it-consulting", desc: "Strategize your infrastructure migration" },
       { title: "Technology: Cloud Solutions", href: "/technology/cloud-solutions", desc: "Leverage scalable cloud topologies" },
-      { title: "Technology: Network Infrastructure", href: "/technology/network-infrastructure", desc: "Optimize edge CDNs and SD-WANs" }
+      { title: "Technology: Network Infrastructure", href: "/technology/network-infrastructure", desc: "Optimize edge CDNs and SD-WANs" },
     ],
     ctaLabel: "Optimize Your Infrastructure",
     ctaTitleTop: "Ready to Modernize",
@@ -380,13 +380,16 @@ function FAQItem({ q, a, accent }: { q: string; a: string; accent: string }) {
   );
 }
 
+/* ==========================================================================
+ SERVICE DETAIL PAGE
+ ========================================================================== */
+
 export default function ServiceDetailPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
-  const router = useRouter();
   const service = servicesData[slug];
 
   if (!service) {
@@ -408,172 +411,352 @@ export default function ServiceDetailPage({
     );
   }
 
+  const caseStudy = service.caseStudies[0] ?? null;
+  const isOutcomePending =
+    !caseStudy || caseStudy.outcome.startsWith("TBD");
+
   return (
-    <div className="min-h-screen bg-transparent relative overflow-x-hidden pt-28 pb-20">
-      <div className="container px-6 sm:px-8 mx-auto space-y-16 relative z-10">
-        {/* Back Link */}
-        <div className="flex justify-start">
+    <div className="min-h-screen bg-background relative overflow-x-hidden">
+
+      {/* ════════════════════════════════
+          HERO
+      ════════════════════════════════ */}
+      <section className="pt-28 pb-14 md:pt-36 md:pb-18 border-b border-border bg-background">
+        <div className="container px-6 sm:px-8 mx-auto">
           <Link
             href="/services"
-            className="group inline-flex items-center gap-2 text-sm font-extrabold text-muted-foreground hover:text-primary transition-colors duration-300"
+            className="group inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-primary transition-colors duration-300 mb-8"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Services
           </Link>
-        </div>
 
-        {/* Hero Banner Section */}
-        <motion.div variants={container} initial="hidden" animate="show" className="space-y-6 max-w-4xl">
-          <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-bold uppercase tracking-wider text-primary">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            Enterprise Practice Area
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight leading-none">
-              {service.title}
-            </h1>
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-indigo-500 text-lg sm:text-xl md:text-2xl font-bold leading-normal">
-              {service.subtitle}
-            </p>
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed font-semibold max-w-3xl">
-              {service.description}
-            </p>
-          </motion.div>
-        </motion.div>
-
-        {/* Dynamic Metrics Grid */}
-        <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-          {service.metrics.map((metric, idx) => (
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="max-w-4xl space-y-5"
+          >
             <motion.div
-              key={idx}
               variants={fadeUp}
-              className="h-full"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/8 border border-primary/15 text-xs font-bold uppercase tracking-wider text-primary"
             >
-              <SpotlightCard className="p-6 bg-card border border-border shadow-sm hover-card-effect space-y-1.5 rounded-2xl h-full">
-                <div className={`text-3xl font-black min-h-[40px] flex items-center ${metric.value ? 'text-primary' : 'text-muted-foreground/60'}`}>
-                  {metric.value ? (
-                    metric.value
-                  ) : (
-                    <span className="font-medium">--</span>
-                  )}
-                </div>
-                <div className="text-sm font-extrabold text-muted-foreground uppercase tracking-widest">
-                  {metric.label}
-                </div>
-              </SpotlightCard>
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              Enterprise Practice Area
             </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Detailed Structure Split Section */}
-        <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
-          {/* Left: Strategic Overview (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
-            {/* Dynamic AI-Generated Graphic Illustration Banner */}
-            <motion.div variants={fadeUp} className="relative overflow-hidden rounded-2xl border border-border shadow-md bg-background">
-              <img
-                src={service.image}
-                alt={service.title}
-                className="w-full h-64 object-cover object-center hover:scale-[1.01] transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
-            </motion.div>
-
-            {/* Practice Overview Container */}
-            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300">
-              <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-2">
-                {iconMap[service.iconName]}
-              </div>
-              <h2 className="text-3xl font-extrabold text-foreground">
-                Practice Overview
-              </h2>
-              <p className="text-muted-foreground text-base sm:text-lg leading-relaxed font-semibold">
-                {service.overview}
-              </p>
-            </motion.div>
-
-            {/* Core Features list container */}
-            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300">
-              <h3 className="text-2xl font-bold text-foreground">
-                Key Core Features
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {service.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5 flex-shrink-0">
-                      <Check className="w-3 h-3 text-primary" />
-                    </span>
-                    <span className="text-base font-bold text-foreground leading-tight">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Right: Benefits & SLA Cards (5 cols) */}
-          <motion.div variants={fadeUp} className="lg:col-span-5 h-full">
-            <SpotlightCard className="p-6 sm:p-8 border border-border bg-card hover-card-effect flex flex-col h-full rounded-2xl shadow-sm">
-              <h3 className="text-2xl font-extrabold text-foreground tracking-tight pb-4">
-                Operational Benefits
-              </h3>
-              <p className="text-muted-foreground text-base font-semibold pb-6 border-b border-border">
-                How our clients succeed using this specific technology consulting suite:
-              </p>
-
-              <ul className="space-y-4 pt-6 flex-1">
-                {service.benefits.map((benefit, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center mt-0.5 flex-shrink-0">
-                      <Check className="w-3 h-3 text-emerald-600" />
-                    </span>
-                    <span className="text-base font-bold text-muted-foreground leading-tight">
-                      {benefit}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* SLA Details footer */}
-              <div className="p-4 rounded-xl bg-background border border-border mt-8 space-y-2">
-                <div className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                  Verified SLA Guarantee
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed font-semibold">
-                  All consulting activities are governed by formal SLAs, offering fully dedicated support, automated log monitoring, and weekly reports.
-                </p>
-              </div>
-            </SpotlightCard>
+            <motion.h1
+              variants={fadeUp}
+              className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight leading-[1.05]"
+            >
+              {service.title}
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
+              className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-indigo-500 text-xl sm:text-2xl font-bold leading-normal"
+            >
+              {service.subtitle}
+            </motion.p>
+            <motion.p
+              variants={fadeUp}
+              className="text-muted-foreground text-lg leading-relaxed font-medium max-w-3xl"
+            >
+              {service.description}
+            </motion.p>
           </motion.div>
-        </motion.div>
+        </div>
+      </section>
 
-        {/* ── Section 1: VS Comparison Table ── */}
+      {/* ════════════════════════════════
+          PAGE BODY
+      ════════════════════════════════ */}
+      <div className="container px-6 sm:px-8 mx-auto py-16 space-y-20 relative z-10">
+
+        {/* ── SECTION 1: THE CHALLENGE ── */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
-          className="space-y-8"
+          className="space-y-6"
         >
-          <motion.div variants={fadeUp} className="text-center space-y-3">
+          <motion.div variants={fadeUp} className="space-y-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-red-500/5 text-red-600 dark:text-red-400 border-red-500/15">
+              The Challenge
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+              What breaks without the right partner
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="grid sm:grid-cols-2 gap-3"
+          >
+            {service.comparison.map((row, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 p-4 rounded-xl border border-red-500/15 bg-red-500/[0.04] dark:bg-red-500/[0.07]"
+              >
+                <div className="w-5 h-5 rounded-full bg-red-100 dark:bg-red-500/15 flex items-center justify-center mt-0.5 shrink-0">
+                  <XIcon className="w-3 h-3 text-red-500" />
+                </div>
+                <p className="text-sm text-foreground font-semibold leading-snug">
+                  {row.without}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="flex items-center gap-4"
+          >
+            <div className="h-px flex-1 bg-border" />
+            <span className="text-xs font-bold uppercase tracking-widest text-primary px-4 py-2 rounded-full border border-primary/20 bg-primary/5">
+              The Jeshurun Difference
+            </span>
+            <div className="h-px flex-1 bg-border" />
+          </motion.div>
+        </motion.div>
+
+        {/* ── SECTION 2: APPROACH ── */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid lg:grid-cols-12 gap-8"
+        >
+          {/* Left: image + overview */}
+          <div className="lg:col-span-7 space-y-5">
+            <motion.div variants={fadeUp} className="space-y-1.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/15">
+                How We Deliver
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+                Our Approach
+              </h2>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="relative overflow-hidden rounded-2xl border border-border shadow-md"
+            >
+              <img
+                src={service.image}
+                alt={service.title}
+                className="w-full h-56 object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="p-6 bg-card border border-border rounded-2xl space-y-3"
+            >
+              <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                {iconMap[service.iconName]}
+              </div>
+              <h3 className="text-lg font-extrabold text-foreground">
+                Practice Overview
+              </h3>
+              <p className="text-muted-foreground text-base leading-relaxed font-medium">
+                {service.overview}
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Right: capabilities + KPI names */}
+          <div className="lg:col-span-5">
+            <motion.div
+              variants={fadeUp}
+              className="p-6 bg-card border border-border rounded-2xl space-y-5 h-full"
+            >
+              <h3 className="text-lg font-extrabold text-foreground">
+                Core Capabilities
+              </h3>
+              <ul className="space-y-3.5">
+                {service.features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5 shrink-0">
+                      <Check className="w-3 h-3 text-primary" />
+                    </span>
+                    <span className="text-base font-semibold text-foreground leading-tight">
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="pt-4 border-t border-border space-y-2.5">
+                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                  What We Measure
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {service.metrics.map((m, i) => (
+                    <span
+                      key={i}
+                      className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-primary/5 text-primary border border-primary/15"
+                    >
+                      {m.label}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-border p-4 rounded-xl bg-background space-y-1.5">
+                <p className="text-[10px] font-black uppercase tracking-widest text-primary">
+                  Verified SLA Guarantee
+                </p>
+                <p className="text-xs text-muted-foreground font-medium leading-relaxed">
+                  All consulting activities are governed by formal SLAs,
+                  offering fully dedicated support, automated log monitoring,
+                  and weekly progress reports.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* ── SECTION 3: OPERATIONAL BENEFITS ── */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-6"
+        >
+          <motion.div variants={fadeUp} className="space-y-1.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 border-emerald-500/15">
+              Outcomes
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+              Operational Benefits
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="grid sm:grid-cols-2 gap-3"
+          >
+            {service.benefits.map((benefit, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 p-4 rounded-xl border border-emerald-500/15 bg-emerald-500/[0.04] dark:bg-emerald-500/[0.07]"
+              >
+                <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-500/15 flex items-center justify-center mt-0.5 shrink-0">
+                  <Check className="w-3 h-3 text-emerald-600" />
+                </div>
+                <p className="text-sm text-foreground font-semibold leading-snug">
+                  {benefit}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        {/* ── SECTION 4: EVIDENCE (case study card) ── */}
+        {caseStudy && (
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ type: "spring", stiffness: 80, damping: 22 }}
+            className="space-y-6"
+          >
+            <div className="space-y-1.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/15">
+                Evidence
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+                Client Engagement
+              </h2>
+            </div>
+
+            <div className="overflow-hidden rounded-2xl border border-border shadow-sm">
+              <div className="relative h-48 overflow-hidden">
+                <img
+                  src={caseStudy.image}
+                  alt={caseStudy.title}
+                  className="w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-slate-950/65" />
+                <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                  <span className="self-start text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/10 border border-white/20 text-white">
+                    {caseStudy.category}
+                  </span>
+                  <h3 className="text-xl font-black text-white leading-tight max-w-2xl">
+                    {caseStudy.title}
+                  </h3>
+                </div>
+              </div>
+
+              <div className="bg-card grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border">
+                <div className="p-6 space-y-2">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                    Challenge
+                  </p>
+                  <p className="text-sm text-foreground font-medium leading-relaxed">
+                    {caseStudy.challenge}
+                  </p>
+                </div>
+                <div className="p-6 space-y-2">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                    Solution
+                  </p>
+                  <p className="text-sm text-foreground font-medium leading-relaxed">
+                    {caseStudy.solution}
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className={`border-t border-border p-4 flex items-center justify-between ${
+                  isOutcomePending ? "bg-muted/20" : "bg-card"
+                }`}
+              >
+                <p className="text-xs font-medium text-muted-foreground">
+                  {isOutcomePending ? (
+                    <span className="italic">
+                      Engagement ongoing — outcome pending
+                    </span>
+                  ) : (
+                    caseStudy.client
+                  )}
+                </p>
+                <Link
+                  href="/case-studies"
+                  className="text-xs font-bold text-primary hover:text-primary/80 transition-colors inline-flex items-center gap-1"
+                >
+                  View all case studies{" "}
+                  <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* ── SECTION 5: WITHOUT vs WITH (comparison table) ── */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-6"
+        >
+          <motion.div variants={fadeUp} className="space-y-1.5">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/10">
               Impact Comparison
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
               Without Us vs. With Jeshurun
             </h2>
-            <p className="text-muted-foreground font-medium text-base sm:text-lg max-w-xl mx-auto">
-              See the real operational difference our {service.title} practice makes for enterprise clients.
-            </p>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="overflow-hidden rounded-2xl border border-border shadow-sm">
-            {/* Header */}
+          <motion.div
+            variants={fadeUp}
+            className="overflow-hidden rounded-2xl border border-border shadow-sm"
+          >
             <div className="grid grid-cols-2 bg-card">
               <div className="px-6 py-4 flex items-center gap-2">
                 <XIcon className="w-4 h-4 text-red-400" />
@@ -588,22 +771,22 @@ export default function ServiceDetailPage({
                 </span>
               </div>
             </div>
-            {/* Rows */}
+
             {service.comparison.map((row, i) => (
-              <div key={i} className={`grid grid-cols-2 border-t border-border ${i % 2 === 0 ? "bg-card" : "bg-muted/10"}`}>
-                <div className="px-6 py-4 flex items-start gap-3 border-r border-border">
-                  <span className="w-5 h-5 rounded-full bg-red-50 flex items-center justify-center mt-0.5 shrink-0">
+              <div key={i} className="grid grid-cols-2 border-t border-border">
+                <div className="px-6 py-4 flex items-start gap-3 border-r border-border bg-red-500/[0.03] dark:bg-red-500/[0.05]">
+                  <span className="w-5 h-5 rounded-full bg-red-50 dark:bg-red-500/10 flex items-center justify-center mt-0.5 shrink-0">
                     <XIcon className="w-3 h-3 text-red-400" />
                   </span>
-                  <span className="text-base text-muted-foreground font-medium leading-snug">
+                  <span className="text-sm text-muted-foreground font-medium leading-snug">
                     {row.without}
                   </span>
                 </div>
-                <div className="px-6 py-4 flex items-start gap-3">
-                  <span className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center mt-0.5 shrink-0">
+                <div className="px-6 py-4 flex items-start gap-3 bg-emerald-500/[0.03] dark:bg-emerald-500/[0.05]">
+                  <span className="w-5 h-5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center mt-0.5 shrink-0">
                     <Check className="w-3 h-3 text-emerald-500" />
                   </span>
-                  <span className="text-base text-foreground font-bold leading-snug">
+                  <span className="text-sm text-foreground font-bold leading-snug">
                     {row.with}
                   </span>
                 </div>
@@ -612,76 +795,7 @@ export default function ServiceDetailPage({
           </motion.div>
         </motion.div>
 
-        {/* ── Section 2: Case Study / Testimonial ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ type: "spring" as const, stiffness: 80, damping: 22 }}
-        >
-          {service.testimonial.quote ? (
-            /* Filled testimonial */
-            <div className="relative rounded-3xl overflow-hidden bg-card p-8 sm:p-12">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--primary),0.15)_0%,transparent_60%)] pointer-events-none" />
-              <div className="absolute inset-0 opacity-10 pointer-events-none" />
-              <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-                {/* Stat */}
-                <div className="lg:col-span-3 text-center lg:text-left space-y-2">
-                  <div className="text-5xl sm:text-6xl font-black text-foreground tracking-tight">
-                    {service.testimonial.stat}
-                  </div>
-                  <div className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
-                    {service.testimonial.statLabel}
-                  </div>
-                  <div className="h-px bg-border mt-4 hidden lg:block" />
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground/60 font-bold pt-2 hidden lg:block">
-                    Verified Client Outcome
-                  </div>
-                </div>
-                <div className="hidden lg:block lg:col-span-1">
-                  <div className="h-full w-px bg-border mx-auto" style={{ minHeight: 120 }} />
-                </div>
-                {/* Quote */}
-                <div className="lg:col-span-8 space-y-6">
-                  <Quote className="w-8 h-8 opacity-20 text-foreground" />
-                  <p className="text-foreground text-lg sm:text-xl font-medium leading-relaxed italic">
-                    &ldquo;{service.testimonial.quote}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-4 pt-2">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center font-black text-base text-foreground bg-primary">
-                      {service.testimonial.author.split(" ").map((n) => n[0]).join("")}
-                    </div>
-                    <div>
-                      <p className="text-base font-bold text-foreground">
-                        {service.testimonial.author}
-                      </p>
-                      <p className="text-sm text-muted-foreground font-medium">
-                        {service.testimonial.role} · {service.testimonial.company}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* Placeholder — shown until real testimonial is added */
-            <div className="relative rounded-3xl border-2 border-dashed border-border bg-muted/10 p-10 sm:p-14 text-center space-y-4">
-              <div className="w-16 h-16 rounded-2xl bg-slate-100 border border-border flex items-center justify-center mx-auto">
-                <Quote className="w-8 h-8 text-muted-foreground/60" />
-              </div>
-              <div>
-                <p className="text-base font-bold text-muted-foreground">
-                  Client Testimonial Coming Soon
-                </p>
-                <p className="text-sm text-muted-foreground/70 mt-2 max-w-md mx-auto">
-                  A verified case study from a real {service.title} engagement will appear here once available.
-                </p>
-              </div>
-            </div>
-          )}
-        </motion.div>
-
-        {/* ── Section 3: FAQ Accordion ── */}
+        {/* ── SECTION 6: FAQ ── */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -689,7 +803,7 @@ export default function ServiceDetailPage({
           viewport={{ once: true, margin: "-60px" }}
           className="space-y-6"
         >
-          <motion.div variants={fadeUp} className="space-y-2">
+          <motion.div variants={fadeUp} className="space-y-1.5">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/10">
               Common Questions
             </div>
@@ -698,36 +812,66 @@ export default function ServiceDetailPage({
             </h2>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="space-y-4 max-w-3xl">
+          <motion.div variants={fadeUp} className="space-y-3 max-w-3xl">
             {service.faqs.map((faq, i) => (
-              <FAQItem key={i} q={faq.q} a={faq.a} accent={service.accentColor} />
+              <FAQItem
+                key={i}
+                q={faq.q}
+                a={faq.a}
+                accent={service.accentColor}
+              />
             ))}
           </motion.div>
         </motion.div>
 
-        {/* ── Section 4: Related Practices + CTA ── */}
+        {/* ── SECTION 7: RELATED PRACTICES ── */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
-          className="space-y-8"
+          className="space-y-5"
         >
+          <motion.div variants={fadeUp}>
+            <h2 className="text-xl font-extrabold text-foreground tracking-tight">
+              Related Practice Areas
+            </h2>
+          </motion.div>
 
-          {/* ═══════ CLOUD ROI CALCULATOR ═══════ */}
-          {/* Removed as requested */}
-
-          {/* CTA Banner */}
-          <div className="-mx-6 sm:-mx-8">
-            <PremiumCTA 
-              variant="services" 
-              titleTop={service.ctaTitleTop}
-              titleHighlight={service.ctaTitleHighlight}
-              description={service.ctaDescription}
-            />
-          </div>
+          <motion.div
+            variants={fadeUp}
+            className="grid sm:grid-cols-3 gap-4"
+          >
+            {service.related.map((rel, i) => (
+              <Link
+                key={i}
+                href={rel.href}
+                className="group flex flex-col gap-2 p-4 rounded-xl border border-border bg-card hover:border-primary/30 hover:shadow-sm transition-all duration-200"
+              >
+                <h3 className="text-sm font-bold text-foreground group-hover:text-primary transition-colors duration-200">
+                  {rel.title}
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed flex-1">
+                  {rel.desc}
+                </p>
+                <span className="mt-1 text-xs font-bold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-200">
+                  Explore{" "}
+                  <ArrowRight className="w-3 h-3" aria-hidden="true" />
+                </span>
+              </Link>
+            ))}
+          </motion.div>
         </motion.div>
+
       </div>
+
+      {/* ── CTA ── */}
+      <PremiumCTA
+        variant="services"
+        titleTop={service.ctaTitleTop}
+        titleHighlight={service.ctaTitleHighlight}
+        description={service.ctaDescription}
+      />
     </div>
   );
 }

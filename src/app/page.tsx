@@ -1247,6 +1247,7 @@ export default function Home() {
       desc: "Strategic technology planning to align your technical assets with key business metrics.",
       icon: <Layers className="w-6 h-6" />,
       href: "/services/it-consulting",
+      tags: ["Tech Roadmap", "Architecture Design", "Digital Transformation"],
       viz: ITConsultingViz
     },
     {
@@ -1254,6 +1255,7 @@ export default function Home() {
       desc: "Methodical agile project delivery ensuring deadlines are met with quality safeguards.",
       icon: <Activity className="w-6 h-6" />,
       href: "/services/project-management",
+      tags: ["Agile & Scrum", "Risk Management", "Stakeholder Alignment"],
       viz: ProjectManagementViz
     },
     {
@@ -1261,6 +1263,7 @@ export default function Home() {
       desc: "Rigorous quality assurance testing pipelines built for modern enterprise applications.",
       icon: <Shield className="w-6 h-6" />,
       href: "/services/test-management",
+      tags: ["QA Automation", "CI/CD Setup"],
       viz: TestManagementViz
     },
     {
@@ -1268,6 +1271,7 @@ export default function Home() {
       desc: "Optimized, secure network architectures and server migrations built for scale.",
       icon: <Monitor className="w-6 h-6" />,
       href: "/services/infrastructure-management",
+      tags: ["Cloud Networks", "24/7 Monitoring"],
       viz: InfrastructureViz
     },
     {
@@ -1275,6 +1279,7 @@ export default function Home() {
       desc: "Custom enterprise applications built with modern architectures and clean code practices.",
       icon: <Code className="w-6 h-6" />,
       href: "/software",
+      tags: ["Full-Stack", "Enterprise APIs"],
       viz: SoftwareEngineeringViz
     },
     {
@@ -1282,6 +1287,7 @@ export default function Home() {
       desc: "Architecting resilient multi-cloud environments and accelerating migration to modernize enterprise infrastructure.",
       icon: <Cloud className="w-6 h-6" />,
       href: "/technology/cloud-solutions",
+      tags: ["Multi-Cloud", "Migration"],
       viz: CloudTransformationViz
     },
     {
@@ -1289,6 +1295,7 @@ export default function Home() {
       desc: "Deploying predictive models and generative AI pipelines to automate workflows and unlock operational intelligence.",
       icon: <Cpu className="w-6 h-6" />,
       href: "/technology/ai-machine-learning",
+      tags: ["Generative AI", "Predictive Analytics"],
       viz: AISolutionsViz
     },
     {
@@ -1296,6 +1303,7 @@ export default function Home() {
       desc: "Streamlined CI/CD pipelines, infrastructure as code, and container orchestration at scale.",
       icon: <Zap className="w-6 h-6" />,
       href: "/technology/devops",
+      tags: ["IaC", "Containerization"],
       viz: DevOpsViz
     },
   ];
@@ -1308,9 +1316,10 @@ export default function Home() {
       ═══════════════════════════════════════════════════ */}
       <section id="hero-section" className="relative w-full min-h-screen flex flex-col justify-center overflow-hidden bg-white dark:bg-[#050810]" onMouseMove={handleMouseMove}>
         <style>{`
-          .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.8) 40%, rgba(245,248,255,0.4) 55%, transparent 75%); }
+          .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.85) 40%, rgba(245,248,255,0.55) 58%, rgba(245,248,255,0.15) 72%, transparent 88%); }
           .scrim-mobile { background: linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 60%, transparent 100%); }
           .dark .scrim-mobile { background: linear-gradient(to right, rgba(5,8,16,0.98) 0%, rgba(5,8,16,0.95) 60%, rgba(5,8,16,0.7) 85%, transparent 100%); }
+          .scrim-diagonal-dark { background: linear-gradient(110deg, rgba(5,8,16,0.97) 0%, rgba(5,8,16,0.93) 20%, rgba(5,8,16,0.82) 40%, rgba(5,8,16,0.50) 58%, rgba(5,8,16,0.12) 72%, transparent 88%); }
         `}</style>
         
         {/* Layer 0: Full-Bleed Map Background */}
@@ -1318,8 +1327,11 @@ export default function Home() {
           <WorldMap forceDark={true} />
         </div>
 
-        {/* Layer 1: Protective Gradient Scrim (Desktop) */}
-        <div className="absolute inset-0 z-10 pointer-events-none hidden md:block scrim-diagonal dark:hidden" />
+        {/* Layer 1: Protective Gradient Scrim (Desktop – Light Mode) */}
+        <div className="absolute inset-0 z-10 pointer-events-none hidden md:block dark:hidden scrim-diagonal" />
+
+        {/* Layer 1: Protective Gradient Scrim (Desktop – Dark Mode) */}
+        <div className="absolute inset-0 z-10 pointer-events-none hidden md:block light-hidden scrim-diagonal-dark" />
         
         {/* Layer 1: Protective Gradient Scrim (Mobile - Stronger & Wider) */}
         <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile dark:hidden" />
@@ -1377,7 +1389,7 @@ export default function Home() {
                 <Link
                   href="/services"
                   aria-label="Explore our enterprise services"
-                  className="text-[15px] md:text-base bg-transparent hover:bg-white/80 text-[#0B1220] border-[#9CA7B5] dark:hover:bg-white/8 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-3 px-7 lg:py-3.5 lg:px-8 flex items-center justify-center transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
+                  className="text-[15px] md:text-base bg-transparent hover:bg-white/80 text-[#0B1220] border-blue-400/60 dark:hover:bg-white/8 dark:text-white font-medium border-[1.5px] dark:border-white/30 rounded-full py-3 px-7 lg:py-3.5 lg:px-8 flex items-center justify-center transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
                 >
                   Our Services <span className="ml-2" aria-hidden="true">→</span>
                 </Link>
@@ -1437,51 +1449,159 @@ export default function Home() {
 
 
 
-      {/* ═══════ SERVICES SECTION — 8 SERVICES ═══════ */}
-      <section className="w-full py-20 md:py-32 relative z-10 bg-card border-t border-border overflow-hidden" aria-label="Core Competencies">
-        {/* Subtle radial gradient background */}
+      {/* ═══════ SERVICES SECTION — TWO-TIER REDESIGN ═══════ */}
+      <section className="w-full py-20 md:py-32 relative z-10 bg-card border-t border-border overflow-hidden" aria-label="Services">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37,99,235,0.04) 0%, transparent 60%)' }} aria-hidden="true" />
-        <div className="container px-6 sm:px-8 mx-auto space-y-12 relative z-10">
+        <div className="container px-6 sm:px-8 mx-auto space-y-14 relative z-10">
+
+          {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary/8 text-primary border border-primary/15 mb-2">
-              What We Do
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20 mb-2">
+              How We Deliver
             </div>
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Core Competencies</h2>
-            <p className="text-muted-foreground text-lg font-medium">Comprehensive services tailored to meet complex, multi-national enterprise requirements.</p>
+            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">One Partner. Full Technology Lifecycle.</h2>
+            <p className="text-muted-foreground text-lg font-medium">From architecture strategy to cloud operations — comprehensive services built for complex, multi-national enterprise requirements.</p>
           </div>
 
-          <motion.div 
+          <motion.div
             variants={enterpriseContainer}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 pt-4"
+            viewport={{ once: true, margin: "-80px" }}
+            className="space-y-14"
           >
-            {services.map((service) => (
-              <motion.div key={service.title} variants={enterpriseItem}>
-                <div onClick={() => router.push(service.href)} className="block cursor-pointer outline-none h-full" role="link" aria-label={`Learn more about ${service.title}`}>
-                  <SpotlightCard borderGlow={false} className="h-full flex flex-col p-7 border border-border bg-card group rounded-2xl hover-card-effect">
-                  <div className="h-11 w-11 rounded-xl bg-[#2563EB]/10 text-[#2563EB] flex items-center justify-center group-hover:bg-[#2563EB]/20 group-hover:scale-[1.05] transition-all duration-300 mb-4">
-                    {service.icon}
+            {/* ── TIER 1: Featured Practice Areas ── */}
+            <div className="grid gap-6 md:grid-cols-2">
+            {/* IT Consulting */}
+            <motion.div variants={enterpriseItem} className="h-full">
+              <div
+                onClick={() => router.push('/services/it-consulting')}
+                className="cursor-pointer group h-full rounded-2xl border border-border bg-card overflow-hidden hover-card-effect flex flex-col"
+                role="link"
+                aria-label="Explore IT Consulting practice area"
+              >
+                <div className="h-[3px] w-full bg-gradient-to-r from-blue-600 to-blue-400" />
+                <div className="flex flex-col flex-1 p-7 xl:p-8 gap-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="h-10 w-10 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-3 group-hover:bg-blue-500/20 transition-colors duration-200">
+                        <Layers className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground">IT Consulting</h3>
+                      <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed max-w-[260px]">Strategic technology planning to align your technical assets with key business metrics.</p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <div className="text-3xl font-black text-foreground leading-none">20+</div>
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mt-0.5">Tech Domains</div>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-3">{service.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    {service.desc}
-                  </p>
-                  <div className="w-full mt-auto mb-4 shrink-0 flex items-center justify-center">
-                    {service.viz && <service.viz />}
+                  <div className="flex flex-wrap gap-1.5">
+                    {services[0].tags?.map(f => (
+                      <span key={f} className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/20">{f}</span>
+                    ))}
                   </div>
-                  <span className="text-[#2563EB] font-bold text-sm inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
-                    Learn more <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  <div className="w-full rounded-xl bg-[#F8FAFC] dark:bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[100px]">
+                    <ITConsultingViz />
+                  </div>
+                  <span className="text-blue-600 dark:text-blue-400 font-bold text-sm inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
+                    Explore Practice <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
                   </span>
-                </SpotlightCard>
                 </div>
+              </div>
+            </motion.div>
+
+            {/* Project Management */}
+            <motion.div variants={enterpriseItem} className="h-full">
+              <div
+                onClick={() => router.push('/services/project-management')}
+                className="cursor-pointer group h-full rounded-2xl border border-border bg-card overflow-hidden hover-card-effect flex flex-col"
+                role="link"
+                aria-label="Explore Project Management practice area"
+              >
+                <div className="h-[3px] w-full bg-gradient-to-r from-indigo-600 to-indigo-400" />
+                <div className="flex flex-col flex-1 p-7 xl:p-8 gap-5">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="h-10 w-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-500/20 transition-colors duration-200">
+                        <Activity className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-xl font-bold text-foreground">Project Management</h3>
+                      <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed max-w-[260px]">Methodical agile project delivery ensuring deadlines are met with quality safeguards.</p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <div className="text-3xl font-black text-foreground leading-none">150+</div>
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mt-0.5">Projects</div>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {services[1].tags?.map(f => (
+                      <span key={f} className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border border-indigo-500/20">{f}</span>
+                    ))}
+                  </div>
+                  <div className="w-full rounded-xl bg-[#F8FAFC] dark:bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[100px]">
+                    <ProjectManagementViz />
+                  </div>
+                  <span className="text-indigo-600 dark:text-indigo-400 font-bold text-sm inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
+                    Explore Practice <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+            </div>
+
+          {/* ── TIER 2: Extended Capabilities (remaining 6 services) ── */}
+          <div className="space-y-6">
+              <motion.div variants={enterpriseItem} className="flex items-center gap-4">
+                <div className="h-px flex-1 bg-border" />
+                <span className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground px-2">Extended Capabilities</span>
+                <div className="h-px flex-1 bg-border" />
               </motion.div>
-            ))}
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {services.slice(2).map((service) => {
+                  const VizComponent = service.viz;
+                  return (
+                    <motion.div key={service.title} variants={enterpriseItem}>
+                      <div
+                        onClick={() => router.push(service.href)}
+                        className="group h-full flex flex-col p-5 border border-border bg-card rounded-xl hover-card-effect cursor-pointer gap-3 relative overflow-hidden"
+                        role="link"
+                        aria-label={`Explore ${service.title} practice area`}
+                      >
+                        {/* Subtle top glow line on hover */}
+                        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-primary/60 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="h-9 w-9 rounded-lg bg-primary/10 text-primary flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-[1.05] transition-all duration-200">
+                            {service.icon}
+                          </div>
+                        </div>
+                        
+                        <div className="mt-1">
+                          <h3 className="text-base font-bold text-foreground">{service.title}</h3>
+                          <p className="text-sm text-muted-foreground leading-relaxed mt-1 line-clamp-2">{service.desc}</p>
+                        </div>
+
+                        {VizComponent && (
+                          <div className="w-full rounded-xl bg-[#F8FAFC] dark:bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[90px] overflow-hidden my-1">
+                            <div className="scale-[0.85] origin-center w-full flex justify-center">
+                              <VizComponent />
+                            </div>
+                          </div>
+                        )}
+
+                        <span className="text-primary font-bold text-sm inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300 mt-auto pt-1">
+                          Explore Practice <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                        </span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
           </motion.div>
 
-          {/* View All Services link */}
-          <div className="flex justify-center pt-4">
+          {/* View All Services */}
+          <div className="flex justify-center pt-2">
             <Link href="/services" className="group inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors duration-200">
               View All Services
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />

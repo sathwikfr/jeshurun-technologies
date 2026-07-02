@@ -374,6 +374,14 @@
     @apply bg-primary/8 text-primary border border-primary/15;
   }
 
+  /* Light-mode only hidden — hides in light, visible in dark */
+  .light-hidden {
+    display: none !important;
+  }
+  .dark .light-hidden {
+    display: block !important;
+  }
+
   /* Link underline slide-in effect */
   .link-underline {
     position: relative;

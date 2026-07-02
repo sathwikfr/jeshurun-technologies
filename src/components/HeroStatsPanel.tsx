@@ -13,10 +13,15 @@ function AnimatedCounter({ target, suffix = "", prefix = "", delay = 0 }: { targ
     stiffness: 100,
     mass: 1
   });
-  const [display, setDisplay] = useState("0");
+  // Initialize display with the target value so we never show "0" as a fallback
+  const [display, setDisplay] = useState(target.toLocaleString("en-US"));
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (isInView) {
+    if (isInView && !hasAnimated.current) {
+      hasAnimated.current = true;
+      // Reset to 0 then animate to target
+      motionValue.set(0);
       const timer = setTimeout(() => {
         motionValue.set(target);
       }, delay);
@@ -48,7 +53,7 @@ const statsData = [
     description: "Successful engagements across industries.",
     delay: 0,
     accentColor: "from-blue-500 to-blue-600",
-    iconBg: "bg-blue-500/10 dark:bg-blue-400/10",
+    iconBg: "bg-blue-500/20 dark:bg-blue-400/15",
     iconColor: "text-blue-600 dark:text-blue-400",
     borderHover: "hover:border-l-blue-500",
   },
@@ -61,7 +66,7 @@ const statsData = [
     description: "Deep expertise in modern enterprise stacks.",
     delay: 150,
     accentColor: "from-indigo-500 to-indigo-600",
-    iconBg: "bg-indigo-500/10 dark:bg-indigo-400/10",
+    iconBg: "bg-indigo-500/20 dark:bg-indigo-400/15",
     iconColor: "text-indigo-600 dark:text-indigo-400",
     borderHover: "hover:border-l-indigo-500",
   },
@@ -74,7 +79,7 @@ const statsData = [
     description: "Distributed engineering across timezones.",
     delay: 300,
     accentColor: "from-cyan-500 to-cyan-600",
-    iconBg: "bg-cyan-500/10 dark:bg-cyan-400/10",
+    iconBg: "bg-cyan-500/20 dark:bg-cyan-400/15",
     iconColor: "text-cyan-600 dark:text-cyan-400",
     borderHover: "hover:border-l-cyan-500",
   },
@@ -87,7 +92,7 @@ const statsData = [
     description: "Continuous monitoring and proactive reliability.",
     delay: 450,
     accentColor: "from-emerald-500 to-emerald-600",
-    iconBg: "bg-emerald-500/10 dark:bg-emerald-400/10",
+    iconBg: "bg-emerald-500/20 dark:bg-emerald-400/15",
     iconColor: "text-emerald-600 dark:text-emerald-400",
     borderHover: "hover:border-l-emerald-500",
   },
