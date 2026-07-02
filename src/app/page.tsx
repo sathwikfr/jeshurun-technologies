@@ -1726,6 +1726,17 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* Explore CTA Row */}
+          <div className="flex justify-center pt-2">
+            <a
+              href="/technology"
+              className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors group"
+            >
+              Explore Our Full Technology Stack
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform duration-200"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
         </div>
       </section>
 

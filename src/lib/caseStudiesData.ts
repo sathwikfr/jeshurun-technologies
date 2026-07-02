@@ -171,5 +171,77 @@ Any code commits trigger automatic unit testing, vulnerability analysis, and con
 The tracking and pathfinding APIs are hosted on Azure Kubernetes Service (AKS). The clusters use internal scaling metrics (CPU, HTTP request rates) to autoscale dynamically during peak logistics windows.
 
 Istio ingress controllers manage traffic routing and security policies, ensuring 100% API uptime. The automation of the routing engine and tracking services reduced overall cargo transit times by 12%.`
+  },
+  {
+    id: "pharma-zero-trust",
+    title: "Pharmaceutical Zero-Trust Security Migration",
+    industry: "Pharmaceutical",
+    location: "Dublin, Ireland",
+    category: "Cybersecurity",
+    challenge: "A near-miss phishing incident exposed the risk of a flat, perimeter-based security model across EU and India offices.",
+    solution: "Implemented a full Zero-Trust architecture with identity-aware proxies, device trust scoring, and micro-segmented network zones.",
+    metrics: [
+      { value: "94%", label: "Lateral Movement Risk Reduced" },
+      { value: "22min", label: "Incident Response Time" },
+      { value: "SOC 2", label: "Type II Compliant" }
+    ],
+    techStack: ["Cybersecurity", "Zero-Trust", "Cloudflare Access", "Azure AD", "SIEM"],
+    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+    excerpt: "How Jeshurun replaced a perimeter-based security model with a full Zero-Trust architecture across a leading European pharmaceutical company's global offices.",
+    content: `## Context & Challenge
+
+A leading European pharmaceutical company with Dublin headquarters and operations spanning Ireland, Germany, and India sought to overhaul its corporate security posture following a sophisticated spear-phishing campaign that came dangerously close to compromising their clinical trial data repositories.
+
+The existing flat network allowed any authenticated user to move laterally across systems — a critical vulnerability in an industry where data integrity is not just a business concern, but a regulatory requirement under EU GMP and FDA 21 CFR Part 11.
+
+## Zero-Trust Architecture Design
+
+Jeshurun's security consultants conducted a 3-week discovery engagement, mapping all user access flows, application dependencies, and data classification tiers. The resulting Zero-Trust framework was built on three pillars:
+
+**Identity Verification**: Cloudflare Access was deployed as an identity-aware reverse proxy in front of all internal applications. Every access request — whether from Dublin HQ or the India development centre — requires continuous device health attestation and MFA via Azure Active Directory Conditional Access.
+
+**Micro-Segmentation**: The corporate network was decomposed into isolated security zones. Research and clinical systems were placed in a dedicated high-trust segment with per-session authorisation, ensuring that even a fully compromised user account could not reach sensitive datasets without triggering automated containment.
+
+**Continuous Monitoring**: A centralised SIEM platform aggregates identity, endpoint, and network telemetry. Automated playbooks trigger isolation of any endpoint exhibiting anomalous access patterns within seconds, replacing the previous 4-hour manual investigation process.
+
+## Outcomes
+
+Following a 14-week phased rollout with zero production disruption, the organisation achieved SOC 2 Type II certification, passed an external penetration test with no critical findings, and reduced their simulated lateral movement attack surface by 94%. Mean incident response time dropped from 4 hours to 22 minutes.`
+  },
+  {
+    id: "insurance-data-pipelines",
+    title: "Real-Time Claims Analytics Platform",
+    industry: "Insurance",
+    location: "Dublin, Ireland",
+    category: "Data Engineering",
+    challenge: "Claims data siloed across 3 legacy systems delayed underwriting decisions by up to 24 hours, reducing competitive agility.",
+    solution: "Designed a Kafka-based event streaming pipeline feeding a Snowflake data warehouse with dbt transformation layers and real-time BI dashboards.",
+    metrics: [
+      { value: "<3min", label: "Claims Data Latency" },
+      { value: "60%", label: "Faster Underwriting" },
+      { value: "€1.2M", label: "Annual Cost Savings" }
+    ],
+    techStack: ["Apache Kafka", "Snowflake", "dbt", "Python", "AWS"],
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    excerpt: "Unifying claims data from 3 legacy systems into a real-time Kafka-Snowflake analytics layer, cutting underwriting decision time by 60% and saving €1.2M annually.",
+    content: `## The Data Silo Problem
+
+A mid-sized Irish insurance group serving both personal lines and commercial clients operated three separate legacy systems: a mainframe-based claims management platform, a third-party policy administration system, and a manual Excel-based bordereaux process for reinsurance reporting.
+
+Actuaries and underwriters had no unified view of live exposure. Generating a consolidated risk report required overnight batch jobs, meaning underwriting decisions on time-sensitive commercial accounts were routinely delayed by 18–24 hours. The business estimated this lag was contributing to a 12% decline in renewal retention for mid-market commercial accounts, where speed of response is a differentiating factor.
+
+## Event Streaming Architecture
+
+Jeshurun's data engineering team designed a real-time event streaming architecture using Apache Kafka as the integration backbone. Change Data Capture (CDC) connectors were deployed against all three legacy systems using Debezium, translating database-level row changes into immutable event streams without requiring modifications to the source systems.
+
+Kafka streams feed into a Snowflake data warehouse via Snowpipe for micro-batch loading, with dbt transformation models handling claims normalisation, policy joining, and reinsurance exposure calculation. The entire transformation layer is version-controlled in Git with automated testing via dbt's built-in test framework.
+
+## Business Intelligence Layer
+
+Real-time Power BI dashboards were connected to Snowflake's materialized views, giving underwriters live exposure summaries that refresh every 3 minutes. A dedicated bordereaux automation module generates regulatory reinsurance reports nightly, replacing the manual Excel process entirely.
+
+## Results
+
+Claims data latency dropped from 24 hours to under 3 minutes. Underwriting decision turnaround improved by 60% for commercial renewals. By decommissioning the legacy ETL tooling and its associated licensing and maintenance overhead, the group realised €1.2M in annual cost savings within the first 12 months of operation.`
   }
 ];

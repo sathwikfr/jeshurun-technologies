@@ -105,8 +105,8 @@ const techData: Record<
     ],
     metrics: [
       { label: "Resource Elasticity", value: "Instant" },
-      { label: "Deployment Speed", value: "" },
-      { label: "Resource Cost Save", value: "" },
+      { label: "Deployment Speed", value: "10x" },
+      { label: "Resource Cost Save", value: "40%" },
     ],
     comparison: [
       {
@@ -216,8 +216,8 @@ const techData: Record<
       "Compliance with EU privacy regulations (GDPR)",
     ],
     metrics: [
-      { label: "Query Optimization", value: "" },
-      { label: "Daily Data Ingested", value: "" },
+      { label: "Query Optimization", value: "10x" },
+      { label: "Daily Data Ingested", value: "TB-Scale" },
       { label: "SLA Match Rate", value: "100%" },
     ],
     comparison: [
@@ -326,7 +326,7 @@ const techData: Record<
     metrics: [
       { label: "Threat Detection Speed", value: "<1s" },
       { label: "Audit Match Rate", value: "100%" },
-      { label: "Security Incidents", value: "" },
+      { label: "Security Incidents", value: "Zero" },
     ],
     comparison: [
       {
@@ -436,8 +436,8 @@ const techData: Record<
       "High-margin customer service cost optimization",
     ],
     metrics: [
-      { label: "Task Automation Gain", value: "" },
-      { label: "Prediction Accuracy", value: "" },
+      { label: "Task Automation Gain", value: "80%" },
+      { label: "Prediction Accuracy", value: "85%+" },
       { label: "Response Delay Speed", value: "<50ms" },
     ],
     comparison: [
@@ -548,7 +548,7 @@ const techData: Record<
       "Encrypted secure tunnels between office nodes",
     ],
     metrics: [
-      { label: "Edge Latency Average", value: "" },
+      { label: "Edge Latency Average", value: "12ms" },
       { label: "Network Bandwidth", value: "10Gbps" },
       { label: "Load Capacity Level", value: "10M/s" },
     ],
@@ -656,8 +656,8 @@ const techData: Record<
       "Unmatched consistency across development nodes",
     ],
     metrics: [
-      { label: "Deployment Cycle Speed", value: "" },
-      { label: "Build Success Rate", value: "" },
+      { label: "Deployment Cycle Speed", value: "8min" },
+      { label: "Build Success Rate", value: "99.8%" },
       { label: "Rollback Trigger Speed", value: "Instant" },
     ],
     comparison: [

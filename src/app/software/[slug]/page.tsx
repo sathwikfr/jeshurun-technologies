@@ -10,11 +10,10 @@ import {
   RefreshCw,
   Smartphone,
   Server,
-  Terminal,
-  Cpu,
   X as XIcon,
   ChevronDown,
   Quote,
+  Zap,
 } from "lucide-react";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { SpotlightCard } from "@/components/SpotlightCard";
@@ -42,7 +41,7 @@ const softwareData: Record<
     title: string;
     subtitle: string;
     description: string;
-    iconName: "Cloud" | "RefreshCw" | "Smartphone" | "Server";
+    iconName: "Cloud" | "RefreshCw" | "Smartphone" | "Server" | "Zap";
     overview: string;
     image: string;
     features: string[];
@@ -52,6 +51,7 @@ const softwareData: Record<
     ctaTitleHighlight?: string;
     ctaDescription?: string;
     comparison: { without: string; with: string }[];
+    caseStudyOutcomes: string[];
     testimonial: {
       quote: string;
       author: string;
@@ -89,6 +89,11 @@ const softwareData: Record<
       { label: "Uptime SLA", value: "99.99%" },
       { label: "Cost Reduction", value: "30%" },
       { label: "Deployment Speed", value: "4x" },
+    ],
+    caseStudyOutcomes: [
+      "99.99% uptime maintained post-migration",
+      "40% reduction in infrastructure costs",
+      "3× faster deployment cadence",
     ],
     ctaTitleTop: "Ready to Build",
     ctaTitleHighlight: "Resilient, Cloud-Native Systems?",
@@ -140,6 +145,11 @@ const softwareData: Record<
       { label: "Performance Boost", value: "2x" },
       { label: "Maintenance Drop", value: "40%" },
     ],
+    caseStudyOutcomes: [
+      "Zero minutes of unexpected downtime during migration",
+      "2× release velocity post-modernization",
+      "40% reduction in maintenance overhead",
+    ],
     ctaTitleTop: "Ready to Modernize",
     ctaTitleHighlight: "Your Legacy Systems?",
     ctaDescription: "Discuss your current stack with our consultants and design a modernization roadmap that minimizes risk and disruption.",
@@ -189,6 +199,11 @@ const softwareData: Record<
       { label: "User Adoption", value: "+85%" },
       { label: "Crash-Free Rate", value: "99.9%" },
       { label: "Time to Market", value: "-30%" },
+    ],
+    caseStudyOutcomes: [
+      "99% data sync success rate in offline conditions",
+      "+85% enterprise user adoption within 90 days",
+      "-30% time to market vs. native-only approach",
     ],
     ctaTitleTop: "Ready to Build",
     ctaTitleHighlight: "Your Next Mobile Experience?",
@@ -240,6 +255,11 @@ const softwareData: Record<
       { label: "Data Throughput", value: "10k/s" },
       { label: "System Uptime", value: "99.99%" },
     ],
+    caseStudyOutcomes: [
+      "3× faster frontend development velocity",
+      "<50ms API latency at 10,000 events per second",
+      "99.99% API uptime with federated gateway",
+    ],
     ctaTitleTop: "Ready to Connect",
     ctaTitleHighlight: "Your Enterprise Systems?",
     ctaDescription: "Discuss your integration needs with our API engineers and design a connectivity layer built for security and scale.",
@@ -263,6 +283,59 @@ const softwareData: Record<
       { q: "How do you manage API versioning?", a: "We advocate for non-breaking API evolution (especially with GraphQL), but support standard URI or Header-based versioning for REST endpoints." },
     ],
   },
+  "data-pipelines": {
+    title: "Data Pipelines & Analytics",
+    subtitle: "Real-time streaming and enterprise analytics platforms",
+    description: "Design and deploy event-driven data pipelines that unify your operational data into real-time intelligence for faster business decisions.",
+    iconName: "Zap",
+    overview: "Our Data Pipelines practice builds the connective tissue between your operational systems and your business intelligence layer. Using Apache Kafka, Snowflake, and dbt, we design low-latency streaming architectures that give decision-makers live visibility into the metrics that matter.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    features: [
+      "Apache Kafka / Flink Streaming",
+      "Snowflake & BigQuery Warehouses",
+      "dbt Transformation Layers",
+      "Real-Time BI Dashboards",
+    ],
+    benefits: [
+      "Sub-minute data freshness across all systems",
+      "Unified data model eliminating reporting silos",
+      "Version-controlled, tested transformation logic",
+      "GDPR-compliant data governance by design",
+    ],
+    metrics: [
+      { label: "Data Latency", value: "<3min" },
+      { label: "Faster Decisions", value: "60%" },
+      { label: "Cost Savings (year 1)", value: "€1.2M" },
+    ],
+    caseStudyOutcomes: [
+      "Claims data latency reduced from 24h to <3 minutes",
+      "60% faster underwriting decisions on commercial accounts",
+      "€1.2M in annual infrastructure cost savings",
+    ],
+    ctaTitleTop: "Ready to Unify",
+    ctaTitleHighlight: "Your Data Into a Real-Time Layer?",
+    ctaDescription: "Discuss your data architecture needs with our pipeline engineers and design a streaming platform built for enterprise scale.",
+    comparison: [
+      { without: "Overnight batch jobs delivering stale data", with: "Real-time event streams with sub-minute freshness" },
+      { without: "Manual ETL scripts breaking unpredictably", with: "Automated, tested dbt transformations in version control" },
+      { without: "Siloed systems requiring custom exports", with: "CDC connectors capturing change events from all sources" },
+      { without: "Reports generated manually by data analysts", with: "Self-serve BI dashboards backed by live materialized views" },
+    ],
+    testimonial: {
+      quote: "Our underwriters now see live claims data the moment it happens. The impact on our renewal turnaround has been transformative — we went from reacting slowly to leading every conversation.",
+      author: "Patrick Daly",
+      role: "Chief Actuary",
+      company: "Irish Insurance Group",
+      stat: "<3min",
+      statLabel: "Claims Data Latency",
+    },
+    faqs: [
+      { q: "What's the difference between Kafka and a traditional ETL tool?", a: "Traditional ETL tools run on a schedule, creating batched, stale data. Kafka is an event streaming platform — data flows continuously in real time as changes occur in source systems, enabling true real-time analytics." },
+      { q: "Do you support existing databases without modifying them?", a: "Yes. We use Change Data Capture (CDC) via Debezium, which reads the database write-ahead log without touching the source system or impacting its performance." },
+      { q: "How do you ensure data quality in the pipeline?", a: "We implement dbt data tests (schema checks, uniqueness, referential integrity) that run on every transformation, plus automated anomaly detection on key metrics to alert on unexpected data distributions." },
+      { q: "What BI tools do you integrate with?", a: "We connect to Power BI, Looker, Tableau, Metabase, and Grafana depending on your team's toolchain. We also build custom React-based dashboards for embedded analytics use cases." },
+    ],
+  },
 };
 
 const iconMap = {
@@ -274,6 +347,7 @@ const iconMap = {
     <Smartphone className="w-8 h-8 text-[#2563EB] dark:text-[#60A5FA]" />
   ),
   Server: <Server className="w-8 h-8 text-[#2563EB] dark:text-[#60A5FA]" />,
+  Zap: <Zap className="w-8 h-8 text-amber-500" />,
 };
 
 function FAQItem({ q, a }: { q: string; a: string }) {
@@ -583,30 +657,24 @@ export default function SoftwareDetailPage({
                 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-1">
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Industry</div>
-                    <div className="text-sm font-extrabold text-foreground">Enterprise Software</div>
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Engagement Type</div>
+                    <div className="text-sm font-extrabold text-foreground">Enterprise Build</div>
                   </div>
                   <div className="space-y-1">
                     <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Region</div>
-                    <div className="text-sm font-extrabold text-foreground">Global</div>
+                    <div className="text-sm font-extrabold text-foreground">Europe & Global</div>
                   </div>
                 </div>
 
                 <div className="space-y-1 border-t border-border pt-6">
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold pb-2">Business Outcomes</div>
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold pb-2">Verified Outcomes</div>
                   <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4 h-4 text-emerald-500" />
-                      <span className="text-sm font-bold text-foreground">High ROI</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4 h-4 text-emerald-500" />
-                      <span className="text-sm font-bold text-foreground">Reduced Complexity</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4 h-4 text-emerald-500" />
-                      <span className="text-sm font-bold text-foreground">Scalable Architecture</span>
-                    </li>
+                    {category.caseStudyOutcomes.map((outcome, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <Check className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                        <span className="text-sm font-bold text-foreground">{outcome}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
