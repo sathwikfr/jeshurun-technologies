@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, Variants } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, Variants, useInView, useReducedMotion } from "framer-motion";
 import {
   Cloud, Database, ShieldCheck, Cpu, Network, Workflow, ArrowRight,
   Code2, Settings,
-} from "lucide-react";
+  Compass, Globe, Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { PremiumCTA } from "@/components/PremiumCTA";
-import { MethodologyTimeline } from "@/components/MethodologyTimeline";
+import { ProcessTimeline } from "@/components/ProcessTimeline";
+import { HeroFieldBackground } from "@/components/HeroFieldBackground";
+import { AnimatedCounter } from "@/components/HeroStatsPanel";
 
 const enterpriseContainer: Variants = {
   hidden: { opacity: 0 },
@@ -50,6 +52,182 @@ const SDLC_STAGES = [
   },
 ];
 
+// heroStats is managed globally by HeroStatsPanel
+function TechnologyStrip({ tech, router, index }: { tech: any; router: any; index: number }) {
+  const isEven = index % 2 === 0;
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: false, margin: "-50px" });
+  const prefersReducedMotion = useReducedMotion();
+
+  const pulseNodes = [
+    { top: "25%", left: "30%", delay: 0 },
+    { top: "60%", left: "70%", delay: 1.5 },
+    { top: "40%", left: "50%", delay: 0.7 },
+  ];
+
+  return (
+    <div id={tech.slug} className="py-16 md:py-24 scroll-mt-28" ref={ref}>
+      <div className="container px-6 sm:px-8 mx-auto">
+        <div className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-10 lg:gap-20 items-center`}>
+          {/* IMAGE PANEL */}
+          <motion.div
+            initial={{ opacity: 0, x: isEven ? -32 : 32 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full lg:w-[46%] shrink-0"
+          >
+            <div className={`relative rounded-2xl overflow-hidden border ${tech.accentBorder} shadow-lg aspect-[4/3] bg-muted group`}>
+              <motion.img
+                src={tech.image}
+                alt={tech.title}
+                animate={!prefersReducedMotion && isInView ? { scale: [1, 1.05, 1] } : { scale: 1 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="w-full h-full object-cover object-center"
+              />
+              
+              {/* Glowing Pulse Nodes Overlay */}
+              {!prefersReducedMotion && isInView && pulseNodes.map((node, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-12 h-12 rounded-full bg-cyan-400/20 blur-xl pointer-events-none mix-blend-screen"
+                  style={{ top: node.top, left: node.left }}
+                  animate={{ opacity: [0, 0.8, 0], scale: [0.8, 1.5, 0.8] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: node.delay, ease: "easeInOut" }}
+                />
+              ))}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none" />
+
+              {/* Title Badge */}
+              <div className="absolute bottom-4 left-4 flex items-center gap-2.5 bg-black/40 backdrop-blur-md border border-white/15 rounded-xl px-3.5 py-2">
+                <div className={`h-8 w-8 rounded-lg bg-gradient-to-br ${tech.accentColor} flex items-center justify-center text-white shrink-0 relative overflow-hidden`}>
+                  {tech.slug === "cybersecurity" && (
+                    <>
+                      <style>{`
+                        @keyframes scanSweepInline {
+                          0%, 10% { transform: translateX(-110%); opacity: 0; }
+                          20% { opacity: 1; }
+                          80% { opacity: 1; }
+                          90%, 100% { transform: translateX(250%); opacity: 0; }
+                        }
+                      `}</style>
+                      <div 
+                        className="absolute top-0 bottom-0 w-[1.5px] bg-gradient-to-b from-transparent via-[#EF4444] to-transparent shadow-[0_0_6px_rgba(239,68,68,0.9)] z-20 left-0"
+                        style={{ 
+                          animation: "scanSweepInline 3s linear infinite",
+                          animationPlayState: isInView ? "running" : "paused"
+                        }}
+                      />
+                    </>
+                  )}
+                  <span className="scale-[0.8]">{tech.icon}</span>
+                </div>
+                <span className="text-white text-sm font-bold tracking-wide">{tech.title}</span>
+              </div>
+
+              {/* Stat Badge */}
+              <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md border border-white/15 rounded-xl px-4 py-2.5 text-center min-w-[120px]">
+                <div className="text-white text-2xl font-black leading-none min-h-[1.5rem]">
+                  {tech.counter.isNumeric ? (
+                    <AnimatedCounter 
+                      target={tech.counter.target} 
+                      prefix={tech.counter.prefix || ""} 
+                      suffix={tech.counter.suffix || ""} 
+                      delay={100}
+                    />
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, y: 5 }}
+                      animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 5 }}
+                      transition={{ duration: 0.5, delay: 0.1, type: "spring", stiffness: 100 }}
+                    >
+                      {tech.stat}
+                    </motion.div>
+                  )}
+                </div>
+                <div className="text-white/70 text-[9px] font-bold uppercase tracking-widest mt-1">{tech.statLabel}</div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* CONTENT PANEL */}
+          <motion.div
+            initial={{ opacity: 0, x: isEven ? 32 : -32 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
+            className="flex-1 space-y-6 min-w-0"
+          >
+            <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${tech.accentBg} ${tech.accentText} border ${tech.accentBorder} text-xs font-bold uppercase tracking-wider`}>
+              <span className={`w-1.5 h-1.5 rounded-full bg-current`} />
+              Domain Expertise
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
+              {tech.title}
+            </h2>
+
+            <p className="text-muted-foreground text-lg leading-relaxed font-medium">
+              {tech.description}
+            </p>
+
+            <ul className="space-y-3 pt-2">
+              {tech.tags.map((tag: string, i: number) => (
+                <li
+                  key={i}
+                  className="flex items-center gap-3 text-base font-semibold text-foreground"
+                >
+                  <span className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <Check className="w-3 h-3 text-primary" />
+                  </span>
+                  {tag}
+                </li>
+              ))}
+            </ul>
+
+            <div className="pt-4">
+              <button 
+                onClick={() => router.push(`/technology/${tech.slug}`)}
+                className="group inline-flex items-center gap-2.5 bg-primary hover:bg-primary/90 text-white font-bold px-6 py-3 rounded-full text-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                Explore {tech.title}
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const TECH_PROCESS = [
+  {
+    title: "Discovery & Architecture",
+    desc: "Comprehensive analysis of existing capabilities and strategic target state mapping.",
+    icon: <Compass className="w-6 h-6" />,
+    accentColor: "blue-600"
+  },
+  {
+    title: "Agile Engineering",
+    desc: "Iterative development cycles ensuring rapid feature delivery and high test coverage.",
+    icon: <Cpu className="w-6 h-6" />,
+    accentColor: "blue-500"
+  },
+  {
+    title: "QA & Security Auditing",
+    desc: "Continuous automated testing and penetration testing across all environments.",
+    icon: <ShieldCheck className="w-6 h-6" />,
+    accentColor: "cyan-500"
+  },
+  {
+    title: "DevOps & Global Scale",
+    desc: "Infrastructure-as-code deployment and auto-scaling production release.",
+    icon: <Globe className="w-6 h-6" />,
+    accentColor: "cyan-400"
+  }
+];
+
 export default function Technology() {
   const router = useRouter();
 
@@ -57,6 +235,7 @@ export default function Technology() {
     {
       title: "Cloud Solutions",
       slug: "cloud-solutions",
+      image: "/images/cloud_solutions_datacenter.png",
       description: "Build secure and scalable cloud environments across AWS, Azure, and GCP to support business growth and uninterrupted operations.",
       icon: <Cloud className="w-6 h-6" />,
       accentColor: "from-blue-600 to-blue-400",
@@ -64,12 +243,14 @@ export default function Technology() {
       accentText: "text-blue-600 dark:text-blue-400",
       accentBorder: "border-blue-500/20",
       stat: "3 Platforms",
-      statLabel: "AWS � Azure � GCP",
+      statLabel: "AWS • Azure • GCP",
       tags: ["Multi-Cloud", "Auto-Scaling", "Cost Optimisation"],
+      counter: { target: 3, suffix: " Platforms", isNumeric: true }
     },
     {
       title: "Data Management",
       slug: "data-management",
+      image: "/images/data_management_analytics.png",
       description: "Design resilient data lakes and advanced analytics pipelines to turn raw information into actionable business intelligence.",
       icon: <Database className="w-6 h-6" />,
       accentColor: "from-indigo-600 to-indigo-400",
@@ -79,10 +260,12 @@ export default function Technology() {
       stat: "100%",
       statLabel: "SLA Match Rate",
       tags: ["Data Lakes", "ETL Pipelines", "GDPR Compliant"],
+      counter: { target: 100, suffix: "%", isNumeric: true }
     },
     {
       title: "Cybersecurity",
       slug: "cybersecurity",
+      image: "/images/cybersecurity_operations.png",
       description: "Implement Zero-Trust architectures to protect your mission-critical digital assets against emerging global threats.",
       icon: <ShieldCheck className="w-6 h-6" />,
       accentColor: "from-red-600 to-rose-400",
@@ -92,10 +275,12 @@ export default function Technology() {
       stat: "<1s",
       statLabel: "Threat Detection",
       tags: ["Zero-Trust", "ISO 27001", "Pen Testing"],
+      counter: { target: 1, prefix: "<", suffix: "s", isNumeric: false }
     },
     {
       title: "AI & Machine Learning",
       slug: "ai-machine-learning",
+      image: "/images/ai_machine_learning_lab.png",
       description: "Deploy intelligent automation and predictive models to increase operational agility and drive strategic innovation.",
       icon: <Cpu className="w-6 h-6" />,
       accentColor: "from-violet-600 to-purple-400",
@@ -105,10 +290,12 @@ export default function Technology() {
       stat: "<50ms",
       statLabel: "Response Latency",
       tags: ["GenAI / LLMs", "Predictive Models", "MLOps"],
+      counter: { target: 50, prefix: "<", suffix: "ms", isNumeric: false }
     },
     {
       title: "Network Infrastructure",
       slug: "network-infrastructure",
+      image: "/images/network_infrastructure_ops.png",
       description: "Optimize high-throughput network backbones for secure, low-latency global connectivity.",
       icon: <Network className="w-6 h-6" />,
       accentColor: "from-sky-600 to-cyan-400",
@@ -118,10 +305,12 @@ export default function Technology() {
       stat: "10Gbps",
       statLabel: "Network Bandwidth",
       tags: ["SD-WAN", "Edge CDN", "DDoS Protection"],
+      counter: { target: 10, suffix: "Gbps", isNumeric: false }
     },
     {
       title: "DevOps",
       slug: "devops",
+      image: "/images/devops_pipeline_ops.png",
       description: "Accelerate software delivery with automated CI/CD pipelines and infrastructure-as-code for reliable, rapid deployments.",
       icon: <Workflow className="w-6 h-6" />,
       accentColor: "from-emerald-600 to-green-400",
@@ -131,6 +320,7 @@ export default function Technology() {
       stat: "Instant",
       statLabel: "Rollback Speed",
       tags: ["CI/CD Automation", "IaC (Terraform)", "Observability"],
+      counter: { target: 1, prefix: "<", suffix: "s (Instant)", isNumeric: false }
     },
   ];
 
@@ -166,59 +356,56 @@ export default function Technology() {
 
       {/* HERO BANNER */}
       <section className="w-full pt-32 pb-20 md:pt-40 md:pb-28 relative z-10 bg-background overflow-hidden border-b border-border">
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(to right, rgba(37, 99, 235, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(37, 99, 235, 0.04) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-            maskImage: "radial-gradient(ellipse at center, black 40%, transparent 80%)",
-            WebkitMaskImage: "radial-gradient(ellipse at center, black 40%, transparent 80%)",
-          }}
-        />
+        {/* NEW UNIFIED BACKGROUND (Cyan/Blue Theme) */}
+        <HeroFieldBackground blobOneColor="bg-cyan-600/15" blobTwoColor="bg-blue-600/15" />
+
         <motion.div
           variants={enterpriseContainer}
           initial="hidden"
           animate="show"
           className="container px-6 sm:px-8 mx-auto relative z-10"
         >
-          <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
+          <div className="flex flex-col items-center text-center space-y-6 max-w-5xl mx-auto">
             <motion.div
               variants={enterpriseItem}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/20 text-xs font-bold uppercase tracking-wider text-primary shadow-sm"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/8 border border-primary/20 text-xs font-bold uppercase tracking-wider text-primary shadow-sm"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               Technology Domains
             </motion.div>
-            <motion.h1 variants={enterpriseItem} className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-none text-foreground">
+            
+            <motion.h1 variants={enterpriseItem} className="text-5xl sm:text-6xl lg:text-[4.5rem] font-black tracking-tight leading-none text-foreground drop-shadow-sm relative">
               <span className="text-[#2563EB]">Technology</span>{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4]">Expertise</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4] animate-gradient-text drop-shadow-[0_0_20px_rgba(37,99,235,0.3)]">
+                Expertise
+              </span>
             </motion.h1>
-            <motion.p variants={enterpriseItem} className="text-muted-foreground text-lg sm:text-xl md:text-2xl leading-relaxed font-semibold max-w-2xl mx-auto">
+            
+            <motion.p variants={enterpriseItem} className="text-slate-700 dark:text-slate-300 text-xl sm:text-2xl leading-relaxed font-semibold max-w-2xl mx-auto">
               Six technology domains. One integrated delivery partner. Built for complex, multi-national enterprise requirements.
             </motion.p>
-            <motion.div variants={enterpriseItem} className="w-full mt-12 pt-8 border-t border-border">
-              <div className="flex flex-wrap justify-center gap-3 w-full">
+            
+            {/* PILL NAVIGATION */}
+            <motion.div variants={enterpriseItem} className="w-full mt-8 pt-8 relative">
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#06B6D4]/30 to-transparent" />
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-background px-4 text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                Jump to a domain <ArrowRight className="w-3 h-3 rotate-90" />
+              </div>
+              <div className="flex flex-wrap justify-center gap-3 w-full bg-card/40 backdrop-blur-md p-5 sm:p-7 rounded-3xl border border-border/50 shadow-inner">
                 {Object.keys(capabilityMap).map((capability, idx) => {
                   const targetId = capabilityMap[capability];
-                  const isActive = activeCapability === targetId;
                   return (
                     <motion.button
                       key={capability}
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 + idx * 0.1, duration: 0.5, type: "spring", stiffness: 100 }}
-                      whileHover={{ y: -3, scale: 1.03, boxShadow: "0 10px 24px rgba(30,95,255,0.2)", borderColor: "#1E5FFF", backgroundColor: "rgba(30,95,255,0.05)", color: "#1E5FFF" }}
-                      whileTap={{ scale: 0.97 }}
+                      whileHover={{ y: -4, scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => {
                         const el = document.getElementById(targetId);
-                        if (el) { const y = el.getBoundingClientRect().top + window.scrollY - 120; window.scrollTo({ top: y, behavior: "smooth" }); }
+                        if (el) { const y = el.getBoundingClientRect().top + window.scrollY - 100; window.scrollTo({ top: y, behavior: "smooth" }); }
                       }}
-                      className={`relative px-5 py-2.5 rounded-full border text-sm font-bold transition-colors duration-300 outline-none ${isActive ? "border-[#1E5FFF] bg-[#EEF3FF] dark:bg-[#1E5FFF]/10 text-[#1E5FFF]" : "bg-card border-border text-foreground shadow-sm"}`}
+                      className="px-6 py-3 rounded-full border border-border/60 bg-background/80 text-sm font-bold text-foreground shadow-sm hover:border-[#06B6D4]/40 transition-colors"
                     >
-                      {isActive && (
-                        <motion.div className="absolute inset-0 rounded-full shadow-[0_0_15px_rgba(30,95,255,0.4)]" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }} />
-                      )}
-                      <span className="relative z-10">{capability}</span>
+                      {capability}
                     </motion.button>
                   );
                 })}
@@ -228,69 +415,21 @@ export default function Technology() {
         </motion.div>
       </section>
 
-      {/* DOMAIN CARDS */}
-      <section className="w-full py-20 md:py-32 bg-card">
-        <div className="container px-6 sm:px-8 mx-auto">
-          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Our Technology Practice Areas</h2>
-            <p className="text-muted-foreground text-lg font-medium">Each domain represents deep, certified expertise � not a checkbox on a brochure.</p>
+      {/* DOMAIN SECTIONS (Alternating Layout) */}
+      <section className="w-full bg-background flex flex-col border-t border-border">
+        {technologies.map((tech, index) => (
+          <div key={tech.slug} className="border-b border-border/40 last:border-0 relative">
+            <TechnologyStrip tech={tech} router={router} index={index} />
           </div>
-          <motion.div
-            variants={enterpriseContainer}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {technologies.map((tech) => (
-              <motion.div key={tech.title} variants={enterpriseItem} id={tech.slug} className="h-full scroll-mt-28">
-                <div
-                  onClick={() => router.push(`/technology/${tech.slug}`)}
-                  className="group h-full flex flex-col rounded-2xl border border-border bg-card overflow-hidden hover-card-effect cursor-pointer relative"
-                  role="link"
-                  aria-label={`Explore ${tech.title} technology domain`}
-                >
-                  <div className={`h-[3px] w-full bg-gradient-to-r ${tech.accentColor}`} />
-                  <div className="flex flex-col flex-1 p-7 gap-5">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className={`h-11 w-11 rounded-xl ${tech.accentBg} ${tech.accentText} flex items-center justify-center group-hover:scale-[1.06] transition-transform duration-200`}>
-                        {tech.icon}
-                      </div>
-                      <div className="text-right shrink-0">
-                        <div className="text-2xl font-black text-foreground leading-none">{tech.stat}</div>
-                        <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mt-0.5">{tech.statLabel}</div>
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-foreground">{tech.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed mt-2">{tech.description}</p>
-                    </div>
-                    <div className="flex flex-wrap gap-1.5">
-                      {tech.tags.map((tag) => (
-                        <span key={tag} className={`text-[11px] font-bold px-2.5 py-1 rounded-full ${tech.accentBg} ${tech.accentText} border ${tech.accentBorder}`}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <span className={`${tech.accentText} font-bold text-sm inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300 mt-auto pt-3 border-t border-border`}>
-                      Explore Domain <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
-                    </span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+        ))}
       </section>
 
       {/* DELIVERY METHODOLOGY */}
-      <MethodologyTimeline
-        badge="DELIVERY METHOD"
-        title="Enterprise Delivery Methodology"
-        subtitle="Standardized phases designed to translate business strategy into secure, high-availability technical operations."
-        steps={SDLC_STAGES}
-        variant="cards"
-      />
+      <ProcessTimeline
+          badge="DELIVERY METHOD"
+          title="Our Technology Delivery Framework"
+          steps={TECH_PROCESS}
+        />
 
       {/* CTA */}
       <PremiumCTA

@@ -20,7 +20,7 @@ export const insightsData: InsightArticle[] = [
     desc: "Discover why traditional hiring models fail modern cybersecurity teams and how enterprise organizations are adapting.",
     readTime: "5 min read",
     date: "June 2026",
-    image: "/images/bg/cyber_insight.png",
+    image: "/images/insight_cyber_talent_model.png",
     author: "Sathwik Jeshurun, Principal Security Architect",
     keyInsights: [
       "Security Workforce Trends",
@@ -64,7 +64,7 @@ Leveraging AI telemetry models to filter signal from noise lets your team spend 
     desc: "Discover how top-tier organizations are blending human creativity with artificial intelligence to accelerate development cycles and reduce operational overhead.",
     readTime: "6 min read",
     date: "June 2026",
-    image: "/images/bg/cloud_insight.png",
+    image: "/images/insight_human_ai_engineering.png",
     author: "Sathwik Jeshurun, CTO",
     keyInsights: [
       "Generative AI Integration",
@@ -108,7 +108,7 @@ This ensures that code is robust and security weaknesses are detected long befor
     desc: "A comprehensive analysis of multi-cloud architectures, providing actionable frameworks for scaling applications across AWS, Azure, and GCP without vendor lock-in.",
     readTime: "7 min read",
     date: "June 2026",
-    image: "/images/bg/ai_insight.png",
+    image: "/images/insight_cloud_scalability_matrix.png",
     author: "Sathwik Jeshurun, Cloud Architecture Lead",
     keyInsights: [
       "Multi-Cloud Frameworks",

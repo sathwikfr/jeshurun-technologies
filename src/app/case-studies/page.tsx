@@ -9,7 +9,7 @@ import { Check, ArrowRight, Activity, Zap, Cpu, Server, Database, Globe, Network
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { Button } from "@/components/ui/button";
-
+import { HeroFieldBackground } from "@/components/HeroFieldBackground";
 
 
 /* ─── ANIMATION VARIANTS ─── */
@@ -26,86 +26,18 @@ const item = {
   show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 90, damping: 22 } }
 };
 
-/* ─── DATA: CASE STUDIES ─── */
-const CASE_STUDIES = [
-  {
-    id: "health-transformation",
-    title: "Healthcare Cloud Transformation & Compliance",
-    industry: "Healthcare",
-    location: "New York",
-    category: "Cloud",
-    challenge: "Siloed patient data limited telehealth scaling and posed HIPAA compliance risks.",
-    solution: "Architected a secure, unified AWS data lake with zero-trust networking.",
-    metrics: [
-      { value: "100%", label: "HIPAA Compliant" },
-      { value: "3x", label: "Faster Access" },
-      { value: "Zero", label: "Data Breaches" }
-    ],
-    techStack: ["AWS", "Python", "Cybersecurity", "Docker"],
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
-    size: "medium" // Span 6 columns
-  },
-  {
-    id: "finance-modernization",
-    title: "Global Banking Platform Modernization",
-    industry: "Financial Services",
-    location: "London",
-    category: "Infrastructure",
-    challenge: "High maintenance costs and peak-hour downtime from legacy monolithic systems.",
-    solution: "Migrated core services to AWS using a Kubernetes microservices architecture.",
-    metrics: [
-      { value: "99.99%", label: "Availability" },
-      { value: "65%", label: "Deployment Acceleration" },
-      { value: "Millions", label: "Transactions" }
-    ],
-    techStack: ["AWS", "Kubernetes", "Docker", "Java"],
-    image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
-    size: "medium" // Span 6 columns
-  },
-  {
-    id: "mfg-analytics",
-    title: "Smart Factory IoT Analytics",
-    industry: "Manufacturing",
-    location: "Hyderabad",
-    category: "AI",
-    challenge: "Lack of machine health visibility caused unpredictable downtime and revenue loss.",
-    solution: "Deployed IoT edge sensors and a predictive AI maintenance model on GCP.",
-    metrics: [
-      { value: "85%", label: "Predictive Accuracy" },
-      { value: "-45%", label: "Downtime" },
-      { value: "$2.4M", label: "Saved Annually" }
-    ],
-    techStack: ["GCP", "Python", "AI", "Kubernetes"],
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
-    size: "small" // Span 4 columns
-  },
-  {
-    id: "logistics-automation",
-    title: "Global Supply Chain Automation",
-    industry: "Logistics",
-    location: "Singapore",
-    category: "DevOps",
-    challenge: "Manual routing and disjointed APIs slowed global freight and increased delays.",
-    solution: "Implemented an AI-driven routing engine and automated CI/CD deployment pipeline.",
-    metrics: [
-      { value: "12%", label: "Transit Time Reduced" },
-      { value: "20x", label: "Faster Deployments" },
-      { value: "100%", label: "API Uptime" }
-    ],
-    techStack: ["DevOps", "Kubernetes", "Node.js", "Azure"],
-    image: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=800&q=80",
-    size: "small" // Span 4 columns
-  }
-];
+import { caseStudiesData, CaseStudyArticle } from "@/lib/caseStudiesData";
 
-const FILTERS = ["All", "Financial Services", "Healthcare", "Retail", "Manufacturing", "Logistics", "SaaS"];
+const CASE_STUDIES = caseStudiesData;
 
-function CaseStudyCard({ study, onClick }: { study: typeof CASE_STUDIES[0], onClick: () => void }) {
+const FILTERS = ["All", "Financial Services", "Healthcare", "Manufacturing", "Logistics", "Pharmaceutical", "Insurance"];
+
+function CaseStudyCard({ study, onClick }: { study: CaseStudyArticle, onClick: () => void }) {
   return (
     <div onClick={onClick} className="w-full h-full cursor-pointer outline-none flex flex-col">
       <SpotlightCard className="flex-1 flex flex-col p-0 hover-card-effect overflow-hidden group">
         {/* Image Header */}
-        <div className="relative w-full h-48 md:h-64 overflow-hidden bg-slate-900 shrink-0">
+        <div className="relative w-full h-48 md:h-52 overflow-hidden bg-slate-900 shrink-0">
           <Image 
             src={study.image} 
             alt={study.title}
@@ -116,7 +48,7 @@ function CaseStudyCard({ study, onClick }: { study: typeof CASE_STUDIES[0], onCl
         </div>
         
         {/* Content Body */}
-        <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
+        <div className="p-5 md:p-6 flex-1 flex flex-col justify-between">
           <div>
             <h3 className="font-extrabold text-foreground tracking-tight leading-tight mb-4 group-hover:text-[#2563EB] transition-colors text-2xl md:text-3xl text-left">
               {study.title}
@@ -179,20 +111,9 @@ export default function CaseStudiesPage() {
     <div className="flex flex-col items-center justify-center bg-transparent min-h-screen">
       
       {/* ═══════ HERO SECTION ═══════ */}
-      <section className="w-full pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden bg-background border-b border-border">
-        {/* Subtle Enterprise Grid Background */}
-        <div 
-          className="absolute inset-0 pointer-events-none" 
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(37, 99, 235, 0.04) 1px, transparent 1px)
-            `,
-            backgroundSize: '40px 40px',
-            maskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)',
-            WebkitMaskImage: 'radial-gradient(ellipse at center, black 40%, transparent 80%)'
-          }}
-        />
+      <section className="w-full pt-32 pb-16 md:pt-36 md:pb-20 relative overflow-hidden bg-background border-b border-border">
+        {/* NEW UNIFIED BACKGROUND (Blue/Cyan Theme) */}
+        <HeroFieldBackground blobOneColor="bg-blue-600/15" blobTwoColor="bg-cyan-600/15" />
         
         <motion.div 
           variants={container}
@@ -202,7 +123,7 @@ export default function CaseStudiesPage() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center max-w-6xl mx-auto">
             {/* Left Content */}
-            <div className="flex flex-col items-start text-left space-y-8">
+            <div className="flex flex-col items-start text-left space-y-6">
               <motion.div variants={item} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/20 text-xs font-bold uppercase tracking-wider text-primary shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 Enterprise Proof Points
@@ -235,7 +156,7 @@ export default function CaseStudiesPage() {
 
 
       {/* ═══════ CASE STUDIES GRID & FILTERS ═══════ */}
-      <section className="w-full py-16 md:py-24 relative z-10 bg-[#F8FAFC]">
+      <section className="w-full py-16 md:py-24 relative z-10 bg-[#F8FAFC] dark:bg-[#020617]">
         <div className="container px-6 sm:px-8 mx-auto space-y-12">
           
           {/* Technology Filters */}

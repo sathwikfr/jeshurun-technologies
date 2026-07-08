@@ -1,6 +1,7 @@
 "use client";
+import { useRef } from "react";
 
-import { motion, type Variants } from "framer-motion";
+import { motion, type Variants , useInView, useReducedMotion } from "framer-motion";
 import {
   Layers,
   Activity,
@@ -8,15 +9,16 @@ import {
   Monitor,
   ArrowRight,
   Check,
-  ChevronRight,
   Compass,
   Cpu,
   Milestone,
   Brain,
-} from "lucide-react";
+  Search, PenTool, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { PremiumCTA } from "@/components/PremiumCTA";
-import { MethodologyTimeline } from "@/components/MethodologyTimeline";
+import { AnimatedCounter } from "@/components/HeroStatsPanel";
+import { ProcessTimeline } from "@/components/ProcessTimeline";
+import { HeroFieldBackground } from "@/components/HeroFieldBackground";
 
 /* ─────────────────────────────────────────────
    Animation variants
@@ -35,15 +37,7 @@ const container: Variants = {
   show: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-/* ─────────────────────────────────────────────
-   Hero stat strip (real data from site-wide stats)
-───────────────────────────────────────────── */
-const heroStats = [
-  { value: "150+", label: "Projects Delivered" },
-  { value: "20+", label: "Technology Domains" },
-  { value: "6", label: "Global Delivery Hubs" },
-  { value: "99.9%", label: "SLA Uptime Guarantee" },
-];
+// Relying on HeroStatsPanel default stats
 
 /* ─────────────────────────────────────────────
    Services with real case-study proof metrics
@@ -75,13 +69,13 @@ const servicesList: ServiceEntry[] = [
       "Comprehensive Technology Assessment",
     ],
     icon: <Layers className="w-6 h-6" />,
-    image: "/service_it_consulting.png",
+    image: "/images/it_consulting_boardroom.png",
     accentFrom: "from-blue-600",
     accentTo: "to-blue-400",
     stat: {
       value: "65%",
       label: "Deployment Acceleration",
-      source: "Global Banking Platform Modernisation",
+      source: "Global Banking Platform Modernization",
     },
     caseStudyHref: "/case-studies/finance-modernization",
   },
@@ -97,12 +91,12 @@ const servicesList: ServiceEntry[] = [
       "Cross-functional Stakeholder Alignment",
     ],
     icon: <Activity className="w-6 h-6" />,
-    image: "/service_project_management.png",
+    image: "/images/project_management_office.png",
     accentFrom: "from-indigo-600",
     accentTo: "to-indigo-400",
     stat: {
-      value: "20×",
-      label: "Faster Deployments",
+      value: "12%",
+      label: "Transit Time Reduced",
       source: "Global Supply Chain Automation",
     },
     caseStudyHref: "/case-studies/logistics-automation",
@@ -119,13 +113,13 @@ const servicesList: ServiceEntry[] = [
       "Continuous Quality Assurance",
     ],
     icon: <Shield className="w-6 h-6" />,
-    image: "/service_test_management.png",
+    image: "/images/test_management_dashboard.png",
     accentFrom: "from-red-600",
     accentTo: "to-orange-400",
     stat: {
-      value: "100%",
-      label: "HIPAA Compliant",
-      source: "Healthcare Cloud Transformation",
+      value: "Zero",
+      label: "Data Breaches",
+      source: "Healthcare Cloud Transformation & Compliance",
     },
     caseStudyHref: "/case-studies/health-transformation",
   },
@@ -141,13 +135,13 @@ const servicesList: ServiceEntry[] = [
       "Business Continuity & Disaster Recovery",
     ],
     icon: <Monitor className="w-6 h-6" />,
-    image: "/service_infrastructure_management.png",
+    image: "/images/infrastructure_datacenter.png",
     accentFrom: "from-emerald-600",
     accentTo: "to-cyan-400",
     stat: {
       value: "99.99%",
       label: "Platform Availability",
-      source: "Global Banking Platform Modernisation",
+      source: "Global Banking Platform Modernization",
     },
     caseStudyHref: "/case-studies/finance-modernization",
   },
@@ -160,22 +154,26 @@ const methodology = [
   {
     title: "Architecture Diagnostics",
     desc: "We perform full legacy architecture diagnostics and evaluate system readiness.",
-    icon: <Compass className="w-6 h-6" />,
+    icon: <Search className="w-6 h-6" />,
+    accentColor: "blue-600"
   },
   {
     title: "Enterprise Blueprinting",
     desc: "Our architects design cloud topologies, security frameworks, and implementation plans.",
-    icon: <Cpu className="w-6 h-6" />,
+    icon: <PenTool className="w-6 h-6" />,
+    accentColor: "blue-500"
   },
   {
     title: "Agile Execution & QA",
     desc: "We execute iterative delivery cycles with automated testing and quality assurance.",
-    icon: <Milestone className="w-6 h-6" />,
+    icon: <CheckCircle2 className="w-6 h-6" />,
+    accentColor: "cyan-500"
   },
   {
     title: "SLA Compliance & Telemetry",
     desc: "We deploy monitoring, governance, and uptime assurance frameworks.",
-    icon: <Brain className="w-6 h-6" />,
+    icon: <Activity className="w-6 h-6" />,
+    accentColor: "cyan-400"
   },
 ];
 
@@ -190,9 +188,25 @@ function ServiceStrip({
   index: number;
 }) {
   const isEven = index % 2 === 0;
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: false, margin: "-50px" });
+  const prefersReducedMotion = useReducedMotion();
+
+  // Parse stat for AnimatedCounter
+  const statMatch = service.stat.value.match(/^(\D*)(\d+)(.*)$/);
+  const isNumeric = statMatch !== null;
+  const statPrefix = isNumeric ? statMatch[1] : "";
+  const statTarget = isNumeric ? parseInt(statMatch[2], 10) : 0;
+  const statSuffix = isNumeric ? statMatch[3] : "";
+
+  const pulseNodes = [
+    { top: "25%", left: "30%", delay: 0 },
+    { top: "60%", left: "70%", delay: 1.5 },
+    { top: "40%", left: "50%", delay: 0.7 },
+  ];
 
   return (
-    <div id={service.slug} className="py-16 md:py-24">
+    <div id={service.slug} className="py-16 md:py-24" ref={ref}>
       <div className="container px-6 sm:px-8 mx-auto">
         <div
           className={`flex flex-col ${
@@ -208,11 +222,24 @@ function ServiceStrip({
             className="w-full lg:w-[46%] shrink-0"
           >
             <div className="relative rounded-2xl overflow-hidden border border-border shadow-lg aspect-[4/3] bg-muted">
-              <img
+              <motion.img
                 src={service.image}
                 alt={service.title}
+                animate={!prefersReducedMotion && isInView ? { scale: [1, 1.05, 1] } : { scale: 1 }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
                 className="w-full h-full object-cover object-center"
               />
+              
+              {/* Glowing Pulse Nodes Overlay */}
+              {!prefersReducedMotion && isInView && pulseNodes.map((node, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-12 h-12 rounded-full bg-cyan-400/20 blur-xl pointer-events-none mix-blend-screen"
+                  style={{ top: node.top, left: node.left }}
+                  animate={{ opacity: [0, 0.8, 0], scale: [0.8, 1.5, 0.8] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: node.delay, ease: "easeInOut" }}
+                />
+              ))}
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/10 to-transparent" />
 
@@ -229,11 +256,26 @@ function ServiceStrip({
               </div>
 
               {/* Proof stat badge */}
-              <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md border border-white/15 rounded-xl px-3 py-2 text-center">
-                <div className="text-white text-2xl font-black leading-none">
-                  {service.stat.value}
+              <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md border border-white/15 rounded-xl px-4 py-2.5 text-center min-w-[120px]">
+                <div className="text-white text-2xl font-black leading-none min-h-[1.5rem]">
+                  {isNumeric ? (
+                    <AnimatedCounter 
+                      target={statTarget} 
+                      prefix={statPrefix} 
+                      suffix={statSuffix} 
+                      delay={100}
+                    />
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, y: 5 }}
+                      animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 5 }}
+                      transition={{ duration: 0.5, delay: 0.1, type: "spring", stiffness: 100 }}
+                    >
+                      {service.stat.value}
+                    </motion.div>
+                  )}
                 </div>
-                <div className="text-white/70 text-[9px] font-bold uppercase tracking-wider mt-0.5">
+                <div className="text-white/70 text-[9px] font-bold uppercase tracking-wider mt-1">
                   {service.stat.label}
                 </div>
               </div>
@@ -283,26 +325,6 @@ function ServiceStrip({
               ))}
             </ul>
 
-            {/* Case study proof strip */}
-            <div className="flex items-center gap-3 p-3.5 rounded-xl border border-border bg-card">
-              <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
-              <div className="flex-1 min-w-0">
-                <span className="text-sm font-bold text-foreground">
-                  {service.stat.value} {service.stat.label}
-                </span>
-                <span className="text-xs text-muted-foreground">
-                  {" "}
-                  — {service.stat.source}
-                </span>
-              </div>
-              <Link
-                href={service.caseStudyHref}
-                className="shrink-0 text-xs font-bold text-primary hover:text-primary/80 transition-colors inline-flex items-center gap-0.5"
-              >
-                See case{" "}
-                <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
-              </Link>
-            </div>
 
             {/* CTA Button */}
             <Link
@@ -333,22 +355,8 @@ export default function Services() {
           HERO
       ════════════════════════════════════════ */}
       <section className="w-full pt-32 pb-16 md:pt-40 md:pb-20 relative z-10 bg-background overflow-hidden border-b border-border">
-        {/* Enterprise grid background */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          aria-hidden="true"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(37, 99, 235, 0.04) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(37, 99, 235, 0.04) 1px, transparent 1px)
-            `,
-            backgroundSize: "40px 40px",
-            maskImage:
-              "radial-gradient(ellipse at center, black 40%, transparent 80%)",
-            WebkitMaskImage:
-              "radial-gradient(ellipse at center, black 40%, transparent 80%)",
-          }}
-        />
+        {/* NEW UNIFIED BACKGROUND */}
+        <HeroFieldBackground blobOneColor="bg-blue-600/15" blobTwoColor="bg-cyan-600/15" />
 
         <motion.div
           variants={container}
@@ -356,7 +364,7 @@ export default function Services() {
           animate="show"
           className="container px-6 sm:px-8 mx-auto relative z-10"
         >
-          <div className="max-w-4xl mx-auto text-center space-y-8">
+          <div className="max-w-5xl mx-auto text-center space-y-6">
             {/* Badge */}
             <motion.div
               variants={fadeUp}
@@ -369,10 +377,10 @@ export default function Services() {
             {/* Headline */}
             <motion.h1
               variants={fadeUp}
-              className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-none text-foreground"
+              className="text-5xl sm:text-6xl lg:text-[4.5rem] font-black tracking-tight leading-none text-foreground drop-shadow-sm relative"
             >
               Technology consulting{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4] animate-gradient-text drop-shadow-[0_0_20px_rgba(37,99,235,0.3)]">
                 that delivers.
               </span>
             </motion.h1>
@@ -380,31 +388,35 @@ export default function Services() {
             {/* Supporting copy */}
             <motion.p
               variants={fadeUp}
-              className="text-muted-foreground text-lg sm:text-xl leading-relaxed font-medium max-w-2xl mx-auto"
+              className="text-slate-700 dark:text-slate-300 text-xl sm:text-2xl leading-relaxed font-semibold max-w-2xl mx-auto"
             >
               Trusted by enterprise leaders across Ireland, Europe, and the
               Middle East — our four practice areas cover the full technology
               lifecycle from strategy to operations.
             </motion.p>
 
-            {/* Stat strip */}
-            <motion.div
-              variants={fadeUp}
-              className="grid grid-cols-2 md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border"
-            >
-              {heroStats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="bg-card px-6 py-5 text-center"
-                >
-                  <div className="text-2xl font-black text-foreground">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mt-1">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
+            {/* PILL NAVIGATION */}
+            <motion.div variants={fadeUp} className="w-full mt-8 pt-8 relative">
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-background px-4 text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
+                Explore practice areas <ArrowRight className="w-3 h-3 rotate-90" />
+              </div>
+              <div className="flex flex-wrap justify-center gap-3 w-full bg-card/40 backdrop-blur-md p-5 sm:p-7 rounded-3xl border border-border/50 shadow-inner">
+                {servicesList.map((service, idx) => (
+                  <motion.button
+                    key={service.slug}
+                    whileHover={{ y: -4, scale: 1.05 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => {
+                      const el = document.getElementById(service.slug);
+                      if (el) { const y = el.getBoundingClientRect().top + window.scrollY - 100; window.scrollTo({ top: y, behavior: "smooth" }); }
+                    }}
+                    className="px-6 py-3 rounded-full border border-border/60 bg-background/80 text-sm font-bold text-foreground shadow-sm hover:border-primary/40 transition-colors"
+                  >
+                    {service.title}
+                  </motion.button>
+                ))}
+              </div>
             </motion.div>
           </div>
         </motion.div>
@@ -422,7 +434,7 @@ export default function Services() {
       {/* ════════════════════════════════════════
           METHODOLOGY TIMELINE
       ════════════════════════════════════════ */}
-      <MethodologyTimeline
+      <ProcessTimeline
         badge="PROCESS"
         title="Enterprise Delivery Methodology"
         subtitle="How we coordinate enterprise consulting, cloud transformation, quality assurance, and infrastructure modernisation."

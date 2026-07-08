@@ -28,7 +28,7 @@ export const caseStudiesData: CaseStudyArticle[] = [
       { value: "Zero", label: "Data Breaches" }
     ],
     techStack: ["AWS", "Python", "Cybersecurity", "Docker"],
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
+    image: "/images/ai_healthcare_tech.jpg",
     excerpt: "Discover how we built a zero-trust AWS data lake for unified patient records, ensuring absolute HIPAA compliance and sub-second query access.",
     content: `## Project Context & Challenge
 
@@ -66,7 +66,7 @@ Following a comprehensive external security review, the cloud environment achiev
       { value: "Millions", label: "Transactions" }
     ],
     techStack: ["AWS", "Kubernetes", "Docker", "Java"],
-    image: "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=1200&q=80",
+    image: "/images/global_banking.jpg",
     excerpt: "Re-platforming legacy core banking workloads into AWS using Kubernetes, accelerating deployments and cutting annual infrastructure costs.",
     content: `## Core System Legacy Pitfalls
 
@@ -106,7 +106,7 @@ Engineers can now declare cluster states in Git, triggering automated rollout, v
       { value: "$2.4M", label: "Saved Annually" }
     ],
     techStack: ["GCP", "Python", "AI", "Kubernetes"],
-    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+    image: "/images/smart_factory_iot.jpg",
     excerpt: "Leveraging Google Cloud IoT Core and TensorFlow models to predict machine fatigue, reducing manufacturing failures and predicting downtime.",
     content: `## The Manufacturing Downtime Deficit
 
@@ -146,7 +146,7 @@ Deployed via Google Kubernetes Engine (GKE), the model continuously scans sensor
       { value: "100%", label: "API Uptime" }
     ],
     techStack: ["DevOps", "Kubernetes", "Node.js", "Azure"],
-    image: "https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?auto=format&fit=crop&w=800&q=80",
+    image: "/images/supply_chain_logistics.jpg",
     excerpt: "Streamlining international freight tracking with automated routing algorithms and containerized deployment networks.",
     content: `## Global Routing Bottlenecks
 
@@ -186,7 +186,7 @@ Istio ingress controllers manage traffic routing and security policies, ensuring
       { value: "SOC 2", label: "Type II Compliant" }
     ],
     techStack: ["Cybersecurity", "Zero-Trust", "Cloudflare Access", "Azure AD", "SIEM"],
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+    image: "/images/pharma_zero_trust.jpg",
     excerpt: "How Jeshurun replaced a perimeter-based security model with a full Zero-Trust architecture across a leading European pharmaceutical company's global offices.",
     content: `## Context & Challenge
 
@@ -222,7 +222,7 @@ Following a 14-week phased rollout with zero production disruption, the organisa
       { value: "€1.2M", label: "Annual Cost Savings" }
     ],
     techStack: ["Apache Kafka", "Snowflake", "dbt", "Python", "AWS"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    image: "/images/claims_dashboard.jpg",
     excerpt: "Unifying claims data from 3 legacy systems into a real-time Kafka-Snowflake analytics layer, cutting underwriting decision time by 60% and saving €1.2M annually.",
     content: `## The Data Silo Problem
 

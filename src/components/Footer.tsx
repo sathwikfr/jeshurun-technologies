@@ -52,7 +52,6 @@ export function Footer() {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-1 max-w-md">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-2">
-                <span className="w-4 h-px bg-primary" />
                 Stay Connected
               </div>
               <h3 className="text-xl font-extrabold text-foreground tracking-tight">

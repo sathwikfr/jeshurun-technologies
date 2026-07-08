@@ -127,7 +127,7 @@ ${formData.message}
   };
 
   return (
-    <div className="relative min-h-screen pt-24 pb-16 overflow-hidden bg-[#FAFBFD] dark:bg-[#0F172A] text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="relative min-h-screen pt-24 pb-16 overflow-hidden bg-background text-slate-900 dark:text-slate-100 transition-colors duration-300">
       {/* Premium radial gradient background */}
       <div
         className="absolute inset-0 pointer-events-none z-0"

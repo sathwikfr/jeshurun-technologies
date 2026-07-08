@@ -1355,15 +1355,15 @@ export default function Home() {
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-[#5EC8FF]"></span>
                 </div>
                 <span className="text-[13px] lg:text-[14px] font-bold text-blue-700 dark:text-white tracking-wider uppercase">
-                  Enterprise Technology Partner
+                  GLOBAL ENTERPRISE CONSULTING
                 </span>
               </motion.div>
 
               <div className="flex flex-col items-center md:items-start w-full gap-3 lg:gap-4 2xl:gap-6">
                 {/* 2. MAIN HEADING */}
                 <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[44px] md:text-[54px] lg:text-[44px] xl:text-[52px] leading-[1.05] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
-                  <span className="block">Mission-Critical</span>
-                  <span className="block">Technology for</span>
+                  <span className="block">Engineering the</span>
+                  <span className="block">Future of</span>
                   <span
                     className="animate-text-gradient text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 dark:from-[#3B82F6] dark:via-[#60A5FA] dark:to-[#22D3EE] block mt-1 2xl:mt-2"
                   >
@@ -1373,18 +1373,18 @@ export default function Home() {
 
                 {/* 3. PARAGRAPH */}
                 <motion.p variants={enterpriseItem} className="text-gray-600 dark:text-[#B8C0CC] text-base md:text-lg lg:text-[16px] xl:text-[18px] leading-[1.6] max-w-[540px] lg:max-w-[520px] xl:max-w-[600px]">
-                  Trusted by pharma, telecoms, and insurance leaders across Ireland, Europe, the Middle East, and India — we architect resilient systems, enforce 99.9% SLA uptime, and deliver complex technology programmes on time, at scale.
+                  Architecting resilient cloud infrastructure, robust software engineering pipelines, and mission-critical digital transformations for global industry leaders.
                 </motion.p>
               </div>
 
               {/* 4. BUTTON ROW */}
-              <motion.div variants={enterpriseItem} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center md:justify-start">
+              <motion.div variants={enterpriseItem} className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto justify-center md:justify-start mt-2">
                 <Link
                   href="/contact"
-                  aria-label="Start a project with Jeshurun Technologies"
+                  aria-label="Schedule a consultation"
                   className="text-[15px] md:text-base bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold rounded-full py-3 px-7 lg:py-3.5 lg:px-8 shadow-[0_4px_20px_rgba(37,99,235,0.45)] hover:shadow-[0_6px_28px_rgba(37,99,235,0.55)] flex items-center justify-center transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
                 >
-                  Start a Project <span className="ml-2" aria-hidden="true">→</span>
+                  Schedule Consultation <span className="ml-2" aria-hidden="true">→</span>
                 </Link>
                 <Link
                   href="/services"

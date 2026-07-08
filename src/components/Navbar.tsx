@@ -246,6 +246,7 @@ const searchIndex = [
   { title: "Legacy Modernization", desc: "Refactoring and migrating monolithic systems.", href: "/software/legacy-modernization" },
   { title: "Mobile Experience Architecture", desc: "Enterprise-grade native and cross-platform mobile apps.", href: "/software/mobile-architecture" },
   { title: "Enterprise API & Data Pipelines", desc: "Building robust GraphQL and REST APIs alongside real-time data streaming.", href: "/software/enterprise-api" },
+  { title: "Data Pipelines & Analytics", desc: "Real-time Kafka and Snowflake streaming pipelines turning operational data into business intelligence.", href: "/software/data-pipelines" },
   
   // Technology Subpages
   { title: "Cloud Solutions", desc: "Scalable cloud infrastructure using AWS, Azure, and Google Cloud Platform.", href: "/technology/cloud-solutions" },

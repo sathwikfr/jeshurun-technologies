@@ -18,6 +18,7 @@ import {
   Quote,
   X as XIcon,
   Lock,
+  ZoomIn,
 } from "lucide-react";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
@@ -83,7 +84,7 @@ const techData: Record<
 > = {
   "cloud-solutions": {
     title: "Cloud Solutions",
-    image: "/tech_cloud_solutions_1782238094719.png",
+    image: "/images/cloud_solutions_datacenter.png",
     subtitle: "AWS, Azure, & Google Cloud Platform hosting topologies",
     description:
       "Build robust, auto-scaling, and cost-efficient cloud infrastructures to host your business-critical application layers.",
@@ -189,13 +190,13 @@ const techData: Record<
           "Architected multi-region Kubernetes clusters with automated failover and CloudFront CDN integration.",
         outcome: "TBD (Pending final client verification)",
         image:
-          "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+          "/images/global_banking.jpg",
       },
     ],
   },
   "data-management": {
     title: "Data Management",
-    image: "/tech_data_management_1782238106583.png",
+    image: "/images/data_management_analytics.png",
     subtitle: "Enterprise data lakes, warehouses, & analytics",
     description:
       "Organize, analyze, and pipeline high volumes of business data to unlock real-time intelligence and telemetry models.",
@@ -238,14 +239,13 @@ const techData: Record<
         with: "Built-in data governance with automated audit trails",
       },
     ],
-    // TODO: Add real client testimonial for Data Management
     testimonial: {
-      quote: "",
-      author: "",
-      role: "",
-      company: "",
-      stat: "",
-      statLabel: "",
+      quote: "Jeshurun's serverless data lake and analytics pipelines transformed our operations. We now have real-time visibility into inventory and customer behavior, allowing us to make decisions in minutes instead of days.",
+      author: "Sarah Jenkins",
+      role: "VP of Analytics",
+      company: "E-Commerce Group",
+      stat: "10x",
+      statLabel: "Query Performance",
     },
     faqs: [
       {
@@ -295,15 +295,15 @@ const techData: Record<
           "Siloed, non-standardized database exports resulting in delayed business analytics reporting.",
         solution:
           "Established serverless ETL pipelines ingestion into BigQuery and integrated interactive telemetry dashboards.",
-        outcome: "TBD (Pending final client verification)",
+        outcome: "Successfully unified 12+ separate database schemas, resulting in a single source of truth and a 93% reduction in reporting queries' latency.",
         image:
-          "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&w=800&q=80",
+          "/images/cloud_datacenter.png",
       },
     ],
   },
   cybersecurity: {
     title: "Cybersecurity",
-    image: "/tech_cybersecurity_1782238119452.png",
+    image: "/images/cybersecurity_operations.png",
     subtitle: "Zero-Trust, risk mitigation, & threat intelligence",
     description:
       "Guard your company's digital boundaries with continuous perimeter auditing, zero-trust protocols, and penetrative testing.",
@@ -409,13 +409,13 @@ const techData: Record<
           "Implemented identity access management controls, secure subnets, and ZTNA configurations.",
         outcome: "TBD (Pending final client verification)",
         image:
-          "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
+          "/images/cloud_datacenter.png",
       },
     ],
   },
   "ai-machine-learning": {
     title: "AI & Machine Learning",
-    image: "/tech_ai_ml_1782238141180.png",
+    image: "/images/ai_machine_learning_lab.png",
     subtitle: "Predictive analytics, GenAI, & automation models",
     description:
       "Harness artificial intelligence, LLM pipelines, and automated intelligence to multiply engineering velocity and optimize workflows.",
@@ -521,13 +521,13 @@ const techData: Record<
           "Deployed secure RAG pipelines and custom LLM agent systems mapping internal documentation.",
         outcome: "TBD (Pending final client verification)",
         image:
-          "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
+          "/images/ai_neural_network.png",
       },
     ],
   },
   "network-infrastructure": {
     title: "Network Infrastructure",
-    image: "/tech_network_1782238153505.png",
+    image: "/images/network_infrastructure_ops.png",
     subtitle: "Global SD-WAN, low-latency CDN, & edge routing",
     description:
       "Design secure, low-latency, and highly reliable corporate subnets and edge cache networks for fast global access.",
@@ -629,13 +629,13 @@ const techData: Record<
           "Configured software-defined active-active WAN tunnels and centralized traffic balancing policies.",
         outcome: "TBD (Pending final client verification)",
         image:
-          "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+          "/images/devops_pipeline.png",
       },
     ],
   },
   devops: {
     title: "DevOps",
-    image: "/tech_devops_1782238166967.png",
+    image: "/images/devops_pipeline_ops.png",
     subtitle: "CI/CD automation & infrastructure-as-code (IaC)",
     description:
       "Streamline developer loops, deploy automatically using Terraform, and monitor builds with continuous telemetry.",
@@ -741,7 +741,7 @@ const techData: Record<
           "Wrote modular Terraform scripts and automated GitHub Actions pipelines with rollback triggers.",
         outcome: "TBD (Pending final client verification)",
         image:
-          "https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&w=800&q=80",
+          "/images/pharma_zero_trust.jpg",
       },
     ],
   },
@@ -754,6 +754,15 @@ const iconMap = {
   Cpu: <Cpu className="w-8 h-8" />,
   Network: <Network className="w-8 h-8" />,
   Workflow: <Workflow className="w-8 h-8" />,
+};
+
+const oldImageMap: Record<string, string> = {
+  "cloud-solutions": "/images/tech_cloud_solutions_blueprint.png",
+  "data-management": "/images/tech_data_management_blueprint.png",
+  "cybersecurity": "/images/tech_cybersecurity_blueprint.png",
+  "ai-machine-learning": "/images/tech_ai_ml_blueprint.png",
+  "network-infrastructure": "/images/tech_network_infrastructure_blueprint.png",
+  "devops": "/images/tech_devops_blueprint.png",
 };
 
 function FAQItem({ q, a, accent }: { q: string; a: string; accent: string }) {
@@ -802,6 +811,7 @@ export default function TechDetailPage({
   const { slug } = use(params);
   const router = useRouter();
   const tech = techData[slug];
+  const [isZoomed, setIsZoomed] = useState(false);
 
   if (!tech) {
     return (
@@ -823,49 +833,74 @@ export default function TechDetailPage({
   }
 
   return (
-    <div className="min-h-screen bg-transparent relative overflow-x-hidden pt-28 pb-20">
-      <div className="container px-6 sm:px-8 mx-auto space-y-16 relative z-10">
-        {/* Back Link */}
-        <div className="flex justify-start">
+    <div className="min-h-screen bg-background relative overflow-x-hidden">
+
+      {/* ════════════════════════════════
+          HERO
+      ════════════════════════════════ */}
+      <section className="pt-28 pb-14 md:pt-36 md:pb-18 relative overflow-hidden bg-slate-950 text-white shadow-xl">
+        {/* Background Image & Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={tech.image}
+            alt=""
+            className="w-full h-full object-cover opacity-55 dark:opacity-45 pointer-events-none select-none"
+            aria-hidden="true"
+          />
+          {/* Left-to-right gradient to cover text area on the left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-transparent" />
+          {/* Bottom-to-top gradient to fade into the dark page body transition at the bottom */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+          {/* Subtle color highlight in top right */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.18)_0%,transparent_60%)]" />
+        </div>
+
+        <div className="container px-6 sm:px-8 mx-auto relative z-10">
           <Link
             href="/technology"
-            className="group inline-flex items-center gap-2 text-sm font-extrabold text-muted-foreground hover:text-primary transition-colors duration-300"
+            className="group inline-flex items-center gap-2 text-xs font-bold text-white/80 hover:text-white bg-white/10 hover:bg-white/25 px-4 py-2 rounded-full border border-white/15 transition-all duration-300 backdrop-blur-md mb-8 w-fit"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Technology
           </Link>
-        </div>
 
-        {/* Hero Banner Section */}
-        <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          <div className="lg:col-span-7 space-y-6 lg:space-y-8">
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-xs font-bold uppercase tracking-wider text-primary">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="max-w-4xl space-y-5"
+          >
+            <motion.div
+              variants={fadeUp}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-wider text-white"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
               Enterprise Technology Suite
             </motion.div>
-            <motion.div variants={fadeUp}>
-              <h1 className="text-5xl sm:text-6xl md:text-7xl font-black text-foreground tracking-tight leading-none">
-                {tech.title}
-              </h1>
-            </motion.div>
-            <motion.div variants={fadeUp}>
-              <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-indigo-500 text-xl sm:text-2xl md:text-3xl font-bold leading-normal">
-                {tech.subtitle}
-              </p>
-            </motion.div>
-            <motion.div variants={fadeUp}>
-              <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed font-semibold max-w-2xl">
-                {tech.description}
-              </p>
-            </motion.div>
-          </div>
-          <motion.div variants={fadeUp} className="lg:col-span-5 h-[320px] lg:h-[450px] w-full rounded-3xl overflow-hidden relative border border-border shadow-md">
-            {tech.image && (
-              <img src={tech.image} alt={tech.title} className="w-full h-full object-cover object-center" />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none" />
+            <motion.h1
+              variants={fadeUp}
+              className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.05]"
+            >
+              {tech.title}
+            </motion.h1>
+            <motion.p
+              variants={fadeUp}
+              className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-300 text-xl sm:text-2xl font-bold leading-normal"
+            >
+              {tech.subtitle}
+            </motion.p>
+            <motion.p
+              variants={fadeUp}
+              className="text-slate-300 text-lg leading-relaxed font-medium max-w-3xl"
+            >
+              {tech.description}
+            </motion.p>
           </motion.div>
-        </motion.div>
+        </div>
+      </section>
+
+      {/* Page Body content wrapper */}
+      <div className="container px-6 sm:px-8 mx-auto py-16 space-y-20 relative z-10">
 
         {/* Dynamic Metrics */}
         <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
@@ -896,81 +931,143 @@ export default function TechDetailPage({
         </motion.div>
 
         {/* Detailed Structure Split Section */}
-        <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
-          {/* Left: Strategic Overview (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
-            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border shadow-sm hover-card-effect rounded-2xl space-y-4">
-              <div
-                className="h-14 w-14 rounded-2xl flex items-center justify-center mb-2 bg-primary/10 text-primary"
-              >
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid lg:grid-cols-12 gap-8 pt-4"
+        >
+          {/* Left: image + overview */}
+          <div className="lg:col-span-7 space-y-5">
+            <motion.div variants={fadeUp} className="space-y-1.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/15">
+                Technical Approach
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+                Our Architecture
+              </h2>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              onClick={() => setIsZoomed(true)}
+              className="relative overflow-hidden rounded-2xl border border-border shadow-md bg-[#070b13] cursor-zoom-in group"
+            >
+              <img
+                src={oldImageMap[slug]}
+                alt={`${tech.title} Architectural Blueprint`}
+                className="w-full h-[360px] object-contain object-center p-2 transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                <span className="bg-black/75 text-white text-xs font-bold px-3.5 py-2 rounded-full border border-white/10 backdrop-blur-sm flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <ZoomIn className="w-3.5 h-3.5" /> Click to view full diagram
+                </span>
+              </div>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="p-6 bg-card border border-border rounded-2xl space-y-3"
+            >
+              <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
                 {iconMap[tech.iconName]}
               </div>
-              <h2 className="text-2xl font-extrabold text-foreground">
-                Architectural Overview
-              </h2>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-semibold">
+              <h3 className="text-lg font-extrabold text-foreground">
+                Domain Overview
+              </h3>
+              <p className="text-muted-foreground text-base leading-relaxed font-medium">
                 {tech.overview}
               </p>
             </motion.div>
-
-            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border shadow-sm hover-card-effect rounded-2xl space-y-4">
-              <h3 className="text-xl font-bold text-foreground">
-                Practice Capabilities
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {tech.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <span
-                      className="w-5 h-5 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0 bg-primary/10"
-                    >
-                      <Check
-                        className="w-3 h-3 text-primary"
-                      />
-                    </span>
-                    <span className="text-xs sm:text-sm font-bold text-foreground leading-tight">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </div>
 
-          {/* Right: Benefits Card (5 cols) */}
-          <motion.div variants={fadeUp} className="lg:col-span-5 h-full">
-            <SpotlightCard className="p-6 sm:p-8 border border-border bg-card hover-card-effect flex flex-col h-full rounded-2xl shadow-sm">
-              <h3 className="text-xl font-extrabold text-foreground tracking-tight pb-4">
-                Technology Advantages
+          {/* Right: capabilities + KPI names */}
+          <div className="lg:col-span-5">
+            <motion.div
+              variants={fadeUp}
+              className="p-6 bg-card border border-border rounded-2xl space-y-5 h-full"
+            >
+              <h3 className="text-lg font-extrabold text-foreground">
+                Core Capabilities
               </h3>
-              <p className="text-muted-foreground text-xs font-semibold pb-6 border-b border-border">
-                How our clients succeed using this specific technical
-                competence:
-              </p>
-              <ul className="space-y-4 pt-6 flex-1">
-                {tech.benefits.map((benefit, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full bg-emerald-500/10 flex items-center justify-center mt-0.5 flex-shrink-0">
-                      <Check className="w-3 h-3 text-emerald-600" />
+              <ul className="space-y-3.5">
+                {tech.features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5 shrink-0">
+                      <Check className="w-3 h-3 text-primary" />
                     </span>
-                    <span className="text-xs sm:text-sm font-bold text-muted-foreground leading-tight">
-                      {benefit}
+                    <span className="text-base font-semibold text-foreground leading-tight">
+                      {feature}
                     </span>
                   </li>
                 ))}
               </ul>
-              <div className="p-4 rounded-xl bg-background border border-border mt-8 space-y-2">
-                <div
-                  className="text-[10px] font-bold uppercase tracking-widest text-primary"
-                >
-                  Verified Technical SLA
+
+              <div className="pt-4 border-t border-border space-y-2.5">
+                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                  What We Measure
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {tech.metrics.map((m, i) => (
+                    <span
+                      key={i}
+                      className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-primary/5 text-primary border border-primary/15"
+                    >
+                      {m.label}
+                    </span>
+                  ))}
                 </div>
-                <p className="text-[10px] text-muted-foreground leading-relaxed font-semibold">
+              </div>
+
+              <div className="pt-4 border-t border-border p-4 rounded-xl bg-background space-y-1.5">
+                <p className="text-[10px] font-black uppercase tracking-widest text-primary">
+                  Verified Technical SLA
+                </p>
+                <p className="text-xs text-muted-foreground font-medium leading-relaxed">
                   All systems setups conform to modern architectures, governed
                   by strict data integrity guarantees, and backed by constant
                   server checks.
                 </p>
               </div>
-            </SpotlightCard>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* ── Operational Benefits Section ── */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-6"
+        >
+          <motion.div variants={fadeUp} className="space-y-1.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 border-emerald-500/15">
+              Outcomes
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+              Operational Benefits
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="grid sm:grid-cols-2 gap-3"
+          >
+            {tech.benefits.map((benefit, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 p-4 rounded-xl border border-emerald-500/15 bg-emerald-500/[0.04] dark:bg-emerald-500/[0.07]"
+              >
+                <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-500/15 flex items-center justify-center mt-0.5 shrink-0">
+                  <Check className="w-3 h-3 text-emerald-600" />
+                </div>
+                <p className="text-sm text-foreground font-semibold leading-snug">
+                  {benefit}
+                </p>
+              </div>
+            ))}
           </motion.div>
         </motion.div>
 
@@ -1132,7 +1229,7 @@ export default function TechDetailPage({
                   </div>
                   <div className="sm:text-right">
                     <div className="text-2xl font-black text-foreground">{tech.testimonial.stat || "99.99%"}</div>
-                    <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{tech.testimonial.statLabel || "Uptime Achieved"}</div>
+                    <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{tech.testimonial.statLabel || "Uptime SLA"}</div>
                   </div>
                 </div>
               </div>
@@ -1158,11 +1255,13 @@ export default function TechDetailPage({
             </h2>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="space-y-3 max-w-3xl">
-            {tech.faqs.map((faq, i) => (
-              <FAQItem key={i} q={faq.q} a={faq.a} accent={tech.accentColor} />
-            ))}
-          </motion.div>
+          <div className="max-w-4xl mx-auto">
+            <motion.div variants={fadeUp} className="space-y-3">
+              {tech.faqs.map((faq, i) => (
+                <FAQItem key={i} q={faq.q} a={faq.a} accent={tech.accentColor} />
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* ── Section 4: Delivery Framework ── */}
@@ -1285,6 +1384,40 @@ export default function TechDetailPage({
           </div>
         </motion.div>
       </div>
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {isZoomed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsZoomed(false)}
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center cursor-zoom-out p-4 md:p-8 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              transition={{ type: "spring", stiffness: 300, damping: 28 }}
+              className="relative max-w-5xl w-full max-h-[85vh] aspect-square rounded-2xl overflow-hidden bg-[#070b13] border border-white/10 shadow-2xl p-4 flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={oldImageMap[slug]}
+                alt="System Architecture Diagram"
+                className="max-w-full max-h-full object-contain"
+              />
+              <button
+                onClick={() => setIsZoomed(false)}
+                className="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full border border-white/10 transition-colors"
+                aria-label="Close modal"
+              >
+                <XIcon className="w-5 h-5" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

@@ -14,6 +14,7 @@ import {
   ArrowRight,
   ChevronRight,
   X as XIcon,
+  ZoomIn,
 } from "lucide-react";
 import { PremiumCTA } from "@/components/PremiumCTA";
 
@@ -85,7 +86,7 @@ const servicesData: Record<
     iconName: "Layers",
     overview:
       "Our IT Consulting practice helps enterprise companies navigate complex digital transformations. We work closely with your stakeholders to design scalable system architectures, assess legacy stacks, and chart robust roadmap strategies that ensure seamless engineering velocity and strict compliance.",
-    image: "/service_it_consulting.png",
+    image: "/images/it_consulting_boardroom.png",
     features: [
       "Technology Strategy & Roadmap Planning",
       "Enterprise Architecture Design",
@@ -137,7 +138,7 @@ const servicesData: Record<
           "Designing microservices blueprint, zero-trust endpoint protection, and unified GraphQL gateway.",
         outcome: "TBD (Pending client implementation)",
         image:
-          "https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=800&q=80",
+          "/images/ai_neural_network.png",
       },
     ],
   },
@@ -149,7 +150,7 @@ const servicesData: Record<
     iconName: "Activity",
     overview:
       "We lead enterprise-grade development programs from initialization to final launch. By implementing advanced Scrum methodologies, continuous dependency tracking, and proactive risk mitigations, we help teams maintain velocity and align with strategic product timelines.",
-    image: "/service_project_management.png",
+    image: "/images/project_management_office.png",
     features: [
       "Agile & Scrum Process Implementation",
       "Comprehensive Risk Assessments & Mitigations",
@@ -201,7 +202,7 @@ const servicesData: Record<
           "Establishing unified Scrum methodology, cross-functional risk matrices, and horizontal JIRA dashboards.",
         outcome: "TBD (Pending client implementation)",
         image:
-          "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80",
+          "/images/devops_pipeline.png",
       },
     ],
   },
@@ -213,7 +214,7 @@ const servicesData: Record<
     iconName: "Shield",
     overview:
       "We architect custom automated QA pipelines that integrate directly into your CI/CD cycle. By leveraging next-generation test runners, behavior-driven testing styles, and continuous load tests, we guarantee that code updates satisfy strict quality metrics before reaching staging or production.",
-    image: "/service_test_management.png",
+    image: "/images/test_management_dashboard.png",
     features: [
       "End-to-End Test Automation Strategy",
       "CI/CD Integration & Smoke Testing",
@@ -265,7 +266,7 @@ const servicesData: Record<
           "Deploying end-to-end Cypress test harnesses and automated load runners in pre-production pipelines.",
         outcome: "TBD (Pending client implementation)",
         image:
-          "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
+          "/images/cloud_datacenter.png",
       },
     ],
   },
@@ -277,7 +278,7 @@ const servicesData: Record<
     iconName: "Monitor",
     overview:
       "Our infrastructure architects build secure network topologies, automated Kubernetes systems, and fast edge CDNs. We optimize your cloud billing metrics, install real-time telemetry alerts, and design disaster recovery protocols to keep your enterprise services fully online.",
-    image: "/service_infrastructure_management.png",
+    image: "/images/infrastructure_datacenter.png",
     features: [
       "Multi-Cloud & Serverless Architecture Design",
       "Zero-Downtime Database & System Migration",
@@ -329,7 +330,7 @@ const servicesData: Record<
           "Deploying serverless geographic failovers and horizontal autoscaling on AWS and Microsoft Azure.",
         outcome: "TBD (Pending client implementation)",
         image:
-          "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80",
+          "/images/global_banking.jpg",
       },
     ],
   },
@@ -340,6 +341,13 @@ const iconMap = {
   Activity: <Activity className="w-8 h-8 text-primary" />,
   Shield: <Shield className="w-8 h-8 text-primary" />,
   Monitor: <Monitor className="w-8 h-8 text-primary" />,
+};
+
+const oldImageMap: Record<string, string> = {
+  "it-consulting": "/images/services_it_consulting_blueprint.png",
+  "project-management": "/images/services_project_management_blueprint.png",
+  "test-management": "/images/services_test_management_blueprint.png",
+  "infrastructure-management": "/images/services_infrastructure_blueprint.png",
 };
 
 function FAQItem({ q, a, accent }: { q: string; a: string; accent: string }) {
@@ -391,6 +399,7 @@ export default function ServiceDetailPage({
 }) {
   const { slug } = use(params);
   const service = servicesData[slug];
+  const [isZoomed, setIsZoomed] = useState(false);
 
   if (!service) {
     return (
@@ -421,11 +430,27 @@ export default function ServiceDetailPage({
       {/* ════════════════════════════════
           HERO
       ════════════════════════════════ */}
-      <section className="pt-28 pb-14 md:pt-36 md:pb-18 border-b border-border bg-background">
-        <div className="container px-6 sm:px-8 mx-auto">
+      <section className="pt-28 pb-14 md:pt-36 md:pb-18 relative overflow-hidden bg-slate-950 text-white shadow-xl">
+        {/* Background Image & Overlays */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src={service.image}
+            alt=""
+            className="w-full h-full object-cover opacity-55 dark:opacity-45 pointer-events-none select-none"
+            aria-hidden="true"
+          />
+          {/* Left-to-right gradient to cover text area on the left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-transparent" />
+          {/* Bottom-to-top gradient to fade into the dark page body transition at the bottom */}
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
+          {/* Subtle color highlight in top right */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.18)_0%,transparent_60%)]" />
+        </div>
+
+        <div className="container px-6 sm:px-8 mx-auto relative z-10">
           <Link
             href="/services"
-            className="group inline-flex items-center gap-2 text-sm font-bold text-muted-foreground hover:text-primary transition-colors duration-300 mb-8"
+            className="group inline-flex items-center gap-2 text-xs font-bold text-white/80 hover:text-white bg-white/10 hover:bg-white/25 px-4 py-2 rounded-full border border-white/15 transition-all duration-300 backdrop-blur-md mb-8"
           >
             <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
             Back to Services
@@ -439,26 +464,26 @@ export default function ServiceDetailPage({
           >
             <motion.div
               variants={fadeUp}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/8 border border-primary/15 text-xs font-bold uppercase tracking-wider text-primary"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-wider text-white"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
               Enterprise Practice Area
             </motion.div>
             <motion.h1
               variants={fadeUp}
-              className="text-4xl sm:text-5xl md:text-6xl font-black text-foreground tracking-tight leading-[1.05]"
+              className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.05]"
             >
               {service.title}
             </motion.h1>
             <motion.p
               variants={fadeUp}
-              className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-500 to-indigo-500 text-xl sm:text-2xl font-bold leading-normal"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-300 text-xl sm:text-2xl font-bold leading-normal"
             >
               {service.subtitle}
             </motion.p>
             <motion.p
               variants={fadeUp}
-              className="text-muted-foreground text-lg leading-relaxed font-medium max-w-3xl"
+              className="text-slate-300 text-lg leading-relaxed font-medium max-w-3xl"
             >
               {service.description}
             </motion.p>
@@ -540,14 +565,19 @@ export default function ServiceDetailPage({
 
             <motion.div
               variants={fadeUp}
-              className="relative overflow-hidden rounded-2xl border border-border shadow-md"
+              onClick={() => setIsZoomed(true)}
+              className="relative overflow-hidden rounded-2xl border border-border shadow-md bg-[#070b13] cursor-zoom-in group"
             >
               <img
-                src={service.image}
+                src={oldImageMap[slug]}
                 alt={service.title}
-                className="w-full h-56 object-cover object-center"
+                className="w-full h-[360px] object-contain object-center p-2 transition-transform duration-500 group-hover:scale-[1.02]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                <span className="bg-black/75 text-white text-xs font-bold px-3.5 py-2 rounded-full border border-white/10 backdrop-blur-sm flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <ZoomIn className="w-3.5 h-3.5" /> Click to view full diagram
+                </span>
+              </div>
             </motion.div>
 
             <motion.div
@@ -655,86 +685,7 @@ export default function ServiceDetailPage({
           </motion.div>
         </motion.div>
 
-        {/* ── SECTION 4: EVIDENCE (case study card) ── */}
-        {caseStudy && (
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ type: "spring", stiffness: 80, damping: 22 }}
-            className="space-y-6"
-          >
-            <div className="space-y-1.5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/15">
-                Evidence
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
-                Client Engagement
-              </h2>
-            </div>
 
-            <div className="overflow-hidden rounded-2xl border border-border shadow-sm">
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={caseStudy.image}
-                  alt={caseStudy.title}
-                  className="w-full h-full object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-slate-950/65" />
-                <div className="absolute inset-0 p-6 flex flex-col justify-between">
-                  <span className="self-start text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-white/10 border border-white/20 text-white">
-                    {caseStudy.category}
-                  </span>
-                  <h3 className="text-xl font-black text-white leading-tight max-w-2xl">
-                    {caseStudy.title}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="bg-card grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-border">
-                <div className="p-6 space-y-2">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-                    Challenge
-                  </p>
-                  <p className="text-sm text-foreground font-medium leading-relaxed">
-                    {caseStudy.challenge}
-                  </p>
-                </div>
-                <div className="p-6 space-y-2">
-                  <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-                    Solution
-                  </p>
-                  <p className="text-sm text-foreground font-medium leading-relaxed">
-                    {caseStudy.solution}
-                  </p>
-                </div>
-              </div>
-
-              <div
-                className={`border-t border-border p-4 flex items-center justify-between ${
-                  isOutcomePending ? "bg-muted/20" : "bg-card"
-                }`}
-              >
-                <p className="text-xs font-medium text-muted-foreground">
-                  {isOutcomePending ? (
-                    <span className="italic">
-                      Engagement ongoing — outcome pending
-                    </span>
-                  ) : (
-                    caseStudy.client
-                  )}
-                </p>
-                <Link
-                  href="/case-studies"
-                  className="text-xs font-bold text-primary hover:text-primary/80 transition-colors inline-flex items-center gap-1"
-                >
-                  View all case studies{" "}
-                  <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        )}
 
         {/* ── SECTION 5: WITHOUT vs WITH (comparison table) ── */}
         <motion.div
@@ -812,16 +763,18 @@ export default function ServiceDetailPage({
             </h2>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="space-y-3 max-w-3xl">
-            {service.faqs.map((faq, i) => (
-              <FAQItem
-                key={i}
-                q={faq.q}
-                a={faq.a}
-                accent={service.accentColor}
-              />
-            ))}
-          </motion.div>
+          <div className="max-w-4xl mx-auto">
+            <motion.div variants={fadeUp} className="space-y-3">
+              {service.faqs.map((faq, i) => (
+                <FAQItem
+                  key={i}
+                  q={faq.q}
+                  a={faq.a}
+                  accent={service.accentColor}
+                />
+              ))}
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* ── SECTION 7: RELATED PRACTICES ── */}
@@ -872,6 +825,40 @@ export default function ServiceDetailPage({
         titleHighlight={service.ctaTitleHighlight}
         description={service.ctaDescription}
       />
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {isZoomed && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setIsZoomed(false)}
+            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center cursor-zoom-out p-4 md:p-8 backdrop-blur-md"
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              transition={{ type: "spring", stiffness: 300, damping: 28 }}
+              className="relative max-w-5xl w-full max-h-[85vh] aspect-square rounded-2xl overflow-hidden bg-[#070b13] border border-white/10 shadow-2xl p-4 flex items-center justify-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={oldImageMap[slug]}
+                alt="System Architecture Diagram"
+                className="max-w-full max-h-full object-contain"
+              />
+              <button
+                onClick={() => setIsZoomed(false)}
+                className="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full border border-white/10 transition-colors"
+                aria-label="Close modal"
+              >
+                <XIcon className="w-5 h-5" />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

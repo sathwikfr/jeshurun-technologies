@@ -479,87 +479,137 @@ export default function SoftwareDetailPage({
         </motion.div>
 
         {/* Detailed Structure Split Section */}
-        <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-4">
-          {/* Left: Strategic Overview (7 cols) */}
-          <div className="lg:col-span-7 space-y-6">
-            <motion.div variants={fadeUp} className="relative overflow-hidden rounded-2xl border border-border shadow-md bg-background">
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid lg:grid-cols-12 gap-8 pt-4"
+        >
+          {/* Left: image + overview */}
+          <div className="lg:col-span-7 space-y-5">
+            <motion.div variants={fadeUp} className="space-y-1.5">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/15">
+                Technical Approach
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+                Our Architecture
+              </h2>
+            </motion.div>
+
+            <motion.div
+              variants={fadeUp}
+              className="relative overflow-hidden rounded-2xl border border-border shadow-md h-[360px] group bg-[#070b13]"
+            >
               <img
                 src={category.image}
                 alt={category.title}
-                className="w-full h-64 object-cover object-center hover:scale-[1.01] transition-transform duration-500"
+                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 to-transparent" />
             </motion.div>
 
-            {/* Practice Overview Container */}
-            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300">
-              <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-2">
+            <motion.div
+              variants={fadeUp}
+              className="p-6 bg-card border border-border rounded-2xl space-y-3"
+            >
+              <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
                 {iconMap[category.iconName]}
               </div>
-              <h2 className="text-2xl font-extrabold text-foreground">
-                Architecture Overview
-              </h2>
-              <p className="text-muted-foreground text-sm sm:text-base leading-relaxed font-semibold">
+              <h3 className="text-lg font-extrabold text-foreground">
+                Domain Overview
+              </h3>
+              <p className="text-muted-foreground text-base leading-relaxed font-medium">
                 {category.overview}
               </p>
             </motion.div>
-
-            {/* Core Features list container */}
-            <motion.div variants={fadeUp} className="p-6 sm:p-8 bg-card border border-border rounded-2xl space-y-4 shadow-sm hover:shadow-md hover:border-primary/20 transition-all duration-300">
-              <h3 className="text-xl font-bold text-foreground">
-                Engineering Features
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {category.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5 flex-shrink-0">
-                      <Check className="w-3 h-3 text-primary" />
-                    </span>
-                    <span className="text-sm font-bold text-foreground leading-tight">
-                      {feature}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
           </div>
 
-          {/* Right: Benefits & SLA Cards (5 cols) */}
-          <motion.div variants={fadeUp} className="lg:col-span-5 h-full">
-            <SpotlightCard className="p-6 sm:p-8 border border-border bg-card hover-card-effect flex flex-col h-full rounded-2xl shadow-sm">
-              <h3 className="text-xl font-extrabold text-foreground tracking-tight pb-4">
-                Business Impact
+          {/* Right: capabilities + KPI names */}
+          <div className="lg:col-span-5">
+            <motion.div
+              variants={fadeUp}
+              className="p-6 bg-card border border-border rounded-2xl space-y-5 h-full"
+            >
+              <h3 className="text-lg font-extrabold text-foreground">
+                Core Capabilities
               </h3>
-              <p className="text-muted-foreground text-sm font-semibold pb-6 border-b border-border">
-                How our clients succeed using this specific software engineering
-                discipline:
-              </p>
-
-              <ul className="space-y-4 pt-6 flex-1">
-                {category.benefits.map((benefit, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <span className="w-5 h-5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 flex items-center justify-center mt-0.5 flex-shrink-0">
-                      <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+              <ul className="space-y-3.5">
+                {category.features.map((feature, i) => (
+                  <li key={i} className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5 shrink-0">
+                      <Check className="w-3 h-3 text-primary" />
                     </span>
-                    <span className="text-sm font-bold text-muted-foreground leading-tight">
-                      {benefit}
+                    <span className="text-base font-semibold text-foreground leading-tight">
+                      {feature}
                     </span>
                   </li>
                 ))}
               </ul>
 
-              {/* SLA Details footer */}
-              <div className="p-4 rounded-xl bg-background border border-border mt-8 space-y-2">
-                <div className="text-[10px] font-bold text-primary uppercase tracking-widest">
-                  Engineering Quality Guarantee
+              <div className="pt-4 border-t border-border space-y-2.5">
+                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                  What We Measure
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {category.metrics.map((m, i) => (
+                    <span
+                      key={i}
+                      className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-primary/5 text-primary border border-primary/15"
+                    >
+                      {m.label}
+                    </span>
+                  ))}
                 </div>
-                <p className="text-xs text-muted-foreground leading-relaxed font-semibold">
+              </div>
+
+              <div className="pt-4 border-t border-border p-4 rounded-xl bg-background space-y-1.5">
+                <p className="text-[10px] font-black uppercase tracking-widest text-primary">
+                  Engineering Quality Guarantee
+                </p>
+                <p className="text-xs text-muted-foreground font-medium leading-relaxed">
                   All software deliveries are governed by robust CI/CD
                   pipelines, strict code quality audits, and automated security
                   scanning.
                 </p>
               </div>
-            </SpotlightCard>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* ── Operational Benefits Section ── */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
+          className="space-y-6"
+        >
+          <motion.div variants={fadeUp} className="space-y-1.5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 border-emerald-500/15">
+              Outcomes
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+              Operational Benefits
+            </h2>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            className="grid sm:grid-cols-2 gap-3"
+          >
+            {category.benefits.map((benefit, i) => (
+              <div
+                key={i}
+                className="flex items-start gap-3 p-4 rounded-xl border border-emerald-500/15 bg-emerald-500/[0.04] dark:bg-emerald-500/[0.07]"
+              >
+                <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-500/15 flex items-center justify-center mt-0.5 shrink-0">
+                  <Check className="w-3 h-3 text-emerald-600" />
+                </div>
+                <p className="text-sm text-foreground font-semibold leading-snug">
+                  {benefit}
+                </p>
+              </div>
+            ))}
           </motion.div>
         </motion.div>
 
