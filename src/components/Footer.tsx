@@ -46,32 +46,7 @@ export function Footer() {
         aria-hidden="true"
       />
 
-      {/* ── Newsletter CTA Strip ── */}
-      <div className="relative z-10 border-b border-border/60">
-        <div className="container mx-auto px-6 sm:px-8 py-10 md:py-12">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-1 max-w-md">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-2">
-                Stay Connected
-              </div>
-              <h3 className="text-xl font-extrabold text-foreground tracking-tight">
-                Enterprise Technology Insights
-              </h3>
-              <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                Research reports, cloud strategies, and digital transformation briefs — delivered to your inbox.
-              </p>
-            </div>
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-xl bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition-all duration-300 shadow-[0_4px_16px_rgba(37,99,235,0.35)] hover:shadow-[0_6px_24px_rgba(37,99,235,0.5)] hover:scale-[1.02] shrink-0"
-            >
-              <Mail className="w-4 h-4" aria-hidden="true" />
-              Get in Touch
-              <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
-            </Link>
-          </div>
-        </div>
-      </div>
+
 
       {/* ── Main Footer Grid ── */}
       <div className="container mx-auto px-6 sm:px-8 py-14 md:py-18 relative z-10">

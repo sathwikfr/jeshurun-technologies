@@ -446,7 +446,7 @@ export function Navbar() {
             <HeaderLogo />
 
             {/* Desktop Navigation (Centered) */}
-            <nav className="hidden md:flex items-center justify-center gap-3 lg:gap-6 xl:gap-8 h-full flex-1 mx-2 lg:mx-8">
+            <nav className="hidden md:flex items-center justify-center gap-0 lg:gap-1 xl:gap-2 h-full flex-1 mx-1 lg:mx-4">
           {navItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -460,7 +460,7 @@ export function Navbar() {
               >
                 {item.hasDropdown ? (
                   <div
-                    className={`text-[15px] xl:text-base font-semibold tracking-wide whitespace-nowrap transition-all duration-300 relative py-1.5 flex items-center gap-1 select-none ${
+                    className={`text-[15px] xl:text-base font-semibold tracking-wide whitespace-nowrap transition-all duration-300 relative h-full flex items-center select-none ${
                       showLine
                         ? "text-primary"
                         : forceLightText
@@ -471,7 +471,7 @@ export function Navbar() {
                     <Link
                       href={item.href}
                       onClick={() => setActiveMenu(null)}
-                      className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm"
+                      className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm h-full flex items-center pl-3 pr-1"
                     >
                       {item.label}
                     </Link>
@@ -495,7 +495,7 @@ export function Navbar() {
                       }}
                       aria-expanded={activeMenu === item.label}
                       aria-haspopup="true"
-                      className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm p-0.5 flex items-center justify-center"
+                      className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-sm h-full flex items-center justify-center pr-3 pl-1"
                     >
                       <ChevronDown className={`w-3.5 h-3.5 opacity-60 transition-transform duration-300 ${activeMenu === item.label ? 'opacity-100 -rotate-180' : 'hover:opacity-100 group-hover:opacity-100'}`} />
                     </button>
@@ -517,7 +517,7 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     onClick={() => setActiveMenu(null)}
-                    className={`text-[15px] xl:text-base font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 relative py-1.5 flex items-center gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md ${
+                    className={`text-[15px] xl:text-base font-semibold tracking-wide whitespace-nowrap transition-colors duration-300 relative h-full px-3 flex items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-md ${
                       showLine
                         ? "text-primary"
                         : forceLightText
