@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   ShieldCheck, 
@@ -216,11 +217,13 @@ export default function SlaPage() {
 
             {/* Right Graphic Column */}
             <div className="lg:col-span-6 relative">
-              <div className="relative group overflow-hidden rounded-3xl border border-border dark:border-border shadow-lg bg-background dark:bg-slate-900/40">
-                <img 
+              <div className="relative group overflow-hidden rounded-3xl border border-border dark:border-border shadow-lg bg-background dark:bg-slate-900/40 h-80">
+                <Image 
                   src="/about_sla_standards.png" 
-                  alt="Network Monitoring Dashboard Visual" 
-                  className="w-full h-80 object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
+                  alt="Network Monitoring Dashboard Visual"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw" 
+                  className="object-cover object-center group-hover:scale-[1.02] transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">

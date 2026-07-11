@@ -409,6 +409,51 @@
     background-size: 200% auto;
     animation: gradient-shift 4s ease infinite;
   }
+
+  /* ── Editorial Design System (Services Detail Pages) ── */
+
+  /* Playfair Display serif for editorial headlines */
+  .font-editorial {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, 'Times New Roman', serif;
+  }
+
+  /* Thin horizontal rule separator — editorial pacing */
+  .editorial-rule {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* Editorial pull-quote styling */
+  .editorial-pullquote {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    line-height: 1.65;
+    letter-spacing: -0.01em;
+  }
+
+  /* Editorial numbered list item */
+  .editorial-numbered-item {
+    counter-increment: editorial-counter;
+  }
+  .editorial-numbered-item::before {
+    content: counter(editorial-counter, decimal-leading-zero);
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+    margin-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  /* Editorial stat number */
+  .editorial-stat {
+    font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
 }
 
 @keyframes ambient-shift {

@@ -2,6 +2,8 @@
 
 import { use, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
   ArrowLeft,
@@ -499,12 +501,14 @@ export default function SoftwareDetailPage({
 
             <motion.div
               variants={fadeUp}
-              className="relative overflow-hidden rounded-2xl border border-border shadow-md h-[360px] group bg-[#070b13]"
+              className="relative overflow-hidden rounded-2xl border border-border shadow-md h-[360px] group bg-slate-50 dark:bg-[#070b13]"
             >
-              <img
+              <Image
                 src={category.image}
                 alt={category.title}
-                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
               />
             </motion.div>
 

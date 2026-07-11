@@ -15,6 +15,7 @@ import {
   Brain,
   Search, PenTool, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { AnimatedCounter } from "@/components/HeroStatsPanel";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
@@ -221,13 +222,14 @@ function ServiceStrip({
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="w-full lg:w-[46%] shrink-0"
           >
-            <div className="relative rounded-2xl overflow-hidden border border-border shadow-lg aspect-[4/3] bg-muted">
-              <motion.img
+            <div className="relative rounded-2xl overflow-hidden border border-border shadow-lg aspect-[4/3] bg-muted group flex items-center justify-center">
+              {/* Photorealistic image background with hover scale */}
+              <Image
                 src={service.image}
                 alt={service.title}
-                animate={!prefersReducedMotion && isInView ? { scale: [1, 1.05, 1] } : { scale: 1 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="w-full h-full object-cover object-center"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
               />
               
               {/* Glowing Pulse Nodes Overlay */}

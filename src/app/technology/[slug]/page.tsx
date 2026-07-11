@@ -1,7 +1,8 @@
 "use client";
 
-import { use, useState } from "react";
+import { use, useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import {
@@ -841,10 +842,13 @@ export default function TechDetailPage({
       <section className="pt-28 pb-14 md:pt-36 md:pb-18 relative overflow-hidden bg-slate-950 text-white shadow-xl">
         {/* Background Image & Overlays */}
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src={tech.image}
             alt=""
-            className="w-full h-full object-cover opacity-55 dark:opacity-45 pointer-events-none select-none"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover opacity-55 dark:opacity-45 pointer-events-none select-none"
             aria-hidden="true"
           />
           {/* Left-to-right gradient to cover text area on the left */}
@@ -952,13 +956,17 @@ export default function TechDetailPage({
             <motion.div
               variants={fadeUp}
               onClick={() => setIsZoomed(true)}
-              className="relative overflow-hidden rounded-2xl border border-border shadow-md bg-[#070b13] cursor-zoom-in group"
+              className="relative overflow-hidden rounded-2xl border border-border shadow-md bg-slate-50 dark:bg-[#070b13] cursor-zoom-in group"
             >
-              <img
-                src={oldImageMap[slug]}
-                alt={`${tech.title} Architectural Blueprint`}
-                className="w-full h-[360px] object-contain object-center p-2 transition-transform duration-500 group-hover:scale-[1.02]"
-              />
+              <div className="w-full h-[360px] relative">
+                <Image
+                  src={oldImageMap[slug]}
+                  alt={`${tech.title} Architectural Blueprint`}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                  className="object-contain object-center p-2 transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              </div>
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
                 <span className="bg-black/75 text-white text-xs font-bold px-3.5 py-2 rounded-full border border-white/10 backdrop-blur-sm flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                   <ZoomIn className="w-3.5 h-3.5" /> Click to view full diagram
@@ -1399,13 +1407,15 @@ export default function TechDetailPage({
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 15 }}
               transition={{ type: "spring", stiffness: 300, damping: 28 }}
-              className="relative max-w-5xl w-full max-h-[85vh] aspect-square rounded-2xl overflow-hidden bg-[#070b13] border border-white/10 shadow-2xl p-4 flex items-center justify-center"
+              className="relative max-w-5xl w-full max-h-[85vh] aspect-square rounded-2xl overflow-hidden bg-slate-50 dark:bg-[#070b13] border border-slate-200 dark:border-white/10 shadow-2xl p-4 flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
+              <Image
                 src={oldImageMap[slug]}
                 alt="System Architecture Diagram"
-                className="max-w-full max-h-full object-contain"
+                fill
+                sizes="100vw"
+                className="object-contain"
               />
               <button
                 onClick={() => setIsZoomed(false)}

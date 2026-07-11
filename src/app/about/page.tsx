@@ -32,7 +32,7 @@ const item: Variants = {
 };
 
 export default function AboutPage() {
-  const [activeTab, setActiveTab] = useState<"who" | "delivery">("who");
+  const [activeTab, setActiveTab] = useState<"who" | "delivery" | null>(null);
 
   // Methodology Timeline steps for Section 6 (How We Deliver)
   const timelineSteps = [
@@ -296,9 +296,66 @@ export default function AboutPage() {
                   ))}
                 </div>
               </motion.div>
+        {/* LEADERSHIP TEAM */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-40px" }}
+          className="max-w-6xl mx-auto mb-20 pt-16 border-t border-[rgba(15,23,42,0.08)] dark:border-slate-800"
+        >
+          <div className="text-center mb-12 space-y-4">
+            <motion.div 
+              variants={item}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+              Leadership Team
             </motion.div>
-          )}
+            
+            <motion.h2 
+              variants={item}
+              className="text-3xl md:text-4xl font-serif tracking-tight text-slate-900 dark:text-white"
+            >
+              Meet Our Leadership
+            </motion.h2>
+            
+            <motion.p 
+              variants={item}
+              className="text-slate-500 dark:text-slate-400 font-semibold text-sm sm:text-base leading-relaxed max-w-2xl mx-auto"
+            >
+              Experienced leaders driving Jeshurun's technology strategy and delivery excellence.
+            </motion.p>
+          </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {leadershipData.map((leader, i) => (
+              <motion.div key={i} variants={item}>
+                <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-2xl shadow-sm flex flex-col h-full hover-card-effect text-center relative">
+                  <div className="w-[120px] h-[120px] mx-auto mb-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden border-2 border-slate-200 dark:border-slate-700">
+                    {leader.image ? (
+                      <Image src={leader.image} alt={leader.name} fill className="object-cover" />
+                    ) : (
+                      <User className="w-12 h-12 text-slate-400 dark:text-slate-500" strokeWidth={1.5} />
+                    )}
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">{leader.name}</h3>
+                  <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-4">{leader.title}</p>
+                  <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 leading-relaxed flex-grow">
+                    {leader.bio}
+                  </p>
+                  <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-center">
+                    <a href={leader.socials.linkedin} className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                      <Link className="w-4 h-4" />
+                    </a>
+                  </div>
+                </SpotlightCard>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+          </motion.div>
+        )}
           {activeTab === "delivery" && (
             <motion.div
               key="delivery"
@@ -307,7 +364,6 @@ export default function AboutPage() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
             >
-              {/* 5. DELIVERY STANDARDS */}
               <motion.div
                 variants={container}
                 initial="hidden"
@@ -414,68 +470,6 @@ export default function AboutPage() {
             </div>
           </motion.div>
         </motion.div>
-      </motion.div>
-      )}
-      </AnimatePresence>
-
-      {/* LEADERSHIP TEAM */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-40px" }}
-          className="max-w-6xl mx-auto mb-20 pt-16 border-t border-[rgba(15,23,42,0.08)] dark:border-slate-800"
-        >
-          <div className="text-center mb-12 space-y-4">
-            <motion.div 
-              variants={item}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
-              Leadership Team
-            </motion.div>
-            
-            <motion.h2 
-              variants={item}
-              className="text-3xl md:text-4xl font-serif tracking-tight text-slate-900 dark:text-white"
-            >
-              Meet Our Leadership
-            </motion.h2>
-            
-            <motion.p 
-              variants={item}
-              className="text-slate-500 dark:text-slate-400 font-semibold text-sm sm:text-base leading-relaxed max-w-2xl mx-auto"
-            >
-              Experienced leaders driving Jeshurun's technology strategy and delivery excellence.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {leadershipData.map((leader, i) => (
-              <motion.div key={i} variants={item}>
-                <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-2xl shadow-sm flex flex-col h-full hover-card-effect text-center relative">
-                  <div className="w-[120px] h-[120px] mx-auto mb-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden border-2 border-slate-200 dark:border-slate-700">
-                    {leader.image ? (
-                      <Image src={leader.image} alt={leader.name} fill className="object-cover" />
-                    ) : (
-                      <User className="w-12 h-12 text-slate-400 dark:text-slate-500" strokeWidth={1.5} />
-                    )}
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">{leader.name}</h3>
-                  <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-4">{leader.title}</p>
-                  <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 leading-relaxed flex-grow">
-                    {leader.bio}
-                  </p>
-                  <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-center">
-                    <a href={leader.socials.linkedin} className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
-                      <Link className="w-4 h-4" />
-                    </a>
-                  </div>
-                </SpotlightCard>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
 
         {/* 6. HOW WE DELIVER (Timeline) */}
         <motion.div
@@ -493,6 +487,9 @@ export default function AboutPage() {
           />
         </motion.div>
 
+            </motion.div>
+          )}
+      </AnimatePresence>
       </div>
 
       {/* 7. PREMIUM CTA */}

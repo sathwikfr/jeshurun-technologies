@@ -246,31 +246,38 @@ function InsightCard({ insight }: InsightCardProps) {
   };
   return (
     <div
-      className="group relative flex flex-col rounded-3xl border border-border bg-card transition-all min-h-[440px] shadow-sm hover-card-effect cursor-pointer select-none overflow-hidden"
+      className="group relative flex flex-col rounded-3xl border border-border bg-card transition-all min-h-[440px] shadow-sm hover:shadow-[0_8px_40px_-12px_rgba(29,78,216,0.2)] hover:border-[#1D4ED8]/30 cursor-pointer select-none overflow-hidden"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={handleClick}
     >
       {/* Image Header */}
-      <div className="relative w-full h-40 shrink-0 overflow-hidden bg-slate-900 border-b border-border/40">
+      <div className="relative w-full h-48 shrink-0 overflow-hidden bg-slate-900 border-b border-border/10">
         <Image 
           src={insight.image} 
           alt={insight.title}
           fill
-          className="object-cover opacity-70 group-hover:opacity-100 group-hover:scale-[1.02] transition-all duration-700"
+          className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.05] transition-all duration-700"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-80" />
+        {/* Duotone Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1D4ED8] to-[#0F766E] mix-blend-multiply opacity-90 group-hover:opacity-60 transition-opacity duration-500" />
+        
+        {/* Bottom shadow blend */}
+        <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-90" />
+        
+        {/* Floating Category Badge */}
+        <div className="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[9px] font-extrabold tracking-widest text-white uppercase shadow-lg group-hover:bg-[#1D4ED8]/80 group-hover:border-[#1D4ED8] transition-colors duration-500">
+          {insight.category}
+        </div>
       </div>
 
       <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">
         <div className="flex-1 flex flex-col">
-          {/* Category & Title */}
-          <div className="mb-4">
-            <span className="text-[10px] font-extrabold tracking-widest text-[#2563EB] uppercase block mb-1.5">
-              {insight.category}
-            </span>
-            <h3 className="text-xl font-black leading-snug text-foreground group-hover:text-[#2563EB] transition-colors duration-300 line-clamp-2">
-              {insight.title}
+          {/* Title */}
+          <div className="mb-4 mt-2">
+            <h3 className="text-xl font-black leading-snug text-foreground group-hover:text-[#2563EB] transition-colors duration-300 line-clamp-2 flex items-start justify-between gap-3">
+              <span>{insight.title}</span>
+              <ArrowRight className="w-5 h-5 shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#2563EB] mt-0.5" />
             </h3>
           </div>
 
@@ -595,51 +602,55 @@ function SLAUptimeViz() {
 
 function ExperienceTimelineViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "-10px" });
+  
   return (
-    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
-      <style>{`
-        @keyframes drawTimeline {
-          0% { stroke-dashoffset: 150; }
-          50%, 100% { stroke-dashoffset: 0; }
-        }
-        @keyframes popNode {
-          0%, 10% { transform: scale(0); opacity: 0; }
-          30%, 100% { transform: scale(1.2); opacity: 1; }
-        }
-      `}</style>
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-gradient-to-br from-slate-100 to-slate-50 dark:from-[#0F172A] dark:to-[#0B1121] overflow-hidden border border-slate-200/50 dark:border-slate-800/80 shadow-inner group">
       
-      {/* SVG Path */}
+      {/* Background Track */}
       <div className="absolute inset-0 z-0 flex items-center justify-center">
-        <svg className="w-full h-full" viewBox="0 0 160 64" strokeWidth="2">
-          {/* Background Track */}
-          <path d="M 30 32 L 130 32" className="stroke-[#3B82F6] opacity-20" fill="none" strokeLinecap="round" />
+        <svg className="w-full h-full overflow-visible" viewBox="0 0 160 64">
+          <path d="M 20 32 L 140 32" className="stroke-slate-300 dark:stroke-slate-700" strokeWidth="2" fill="none" strokeLinecap="round" />
           
-          {/* Animated Fill */}
-          <path 
-            d="M 30 32 L 130 32" 
-            className="stroke-[#2563EB] dark:stroke-[#60A5FA]" 
+          <motion.path 
+            d="M 20 32 L 140 32" 
+            stroke="url(#blueGlowExp)" 
+            strokeWidth="3"
             fill="none" 
             strokeLinecap="round" 
-            strokeDasharray="150"
-            style={{ animation: "drawTimeline 4s ease-out infinite", animationPlayState: isInView ? "running" : "paused" }} 
+            initial={{ pathLength: 0 }}
+            animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
           />
+          <defs>
+            <linearGradient id="blueGlowExp" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#2563EB" />
+            </linearGradient>
+          </defs>
         </svg>
       </div>
 
       {/* Nodes */}
-      <div className="absolute inset-0 z-10 flex items-center justify-between px-7">
-        {[...Array(4)].map((_, i) => (
-          <div 
-            key={i} 
-            className="w-2.5 h-2.5 rounded-full bg-white dark:bg-[#0F172A] border-2 border-[#2563EB] shadow-[0_0_5px_rgba(37,99,235,0.5)]"
-            style={{ 
-              animation: "popNode 4s ease-out infinite", 
-              animationDelay: `${0.5 + i * 0.4}s`,
-              animationPlayState: isInView ? "running" : "paused",
-              opacity: 0
-            }}
-          />
+      <div className="absolute inset-0 z-10 flex items-center justify-between px-[18px]">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="relative flex items-center justify-center w-3 h-3">
+            <div className="absolute w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700" />
+            
+            <motion.div 
+              className="absolute w-3 h-3 rounded-full bg-white dark:bg-[#0F172A] border-2 border-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+              transition={{ duration: 0.4, ease: "backOut", delay: i * 0.3 }}
+            />
+            
+            {/* Ambient Pulse After Draw */}
+            <motion.div
+              className="absolute w-3 h-3 rounded-full bg-blue-400 opacity-0"
+              animate={isInView ? { scale: [1, 2.5], opacity: [0, 0.4, 0] } : {}}
+              transition={{ duration: 2, repeat: Infinity, delay: 1.5 + (i * 0.2) }}
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -1409,14 +1420,14 @@ export default function Home() {
 
 
       {/* ═══════ TRUSTED PARTNERS SECTION ═══════ */}
-      <section className="w-full py-16 md:py-20 relative z-10 bg-white dark:bg-background" aria-label="Trusted Partners">
+      <section className="w-full py-16 md:py-20 relative z-10 bg-background" aria-label="Trusted Partners">
         <div className="container px-6 sm:px-8 mx-auto space-y-8">
-          <div className="text-center space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-muted/60 text-muted-foreground border border-border mb-1">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">
               Our Clients
             </div>
-            <h2 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">Trusted by Enterprise Leaders</h2>
-            <p className="text-muted-foreground text-sm font-medium max-w-lg mx-auto">Partnering with global organizations across pharmaceuticals, telecommunications, and insurance to deliver mission-critical technology systems.</p>
+            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Trusted by Enterprise Leaders</h2>
+            <p className="text-muted-foreground text-lg font-medium leading-relaxed">Partnering with global organizations across pharmaceuticals, telecommunications, and insurance to deliver mission-critical technology systems.</p>
           </div>
 
           <div 
@@ -1450,7 +1461,7 @@ export default function Home() {
 
 
       {/* ═══════ SERVICES SECTION — TWO-TIER REDESIGN ═══════ */}
-      <section className="w-full py-20 md:py-32 relative z-10 bg-card border-t border-border overflow-hidden" aria-label="Services">
+      <section className="w-full py-20 md:py-32 relative z-10 bg-background border-t border-border overflow-hidden" aria-label="Services">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37,99,235,0.04) 0%, transparent 60%)' }} aria-hidden="true" />
         <div className="container px-6 sm:px-8 mx-auto space-y-14 relative z-10">
 
@@ -1613,7 +1624,7 @@ export default function Home() {
 
 
       {/* ═══════ TECHNOLOGY ECOSYSTEM ═══════ */}
-      <section className="w-full py-20 md:py-32 relative z-10 border-t border-border bg-[#F8FAFC] dark:bg-background" aria-label="Technology Ecosystem">
+      <section className="w-full py-20 md:py-32 relative z-10 border-t border-border bg-background" aria-label="Technology Ecosystem">
         <div className="container px-6 sm:px-8 mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2563EB]/8 text-[#2563EB] border border-[#2563EB]/15 mb-2">

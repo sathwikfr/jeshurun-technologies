@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { Calendar, Clock, Share2, Tag, ArrowLeft, ArrowRight, Play, Quote, MapPin, Briefcase, User, ShieldAlert } from "lucide-react";
 import { SpotlightCard } from "@/components/SpotlightCard";
@@ -143,10 +144,13 @@ export default function CaseStudyArticlePage() {
       <section className="w-full pt-32 pb-20 relative overflow-hidden bg-slate-950 text-white shadow-xl">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src={article.image}
             alt={article.title}
-            className="w-full h-full object-cover opacity-60"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover opacity-60"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.12)_0%,transparent_60%)]" />
@@ -291,10 +295,12 @@ export default function CaseStudyArticlePage() {
               >
                 {/* Header Image */}
                 <div className="h-48 w-full overflow-hidden relative bg-slate-950">
-                  <img
+                  <Image
                     src={rel.image}
                     alt={rel.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60" />
                 </div>

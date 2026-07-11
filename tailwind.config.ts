@@ -19,9 +19,13 @@ export default <Config>{
             'background-position': 'right center',
           },
         },
+        'shimmer': {
+          '100%': { transform: 'translateX(200%)' },
+        },
       },
       animation: {
         'text-gradient': 'text-gradient 4s ease infinite',
+        'shimmer': 'shimmer 2s infinite',
       },
     },
   },

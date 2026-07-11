@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { motion, Variants, useInView } from "framer-motion";
 import {
   Check,
@@ -153,10 +154,12 @@ function OfferingStrip({ cap, router, index }: { cap: any; router: any; index: n
           >
             <div className={`relative rounded-2xl overflow-hidden border ${cap.accentBorder} shadow-lg aspect-[4/3] bg-muted group flex items-center justify-center`}>
               {/* Photorealistic image background */}
-              <img
+              <Image
                 src={cap.image}
                 alt={cap.title}
-                className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/45 via-slate-950/10 to-transparent pointer-events-none" />
 
