@@ -624,9 +624,10 @@ export default function ServiceDetailPage({
             fill
             sizes="100vw"
             priority
-            className="object-cover opacity-60"
+            className="object-cover object-top opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.12)_0%,transparent_60%)]" />
         </div>
 
@@ -678,16 +679,7 @@ export default function ServiceDetailPage({
                 {service.description}
               </motion.p>
 
-              {/* Solid Blue CTA Button */}
-              <motion.div variants={fadeUp} className="pt-4">
-                <Link
-                  href="/contact"
-                  className="group inline-flex items-center gap-3 bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-full text-base font-semibold transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] hover:shadow-[0_0_30px_rgba(37,99,235,0.6)]"
-                >
-                  {service.ctaLabel}
-                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </motion.div>
+
             </motion.div>
           </div>
         </div>

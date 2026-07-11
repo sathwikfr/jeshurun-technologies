@@ -33,7 +33,7 @@ export default function InsightsPage() {
             <Link key={insight.slug} href={`/insights/${insight.slug}`} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-3xl">
               <div className="group relative flex flex-col rounded-3xl border border-border bg-card transition-all min-h-[440px] shadow-sm hover:shadow-[0_8px_40px_-12px_rgba(29,78,216,0.2)] hover:border-[#1D4ED8]/30 cursor-pointer select-none overflow-hidden h-full">
                 {/* Image Header */}
-                <div className="relative w-full h-48 shrink-0 overflow-hidden bg-slate-900 border-b border-border/10">
+                <div className="relative w-full h-48 shrink-0 overflow-hidden bg-slate-900 border-b-2 border-blue-600 group-hover:border-blue-500 transition-colors duration-500">
                   <Image 
                     src={insight.image} 
                     alt={insight.title}

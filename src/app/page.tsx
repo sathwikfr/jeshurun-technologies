@@ -252,7 +252,7 @@ function InsightCard({ insight }: InsightCardProps) {
       onClick={handleClick}
     >
       {/* Image Header */}
-      <div className="relative w-full h-48 shrink-0 overflow-hidden bg-slate-900 border-b border-border/10">
+      <div className="relative w-full h-48 shrink-0 overflow-hidden bg-slate-900 border-b-2 border-blue-600 group-hover:border-blue-500 transition-colors duration-500">
         <Image 
           src={insight.image} 
           alt={insight.title}
