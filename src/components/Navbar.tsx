@@ -12,6 +12,7 @@ import {
   ChevronDown,
   ExternalLink,
   Search,
+  Phone,
 } from "lucide-react";
 import { HeaderLogo } from "@/components/HeaderLogo";
 import { useSession, signOut } from "next-auth/react";
