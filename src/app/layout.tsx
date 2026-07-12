@@ -101,7 +101,7 @@ export default function RootLayout({
           />
           <div className="grain-overlay" />
           <Navbar />
-          <main className="flex-1">
+          <main className="flex-1 w-full overflow-x-hidden">
             <PageTransition>{children}</PageTransition>
           </main>
           <Footer />

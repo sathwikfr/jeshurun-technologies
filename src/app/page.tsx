@@ -161,22 +161,40 @@ function TechCard({ tech }: { tech: typeof refinedTechCategories[0]["items"][0] 
   const brandColor = tech.name === "Next.js" ? (isDark ? "#ffffff" : "#0f172a") : tech.color;
 
   return (
-    <div className="relative group w-full isolate">
-      {/* Radial Glow below the card - optimized for visibility and hardware acceleration to prevent text bleeding */}
+    <div className="relative group w-full h-[120px] isolate">
+      {/* Ambient base glow (soft radial) - Stays on the floor */}
       <div 
-        className="absolute -bottom-2 left-1/2 w-[80%] h-[24px] rounded-[50%] blur-[12px] opacity-60 dark:opacity-[0.85] pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 z-0 will-change-transform"
+        className="absolute -bottom-3 left-1/2 w-[75%] h-[32px] rounded-[50%] blur-[12px] opacity-75 dark:opacity-[0.85] pointer-events-none transition-all duration-500 group-hover:opacity-100 group-hover:scale-[1.3] z-0"
         style={{ 
           backgroundColor: brandColor,
           transform: 'translateX(-50%) translateZ(0)'
         }}
       />
+      
+      {/* Sharp glass edge (3D pedestal effect) - Stays on the floor */}
+      <div 
+        className="absolute -bottom-1 left-1/2 w-[65%] h-[20px] rounded-[100%] pointer-events-none transition-all duration-500 opacity-100 group-hover:scale-110 z-0"
+        style={{ 
+          borderBottom: `3px solid ${brandColor}`,
+          boxShadow: `inset 0 -12px 20px -4px ${brandColor}`,
+          filter: `drop-shadow(0 -2px 6px ${brandColor})`,
+          transform: 'translateX(-50%) translateZ(0)'
+        }}
+      />
+
+      {/* The Lifting Card Container */}
       <div
-        className="relative flex flex-col items-center justify-center h-[120px] bg-card border rounded-2xl cursor-pointer overflow-hidden p-4 text-center select-none hover-card-effect z-10"
+        className="relative flex flex-col items-center justify-center h-full bg-card border rounded-2xl cursor-pointer overflow-hidden p-4 text-center select-none z-10 transition-all duration-500 group-hover:-translate-y-2.5"
         style={{
           borderColor: `${brandColor}40`,
           boxShadow: `0 4px 10px ${brandColor}06`,
         }}
       >
+        {/* Dynamic Inner border that lights up with brand color on hover */}
+        <div 
+          className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100"
+          style={{ boxShadow: `inset 0 0 0 1px ${brandColor}80` }}
+        />
       {/* Real Unsplash background image with low opacity on idle, zooming on hover */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-slate-50/50 dark:bg-slate-950/40 pointer-events-none">
         <Image
@@ -1747,7 +1765,7 @@ export default function Home() {
                         View all <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5" />
                       </Link>
                     </div>
-                    <div className="grid grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                       {cat.items.map((tech) => (
                         <TechCard key={tech.name} tech={tech} />
                       ))}

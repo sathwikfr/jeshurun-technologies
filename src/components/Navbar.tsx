@@ -831,7 +831,7 @@ export function Navbar() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="md:hidden border-b border-border dark:border-border bg-card/95 dark:bg-slate-950/95 backdrop-blur-md overflow-hidden"
           >
-            <div className="px-6 py-6 space-y-4">
+            <div className="px-6 pt-6 pb-28 space-y-4 max-h-[calc(100vh-80px)] overflow-y-auto">
               {/* Mobile Search Input */}
               <div className="relative flex items-center w-full mb-4">
                 <Search className="absolute left-3 w-4 h-4 text-muted-foreground transition-colors" />
@@ -973,9 +973,10 @@ export function Navbar() {
                 <Link
                   href="/contact"
                   onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center gap-1.5 text-muted-foreground  hover:text-[#0057D9] dark:hover:text-[#60A5FA] p-1 rounded-md text-base font-bold"
+                  className="flex items-center justify-center gap-2 bg-primary/10 hover:bg-primary/20 text-primary p-3 rounded-xl text-sm font-bold transition-colors"
                 >
-                  <span>Contact Us 📞</span>
+                  <Phone className="w-4 h-4" />
+                  <span>Contact Us</span>
                 </Link>
                 {session ? (
                   <div className="flex flex-col gap-2 pt-2">
