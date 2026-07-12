@@ -161,13 +161,22 @@ function TechCard({ tech }: { tech: typeof refinedTechCategories[0]["items"][0] 
   const brandColor = tech.name === "Next.js" ? (isDark ? "#ffffff" : "#0f172a") : tech.color;
 
   return (
-    <div
-      className="group relative flex flex-col items-center justify-center h-[120px] bg-card border rounded-2xl cursor-pointer overflow-hidden p-4 text-center select-none hover-card-effect"
-      style={{
-        borderColor: `${brandColor}40`,
-        boxShadow: `0 4px 10px ${brandColor}06`,
-      }}
-    >
+    <div className="relative group w-full isolate">
+      {/* Radial Glow below the card - optimized for visibility and hardware acceleration to prevent text bleeding */}
+      <div 
+        className="absolute -bottom-2 left-1/2 w-[80%] h-[24px] rounded-[50%] blur-[12px] opacity-60 dark:opacity-[0.85] pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:scale-110 z-0 will-change-transform"
+        style={{ 
+          backgroundColor: brandColor,
+          transform: 'translateX(-50%) translateZ(0)'
+        }}
+      />
+      <div
+        className="relative flex flex-col items-center justify-center h-[120px] bg-card border rounded-2xl cursor-pointer overflow-hidden p-4 text-center select-none hover-card-effect z-10"
+        style={{
+          borderColor: `${brandColor}40`,
+          boxShadow: `0 4px 10px ${brandColor}06`,
+        }}
+      >
       {/* Real Unsplash background image with low opacity on idle, zooming on hover */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-slate-50/50 dark:bg-slate-950/40 pointer-events-none">
         <Image
@@ -208,6 +217,7 @@ function TechCard({ tech }: { tech: typeof refinedTechCategories[0]["items"][0] 
           {tech.desc}
         </p>
       </div>
+    </div>
     </div>
   );
 }
@@ -1709,9 +1719,14 @@ export default function Home() {
               {/* Cloud Platforms & Engineering (First 2 categories) */}
               {refinedTechCategories.slice(0, 2).map((cat) => (
                 <div key={cat.category} className="space-y-3">
-                  <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground border-b-2 border-primary/20 pb-2 font-mono">
-                    {cat.category}
-                  </h4>
+                  <div className="flex items-center justify-between border-b-2 border-primary/20 pb-2">
+                    <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">
+                      {cat.category}
+                    </h4>
+                    <Link href="/technology" className="text-[12px] font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-1 group/link">
+                      View all <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5" />
+                    </Link>
+                  </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
                     {cat.items.map((tech) => (
                       <TechCard key={tech.name} tech={tech} />
@@ -1724,9 +1739,14 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {refinedTechCategories.slice(2, 4).map((cat) => (
                   <div key={cat.category} className="space-y-3">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground border-b-2 border-primary/20 pb-2 font-mono">
-                      {cat.category}
-                    </h4>
+                    <div className="flex items-center justify-between border-b-2 border-primary/20 pb-2">
+                      <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">
+                        {cat.category}
+                      </h4>
+                      <Link href="/technology" className="text-[12px] font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-1 group/link">
+                        View all <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5" />
+                      </Link>
+                    </div>
                     <div className="grid grid-cols-3 gap-3">
                       {cat.items.map((tech) => (
                         <TechCard key={tech.name} tech={tech} />

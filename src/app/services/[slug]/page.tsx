@@ -25,6 +25,9 @@ import { PremiumCTA } from "@/components/PremiumCTA";
 import { HeroFieldBackground } from "@/components/HeroFieldBackground";
 import { AnimatedArchitectureDiagram } from "@/components/AnimatedArchitectureDiagram";
 import { AnimatedServiceVisual } from "@/components/AnimatedServiceVisual";
+import { FloatingSidebarNav } from "@/components/FloatingSidebarNav";
+import { ExpertSpotlight } from "@/components/ExpertSpotlight";
+import { RelatedCaseStudies } from "@/components/RelatedCaseStudies";
 
 /* ==========================================================================
  ANIMATION VARIANTS — editorial, useInView gated, respects reduced motion
@@ -612,6 +615,14 @@ export default function ServiceDetailPage({
 
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden">
+      <FloatingSidebarNav 
+        sections={[
+          { id: "overview", label: "Overview" },
+          { id: "capabilities", label: "Capabilities" },
+          { id: "outcomes", label: "Outcomes" },
+          { id: "faqs", label: "FAQs" }
+        ]}
+      />
 
       {/* ════════════════════════════════════════════════════════════════
           SECTION 1 — EDITORIAL HERO
@@ -641,13 +652,13 @@ export default function ServiceDetailPage({
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 mb-8"
           >
-            <Link
-              href="/services"
-              className="group inline-flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full border border-white/15 transition-all duration-300 backdrop-blur-md w-fit"
-            >
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-              Services
-            </Link>
+            <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/60">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span className="w-1 h-1 rounded-full bg-white/30" />
+              <Link href="/services" className="hover:text-white transition-colors">Services</Link>
+              <span className="w-1 h-1 rounded-full bg-white/30" />
+              <span className="text-white">{service.title}</span>
+            </nav>
           </motion.div>
 
           <div className="flex-grow mb-8">
@@ -720,7 +731,7 @@ export default function ServiceDetailPage({
           Two-column split: Image + Practice narrative.
           Asymmetric layout for editorial rhythm.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28">
+      <section id="overview" className="py-20 md:py-28">
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -804,7 +815,7 @@ export default function ServiceDetailPage({
           Numbered vertical capability list. IBM-style clean list.
           Typography does the work — no cards, no borders.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28">
+      <section id="capabilities" className="py-20 md:py-28">
         <div className="container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
@@ -939,7 +950,7 @@ export default function ServiceDetailPage({
       )}
 
       {/* ── VERIFIED OUTCOMES + TESTIMONIAL ─────────────────────── */}
-      <section className="py-20 md:py-28 border-y border-border">
+      <section id="outcomes" className="py-20 md:py-28 border-y border-border">
         <div className="container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
@@ -1016,6 +1027,9 @@ export default function ServiceDetailPage({
               </div>
             </motion.div>
           </motion.div>
+          <motion.div variants={fadeUp}>
+            <ExpertSpotlight />
+          </motion.div>
         </div>
       </section>
 
@@ -1025,7 +1039,7 @@ export default function ServiceDetailPage({
           Clean editorial table. Thin borders, subtle tints.
           Left-aligned text, no icon circles.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28">
+      <section id="overview" className="py-20 md:py-28">
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -1098,7 +1112,7 @@ export default function ServiceDetailPage({
           SECTION 7 — FAQ
           Editorial accordion. Thin separators, clean typography.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28">
+      <section id="faqs" className="py-20 md:py-28">
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -1182,6 +1196,8 @@ export default function ServiceDetailPage({
         </motion.div>
       </section>
 
+
+      <RelatedCaseStudies category={service.title} />
 
       {/* ════════════════════════════════════════════════════════════════
           SECTION 9 — CTA (Existing PremiumCTA — unchanged)

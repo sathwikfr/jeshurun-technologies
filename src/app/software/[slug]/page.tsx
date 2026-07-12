@@ -21,6 +21,9 @@ import {
   EnterpriseAPIViz, 
   DataPipelinesViz 
 } from "@/components/SoftwareVisuals";
+import { FloatingSidebarNav } from "@/components/FloatingSidebarNav";
+import { ExpertSpotlight } from "@/components/ExpertSpotlight";
+import { RelatedCaseStudies } from "@/components/RelatedCaseStudies";
 
 /* ==========================================================================
    FRAMER MOTION VARIANTS — Editorial design system
@@ -575,6 +578,14 @@ export default function SoftwareDetailPage({
 
   return (
     <div className="min-h-screen bg-background relative overflow-x-hidden selection:bg-primary/20">
+      <FloatingSidebarNav 
+        sections={[
+          { id: "overview", label: "Overview" },
+          { id: "capabilities", label: "Capabilities" },
+          { id: "outcomes", label: "Outcomes" },
+          { id: "faqs", label: "FAQs" }
+        ]}
+      />
 
       {/* ── 1. HERO ────────────────────────────────────────────────── */}
       <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-950 text-white shadow-xl">
@@ -601,13 +612,13 @@ export default function SoftwareDetailPage({
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 mb-8"
           >
-            <Link
-              href="/software"
-              className="group inline-flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full border border-white/15 transition-all duration-300 backdrop-blur-md w-fit"
-            >
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-              Software Engineering
-            </Link>
+            <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/60">
+              <Link href="/" className="hover:text-white transition-colors">Home</Link>
+              <span className="w-1 h-1 rounded-full bg-white/30" />
+              <Link href="/software" className="hover:text-white transition-colors">Software</Link>
+              <span className="w-1 h-1 rounded-full bg-white/30" />
+              <span className="text-white">{category.title}</span>
+            </nav>
           </motion.div>
 
           <div className="flex-grow mb-8">
@@ -669,7 +680,7 @@ export default function SoftwareDetailPage({
       </section>
 
       {/* ── 3. DOMAIN OVERVIEW ─────────────────────────────────────── */}
-      <section className="py-20 md:py-28">
+      <section id="overview" className="py-20 md:py-28">
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -753,7 +764,7 @@ export default function SoftwareDetailPage({
       </section>
 
       {/* ── 4. CORE CAPABILITIES ───────────────────────────────────── */}
-      <section className="py-20 md:py-28">
+      <section id="capabilities" className="py-20 md:py-28">
         <div className="container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
@@ -872,7 +883,7 @@ export default function SoftwareDetailPage({
       </section>
 
       {/* ── 6. VERIFIED OUTCOMES + TESTIMONIAL ─────────────────────── */}
-      <section className="py-20 md:py-28 border-y border-border">
+      <section id="success" className="py-20 md:py-28 border-y border-border">
         <div className="container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
@@ -949,13 +960,14 @@ export default function SoftwareDetailPage({
               </div>
             </motion.div>
           </motion.div>
+          <motion.div variants={fadeUp}>
+            <ExpertSpotlight />
+          </motion.div>
         </div>
       </section>
 
-      <AccentLine />
-
       {/* ── 7. IMPACT COMPARISON ───────────────────────────────────── */}
-      <section className="py-20 md:py-28">
+      <section id="comparison" className="py-20 md:py-28">
         <div className="container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
@@ -1021,7 +1033,7 @@ export default function SoftwareDetailPage({
       </section>
 
       {/* ── 8. FREQUENTLY ASKED QUESTIONS ──────────────────────────── */}
-      <section className="py-20 md:py-28">
+      <section id="faqs" className="py-20 md:py-28">
         <div className="container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
@@ -1103,8 +1115,10 @@ export default function SoftwareDetailPage({
         </div>
       </section>
 
+      <RelatedCaseStudies category={category.title} />
+
       {/* ── 10. CTA ────────────────────────────────────────────────── */}
-      <section className="py-0">
+      <section id="contact" className="py-0">
         <PremiumCTA
           variant="software"
           titleTop={category.ctaTitleTop}
