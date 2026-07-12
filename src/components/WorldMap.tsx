@@ -58,19 +58,19 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
         const seed2 = seed1 + 1337;
         const seed3 = seed1 + 4242;
 
-        // Vary opacity to create structured noise (40%, 60%, 80%, 100%)
-        const opacityOptions = [0.4, 0.6, 0.8, 1.0];
+        // Vary opacity to create structured noise (brighter overall)
+        const opacityOptions = [0.5, 0.75, 0.9, 1.0];
         const opacity = opacityOptions[Math.floor(pseudoRandom(seed1) * opacityOptions.length)];
         
         // Colors
         const isBright = pseudoRandom(seed2) < 0.15;
         const color = isDarkMode 
-          ? (isBright ? "#5EC8FF" : "#3FA9F5") 
+          ? (isBright ? "#80D8FF" : "#4FBFFF") // Increased brightness of base and bright dots
           : "#1E40AF"; // deeper blue in light mode
         
         // Dot diameter 1.5 - 2px -> Radius 0.75 - 1.0
         let r = 0.85;
-        if (pseudoRandom(seed3) < 0.2) r = 1.0; // some slightly larger
+        if (pseudoRandom(seed3) < 0.2) r = 1.1; // slightly larger bright dots
 
         dots.push({ cx: x + DOT_SPACING/2, cy: y + DOT_SPACING/2, r, opacity, fill: color });
       }
@@ -173,7 +173,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
             <filter id="bloom-glow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="1" result="blur" />
               <feComponentTransfer in="blur" result="glow">
-                <feFuncA type="linear" slope="1.2" />
+                <feFuncA type="linear" slope="2.0" />
               </feComponentTransfer>
               <feMerge>
                 <feMergeNode in="glow" />
