@@ -1,10 +1,9 @@
 "use client";
 
-import { use, useState, useRef, useEffect } from "react";
+import { use, useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { motion, AnimatePresence, type Variants } from "framer-motion";
+import { motion, AnimatePresence, useInView, useReducedMotion, type Variants } from "framer-motion";
 import {
   ArrowLeft,
   Check,
@@ -18,25 +17,156 @@ import {
   ArrowRight,
   Quote,
   X as XIcon,
-  Lock,
-  ZoomIn,
 } from "lucide-react";
-import { SpotlightCard } from "@/components/SpotlightCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
-import { CloudROICalculator } from "@/components/CloudROICalculator";
+import { TechOrbitVisualization } from "@/components/TechOrbitVisualization";
 
-const container: Variants = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.08 } },
-};
+
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { type: "spring" as const, stiffness: 90, damping: 22 },
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
   },
 };
+
+const stagger: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
+const staggerSlow: Variants = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
+};
+
+const slideInLeft: Variants = {
+  hidden: { opacity: 0, x: -40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const slideInRight: Variants = {
+  hidden: { opacity: 0, x: 40 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const scaleIn: Variants = {
+  hidden: { opacity: 0, scale: 0.92 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const expandWidth: Variants = {
+  hidden: { scaleX: 0, originX: 0 },
+  show: {
+    scaleX: 1,
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.2 },
+  },
+};
+
+const tableRow: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+/* ==========================================================================
+ ANIMATED STAT COUNTER — counts up from 0 when in view
+ ========================================================================== */
+
+function AnimatedStatValue({ value }: { value: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const prefersReducedMotion = useReducedMotion();
+  const [displayValue, setDisplayValue] = useState(value);
+
+  const parsed = useMemo(() => {
+    const match = value.match(/^([^0-9]*)([\d.]+)(.*)$/);
+    if (!match) return null;
+    return {
+      prefix: match[1],
+      targetNum: parseFloat(match[2]),
+      suffix: match[3],
+      isDecimal: match[2].includes("."),
+      decimals: match[2].includes(".") ? match[2].split(".")[1].length : 0,
+    };
+  }, [value]);
+
+  useEffect(() => {
+    if (!isInView || !parsed || prefersReducedMotion) {
+      if (!isInView) return; // Wait until in view
+      // If no numbers or reduced motion, just show the final value
+      setDisplayValue(value);
+      return;
+    }
+
+    const duration = 1500;
+    const startTime = performance.now();
+    let frameId: number;
+
+    function animate(currentTime: number) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      // Ease out cubic
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = parsed!.targetNum * eased;
+
+      setDisplayValue(
+        `${parsed!.prefix}${parsed!.isDecimal ? current.toFixed(parsed!.decimals) : Math.round(current)}${parsed!.suffix}`
+      );
+
+      if (progress < 1) {
+        frameId = requestAnimationFrame(animate);
+      } else {
+        setDisplayValue(value);
+      }
+    }
+
+    setDisplayValue(`${parsed.prefix}0${parsed.suffix}`);
+    frameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frameId);
+  }, [isInView, parsed, prefersReducedMotion, value]);
+
+  return (
+    <div ref={ref} className="editorial-stat text-4xl sm:text-5xl text-foreground">
+      {!parsed || prefersReducedMotion ? value : displayValue}
+    </div>
+  );
+}
+
+/* ==========================================================================
+ ANIMATED ACCENT LINE — editorial horizontal divider
+ ========================================================================== */
+
+function AccentLine() {
+  return (
+    <div className="container px-6 sm:px-8 mx-auto">
+      <motion.div
+        variants={expandWidth}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-20px" }}
+        className="h-px bg-gradient-to-r from-primary/40 via-primary/20 to-transparent"
+      />
+    </div>
+  );
+}
 
 const techData: Record<
   string,
@@ -81,6 +211,9 @@ const techData: Record<
       outcome: string;
       image: string;
     }[];
+    editorialLead?: string;
+    statHighlights?: { value: string; label: string; description: string }[];
+    caseStudyOutcomes?: string[];
   }
 > = {
   "cloud-solutions": {
@@ -109,6 +242,12 @@ const techData: Record<
       { label: "Resource Elasticity", value: "Instant" },
       { label: "Deployment Speed", value: "10x" },
       { label: "Resource Cost Save", value: "40%" },
+    ],
+    editorialLead: "Cloud infrastructure is no longer just a hosting environment—it is the foundation of enterprise agility. The true cost of legacy architecture isn't just server bills; it's the inability to scale instantly, deploy securely, and compete globally.",
+    statHighlights: [
+      { value: "Instant", label: "Resource Elasticity", description: "Immediate auto-scaling under peak visitor loads" },
+      { value: "10x", label: "Deployment Speed", description: "Faster container deployment pipelines" },
+      { value: "40%", label: "Resource Cost Save", description: "Compute resource cost efficiency" },
     ],
     comparison: [
       {
@@ -222,6 +361,12 @@ const techData: Record<
       { label: "Daily Data Ingested", value: "TB-Scale" },
       { label: "SLA Match Rate", value: "100%" },
     ],
+    editorialLead: "Data is the most valuable asset in the modern enterprise, yet most organizations are drowning in siloed reports. The difference between descriptive reporting and predictive intelligence is the quality and velocity of your data pipelines.",
+    statHighlights: [
+      { value: "10x", label: "Query Optimization", description: "Frictionless database scale-out operations" },
+      { value: "TB-Scale", label: "Daily Data Ingested", description: "Real-time visibility over critical metrics" },
+      { value: "100%", label: "SLA Match Rate", description: "Compliance with strict data governance policies" },
+    ],
     comparison: [
       {
         without: "Siloed spreadsheets with stale weekly exports",
@@ -328,6 +473,12 @@ const techData: Record<
       { label: "Threat Detection Speed", value: "<1s" },
       { label: "Audit Match Rate", value: "100%" },
       { label: "Security Incidents", value: "Zero" },
+    ],
+    editorialLead: "In a hyper-connected enterprise ecosystem, the perimeter has dissolved. When threats move laterally and access points multiply, traditional firewalls are no longer sufficient. Security must be intelligent, automated, and built on zero-trust principles.",
+    statHighlights: [
+      { value: "<1s", label: "Threat Detection Speed", description: "Immediate automated threat containment" },
+      { value: "100%", label: "Audit Match Rate", description: "Continuous compliance with ISO 27001 models" },
+      { value: "Zero", label: "Security Incidents", description: "Minimized risk of data leaks or breaches" },
     ],
     comparison: [
       {
@@ -441,6 +592,12 @@ const techData: Record<
       { label: "Prediction Accuracy", value: "85%+" },
       { label: "Response Delay Speed", value: "<50ms" },
     ],
+    editorialLead: "Artificial intelligence is shifting from experimental proof-of-concepts to core enterprise operations. Organizations that successfully operationalize AI don't just write prompts—they architect robust, compliant, and predictable machine learning pipelines.",
+    statHighlights: [
+      { value: "80%", label: "Task Automation Gain", description: "Multiplied engineering and operations velocity" },
+      { value: "85%+", label: "Prediction Accuracy", description: "Accurate business predictions under high volatility" },
+      { value: "<50ms", label: "Response Delay Speed", description: "Automated processing of high-volume text logs" },
+    ],
     comparison: [
       {
         without: "Manual customer query handling — 4hr SLA",
@@ -553,6 +710,12 @@ const techData: Record<
       { label: "Network Bandwidth", value: "10Gbps" },
       { label: "Load Capacity Level", value: "10M/s" },
     ],
+    editorialLead: "Enterprise connectivity defines business continuity. As applications migrate to the cloud and workforces distribute globally, legacy networks become bottlenecks. Modern SD-WAN and edge routing eliminate latency and ensure uninterrupted operations.",
+    statHighlights: [
+      { value: "12ms", label: "Edge Latency Average", description: "Global latency dropped to milliseconds" },
+      { value: "10Gbps", label: "Network Bandwidth", description: "Robust failovers preventing network outages" },
+      { value: "10M/s", label: "Load Capacity Level", description: "Optimized content caching to reduce origin loads" },
+    ],
     comparison: [
       {
         without: "MPLS WAN with 80ms+ latency between offices",
@@ -661,6 +824,12 @@ const techData: Record<
       { label: "Build Success Rate", value: "99.8%" },
       { label: "Rollback Trigger Speed", value: "Instant" },
     ],
+    editorialLead: "Speed and stability are often treated as opposing forces in software delivery. DevOps bridges this gap. By automating infrastructure as code and embedding quality into continuous delivery pipelines, organizations can ship faster without breaking production.",
+    statHighlights: [
+      { value: "8min", label: "Deployment Cycle Speed", description: "Drastically faster time-to-market schedules" },
+      { value: "99.8%", label: "Build Success Rate", description: "Unmatched consistency across development nodes" },
+      { value: "Instant", label: "Rollback Trigger Speed", description: "Instant rollback triggers for failed deploys" },
+    ],
     comparison: [
       {
         without: "Manual deployments taking 3+ hours with risk",
@@ -766,21 +935,27 @@ const oldImageMap: Record<string, string> = {
   "devops": "/images/tech_devops_blueprint.png",
 };
 
-function FAQItem({ q, a, accent }: { q: string; a: string; accent: string }) {
+function FAQItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-border rounded-xl overflow-hidden">
+    <motion.div
+      className="border-t border-border"
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.07 }}
+    >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-muted/50 transition-colors duration-200 gap-4"
+        className="w-full flex items-center justify-between py-6 text-left group gap-4"
       >
-        <span className="text-sm font-bold text-foreground leading-snug">
+        <span className="text-[1.0625rem] font-semibold text-foreground leading-snug group-hover:text-primary transition-colors duration-200">
           {q}
         </span>
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.22 }}
-          className="shrink-0 text-muted-foreground"
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="shrink-0 text-muted-foreground group-hover:text-primary transition-colors duration-200"
         >
           <ChevronDown className="w-5 h-5" />
         </motion.span>
@@ -791,16 +966,16 @@ function FAQItem({ q, a, accent }: { q: string; a: string; accent: string }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden"
           >
-            <p className="px-6 pb-5 text-sm text-muted-foreground leading-relaxed font-medium border-t border-border pt-4">
+            <p className="pb-6 text-base text-muted-foreground leading-relaxed font-medium max-w-3xl">
               {a}
             </p>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
@@ -810,624 +985,574 @@ export default function TechDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = use(params);
-  const router = useRouter();
   const tech = techData[slug];
-  const [isZoomed, setIsZoomed] = useState(false);
 
   if (!tech) {
     return (
       <div className="container mx-auto px-6 py-32 text-center min-h-[60vh] flex flex-col justify-center items-center">
-        <h1 className="text-3xl font-extrabold text-foreground">
-          Technology Not Found
-        </h1>
-        <p className="text-muted-foreground mt-2 font-medium">
-          The requested technology page does not exist.
-        </p>
-        <Link
-          href="/technology"
-          className="mt-6 text-primary font-bold flex items-center gap-1.5 hover:underline"
-        >
-          <ArrowLeft className="w-4 h-4" /> Back to Technology
+        <h1 className="text-3xl font-bold text-foreground">Technology Not Found</h1>
+        <p className="text-muted-foreground mt-2">The requested technology page does not exist.</p>
+        <Link href="/technology" className="mt-6 text-primary font-semibold flex items-center gap-1.5 hover:underline">
+          <ArrowLeft className="w-4 h-4" /> Back to Technology Hub
         </Link>
       </div>
     );
   }
 
-  return (
-    <div className="min-h-screen bg-background relative overflow-x-hidden">
+  const titleWords = tech.title.split(" ");
+  const titleFirstWord = titleWords[0];
+  const titleRest = titleWords.slice(1).join(" ");
 
-      {/* ════════════════════════════════
-          HERO
-      ════════════════════════════════ */}
-      <section className="pt-28 pb-14 md:pt-36 md:pb-18 relative overflow-hidden bg-slate-950 text-white shadow-xl">
-        {/* Background Image & Overlays */}
+  return (
+    <div className="min-h-screen bg-background relative overflow-x-hidden selection:bg-primary/20">
+
+      {/* ── 1. HERO ────────────────────────────────────────────────── */}
+      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-950 text-white shadow-xl">
+        {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
             src={tech.image}
-            alt=""
+            alt={tech.title}
             fill
             sizes="100vw"
             priority
-            className="object-cover opacity-55 dark:opacity-45 pointer-events-none select-none"
-            aria-hidden="true"
+            className="object-cover object-top opacity-90"
           />
-          {/* Left-to-right gradient to cover text area on the left */}
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-slate-950/50 to-transparent" />
-          {/* Bottom-to-top gradient to fade into the dark page body transition at the bottom */}
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
-          {/* Subtle color highlight in top right */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.18)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.15)_0%,transparent_60%)]" />
         </div>
 
-        <div className="container px-6 sm:px-8 mx-auto relative z-10">
-          <Link
-            href="/technology"
-            className="group inline-flex items-center gap-2 text-xs font-bold text-white/80 hover:text-white bg-white/10 hover:bg-white/25 px-4 py-2 rounded-full border border-white/15 transition-all duration-300 backdrop-blur-md mb-8 w-fit"
-          >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            Back to Technology
-          </Link>
-
+        <div className="container px-6 sm:px-8 mx-auto relative z-10 flex flex-col justify-center">
+          {/* Breadcrumb — fade in */}
           <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            className="max-w-4xl space-y-5"
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 mb-8"
           >
+            <Link
+              href="/technology"
+              className="group inline-flex items-center gap-2 text-sm font-semibold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full border border-white/15 transition-all duration-300 backdrop-blur-md w-fit"
+            >
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+              Technology Capabilities
+            </Link>
+          </motion.div>
+
+          <div className="flex-grow mb-8">
             <motion.div
-              variants={fadeUp}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-xs font-bold uppercase tracking-wider text-white"
+              variants={staggerSlow}
+              initial="hidden"
+              animate="show"
+              className="max-w-4xl space-y-8"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-              Enterprise Technology Suite
+              {/* Editorial Headline — Playfair Display */}
+              <motion.h1
+                variants={fadeUp}
+                className="font-editorial text-4xl sm:text-5xl md:text-6xl text-white tracking-tight leading-tight"
+              >
+                {titleFirstWord} <span className="text-blue-400">{titleRest}</span>
+              </motion.h1>
+
+              {/* Subtitle — clean sans-serif contrast */}
+              <motion.p
+                variants={fadeUp}
+                className="text-white/90 text-lg sm:text-xl font-medium leading-relaxed"
+              >
+                {tech.subtitle}
+              </motion.p>
+
+              {/* Description */}
+              <motion.p
+                variants={fadeUp}
+                className="text-white/70 text-base md:text-lg font-medium leading-relaxed max-w-xl"
+              >
+                {tech.description}
+              </motion.p>
             </motion.div>
-            <motion.h1
-              variants={fadeUp}
-              className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-[1.05]"
-            >
-              {tech.title}
-            </motion.h1>
-            <motion.p
-              variants={fadeUp}
-              className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-300 to-cyan-300 text-xl sm:text-2xl font-bold leading-normal"
-            >
-              {tech.subtitle}
-            </motion.p>
-            <motion.p
-              variants={fadeUp}
-              className="text-slate-300 text-lg leading-relaxed font-medium max-w-3xl"
-            >
-              {tech.description}
-            </motion.p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2. EDITORIAL INTRODUCTION ──────────────────────────────── */}
+      <section className="py-24 md:py-32 !border-t-0">
+        <motion.div
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          variants={stagger}
+          className="container px-6 sm:px-8 mx-auto"
+        >
+          <motion.div variants={fadeUp} className="max-w-3xl mx-auto">
+            <p className="editorial-pullquote text-foreground text-xl sm:text-2xl md:text-[1.75rem]">
+              {tech.editorialLead || tech.overview}
+            </p>
+          </motion.div>
+
+          {/* Animated accent line */}
+          <motion.div
+            variants={expandWidth}
+            className="max-w-3xl mx-auto mt-16 h-px bg-gradient-to-r from-primary/30 via-primary/15 to-transparent"
+          />
+        </motion.div>
+      </section>
+
+      {/* ── 3. DOMAIN OVERVIEW ─────────────────────────────────────── */}
+      <section className="py-20 md:py-28">
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="container px-6 sm:px-8 mx-auto"
+        >
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            {/* Image column — slide in from left with scale */}
+            <motion.div variants={slideInLeft} className="lg:col-span-5">
+              <motion.div
+                className="relative overflow-hidden group aspect-[4/3] flex items-center justify-center"
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              >
+                {/* Background ambient glow */}
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08)_0%,transparent_70%)]" />
+                
+                {/* Interactive Visual Component */}
+                <div className="absolute inset-0 p-8">
+                  <TechOrbitVisualization />
+                </div>
+
+                {/* Viewfinder Corners */}
+                <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-cyan-500/30" />
+                <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-cyan-500/30" />
+                <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyan-500/30" />
+                <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyan-500/30" />
+
+                {/* Subtle border glow on hover */}
+                <div className="absolute inset-0 rounded-xl border border-white/0 group-hover:border-cyan-500/20 transition-colors duration-300 pointer-events-none" />
+              </motion.div>
+            </motion.div>
+
+            {/* Narrative column — slide in from right */}
+            <motion.div variants={slideInRight} className="lg:col-span-7 space-y-8">
+              <div className="space-y-3">
+                <motion.p
+                  initial={{ opacity: 0, x: 12 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-xs font-bold uppercase tracking-widest text-primary"
+                >
+                  Domain Overview
+                </motion.p>
+                <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
+                  {tech.subtitle}
+                </h2>
+              </div>
+
+              <p className="text-muted-foreground text-lg leading-relaxed font-medium">
+                {tech.overview}
+              </p>
+
+              {/* Icon + SLA guarantee — subtle hover lift */}
+              <motion.div
+                className="flex items-start gap-4 p-5 rounded-lg bg-card border border-border transition-colors duration-300 hover:border-primary/20"
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-widest text-primary mb-1">
+                    Verified Technical SLA
+                  </p>
+                  <p className="text-sm text-muted-foreground font-medium leading-relaxed">
+                    All enterprise architectures engineered by Jeshurun Technologies are backed by a minimum 99.9% uptime SLA, rigorous load testing, and comprehensive failover protocols prior to deployment.
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          </div>
+        </motion.div>
+      </section>
+
+      <AccentLine />
+
+      {/* ── 4. CORE CAPABILITIES ───────────────────────────────────── */}
+      <section className="py-20 md:py-28">
+        <div className="container px-6 sm:px-8 mx-auto">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="grid lg:grid-cols-12 gap-12 lg:gap-20"
+          >
+            {/* Sticky label */}
+            <div className="lg:col-span-4">
+              <motion.div variants={fadeUp} className="lg:sticky lg:top-32 space-y-6">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
+                    Core Capabilities
+                  </p>
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-editorial text-foreground leading-tight">
+                    What we deliver
+                  </h3>
+                </div>
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  Our {tech.title} practice is built on battle-tested, automated, and enterprise-grade delivery frameworks.
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Numbered list */}
+            <div className="lg:col-span-8">
+              <div className="border-t border-border">
+                {tech.features.map((feature, idx) => (
+                  <motion.div
+                    key={idx}
+                    variants={tableRow}
+                    whileHover={{ x: 8 }}
+                    className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-6 sm:py-8 border-b border-border group cursor-default"
+                  >
+                    <span className="text-sm font-bold text-primary/40 shrink-0 tabular-nums">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex-1">
+                      <h4 className="text-lg md:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                        {feature}
+                      </h4>
+                      {tech.benefits[idx] && (
+                        <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                          {tech.benefits[idx]}
+                        </p>
+                      )}
+                    </div>
+                    <motion.div
+                      className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0 ml-4"
+                    >
+                      <ArrowRight className="w-5 h-5 text-primary" />
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Page Body content wrapper */}
-      <div className="container px-6 sm:px-8 mx-auto py-16 space-y-20 relative z-10">
+      <AccentLine />
 
-        {/* Dynamic Metrics */}
-        <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true, margin: "-60px" }} className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-          {tech.metrics.map((metric, idx) => (
-            <motion.div
-              key={idx}
-              variants={fadeUp}
-              className="h-full"
-            >
-              <SpotlightCard className="p-6 bg-card border border-border shadow-sm hover-card-effect space-y-1.5 rounded-2xl h-full">
-                <div
-                  className={`text-3xl font-black min-h-[40px] flex items-center ${metric.value ? 'text-primary' : 'text-muted-foreground/60'}`}
-                >
-                  {metric.value ? (
-                    metric.value
-                  ) : (
-                    <span className="font-medium">
-                      --
-                    </span>
-                  )}
-                </div>
-                <div className="text-xs font-extrabold text-muted-foreground uppercase tracking-widest">
-                  {metric.label}
-                </div>
-              </SpotlightCard>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Detailed Structure Split Section */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          className="grid lg:grid-cols-12 gap-8 pt-4"
-        >
-          {/* Left: image + overview */}
-          <div className="lg:col-span-7 space-y-5">
-            <motion.div variants={fadeUp} className="space-y-1.5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/15">
-                Technical Approach
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
-                Our Architecture
-              </h2>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              onClick={() => setIsZoomed(true)}
-              className="relative overflow-hidden rounded-2xl border border-border shadow-md bg-slate-50 dark:bg-[#070b13] cursor-zoom-in group"
-            >
-              <div className="w-full h-[360px] relative">
-                <Image
-                  src={oldImageMap[slug]}
-                  alt={`${tech.title} Architectural Blueprint`}
-                  fill
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-contain object-center p-2 transition-transform duration-500 group-hover:scale-[1.02]"
-                />
-              </div>
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                <span className="bg-black/75 text-white text-xs font-bold px-3.5 py-2 rounded-full border border-white/10 backdrop-blur-sm flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                  <ZoomIn className="w-3.5 h-3.5" /> Click to view full diagram
-                </span>
-              </div>
-            </motion.div>
-
-            <motion.div
-              variants={fadeUp}
-              className="p-6 bg-card border border-border rounded-2xl space-y-3"
-            >
-              <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                {iconMap[tech.iconName]}
-              </div>
-              <h3 className="text-lg font-extrabold text-foreground">
-                Domain Overview
-              </h3>
-              <p className="text-muted-foreground text-base leading-relaxed font-medium">
-                {tech.overview}
+      {/* ── 5. MEASURABLE OUTCOMES ─────────────────────────────────── */}
+      <section className="py-24 md:py-32">
+        <div className="container px-6 sm:px-8 mx-auto">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="space-y-16"
+          >
+            <motion.div variants={fadeUp} className="max-w-3xl">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+                Outcomes
               </p>
-            </motion.div>
-          </div>
-
-          {/* Right: capabilities + KPI names */}
-          <div className="lg:col-span-5">
-            <motion.div
-              variants={fadeUp}
-              className="p-6 bg-card border border-border rounded-2xl space-y-5 h-full"
-            >
-              <h3 className="text-lg font-extrabold text-foreground">
-                Core Capabilities
+              <h3 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
+                Measurable impact
               </h3>
-              <ul className="space-y-3.5">
-                {tech.features.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-0.5 shrink-0">
-                      <Check className="w-3 h-3 text-primary" />
-                    </span>
-                    <span className="text-base font-semibold text-foreground leading-tight">
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="pt-4 border-t border-border space-y-2.5">
-                <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-                  What We Measure
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {tech.metrics.map((m, i) => (
-                    <span
-                      key={i}
-                      className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-primary/5 text-primary border border-primary/15"
-                    >
-                      {m.label}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-border p-4 rounded-xl bg-background space-y-1.5">
-                <p className="text-[10px] font-black uppercase tracking-widest text-primary">
-                  Verified Technical SLA
-                </p>
-                <p className="text-xs text-muted-foreground font-medium leading-relaxed">
-                  All systems setups conform to modern architectures, governed
-                  by strict data integrity guarantees, and backed by constant
-                  server checks.
-                </p>
-              </div>
             </motion.div>
-          </div>
-        </motion.div>
 
-        {/* ── Operational Benefits Section ── */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          className="space-y-6"
-        >
-          <motion.div variants={fadeUp} className="space-y-1.5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 border-emerald-500/15">
-              Outcomes
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
-              Operational Benefits
-            </h2>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            className="grid sm:grid-cols-2 gap-3"
-          >
-            {tech.benefits.map((benefit, i) => (
-              <div
-                key={i}
-                className="flex items-start gap-3 p-4 rounded-xl border border-emerald-500/15 bg-emerald-500/[0.04] dark:bg-emerald-500/[0.07]"
-              >
-                <div className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-500/15 flex items-center justify-center mt-0.5 shrink-0">
-                  <Check className="w-3 h-3 text-emerald-600" />
-                </div>
-                <p className="text-sm text-foreground font-semibold leading-snug">
-                  {benefit}
-                </p>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* ── Section 1: VS Comparison Table ── */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          className="space-y-8"
-        >
-          <motion.div variants={fadeUp} className="text-center space-y-3">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/10"
+            <motion.div
+              variants={stagger}
+              className="grid sm:grid-cols-3 gap-px bg-border rounded-xl overflow-hidden"
             >
-              Impact Comparison
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
-              Without Us vs. With Jeshurun
-            </h2>
-            <p className="text-muted-foreground font-medium text-sm max-w-xl mx-auto">
-              See the real operational difference our {tech.title} practice
-              makes for enterprise clients.
-            </p>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            className="overflow-hidden rounded-2xl border border-border shadow-sm"
-          >
-            {/* Header */}
-            <div className="grid grid-cols-2 bg-card">
-              <div className="px-6 py-4 flex items-center gap-2">
-                <XIcon className="w-4 h-4 text-red-400" />
-                <span className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-                  Without Jeshurun
-                </span>
-              </div>
-              <div className="px-6 py-4 flex items-center gap-2 border-l border-border">
-                <Check className="w-4 h-4 text-emerald-400" />
-                <span className="text-xs font-extrabold uppercase tracking-widest text-foreground">
-                  With Jeshurun
-                </span>
-              </div>
-            </div>
-            {/* Rows */}
-            {tech.comparison.map((row, i) => (
-              <div
-                key={i}
-                className={`grid grid-cols-2 border-t border-border ${i % 2 === 0 ? "bg-card" : "bg-muted/10"}`}
-              >
-                <div className="px-6 py-4 flex items-start gap-3 border-r border-border">
-                  <span className="w-5 h-5 rounded-full bg-red-50 flex items-center justify-center mt-0.5 shrink-0">
-                    <XIcon className="w-3 h-3 text-red-400" />
-                  </span>
-                  <span className="text-sm text-muted-foreground font-medium leading-snug">
-                    {row.without}
-                  </span>
-                </div>
-                <div className="px-6 py-4 flex items-start gap-3">
-                  <span className="w-5 h-5 rounded-full bg-emerald-50 flex items-center justify-center mt-0.5 shrink-0">
-                    <Check className="w-3 h-3 text-emerald-500" />
-                  </span>
-                  <span className="text-sm text-foreground font-bold leading-snug">
-                    {row.with}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* ── Section 2: Case Study / Testimonial ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ type: "spring" as const, stiffness: 80, damping: 22 }}
-        >
-          {/* Enterprise Case Study Preview */}
-          <SpotlightCard className="p-0">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(var(--primary),0.05)_0%,transparent_60%)] pointer-events-none" />
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12">
-              
-              {/* Left Side: Case Study Card (40%) */}
-              <div className="lg:col-span-5 bg-muted/20 border-b lg:border-b-0 lg:border-r border-border p-8 sm:p-12 space-y-8">
-                <div className="space-y-2">
-                  <span className="px-3 py-1 text-[10px] font-extrabold uppercase tracking-widest bg-primary/10 text-primary rounded-full shadow-sm">
-                    CLIENT SUCCESS STORY
-                  </span>
-                  <h3 className="text-2xl font-black text-foreground pt-2">
-                    {tech.title} Modernization
-                  </h3>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="space-y-1">
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Industry</div>
-                    <div className="text-sm font-extrabold text-foreground">Healthcare</div>
-                  </div>
-                  <div className="space-y-1">
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold">Region</div>
-                    <div className="text-sm font-extrabold text-foreground">Global</div>
-                  </div>
-                </div>
-
-                <div className="space-y-1 border-t border-border pt-6">
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold pb-2">Technologies</div>
-                  <div className="flex flex-wrap gap-2">
-                    <span className="px-2.5 py-1 text-xs font-bold bg-background border border-border rounded-md text-foreground">Enterprise Cloud</span>
-                    <span className="px-2.5 py-1 text-xs font-bold bg-background border border-border rounded-md text-foreground">Kubernetes</span>
-                    <span className="px-2.5 py-1 text-xs font-bold bg-background border border-border rounded-md text-foreground">Terraform</span>
-                  </div>
-                </div>
-
-                <div className="space-y-1 border-t border-border pt-6">
-                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold pb-2">Business Outcomes</div>
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4 h-4 text-emerald-500" />
-                      <span className="text-sm font-bold text-foreground">99.99% Availability</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4 h-4 text-emerald-500" />
-                      <span className="text-sm font-bold text-foreground">40% Cost Reduction</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Check className="w-4 h-4 text-emerald-500" />
-                      <span className="text-sm font-bold text-foreground">65% Faster Deployment</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              {/* Right Side: Client Testimonial (60%) */}
-              <div className="lg:col-span-7 p-8 sm:p-12 flex flex-col justify-center space-y-10">
-                <Quote className="w-10 h-10 text-primary opacity-20" />
-                <p className="text-foreground text-xl sm:text-2xl font-medium leading-relaxed italic">
-                  {tech.testimonial.quote ? (
-                    <>&ldquo;{tech.testimonial.quote}&rdquo;</>
-                  ) : (
-                    <>&ldquo;Implementing {tech.title} solutions with Jeshurun entirely transformed our operational capabilities. Their enterprise-grade approach allowed us to scale seamlessly during peak traffic while drastically cutting infrastructure overhead. They don&apos;t just deliver technology—they deliver verifiable business value.&rdquo;</>
-                  )}
-                </p>
-                
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pt-8 border-t border-border">
-                  <div className="flex items-center gap-5">
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center font-black text-lg text-primary-foreground bg-primary shadow-md shrink-0">
-                      {tech.testimonial.author ? tech.testimonial.author.split(" ").map(n => n[0]).join("") : "JD"}
-                    </div>
-                    <div>
-                      <p className="text-base font-black text-foreground tracking-tight">
-                        {tech.testimonial.author || "John Doe"}
+              {(tech.statHighlights || tech.metrics.map(m => ({
+                value: m.value,
+                label: m.label,
+                description: "",
+              }))).map((stat, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: idx * 0.15 }}
+                  className="bg-background p-8 sm:p-10 relative group overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -translate-x-full group-hover:translate-x-0" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  <div className="relative z-10 space-y-3 transform transition-transform duration-500 group-hover:-translate-y-1">
+                    <AnimatedStatValue value={stat.value} />
+                    <motion.div
+                      initial={{ scaleX: 0, originX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 + idx * 0.15 }}
+                      className="w-12 h-px bg-primary/40 transition-all duration-500 group-hover:w-24 group-hover:bg-primary"
+                    />
+                    <p className="text-sm font-bold uppercase tracking-wider text-primary">
+                      {stat.label}
+                    </p>
+                    {stat.description && (
+                      <p className="text-sm text-muted-foreground font-medium leading-relaxed">
+                        {stat.description}
                       </p>
-                      <p className="text-xs text-muted-foreground font-bold uppercase tracking-wide">
-                        {tech.testimonial.role || "Chief Technology Officer"} · {tech.testimonial.company || "TechCorp Enterprise"}
-                      </p>
-                    </div>
+                    )}
                   </div>
-                  <div className="sm:text-right">
-                    <div className="text-2xl font-black text-foreground">{tech.testimonial.stat || "99.99%"}</div>
-                    <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{tech.testimonial.statLabel || "Uptime SLA"}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </SpotlightCard>
-        </motion.div>
-        {/* ── Section 3: FAQ Accordion ── */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          className="space-y-6"
-        >
-          <motion.div variants={fadeUp} className="space-y-2">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/10"
-            >
-              Common Questions
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
-              Frequently Asked Questions
-            </h2>
-          </motion.div>
-
-          <div className="max-w-4xl mx-auto">
-            <motion.div variants={fadeUp} className="space-y-3">
-              {tech.faqs.map((faq, i) => (
-                <FAQItem key={i} q={faq.q} a={faq.a} accent={tech.accentColor} />
+                </motion.div>
               ))}
             </motion.div>
-          </div>
-        </motion.div>
-
-        {/* ── Section 4: Delivery Framework ── */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          className="space-y-8 pt-8"
-        >
-          <motion.div variants={fadeUp} className="text-center space-y-3">
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border bg-primary/5 text-primary border-primary/10"
-            >
-              Delivery Framework
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
-              Our Collaboration Pipeline
-            </h2>
-            <p className="text-muted-foreground font-medium text-sm max-w-xl mx-auto">
-              How we coordinate legacy assessments, cloud mappings, and automated release cycles.
-            </p>
           </motion.div>
+        </div>
+      </section>
 
+      {/* ── VERIFIED OUTCOMES + TESTIMONIAL ─────────────────────── */}
+      <section className="py-20 md:py-28 border-y border-border">
+        <div className="container px-6 sm:px-8 mx-auto">
           <motion.div
-            variants={fadeUp}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch"
           >
-            {[
-              {
-                num: "01",
-                title: "Architecture Diagnostics",
-                desc: "We perform full legacy architecture diagnostics and evaluate code coverage metrics."
-              },
-              {
-                num: "02",
-                title: "Enterprise Blueprinting",
-                desc: "Our architects map cloud topologies, security frameworks, and release scripts."
-              },
-              {
-                num: "03",
-                title: "Agile Execution & QA",
-                desc: "We run Agile iterations coupled with continuous automated test integration."
-              },
-              {
-                num: "04",
-                title: "SLA Compliance & Telemetry",
-                desc: "We deploy real-time alerts, cost telemetry, and guarantee 99.9% uptime compliance."
-              }
-            ].map((step, i) => (
-              <SpotlightCard key={i} className="p-6 bg-card border border-border rounded-2xl space-y-4 hover-card-effect">
-                <div className="text-4xl font-black text-primary/20">
-                  {step.num}
-                </div>
-                <h3 className="text-lg font-extrabold text-foreground">
-                  {step.title}
-                </h3>
-                <p className="text-sm font-medium text-muted-foreground leading-relaxed">
-                  {step.desc}
+            {/* Outcomes */}
+            <motion.div variants={fadeUp} className="flex flex-col h-full lg:pr-8 lg:py-10">
+              <div className="mb-12">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
+                  Client Success
                 </p>
-              </SpotlightCard>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* ── Section 5: Related Technologies + CTA ── */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-60px" }}
-          className="space-y-8 pt-8"
-        >
-          <motion.div variants={fadeUp}>
-            <div
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider border mb-3 bg-primary/5 text-primary border-primary/10"
-            >
-              Related Practices
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
-              Explore Connected Technologies
-            </h2>
-          </motion.div>
-
-          <motion.div
-            variants={fadeUp}
-            className="grid grid-cols-1 md:grid-cols-3 gap-5"
-          >
-            {tech.related.map((rel) => (
-              <div key={rel.href} onClick={() => router.push(rel.href)} className="group block cursor-pointer outline-none">
-                <SpotlightCard className="h-full p-0">
-                  <h4 className="text-base font-extrabold text-foreground group-hover:text-primary transition-colors duration-200 mb-2">
-                    {rel.title}
-                  </h4>
-                  <p className="text-xs text-muted-foreground font-medium leading-relaxed">
-                    {rel.desc}
-                  </p>
-                  <div
-                    className="flex items-center gap-1 mt-4 text-xs font-bold text-primary"
-                  >
-                    Explore{" "}
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform duration-200" />
-                  </div>
-                </SpotlightCard>
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-editorial text-foreground leading-tight">
+                  Verified engagement outcomes.
+                </h3>
               </div>
-            ))}
-          </motion.div>
+              
+              <div className="flex-grow flex flex-col justify-between">
+                <div className="space-y-6 mb-8">
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold border-b border-border pb-3">Verified Outcomes</p>
+                  <ul className="space-y-5">
+                    {(tech.caseStudyOutcomes || tech.benefits.slice(0, 3)).map((outcome: string, i: number) => (
+                      <li key={i} className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                          <Check className="w-3.5 h-3.5 text-primary" />
+                        </div>
+                        <span className="text-base font-medium text-foreground leading-snug">{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-6 pt-6 border-t border-border">
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-2">Engagement Type</div>
+                    <div className="text-sm font-bold text-foreground">Enterprise Build</div>
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-2">Region</div>
+                    <div className="text-sm font-bold text-foreground">Europe & Global</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
 
-          {/* ═══════ CLOUD ROI CALCULATOR ═══════ */}
-          {/* Removed as requested */}
-
-          {/* CTA Banner */}
-          <div className="-mx-6 sm:-mx-8">
-            <PremiumCTA 
-              variant="technology"
-              titleTop={tech.ctaTitleTop}
-              titleHighlight={tech.ctaTitleHighlight}
-              description={tech.ctaDescription}
-            />
-          </div>
-        </motion.div>
-      </div>
-      {/* Lightbox Modal */}
-      <AnimatePresence>
-        {isZoomed && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsZoomed(false)}
-            className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center cursor-zoom-out p-4 md:p-8 backdrop-blur-md"
-          >
-            <motion.div
-              initial={{ scale: 0.95, y: 15 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 15 }}
-              transition={{ type: "spring", stiffness: 300, damping: 28 }}
-              className="relative max-w-5xl w-full max-h-[85vh] aspect-square rounded-2xl overflow-hidden bg-slate-50 dark:bg-[#070b13] border border-slate-200 dark:border-white/10 shadow-2xl p-4 flex items-center justify-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Image
-                src={oldImageMap[slug]}
-                alt="System Architecture Diagram"
-                fill
-                sizes="100vw"
-                className="object-contain"
-              />
-              <button
-                onClick={() => setIsZoomed(false)}
-                className="absolute top-4 right-4 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-2 rounded-full border border-white/10 transition-colors"
-                aria-label="Close modal"
-              >
-                <XIcon className="w-5 h-5" />
-              </button>
+            {/* Testimonial */}
+            <motion.div variants={fadeUp} className="h-full">
+              <div className="p-8 lg:p-10 rounded-3xl border border-border h-full flex flex-col justify-between relative overflow-hidden">
+                
+                <div className="relative z-10">
+                  <Quote className="w-8 h-8 text-primary mb-8" />
+                  <blockquote className="text-base md:text-lg lg:text-xl font-editorial text-foreground leading-relaxed mb-10">
+                    &ldquo;{tech.testimonial.quote || "The federated GraphQL layer completely transformed how our frontend teams consume data. Development cycles are significantly faster now."}&rdquo;
+                  </blockquote>
+                </div>
+                
+                <div className="flex items-center gap-4 pt-6 border-t border-border/50 relative z-10 flex-wrap">
+                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center font-bold text-primary-foreground text-sm shrink-0">
+                    {(tech.testimonial.author || "Elena Rodriguez").split(" ").map((n) => n[0]).join("")}
+                  </div>
+                  <div className="flex-1 min-w-0 pr-4 border-r border-border/50">
+                    <div className="text-sm font-bold text-foreground truncate">{tech.testimonial.author || "Elena Rodriguez"}</div>
+                    <div className="text-[10px] text-muted-foreground uppercase tracking-widest truncate">
+                      {tech.testimonial.role || "Lead Software Architect"} · {tech.testimonial.company || "E-commerce Enterprise"}
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <div className="text-2xl font-editorial text-foreground">{tech.testimonial.stat || "3X"}</div>
+                    <div className="text-[9px] font-bold uppercase tracking-widest text-primary">{tech.testimonial.statLabel || "DEVELOPMENT VELOCITY"}</div>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      </section>
+
+
+
+      {/* ── 7. IMPACT COMPARISON ───────────────────────────────────── */}
+      <section className="py-20 md:py-28">
+        <div className="container px-6 sm:px-8 mx-auto">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="space-y-12"
+          >
+            <motion.div variants={fadeUp} className="max-w-3xl">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+                Impact Comparison
+              </p>
+              <h3 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
+                Without Us vs. With Jeshurun
+              </h3>
+            </motion.div>
+
+            <motion.div
+              variants={scaleIn}
+              className="overflow-hidden rounded-xl border border-border"
+            >
+              {/* Table header */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="grid grid-cols-2 bg-background"
+              >
+                <div className="px-6 py-4 border-b border-border">
+                  <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
+                    Without strategic partner
+                  </span>
+                </div>
+                <div className="px-6 py-4 border-b border-l border-border">
+                  <span className="text-xs font-bold uppercase tracking-widest text-foreground">
+                    With Jeshurun Technologies
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Rows */}
+              {tech.comparison.map((row, i) => (
+                <motion.div
+                  key={i}
+                  variants={tableRow}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, margin: "-20px" }}
+                  transition={{ delay: i * 0.08 }}
+                  className="grid grid-cols-2 border-t border-border first:border-t-0 group"
+                >
+                  <div className="px-6 py-5 bg-red-500/[0.02] dark:bg-red-500/[0.04] group-hover:bg-red-500/[0.04] dark:group-hover:bg-red-500/[0.07] transition-colors duration-200">
+                    <p className="text-sm text-muted-foreground font-medium leading-relaxed">
+                      {row.without}
+                    </p>
+                  </div>
+                  <div className="px-6 py-5 border-l border-border bg-emerald-500/[0.02] dark:bg-emerald-500/[0.04] group-hover:bg-emerald-500/[0.04] dark:group-hover:bg-emerald-500/[0.07] transition-colors duration-200">
+                    <p className="text-sm text-foreground font-semibold leading-relaxed">
+                      {row.with}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+
+
+      {/* ── 9. FREQUENTLY ASKED QUESTIONS ──────────────────────────── */}
+      <section className="py-20 md:py-28">
+        <div className="container px-6 sm:px-8 mx-auto">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+          >
+            <motion.div variants={fadeUp} className="max-w-3xl mb-12">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+                Frequently Asked
+              </p>
+              <h3 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
+                Common questions
+              </h3>
+            </motion.div>
+            <div className="max-w-3xl">
+              {tech.faqs.map((faq, i) => (
+                <FAQItem key={i} q={faq.q} a={faq.a} index={i} />
+              ))}
+              <motion.div
+                initial={{ scaleX: 0, originX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className="border-t border-border"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 10. RELATED TECHNOLOGIES ───────────────────────────────── */}
+      <section className="py-16 md:py-20">
+        <div className="container px-6 sm:px-8 mx-auto">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            <motion.div variants={fadeUp} className="mb-10">
+              <h2 className="font-editorial text-xl sm:text-2xl text-foreground tracking-tight">
+                Related practice areas
+              </h2>
+            </motion.div>
+            <div className="space-y-0">
+              {tech.related.slice(0, 3).map((rel, i) => (
+                <motion.div
+                  key={rel.href}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-20px" }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
+                >
+                  <Link
+                    href={rel.href}
+                    className="group flex items-center justify-between py-5 border-t border-border last:border-b hover:bg-background/50 transition-colors duration-200 -mx-4 px-4 rounded-lg"
+                  >
+                    <div className="space-y-0.5">
+                      <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors duration-200">
+                        {rel.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground font-medium">
+                        {rel.desc}
+                      </p>
+                    </div>
+                    <ArrowRight
+                      className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-200 shrink-0 ml-4"
+                      aria-hidden="true"
+                    />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── 11. CTA ────────────────────────────────────────────────── */}
+      <section className="py-0">
+        <PremiumCTA
+          variant="technology"
+          titleTop={tech.ctaTitleTop}
+          titleHighlight={tech.ctaTitleHighlight}
+          description={tech.ctaDescription}
+        />
+      </section>
     </div>
   );
-}
+}

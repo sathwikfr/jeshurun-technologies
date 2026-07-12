@@ -648,7 +648,7 @@ function ExperienceTimelineViz() {
             <motion.div
               className="absolute w-3 h-3 rounded-full bg-blue-400 opacity-0"
               animate={isInView ? { scale: [1, 2.5], opacity: [0, 0.4, 0] } : {}}
-              transition={{ duration: 2, repeat: Infinity, delay: 1.5 + (i * 0.2) }}
+              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1.5 + (i * 0.2) }}
             />
           </div>
         ))}
@@ -1781,11 +1781,10 @@ export default function Home() {
         </div>
       </section>
 
-      <PremiumCTA variant="home" />
 
       {/* ── Newsletter CTA Strip ── */}
       <div className="relative z-10 border-t border-b border-border/60 bg-background mt-20">
-        <div className="container mx-auto px-6 sm:px-8 py-10 md:py-12">
+        <div className="w-full px-6 sm:px-12 md:px-24 lg:px-32 py-10 md:py-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-1 max-w-md">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-2">

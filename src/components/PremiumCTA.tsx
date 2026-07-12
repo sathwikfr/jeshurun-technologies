@@ -19,8 +19,8 @@ const CTA_DATA: Record<CTAVariant, {
   description: string;
   primaryButtonText: string;
   primaryButtonHref: string;
-  secondaryButtonText: string;
-  secondaryButtonHref: string;
+  secondaryButtonText?: string;
+  secondaryButtonHref?: string;
 }> = {
   home: {
     titleTop: "We Deliver",
@@ -28,8 +28,6 @@ const CTA_DATA: Record<CTAVariant, {
     description: "Partner with Jeshurun Technologies — 99.9% SLA uptime, 45+ certified engineers, and a proven track record across pharma, telecoms, and insurance globally.",
     primaryButtonText: "Start a Project",
     primaryButtonHref: "/contact",
-    secondaryButtonText: "Our Services",
-    secondaryButtonHref: "/services",
   },
   services: {
     titleTop: "Ready to Accelerate Your",
@@ -156,16 +154,18 @@ export function PremiumCTA({ variant, titleTop: customTitleTop, titleHighlight: 
                     <ArrowRight className="ml-2 w-3.5 h-3.5" aria-hidden="true" />
                   </Button>
                 </Link>
-                <Link href={data.secondaryButtonHref}>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="card-sweep-container h-11 px-8 text-sm font-bold border-border bg-card hover:bg-primary/5 hover:border-primary/30 text-foreground shadow-sm transition-all duration-300 rounded-xl hover:scale-[1.02]"
-                  >
-                    <div className="card-sweep-highlight" aria-hidden="true" />
-                    {data.secondaryButtonText}
-                  </Button>
-                </Link>
+                {data.secondaryButtonText && data.secondaryButtonHref && (
+                  <Link href={data.secondaryButtonHref}>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="card-sweep-container h-11 px-8 text-sm font-bold border-border bg-card hover:bg-primary/5 hover:border-primary/30 text-foreground shadow-sm transition-all duration-300 rounded-xl hover:scale-[1.02]"
+                    >
+                      <div className="card-sweep-highlight" aria-hidden="true" />
+                      {data.secondaryButtonText}
+                    </Button>
+                  </Link>
+                )}
               </div>
             </div>
           </div>

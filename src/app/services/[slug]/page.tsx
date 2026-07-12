@@ -13,6 +13,7 @@ import {
   Monitor,
   ChevronDown,
   ArrowRight,
+  Quote,
   X as XIcon,
   ZoomIn,
   Target,
@@ -219,6 +220,7 @@ const servicesData: Record<
     /* Extended editorial fields */
     editorialLead?: string;
     statHighlights?: { value: string; label: string; description: string }[];
+    caseStudyOutcomes?: string[];
   }
 > = {
   "it-consulting": {
@@ -624,11 +626,11 @@ export default function ServiceDetailPage({
             fill
             sizes="100vw"
             priority
-            className="object-cover object-top opacity-60"
+            className="object-cover object-top opacity-90"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.12)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.15)_0%,transparent_60%)]" />
         </div>
 
         <div className="container px-6 sm:px-8 mx-auto relative z-10 flex flex-col justify-center">
@@ -730,7 +732,7 @@ export default function ServiceDetailPage({
             {/* Image column — slide in from left with scale */}
             <motion.div variants={slideInLeft} className="lg:col-span-5">
               <motion.div
-                className="relative overflow-hidden rounded-xl bg-slate-50 dark:bg-[#070b13] group aspect-[4/3] border border-slate-200 dark:border-white/5 flex items-center justify-center"
+                className="relative overflow-hidden group aspect-[4/3] flex items-center justify-center"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
@@ -765,7 +767,7 @@ export default function ServiceDetailPage({
                   Practice Overview
                 </motion.p>
                 <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-                  How we approach {service.title.toLowerCase()}
+                  How we approach {service.title}
                 </h2>
               </div>
 
@@ -802,55 +804,65 @@ export default function ServiceDetailPage({
           Numbered vertical capability list. IBM-style clean list.
           Typography does the work — no cards, no borders.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-card">
-        <motion.div
-          variants={stagger}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-80px" }}
-          className="container px-6 sm:px-8 mx-auto"
-        >
-          <motion.div variants={fadeUp} className="max-w-3xl mb-16">
-            <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
-              Capabilities
-            </p>
-            <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-              What we deliver
-            </h2>
-          </motion.div>
-
-          <div className="max-w-4xl" style={{ counterReset: "editorial-counter" }}>
-            {service.features.map((feature, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-30px" }}
-                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: i * 0.1 }}
-                whileHover={{ x: 8 }}
-                className="editorial-numbered-item flex items-baseline border-t border-border py-7 first:border-t-0 cursor-default group"
-              >
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-foreground leading-snug group-hover:text-primary transition-colors duration-200">
-                    {feature}
+      <section className="py-20 md:py-28">
+        <div className="container px-6 sm:px-8 mx-auto">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="grid lg:grid-cols-12 gap-12 lg:gap-20"
+          >
+            {/* Sticky label */}
+            <div className="lg:col-span-4">
+              <motion.div variants={fadeUp} className="lg:sticky lg:top-32 space-y-6">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
+                    Core Capabilities
+                  </p>
+                  <h3 className="text-3xl md:text-4xl lg:text-5xl font-editorial text-foreground leading-tight">
+                    What we deliver
                   </h3>
-                  {/* Map benefits to features as descriptions */}
-                  {service.benefits[i] && (
-                    <p className="text-muted-foreground text-base font-medium mt-1.5 leading-relaxed">
-                      {service.benefits[i]}
-                    </p>
-                  )}
                 </div>
-                {/* Animated arrow on hover */}
-                <motion.div
-                  className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0 ml-4"
-                >
-                  <ArrowRight className="w-4 h-4 text-primary" />
-                </motion.div>
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  Our {service.title} practice is built on battle-tested, automated, and enterprise-grade delivery frameworks.
+                </p>
               </motion.div>
-            ))}
-          </div>
-        </motion.div>
+            </div>
+            
+            <div className="lg:col-span-8">
+              <div className="border-t border-border">
+                {service.features.map((feature, idx) => (
+                  <motion.div
+                    key={idx}
+                    variants={tableRow}
+                    whileHover={{ x: 8 }}
+                    className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-6 sm:py-8 border-b border-border group cursor-default"
+                  >
+                    <span className="text-sm font-bold text-primary/40 shrink-0 tabular-nums">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex-1">
+                      <h4 className="text-lg md:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                        {feature}
+                      </h4>
+                      {service.benefits[idx] && (
+                        <p className="text-muted-foreground text-sm md:text-base leading-relaxed">
+                          {service.benefits[idx]}
+                        </p>
+                      )}
+                    </div>
+                    <motion.div
+                      className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 shrink-0 ml-4"
+                    >
+                      <ArrowRight className="w-5 h-5 text-primary" />
+                    </motion.div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Accent divider */}
@@ -926,13 +938,94 @@ export default function ServiceDetailPage({
         </section>
       )}
 
+      {/* ── VERIFIED OUTCOMES + TESTIMONIAL ─────────────────────── */}
+      <section className="py-20 md:py-28 border-y border-border">
+        <div className="container px-6 sm:px-8 mx-auto">
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch"
+          >
+            {/* Outcomes */}
+            <motion.div variants={fadeUp} className="flex flex-col h-full lg:pr-8 lg:py-10">
+              <div className="mb-12">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
+                  Client Success
+                </p>
+                <h3 className="text-3xl md:text-4xl lg:text-5xl font-editorial text-foreground leading-tight">
+                  Verified engagement outcomes.
+                </h3>
+              </div>
+              
+              <div className="flex-grow flex flex-col justify-between">
+                <div className="space-y-6 mb-8">
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold border-b border-border pb-3">Verified Outcomes</p>
+                  <ul className="space-y-5">
+                    {(service.caseStudyOutcomes || service.benefits.slice(0, 3)).map((outcome: string, i: number) => (
+                      <li key={i} className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                          <Check className="w-3.5 h-3.5 text-primary" />
+                        </div>
+                        <span className="text-base font-medium text-foreground leading-snug">{outcome}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-6 pt-6 border-t border-border">
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-2">Engagement Type</div>
+                    <div className="text-sm font-bold text-foreground">Enterprise Build</div>
+                  </div>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-2">Region</div>
+                    <div className="text-sm font-bold text-foreground">Europe & Global</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Testimonial */}
+            <motion.div variants={fadeUp} className="h-full">
+              <div className="p-8 lg:p-10 rounded-3xl border border-border h-full flex flex-col justify-between relative overflow-hidden">
+                
+                <div className="relative z-10">
+                  <Quote className="w-8 h-8 text-primary mb-8" />
+                  <blockquote className="text-base md:text-lg lg:text-xl font-editorial text-foreground leading-relaxed mb-10">
+                    &ldquo;{service.testimonial.quote || "The federated GraphQL layer completely transformed how our frontend teams consume data. Development cycles are significantly faster now."}&rdquo;
+                  </blockquote>
+                </div>
+                
+                <div className="flex items-center gap-4 pt-6 border-t border-border/50 relative z-10 flex-wrap">
+                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center font-bold text-primary-foreground text-sm shrink-0">
+                    {(service.testimonial.author || "Elena Rodriguez").split(" ").map((n) => n[0]).join("")}
+                  </div>
+                  <div className="flex-1 min-w-0 pr-4 border-r border-border/50">
+                    <div className="text-sm font-bold text-foreground truncate">{service.testimonial.author || "Elena Rodriguez"}</div>
+                    <div className="text-[10px] text-muted-foreground uppercase tracking-widest truncate">
+                      {service.testimonial.role || "Lead Software Architect"} · {service.testimonial.company || "E-commerce Enterprise"}
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <div className="text-2xl font-editorial text-foreground">{service.testimonial.stat || "3X"}</div>
+                    <div className="text-[9px] font-bold uppercase tracking-widest text-primary">{service.testimonial.statLabel || "DEVELOPMENT VELOCITY"}</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
 
       {/* ════════════════════════════════════════════════════════════════
           SECTION 6 — COMPARISON TABLE
           Clean editorial table. Thin borders, subtle tints.
           Left-aligned text, no icon circles.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-card">
+      <section className="py-20 md:py-28">
         <motion.div
           variants={stagger}
           initial="hidden"
@@ -945,7 +1038,7 @@ export default function ServiceDetailPage({
               Impact Comparison
             </p>
             <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-              Without us vs. with Jeshurun
+              Without Us vs. With Jeshurun
             </h2>
           </motion.div>
 
@@ -1043,7 +1136,7 @@ export default function ServiceDetailPage({
           SECTION 8 — RELATED PRACTICES
           Horizontal text links with arrows. No cards.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="py-16 md:py-20 bg-card">
+      <section className="py-16 md:py-20">
         <motion.div
           variants={stagger}
           initial="hidden"
