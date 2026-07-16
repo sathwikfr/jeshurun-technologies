@@ -750,7 +750,7 @@ export default function ServiceDetailPage({
                 {/* Background ambient glow */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08)_0%,transparent_70%)]" />
                 
-                <div className="scale-75 md:scale-90">
+                <div className="scale-[0.6] md:scale-[0.75]">
                   <AnimatedServiceVisual slug={slug} />
                 </div>
 

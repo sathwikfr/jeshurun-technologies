@@ -866,10 +866,7 @@ function TestManagementViz() {
         }
       `}</style>
 
-      {/* Grid Background */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-10 dark:opacity-20">
-        <div className="w-full h-full border-[0.5px] border-[#10B981] [background-image:linear-gradient(#10B981_0.5px,transparent_0.5px),linear-gradient(90deg,#10B981_0.5px,transparent_0.5px)] [background-size:16px_16px]" />
-      </div>
+
 
       <div className="flex items-center gap-3 z-10 w-full px-6 relative">
         {[0, 1, 2, 3].map((i) => (

@@ -39,7 +39,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.jeshurun.ie"),
   title: {
-    default: "Jeshurun Technologies | Enterprise IT Consulting",
+    default: "Jeshurun Technologies",
     template: "%s | Jeshurun Technologies",
   },
   description: "Expert IT consulting, cloud solutions, test management, and enterprise software services for global organizations across Ireland and Europe.",
@@ -52,13 +52,13 @@ export const metadata: Metadata = {
     locale: "en_IE",
     url: "https://www.jeshurun.ie",
     siteName: "Jeshurun Technologies",
-    title: "Jeshurun Technologies | Enterprise IT Consulting",
+    title: "Jeshurun Technologies",
     description: "Expert IT consulting, cloud solutions, test management, and enterprise software services for global organizations across Ireland and Europe.",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Jeshurun Technologies" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jeshurun Technologies | Enterprise IT Consulting",
+    title: "Jeshurun Technologies",
     description: "Expert IT consulting, cloud solutions, test management, and enterprise software services.",
     images: ["/og-image.png"],
   },

@@ -1122,7 +1122,7 @@ export default function TechDetailPage({
             {/* Image column — slide in from left with scale */}
             <motion.div variants={slideInLeft} className="lg:col-span-5">
               <motion.div
-                className="relative overflow-hidden group aspect-[4/3] flex items-center justify-center"
+                className="relative group aspect-[4/3] flex items-center justify-center"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
@@ -1130,8 +1130,19 @@ export default function TechDetailPage({
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08)_0%,transparent_70%)]" />
                 
                 {/* Interactive Visual Component */}
-                <div className="absolute inset-0 p-8">
-                  <TechOrbitVisualization />
+                <div className="absolute inset-0 p-8 flex items-center justify-center">
+                  {slug === "cloud-solutions" ? (
+                    <TechOrbitVisualization />
+                  ) : (
+                    <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+                      <Image
+                        src={tech.image}
+                        alt={tech.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
                 </div>
 
                 {/* Viewfinder Corners */}
