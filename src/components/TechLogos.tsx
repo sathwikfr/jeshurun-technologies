@@ -1,7 +1,7 @@
 import React from "react";
 
 export const AwsLogo = ({ className }: { className?: string }) => (
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" className={className} alt="AWS" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" className={`${className || ""} dark:brightness-0 dark:invert`} alt="AWS" />
 );
 
 export const AzureLogo = ({ className }: { className?: string }) => (
