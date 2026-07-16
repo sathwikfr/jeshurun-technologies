@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Send, X, Bot, RotateCcw } from "lucide-react";
-import { findMatchingResponse } from "@/lib/chatRules";
 
 type Message = {
   role: "user" | "assistant";
@@ -168,15 +167,22 @@ export function AIChatbot() {
     setIsTyping(true);
 
     try {
-      // Simulate artificial typing delay (700ms) before responding
-      setTimeout(() => {
-        const { response, quickReplies } = findMatchingResponse(messageText);
-        streamReply(response, quickReplies, newMessages);
-      }, 700);
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages }),
+      });
+      
+      if (!res.ok) {
+        throw new Error("Failed to fetch response");
+      }
+      
+      const data = await res.json();
+      streamReply(data.reply, [], newMessages);
     } catch (err) {
       console.error(err);
       setIsTyping(false);
-      setMessages([...newMessages, { role: "assistant", content: "Sorry, an error occurred.", timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
+      setMessages([...newMessages, { role: "assistant", content: "Sorry, an error occurred while connecting to the server.", timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }]);
     }
   };
 
