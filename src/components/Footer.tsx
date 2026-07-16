@@ -14,7 +14,6 @@ const footerLinks = {
     { label: "Technology", href: "/technology" },
     { label: "Software", href: "/software" },
     { label: "Case Studies", href: "/case-studies" },
-    { label: "Careers", href: "/careers" },
   ],
   resources: [
     { label: "Insights & Research", href: "/insights" },

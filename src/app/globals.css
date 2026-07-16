@@ -170,14 +170,14 @@
   --border: rgba(59, 130, 246, 0.15);
   --input: rgba(59, 130, 246, 0.15);
 
-  --primary: #06B6D4;
-  --primary-foreground: #020617;
+  --primary: #3B82F6;
+  --primary-foreground: #FFFFFF;
   
   --secondary: #1E3A8A;
   --secondary-foreground: #F8FAFC;
 
-  --accent: #3B82F6;
-  --accent-foreground: #FFFFFF;
+  --accent: #06B6D4;
+  --accent-foreground: #020617;
 
   --muted: #475569;
   --muted-foreground: #94A3B8;

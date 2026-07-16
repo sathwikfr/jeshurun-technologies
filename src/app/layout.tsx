@@ -71,34 +71,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${inter.variable} ${playfair.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Jeshurun Technologies",
+                url: "https://www.jeshurun.ie",
+                logo: "https://www.jeshurun.ie/logo.png",
+                contactPoint: { "@type": "ContactPoint", contactType: "customer support", areaServed: "IE" },
+                sameAs: ["https://www.linkedin.com/company/jeshurun-technologies"],
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Jeshurun Technologies",
+                url: "https://www.jeshurun.ie",
+                potentialAction: { "@type": "SearchAction", target: "https://www.jeshurun.ie/search?q={search_term_string}", "query-input": "required name=search_term_string" },
+              },
+            ]),
+          }}
+        />
         <Providers>
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify([
-                {
-                  "@context": "https://schema.org",
-                  "@type": "Organization",
-                  name: "Jeshurun Technologies",
-                  url: "https://www.jeshurun.ie",
-                  logo: "https://www.jeshurun.ie/logo.png",
-                  contactPoint: { "@type": "ContactPoint", contactType: "customer support", areaServed: "IE" },
-                  sameAs: ["https://www.linkedin.com/company/jeshurun-technologies"],
-                },
-                {
-                  "@context": "https://schema.org",
-                  "@type": "WebSite",
-                  name: "Jeshurun Technologies",
-                  url: "https://www.jeshurun.ie",
-                  potentialAction: { "@type": "SearchAction", target: "https://www.jeshurun.ie/search?q={search_term_string}", "query-input": "required name=search_term_string" },
-                },
-              ]),
-            }}
-          />
           <div className="grain-overlay" />
           <Navbar />
           <main className="flex-1 w-full overflow-x-hidden">

@@ -27,6 +27,7 @@ import {
   Key
 } from "lucide-react";
 import { SpotlightCard } from "@/components/SpotlightCard";
+import { HeroFieldBackground } from "@/components/HeroFieldBackground";
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -51,8 +52,9 @@ export default function Contact() {
     lastName: "",
     email: "",
     company: "",
+    countryCode: "+353",
     phone: "",
-    interest: "",
+    interest: [] as string[],
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -74,8 +76,8 @@ export default function Contact() {
     // Format additional fields into the message body to preserve database schema & API route integrity
     const formattedMessage = `
 --- Enterprise Inquiry Details ---
-Phone: ${formData.phone || "Not Provided"}
-Service Interest: ${formData.interest || "Not Provided"}
+Phone: ${formData.countryCode} ${formData.phone || "Not Provided"}
+Service Interest: ${formData.interest.length > 0 ? formData.interest.join(", ") : "Not Provided"}
 
 --- Project Requirements ---
 ${formData.message}
@@ -105,8 +107,9 @@ ${formData.message}
           lastName: "",
           email: "",
           company: "",
+          countryCode: "+353",
           phone: "",
-          interest: "",
+          interest: [],
           message: "",
         });
       } else {
@@ -127,21 +130,15 @@ ${formData.message}
   };
 
   return (
-    <div className="relative min-h-screen pt-24 pb-16 overflow-hidden bg-background text-slate-900 dark:text-slate-100 transition-colors duration-300">
-      {/* Premium radial gradient background */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: "radial-gradient(ellipse 80% 60% at 20% -10%, rgba(37,99,235,0.06) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 110%, rgba(6,182,212,0.05) 0%, transparent 60%)"
-        }}
-        aria-hidden="true"
-      />
+    <div className="bg-background text-slate-900 dark:text-slate-100 transition-colors duration-300">
+      {/* HERO SECTION WRAPPER */}
+      <section className="relative w-full pt-32 md:pt-40 pb-16 overflow-hidden border-b border-border">
+        {/* NEW UNIFIED BACKGROUND (Blue/Cyan Theme) */}
+        <HeroFieldBackground blobOneColor="bg-blue-600/15" blobTwoColor="bg-cyan-600/15" />
 
-
-      <div className="container px-6 sm:px-8 mx-auto relative z-10">
-        
-        {/* HERO SECTION */}
-        <motion.div 
+        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+          {/* HERO CONTENT */}
+          <motion.div 
           variants={container}
           initial="hidden"
           animate="show"
@@ -152,29 +149,29 @@ ${formData.message}
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
-            GLOBAL ENTERPRISE CONSULTING
+            START A CONVERSATION
           </motion.div>
           
           <motion.h1 
             variants={item}
-            className="text-5xl sm:text-6xl md:text-7xl font-serif tracking-tight leading-none text-slate-900 dark:text-white"
+            className="text-4xl sm:text-5xl md:text-6xl font-serif tracking-tight leading-[1.15] text-foreground"
           >
-            <span className="text-slate-900 dark:text-white">Mission-Critical</span>{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
-              Technology. Delivered.
+            <span className="text-slate-900 dark:text-white block">Let's Solve Your Hardest</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 block">
+              Technical Challenges.
             </span>
           </motion.h1>
           
           <motion.p 
             variants={item}
-            className="text-muted-foreground text-lg sm:text-xl md:text-2xl leading-relaxed font-semibold max-w-2xl mx-auto"
+            className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-medium"
           >
-            Trusted by pharma, telecoms, and insurance enterprises globally — tell us your challenge and a senior consultant will respond within 2 business hours.
+            From secure cloud infrastructure to mission-critical software. Tell us what you’re building—or what's holding you back—and a senior consultant will be in touch within 2 business hours.
           </motion.p>
 
           {/* TRUST STRIP */}
           <div 
-            className="pt-6 mt-4 border-t border-dashed border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[10px] sm:text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest"
+            className="pt-8 mt-6 border-t border-dashed border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-xs sm:text-sm font-black text-slate-400 dark:text-slate-500 uppercase tracking-[0.2em]"
           >
             {[
               "2017 Established",
@@ -185,7 +182,7 @@ ${formData.message}
               <span key={idx} className="flex items-center gap-x-6">
                 <motion.span 
                   variants={item}
-                  whileHover={{ scale: 1.05, color: "#2563eb" }} 
+                  whileHover={{ scale: 1.05, color: "#94a3b8" }} 
                   className="cursor-default transition-colors duration-200"
                 >
                   {stat}
@@ -197,55 +194,83 @@ ${formData.message}
             ))}
           </div>
         </motion.div>
+        </div>
+      </section>
 
-
-        {/* MAIN LAYOUT */}
-        <div className="grid gap-10 lg:grid-cols-12 max-w-5xl mx-auto items-start mb-16">
-          
-          {/* LEFT COLUMN: Premium Contact Form */}
-          <motion.div 
+      {/* MAIN CONTENT SECTION */}
+      <section className="relative w-full py-16 bg-transparent">
+        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+          {/* MAIN LAYOUT */}
+          <div className="grid gap-10 lg:grid-cols-12 max-w-5xl mx-auto items-stretch mb-16">
+            
+            {/* LEFT COLUMN: Premium Contact Form */}
+            <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 90, damping: 22, delay: 0.2 }}
-            className="lg:col-span-7"
+            className="lg:col-span-7 flex flex-col"
           >
-            <Card className="shadow-[0_20px_50px_rgba(0,0,0,0.02)] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 bg-[#FFFFFF] dark:bg-[#111827] rounded-3xl overflow-hidden hover-card-effect">
-              <CardHeader className="space-y-2 p-6 md:p-8">
-                <CardTitle className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <SpotlightCard className="p-6 md:p-8 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden flex-1">
+              <div className="space-y-2 mb-8 border-b border-slate-200/50 dark:border-slate-800/50 pb-6">
+                <h2 className="text-2xl md:text-3xl font-serif text-slate-900 dark:text-white tracking-tight">
                   Start a Conversation
-                </CardTitle>
-                <CardDescription className="text-slate-550 dark:text-slate-400 font-semibold text-sm leading-relaxed">
+                </h2>
+                <p className="text-slate-600 dark:text-slate-400 font-medium text-sm sm:text-base leading-relaxed">
                   Tell us about your project, goals, and technical requirements. Our team will connect with you within 2 business hours.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="px-6 pb-6 md:px-8 md:pb-8">
-                {submitResult && (
+                </p>
+              </div>
+              <div>
+                {submitResult?.success ? (
                   <motion.div
-                    initial={{ opacity: 0, y: -8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35 }}
-                    className={`flex items-start gap-3 p-4 mb-6 rounded-2xl border text-sm font-semibold ${
-                      submitResult.success
-                        ? "bg-emerald-50 border-emerald-200 text-emerald-800 dark:bg-emerald-950/30 dark:border-emerald-800/40 dark:text-emerald-300"
-                        : "bg-rose-50 border-rose-200 text-rose-800 dark:bg-rose-950/30 dark:border-rose-800/40 dark:text-rose-300"
-                    }`}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col items-center justify-center py-12 text-center"
                   >
-                    <span className={`shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white text-xs mt-0.5 ${
-                      submitResult.success ? 'bg-emerald-500' : 'bg-rose-500'
-                    }`}>
-                      {submitResult.success ? '✓' : '✕'}
-                    </span>
-                    <span>{submitResult.message}</span>
+                    <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-6">
+                      <motion.svg 
+                        initial={{ pathLength: 0 }} 
+                        animate={{ pathLength: 1 }} 
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="w-10 h-10 text-emerald-600 dark:text-emerald-400" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor" 
+                        strokeWidth="3"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                      </motion.svg>
+                    </div>
+                    <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Message Received!</h3>
+                    <p className="text-slate-600 dark:text-slate-400 font-medium max-w-md mx-auto">
+                      Thank you for reaching out. A senior consultant will review your requirements and respond within 2 business hours.
+                    </p>
+                    <button 
+                      type="button"
+                      onClick={() => setSubmitResult(null)}
+                      className="mt-8 px-6 py-2.5 rounded-xl text-sm font-bold bg-slate-100 hover:bg-slate-200 text-slate-900 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-white transition-colors"
+                    >
+                      Send Another Message
+                    </button>
                   </motion.div>
-                )}
-                
-                <form onSubmit={handleSubmit} className="space-y-5">
+                ) : (
+                  <>
+                    {submitResult && !submitResult.success && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-start gap-3 p-4 mb-6 rounded-2xl border text-sm font-semibold bg-rose-50 border-rose-200 text-rose-800 dark:bg-rose-950/30 dark:border-rose-800/40 dark:text-rose-300"
+                      >
+                        <span className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white text-xs mt-0.5 bg-rose-500">✕</span>
+                        <span>{submitResult.message}</span>
+                      </motion.div>
+                    )}
+                    
+                    <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div className="space-y-2">
                       <Label htmlFor="firstName" className="text-sm font-bold text-slate-700 dark:text-slate-300">First Name</Label>
                       <Input 
                         id="firstName" 
-                        placeholder="John" 
                         required 
                         value={formData.firstName} 
                         onChange={handleChange} 
@@ -257,7 +282,6 @@ ${formData.message}
                       <Label htmlFor="lastName" className="text-sm font-bold text-slate-700 dark:text-slate-300">Last Name</Label>
                       <Input 
                         id="lastName" 
-                        placeholder="Doe" 
                         required 
                         value={formData.lastName} 
                         onChange={handleChange} 
@@ -273,7 +297,6 @@ ${formData.message}
                       <Input 
                         id="email" 
                         type="email" 
-                        placeholder="john@company.com" 
                         required 
                         value={formData.email} 
                         onChange={handleChange} 
@@ -285,7 +308,6 @@ ${formData.message}
                       <Label htmlFor="company" className="text-sm font-bold text-slate-700 dark:text-slate-300">Company</Label>
                       <Input 
                         id="company" 
-                        placeholder="Acme Corp" 
                         required
                         value={formData.company} 
                         onChange={handleChange} 
@@ -295,44 +317,70 @@ ${formData.message}
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="space-y-2 col-span-1">
-                      <Label htmlFor="phone" className="text-sm font-bold text-slate-700 dark:text-slate-300">Phone Number</Label>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="text-sm font-bold text-slate-700 dark:text-slate-300">Phone Number</Label>
+                    <div className="flex gap-2">
+                      <div className="relative w-28 shrink-0">
+                        <select
+                          id="countryCode"
+                          value={formData.countryCode}
+                          onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+                          disabled={isSubmitting}
+                          className="w-full bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus:border-[#0057D9] focus:ring-1 focus:ring-[#0057D9] h-12 rounded-xl pl-3 pr-8 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all appearance-none cursor-pointer outline-none text-sm"
+                        >
+                          <option value="+353">🇮🇪 +353</option>
+                          <option value="+1">🇺🇸 +1</option>
+                          <option value="+44">🇬🇧 +44</option>
+                          <option value="+91">🇮🇳 +91</option>
+                          <option value="+971">🇦🇪 +971</option>
+                          <option value="+61">🇦🇺 +61</option>
+                          <option value="+49">🇩🇪 +49</option>
+                          <option value="+33">🇫🇷 +33</option>
+                          <option value="+81">🇯🇵 +81</option>
+                          <option value="+65">🇸🇬 +65</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-slate-500">
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                      </div>
                       <Input 
                         id="phone" 
                         type="tel" 
-                        placeholder="+353 (0) 1 000 0000" 
                         required 
                         value={formData.phone} 
                         onChange={handleChange} 
                         disabled={isSubmitting} 
-                        className="bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
+                        className="flex-1 bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
                       />
                     </div>
-                    <div className="space-y-2 col-span-1">
-                      <Label htmlFor="interest" className="text-sm font-bold text-slate-700 dark:text-slate-300">Service Interest</Label>
-                      <div className="relative">
-                        <select
-                          id="interest"
-                          required
-                          value={formData.interest}
-                          onChange={handleChange}
-                          disabled={isSubmitting}
-                          className="w-full bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus:border-[#0057D9] focus:ring-1 focus:ring-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all appearance-none cursor-pointer pr-10 outline-none"
+                  </div>
+                  
+                  <div className="space-y-3 pt-2">
+                    <Label className="text-sm font-bold text-slate-700 dark:text-slate-300">Service Interest</Label>
+                    <div className="flex flex-wrap gap-2">
+                      {[
+                        "IT Consulting", "Cloud Solutions", "Digital Transformation", 
+                        "Infrastructure", "AI & Automation", "Cybersecurity", "Custom Software"
+                      ].map((service) => (
+                        <button
+                          key={service}
+                          type="button"
+                          onClick={() => {
+                            const current = formData.interest;
+                            const updated = current.includes(service)
+                              ? current.filter(s => s !== service)
+                              : [...current, service];
+                            setFormData({ ...formData, interest: updated });
+                          }}
+                          className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                            formData.interest.includes(service)
+                              ? "bg-blue-600 text-white shadow-md shadow-blue-500/20 scale-[1.02]" 
+                              : "bg-slate-50 dark:bg-slate-900 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:scale-[1.02]"
+                          }`}
                         >
-                          <option value="" className="text-slate-500 bg-white dark:bg-slate-900">Select Service Interest</option>
-                          <option value="IT Consulting" className="bg-white dark:bg-slate-900">IT Consulting</option>
-                          <option value="Cloud Solutions" className="bg-white dark:bg-slate-900">Cloud Solutions</option>
-                          <option value="Digital Transformation" className="bg-white dark:bg-slate-900">Digital Transformation</option>
-                          <option value="Infrastructure Services" className="bg-white dark:bg-slate-900">Infrastructure Services</option>
-                          <option value="AI & Automation" className="bg-white dark:bg-slate-900">AI & Automation</option>
-                          <option value="Cybersecurity" className="bg-white dark:bg-slate-900">Cybersecurity</option>
-                          <option value="Custom Software" className="bg-white dark:bg-slate-900">Custom Software</option>
-                        </select>
-                        <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-slate-500 dark:text-slate-400">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
-                      </div>
+                          {service}
+                        </button>
+                      ))}
                     </div>
                   </div>
                   
@@ -371,8 +419,10 @@ ${formData.message}
                     <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline text-blue-600 hover:text-blue-500 transition-colors">Terms of Service</a> apply.
                   </p>
                 </form>
-              </CardContent>
-            </Card>
+              </>
+            )}
+              </div>
+            </SpotlightCard>
           </motion.div>
 
           {/* RIGHT COLUMN: Company Overview & Global Headquarters */}
@@ -380,10 +430,10 @@ ${formData.message}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 90, damping: 22, delay: 0.25 }}
-            className="lg:col-span-5 space-y-6"
+            className="lg:col-span-5 flex flex-col gap-6"
           >
             {/* COMPANY OVERVIEW */}
-            <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-md hover-card-effect transition-all duration-300">
+            <SpotlightCard className="p-6 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group">
               <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2 border-b border-[rgba(15,23,42,0.08)] dark:border-slate-800 pb-3 mb-4">
                 <Building2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 Company Overview
@@ -411,7 +461,7 @@ ${formData.message}
             </SpotlightCard>
 
             {/* GLOBAL HEADQUARTERS CARD WITH MAP */}
-            <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-3xl shadow-sm hover:shadow-md hover-card-effect transition-all duration-300">
+            <SpotlightCard className="p-6 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group flex-1 flex flex-col">
               <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2 border-b border-[rgba(15,23,42,0.08)] dark:border-slate-800 pb-3 mb-4">
                 <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 Global Headquarters
@@ -425,7 +475,7 @@ ${formData.message}
               </div>
 
               {/* Miniature Interactive Map */}
-              <div className="h-44 w-full rounded-2xl overflow-hidden mb-4 relative bg-slate-100 dark:bg-slate-950 border border-slate-900/10 dark:border-slate-800">
+              <div className="w-full rounded-2xl overflow-hidden mb-4 relative bg-slate-100 dark:bg-slate-950 border border-slate-900/10 dark:border-slate-800 flex-1 min-h-[176px]">
                 <iframe
                   src="https://maps.google.com/maps?q=Nutgrove%20Office%20Park,%20Dundrum,%20Dublin%2014,%20Ireland&t=&z=14&ie=UTF8&iwloc=&output=embed"
                   width="100%"
@@ -442,7 +492,7 @@ ${formData.message}
                 href="https://www.google.com/maps/search/?api=1&query=Nutgrove+Office+Park,+Dundrum,+Dublin+14,+Ireland"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-1.5 h-11 rounded-xl text-xs font-bold text-slate-800 dark:text-white bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 transition-colors shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-1.5 h-11 rounded-xl text-xs font-bold text-slate-800 dark:text-white bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 transition-colors shadow-sm mt-auto"
               >
                 <span>Open in Google Maps</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -460,7 +510,7 @@ ${formData.message}
           viewport={{ once: true, margin: "-40px" }}
           className="max-w-5xl mx-auto mb-16"
         >
-          <div className="bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-3xl p-6 md:p-8 shadow-sm hover:shadow-md hover-card-effect transition-all duration-300">
+          <SpotlightCard className="rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 p-6 md:p-8">
             <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
               <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center justify-center gap-2">
                 <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
@@ -482,10 +532,11 @@ ${formData.message}
                 </motion.div>
               ))}
             </div>
-          </div>
+          </SpotlightCard>
         </motion.div>
 
       </div>
+      </section>
 
       {/* REGISTRY DETAILS MODAL */}
       <AnimatePresence>

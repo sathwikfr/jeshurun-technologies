@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { HeaderLogo } from "@/components/HeaderLogo";
 import { useSession, signOut } from "next-auth/react";
+import { useTheme } from "next-themes";
 
 const menuData = {
   About: {
@@ -276,30 +277,9 @@ export function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
   const [mobileActiveMenu, setMobileActiveMenu] = useState<string | null>(null);
 
-  // Dark mode state and toggle
+  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem("theme");
-    if (stored) {
-      setIsDarkMode(stored === "dark");
-    } else {
-      setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
-    }
-  }, []);
-  const toggleDarkMode = () => {
-    const newMode = !isDarkMode;
-    setIsDarkMode(newMode);
-    if (newMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
+  useEffect(() => setMounted(true), []);
 
   // Monitor scroll height to apply background color transitions and hide/show navbar
   useEffect(() => {
@@ -618,6 +598,7 @@ export function Navbar() {
                 )}
               </AnimatePresence>
             </div>
+
             {(() => {
               const isContactActive = pathname === "/contact";
               return (
@@ -690,18 +671,18 @@ export function Navbar() {
             </span>
           </button>
           <button
-            onClick={toggleDarkMode}
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className={`group relative p-2 rounded-md transition-colors duration-300 ${
               forceLightText
                 ? "hover:bg-white/10"
                 : "hover:bg-slate-100 dark:hover:bg-slate-900"
             }`}
             aria-label={
-              mounted && isDarkMode ? "Switch to light mode" : "Switch to dark mode"
+              mounted && theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
             }
           >
             {mounted ? (
-              isDarkMode ? (
+              theme === "dark" ? (
                 <Sun className={`w-5 h-5 ${forceLightText ? "text-white" : "text-yellow-400"}`} />
               ) : (
                 <Moon className={`w-5 h-5 ${forceLightText ? "text-white" : "text-muted-foreground"}`} />
@@ -711,8 +692,8 @@ export function Navbar() {
             )}
             
             {/* Tooltip */}
-            <div className="absolute right-0 top-full mt-2 w-max px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all pointer-events-none z-50">
-              {mounted && isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            <div className="absolute right-0 top-full mt-2 w-max px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+              {mounted && theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             </div>
           </button>
         </div>

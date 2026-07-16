@@ -2,7 +2,7 @@
 
 import { ReactNode, useState, useEffect, useRef } from "react";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export interface MethodologyStep {
   title: string;
@@ -28,6 +28,13 @@ export function MethodologyTimeline({
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
+
+  // Scroll-linked animation for the timeline
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   useEffect(() => {
     if (variant !== "compact-loop") return;
@@ -197,8 +204,14 @@ export function MethodologyTimeline({
             ref={containerRef}
             className="flex flex-col space-y-2 md:space-y-3 relative max-w-4xl mx-auto py-4"
           >
-            {/* Center line for desktop */}
+            {/* Background line for desktop */}
             <div className="hidden md:block absolute top-4 bottom-4 left-1/2 w-0.5 bg-border -translate-x-1/2 z-0" />
+            
+            {/* Scroll-linked active line */}
+            <motion.div 
+              className="hidden md:block absolute top-4 left-1/2 w-0.5 bg-blue-600 dark:bg-blue-500 shadow-[0_0_15px_rgba(37,99,235,0.8)] -translate-x-1/2 z-0 origin-top" 
+              style={{ height: lineHeight, bottom: "1rem" }}
+            />
             
             {steps.map((stage, i) => {
               const isActive = i === activeIndex;
@@ -206,41 +219,41 @@ export function MethodologyTimeline({
               return (
                 <div key={i} className="relative flex flex-col md:flex-row items-center justify-between w-full z-10">
                   {/* Connector dot */}
-                  <div className={`hidden md:flex absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 rounded-full ring-4 ring-background z-10 transition-colors duration-300 ${
-                    isActive ? "bg-blue-600 dark:bg-blue-500" : "bg-primary/20"
+                  <div className={`hidden md:flex absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 rounded-full ring-4 ring-background z-10 transition-all duration-500 ${
+                    isActive ? "bg-blue-600 dark:bg-blue-500 scale-125 shadow-[0_0_15px_rgba(37,99,235,0.5)]" : "bg-primary/20"
                   }`} />
                   
-                  {/* Content Box */}
+                  {/* Content (Box-less Floating Style) */}
                   <div 
-                    className={`w-full md:w-[45%] flex items-start gap-4 p-3 sm:p-4 rounded-xl border transition-all duration-300 ease-out text-left ${
-                      isEven ? "md:mr-auto" : "md:ml-auto"
+                    className={`w-full md:w-[45%] flex items-start gap-4 p-2 sm:p-4 transition-all duration-500 ease-out text-left group ${
+                      isEven ? "md:mr-auto md:text-right md:flex-row-reverse" : "md:ml-auto"
                     } ${
                       isActive 
-                        ? "bg-blue-50/50 dark:bg-blue-900/10 border-blue-500/50 dark:border-blue-400/50 shadow-md scale-[1.02] z-20" 
-                        : "bg-card border-border shadow-sm opacity-60 scale-100 z-10"
+                        ? "opacity-100 scale-[1.02] z-20" 
+                        : "opacity-40 scale-100 z-10"
                     }`}
                   >
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all duration-500 ${
                       isActive
-                        ? "bg-blue-100 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"
+                        ? "bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 shadow-[0_0_30px_rgba(37,99,235,0.2)]"
                         : "bg-primary/5 text-muted-foreground"
                     }`}>
                       {stage.icon}
                     </div>
-                    <div className="flex flex-col pt-0.5">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className={`text-[10px] sm:text-xs font-black tracking-widest px-2 py-0.5 rounded-full transition-colors duration-300 ${
+                    <div className="flex flex-col pt-1">
+                      <div className={`flex items-center gap-3 mb-1 ${isEven ? "md:flex-row-reverse" : ""}`}>
+                        <span className={`text-xs sm:text-sm font-black tracking-[0.2em] transition-colors duration-500 ${
                           isActive
-                            ? "bg-blue-600 text-white dark:bg-blue-500"
-                            : "text-muted-foreground bg-muted"
+                            ? "text-blue-600 dark:text-blue-400"
+                            : "text-muted-foreground"
                         }`}>
                           0{i + 1}
                         </span>
-                        <h4 className={`text-base font-bold transition-colors duration-300 ${isActive ? "text-slate-900 dark:text-white" : "text-foreground"}`}>
+                        <h4 className={`text-lg sm:text-xl font-serif transition-colors duration-500 ${isActive ? "text-slate-900 dark:text-white" : "text-foreground"}`}>
                           {stage.title}
                         </h4>
                       </div>
-                      <p className={`text-xs sm:text-sm leading-relaxed transition-colors duration-300 ${isActive ? "text-slate-700 dark:text-slate-300 font-medium" : "text-muted-foreground"}`}>
+                      <p className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${isActive ? "text-slate-600 dark:text-slate-400 font-medium" : "text-muted-foreground"}`}>
                         {stage.desc}
                       </p>
                     </div>

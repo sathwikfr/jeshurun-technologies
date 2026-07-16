@@ -13,6 +13,8 @@ import {
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { MethodologyTimeline } from "@/components/MethodologyTimeline";
+import { TiltCard } from "@/components/TiltCard";
+import { HeroFieldBackground } from "@/components/HeroFieldBackground";
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -85,32 +87,20 @@ export default function AboutPage() {
       bio: "Brings over a decade of enterprise technology leadership, driving strategic growth and operational excellence across global markets.",
       image: "", 
       socials: { linkedin: "#" }
-    },
-    {
-      name: "Full Name",
-      title: "VP of Delivery",
-      bio: "Brings over a decade of enterprise technology leadership, driving strategic growth and operational excellence across global markets.",
-      image: "", 
-      socials: { linkedin: "#" }
     }
   ];
 
   return (
-    <div className="relative min-h-screen pt-24 pb-16 overflow-hidden bg-background text-foreground transition-colors duration-300">
-      {/* Premium radial gradient background */}
-      <div
-        className="absolute inset-0 pointer-events-none z-0"
-        style={{
-          background: "radial-gradient(ellipse 70% 50% at 30% -5%, rgba(37,99,235,0.06) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 90% 80%, rgba(6,182,212,0.04) 0%, transparent 55%)"
-        }}
-        aria-hidden="true"
-      />
+    <div className="bg-background text-foreground transition-colors duration-300">
+      {/* HERO SECTION WRAPPER */}
+      <section className="relative w-full pt-32 md:pt-40 pb-16 overflow-hidden border-b border-border">
+        {/* NEW UNIFIED BACKGROUND (Blue/Cyan Theme) */}
+        <HeroFieldBackground blobOneColor="bg-blue-600/15" blobTwoColor="bg-cyan-600/15" />
 
-
-      <div className="container px-6 sm:px-8 mx-auto relative z-10">
-        
-        {/* 1. HERO SECTION */}
-        <motion.div 
+        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+          
+          {/* 1. HERO CONTENT */}
+          <motion.div 
           variants={container}
           initial="hidden"
           animate="show"
@@ -142,30 +132,35 @@ export default function AboutPage() {
             45+ certified engineers. 99.9% SLA uptime. Serving pharma, telecoms, and insurance leaders across Ireland, Europe, the Middle East, and India since 2017.
           </motion.p>
         </motion.div>
+        </div>
+      </section>
 
-        {/* TAB TOGGLES */}
-        <div className="flex justify-center mb-12">
-          <div className="flex p-1.5 bg-slate-100 dark:bg-slate-800/80 rounded-full border border-slate-200 dark:border-slate-700 backdrop-blur-sm shadow-sm">
-            <button 
-              onClick={() => setActiveTab("who")}
-              className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 ${
-                activeTab === "who" 
-                  ? "bg-blue-600 text-white shadow-md" 
-                  : "text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
-              }`}
-            >
-              Who We Are
-            </button>
-            <button 
-              onClick={() => setActiveTab("delivery")}
-              className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 ${
-                activeTab === "delivery" 
-                  ? "bg-blue-600 text-white shadow-md" 
-                  : "text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
-              }`}
-            >
-              Delivery & Quality Standards
-            </button>
+      {/* MAIN CONTENT SECTION */}
+      <section className="relative w-full py-12">
+        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+          {/* TAB TOGGLES (Sticky & Fluid) */}
+          <div className="sticky top-24 z-50 flex justify-center mb-12">
+            <div className="flex p-1.5 bg-slate-100/70 dark:bg-slate-800/70 rounded-full border border-slate-200 dark:border-slate-700 backdrop-blur-md shadow-sm">
+            {(["who", "delivery"] as const).map((tab) => (
+              <button 
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`relative px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-200 z-10 ${
+                  activeTab === tab 
+                    ? "text-white" 
+                    : "text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+                }`}
+              >
+                {activeTab === tab && (
+                  <motion.div
+                    layoutId="activeTabPill"
+                    className="absolute inset-0 bg-blue-600 rounded-full -z-10 shadow-md"
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  />
+                )}
+                <span className="relative z-10">{tab === "who" ? "Who We Are" : "Delivery & Quality Standards"}</span>
+              </button>
+            ))}
           </div>
         </div>
 
@@ -178,76 +173,110 @@ export default function AboutPage() {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
             >
-              {/* 2. AT A GLANCE */}
+              {/* Tab Header (Who We Are) */}
               <motion.div
                 variants={container}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-40px" }}
-                className="max-w-5xl mx-auto mb-20 space-y-8"
+                className="max-w-5xl mx-auto mb-16 space-y-12 pt-8"
               >
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-                  {[
-                    { val: "150+", label: "Projects Delivered" },
-                    { val: "Multi-Industry", label: "Expertise" },
-                    { val: "Global", label: "Delivery Capability" },
-                    { val: "24/7", label: "Operational Support" }
-                  ].map((metric, i) => (
-                    <motion.div key={i} variants={item} className="h-full">
-                      <SpotlightCard className="p-6 text-center bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-2xl shadow-sm h-full hover-card-effect flex flex-col">
-                        <div className="w-full py-4 px-2 bg-blue-600/5 dark:bg-blue-600/10 text-blue-600 dark:text-blue-400 rounded-xl mb-4 flex items-center justify-center">
-                          <span className="text-xl md:text-2xl font-black">{metric.val}</span>
-                        </div>
-                        <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider leading-tight mt-auto">{metric.label}</div>
-                      </SpotlightCard>
-                    </motion.div>
-                  ))}
+                <div className="text-center space-y-4">
+                  <motion.div 
+                    variants={item}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                    About Us
+                  </motion.div>
+                  
+                  <motion.h2 
+                    variants={item}
+                    className="text-3xl md:text-4xl font-serif tracking-tight text-slate-900 dark:text-white"
+                  >
+                    About Jeshurun Technologies
+                  </motion.h2>
+                  
+                  <motion.p 
+                    variants={item}
+                    className="text-slate-500 dark:text-slate-400 font-semibold text-sm sm:text-base leading-relaxed max-w-2xl mx-auto"
+                  >
+                    We are a premier technology consulting firm specializing in cloud engineering, cybersecurity, and digital transformation.
+                  </motion.p>
                 </div>
               </motion.div>
 
-              {/* 3. WHO WE ARE */}
+              {/* 2. WHO WE ARE */}
               <motion.div
                 variants={container}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-40px" }}
-                className="max-w-4xl mx-auto mb-20 py-10 border-y border-[rgba(15,23,42,0.08)] dark:border-slate-800"
+                className="max-w-4xl mx-auto mb-20 relative"
               >
-            <motion.h2 
-              variants={item}
-              className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 text-center mb-6"
-            >
-              Who We Are
-            </motion.h2>
-            
-            <div className="max-w-3xl mx-auto text-center">
-              <motion.p 
-                variants={item}
-                className="text-base sm:text-lg font-semibold text-slate-700 dark:text-slate-300 leading-relaxed"
-              >
-                Jeshurun Technologies helps organizations modernize technology, optimize operations, and accelerate digital transformation through consulting, cloud engineering, infrastructure modernization, cybersecurity, and software delivery. Operating across Ireland, Europe, the Middle East, India, and global remote delivery models, we support organizations building secure, scalable, and future-ready technology ecosystems.
-              </motion.p>
-            </div>
-          </motion.div>
-
-              {/* 4. WHY ORGANIZATIONS TRUST JESHURUN */}
-              <motion.div
-                variants={container}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: "-40px" }}
-                className="max-w-5xl mx-auto mb-24 space-y-8"
-              >
-                <div className="text-center">
+                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group">
+                  {/* Decorative background glow */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-blue-500/10 blur-[60px] pointer-events-none rounded-full" />
+                  
                   <motion.h2 
                     variants={item}
-                    className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400"
+                    className="text-lg sm:text-xl font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 text-center mb-8"
+                  >
+                    Who We Are
+                  </motion.h2>
+                  
+                  <div className="max-w-3xl mx-auto text-center space-y-8 relative z-10">
+                    <motion.p 
+                      variants={item}
+                      className="text-2xl md:text-3xl font-serif text-slate-900 dark:text-white leading-snug"
+                    >
+                      Jeshurun Technologies helps organizations modernize technology, optimize operations, and accelerate digital transformation.
+                    </motion.p>
+                    
+                    <motion.div variants={item} className="h-px w-24 bg-blue-200 dark:bg-blue-800 mx-auto" />
+                    
+                    <motion.p 
+                      variants={item}
+                      className="text-base sm:text-lg font-serif font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto"
+                    >
+                      Operating across Ireland, Europe, the Middle East, India, and global remote delivery models, we support leading enterprises in building secure, scalable, and future-ready technology ecosystems through elite consulting, cloud engineering, and cybersecurity.
+                    </motion.p>
+                  </div>
+                </SpotlightCard>
+              </motion.div>
+
+
+              {/* 4. WHY ORGANIZATIONS TRUST JESHURUN (Box-less Floating Grid) */}
+              <motion.div
+                variants={container}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-40px" }}
+                className="max-w-5xl mx-auto mb-32"
+              >
+                <div className="text-center space-y-6 mb-16">
+                  <motion.h2 
+                    variants={item}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 shadow-sm mx-auto"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                    Our Differentiator
+                  </motion.h2>
+                  <motion.h3 
+                    variants={item}
+                    className="text-3xl md:text-5xl font-serif text-slate-900 dark:text-white leading-tight"
                   >
                     Why Organizations Trust Jeshurun
-                  </motion.h2>
+                  </motion.h3>
+                  <motion.p 
+                    variants={item}
+                    className="text-base sm:text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto"
+                  >
+                    We don't just deliver technology—we architect resilient ecosystems designed to scale and secure your enterprise's future.
+                  </motion.p>
                 </div>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16 pt-8 border-t border-[rgba(15,23,42,0.08)] dark:border-slate-800">
                   {[
                     { 
                       title: "Cloud-Native Expertise", 
@@ -279,19 +308,19 @@ export default function AboutPage() {
                       desc: "Seamless delivery coordination across multiple time zones and regions.",
                       icon: Globe 
                     }
-                  ].map((itemCard, idx) => (
-                    <motion.div key={idx} variants={item}>
-                      <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-2xl shadow-sm flex flex-col h-full hover-card-effect">
-                        <div className="w-full p-3 bg-blue-600/5 dark:bg-blue-600/10 rounded-xl mb-5 flex items-center">
-                          <div className="bg-white dark:bg-slate-800 shadow-sm p-2 rounded-full text-blue-600 dark:text-blue-400">
-                            <itemCard.icon className="w-5 h-5" />
-                          </div>
-                        </div>
-                        <div className="space-y-2 mt-auto">
-                          <h3 className="font-extrabold text-slate-900 dark:text-white text-base tracking-tight leading-tight">{itemCard.title}</h3>
-                          <p className="text-xs sm:text-sm font-semibold text-slate-550 dark:text-slate-400 leading-normal">{itemCard.desc}</p>
-                        </div>
-                      </SpotlightCard>
+                  ].map((feature, idx) => (
+                    <motion.div key={idx} variants={item} className="flex flex-col items-start group">
+                      <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] mb-6">
+                        <feature.icon className="w-6 h-6" />
+                      </div>
+                      <div className="space-y-2 text-left">
+                        <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                          {feature.title}
+                        </h4>
+                        <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">
+                          {feature.desc}
+                        </p>
+                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -328,28 +357,49 @@ export default function AboutPage() {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {leadershipData.map((leader, i) => (
               <motion.div key={i} variants={item}>
-                <SpotlightCard className="p-6 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-2xl shadow-sm flex flex-col h-full hover-card-effect text-center relative">
-                  <div className="w-[120px] h-[120px] mx-auto mb-6 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center overflow-hidden border-2 border-slate-200 dark:border-slate-700">
-                    {leader.image ? (
-                      <Image src={leader.image} alt={leader.name} fill className="object-cover" />
-                    ) : (
-                      <User className="w-12 h-12 text-slate-400 dark:text-slate-500" strokeWidth={1.5} />
-                    )}
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1">{leader.name}</h3>
-                  <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-4">{leader.title}</p>
-                  <p className="text-sm font-semibold text-slate-500 dark:text-slate-400 leading-relaxed flex-grow">
-                    {leader.bio}
-                  </p>
-                  <div className="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex justify-center">
-                    <a href={leader.socials.linkedin} className="w-8 h-8 rounded-full bg-slate-50 dark:bg-slate-800/50 flex items-center justify-center text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
-                      <Link className="w-4 h-4" />
-                    </a>
-                  </div>
-                </SpotlightCard>
+                <TiltCard className="h-full">
+                  <SpotlightCard className="p-6 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col h-full hover-card-effect text-center relative overflow-hidden group">
+                    {/* Glowing Mesh Background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/10 transition-colors duration-500" />
+                    
+                    <div 
+                      className="relative w-32 h-32 mx-auto mb-6 flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
+                      style={{ transform: "translateZ(40px)" }}
+                    >
+                      {/* Animated Glow Ring */}
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500 animate-pulse" />
+                      
+                      <div className="relative w-[120px] h-[120px] rounded-full bg-white dark:bg-slate-800 flex items-center justify-center overflow-hidden border-[3px] border-white dark:border-slate-800 shadow-xl z-10">
+                        {leader.image ? (
+                          <Image src={leader.image} alt={leader.name} fill className="object-cover" />
+                        ) : (
+                          <User className="w-12 h-12 text-slate-400 dark:text-slate-500" strokeWidth={1.5} />
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="relative z-10 flex flex-col flex-grow" style={{ transform: "translateZ(20px)" }}>
+                      <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">{leader.name}</h3>
+                      <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">{leader.title}</p>
+                      <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed flex-grow">
+                        {leader.bio}
+                      </p>
+                    </div>
+
+                    {/* Sliding Social Links */}
+                    <div 
+                      className="relative z-10 mt-6 pt-6 border-t border-slate-200/50 dark:border-slate-700/50 flex justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500"
+                      style={{ transform: "translateZ(30px)" }}
+                    >
+                      <a href={leader.socials.linkedin} className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                        <Link className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </SpotlightCard>
+                </TiltCard>
               </motion.div>
             ))}
           </div>
@@ -369,107 +419,141 @@ export default function AboutPage() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-40px" }}
-                className="max-w-5xl mx-auto mb-20 space-y-12 pt-16 border-[rgba(15,23,42,0.08)] dark:border-slate-800"
+                className="max-w-5xl mx-auto mb-16 space-y-12 pt-8"
               >
-            <div className="text-center space-y-4">
-              <motion.div 
-                variants={item}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
-                Delivery & Quality Standards
-              </motion.div>
-              
-              <motion.h2 
-                variants={item}
-                className="text-3xl md:text-4xl font-serif tracking-tight text-slate-900 dark:text-white"
-              >
-                Delivery & Quality Standards
-              </motion.h2>
-              
-              <motion.p 
-                variants={item}
-                className="text-slate-500 dark:text-slate-400 font-semibold text-sm sm:text-base leading-relaxed max-w-2xl mx-auto"
-              >
-                Every engagement is governed by proven delivery frameworks, security-first engineering, continuous quality assurance, and operational excellence.
-              </motion.p>
-            </div>
-
-          {/* Quality Standards Stat Row (Redesigned as a horizontal list) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {[
-              { val: "99.9%", label: "Uptime Commitment", icon: <Activity className="w-5 h-5" /> },
-              { val: "24/7", label: "Monitoring", icon: <RefreshCw className="w-5 h-5" /> },
-              { val: "Enterprise", label: "Security Controls", icon: <Lock className="w-5 h-5" /> },
-              { val: "Continuous", label: "Quality Assurance", icon: <ShieldCheck className="w-5 h-5" /> }
-            ].map((metric, i) => (
-              <motion.div key={i} variants={item}>
-                <div className="flex items-center gap-4 p-5 bg-gradient-to-br from-white to-slate-50 dark:from-slate-900 dark:to-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                  <div className="w-12 h-12 rounded-full bg-blue-100/50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
-                    {metric.icon}
-                  </div>
-                  <div>
-                    <div className="text-xl font-black text-slate-900 dark:text-white leading-tight">{metric.val}</div>
-                    <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{metric.label}</div>
-                  </div>
+                <div className="text-center space-y-4">
+                  <motion.div 
+                    variants={item}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                    Delivery & Quality Standards
+                  </motion.div>
+                  
+                  <motion.h2 
+                    variants={item}
+                    className="text-3xl md:text-4xl font-serif tracking-tight text-slate-900 dark:text-white"
+                  >
+                    Delivery & Quality Standards
+                  </motion.h2>
+                  
+                  <motion.p 
+                    variants={item}
+                    className="text-slate-500 dark:text-slate-400 font-semibold text-sm sm:text-base leading-relaxed max-w-2xl mx-auto"
+                  >
+                    Every engagement is governed by proven delivery frameworks, security-first engineering, continuous quality assurance, and operational excellence.
+                  </motion.p>
                 </div>
               </motion.div>
-            ))}
-          </div>
 
-          {/* Resilience Cards (4 Compact items) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { 
-                title: "Zero-Trust Security", 
-                desc: "Identity-first access controls.",
-                icon: Lock 
-              },
-              { 
-                title: "Business Continuity", 
-                desc: "Proactive strategies to maintain operational workflows.",
-                icon: Activity 
-              },
-              { 
-                title: "Disaster Recovery", 
-                desc: "Automated backup and failover strategies.",
-                icon: RefreshCw 
-              },
-              { 
-                title: "Compliance Readiness", 
-                desc: "Aligning architectures with regional governance guidelines.",
-                icon: ShieldCheck 
-              }
-            ].map((resCard, idx) => (
-              <motion.div key={idx} variants={item}>
-                <SpotlightCard className="p-5 bg-[#FFFFFF] dark:bg-[#111827] border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-2xl shadow-sm flex flex-col gap-3 h-full hover-card-effect">
-                  <div className="p-3 bg-blue-600/10 dark:bg-blue-600/20 text-blue-600 dark:text-blue-400 rounded-xl h-fit w-fit">
-                    <resCard.icon className="w-5 h-5" />
-                  </div>
-                  <div className="space-y-1 text-left">
-                    <h3 className="font-extrabold text-slate-900 dark:text-white text-sm sm:text-base tracking-tight leading-tight">{resCard.title}</h3>
-                    <p className="text-xs font-semibold text-slate-550 dark:text-slate-400 leading-normal">{resCard.desc}</p>
+              <motion.div
+                variants={container}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-40px" }}
+                className="max-w-4xl mx-auto mb-20 mt-8 relative"
+              >
+                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group">
+                  {/* Decorative background glow */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-blue-500/10 blur-[60px] pointer-events-none rounded-full" />
+                  
+                  <motion.h2 
+                    variants={item}
+                    className="text-lg sm:text-xl font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 text-center mb-8"
+                  >
+                    Our Commitment
+                  </motion.h2>
+                  
+                  <div className="max-w-3xl mx-auto text-center space-y-8 relative z-10">
+                    <motion.p 
+                      variants={item}
+                      className="text-2xl md:text-3xl font-serif text-slate-900 dark:text-white leading-snug"
+                    >
+                      We build secure, scalable, and resilient solutions.
+                    </motion.p>
+                    
+                    <motion.div variants={item} className="h-px w-24 bg-blue-200 dark:bg-blue-800 mx-auto" />
+                    
+                    <motion.p 
+                      variants={item}
+                      className="text-base sm:text-lg font-serif font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto"
+                    >
+                      By leveraging proven engineering practices, continuous quality assurance, and proactive operational governance, we consistently deliver reliable business outcomes.
+                    </motion.p>
                   </div>
                 </SpotlightCard>
               </motion.div>
-            ))}
-          </div>
 
-          {/* Commitment Statement (Framed highlighted card) */}
-          <motion.div 
-            variants={item}
-            className="w-full bg-[#FFFFFF] dark:bg-[#111827] border border-blue-600/20 rounded-3xl p-8 md:p-10 shadow-lg text-center relative overflow-hidden group max-w-4xl mx-auto"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-[#2563EB]/5 to-transparent opacity-100 z-0" />
-            
-            <div className="relative z-10 space-y-4">
-              <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">Our Commitment</span>
-              <p className="text-base md:text-lg font-bold text-slate-850 dark:text-slate-100 leading-relaxed max-w-3xl mx-auto">
-                We build secure, scalable, and resilient solutions using proven engineering practices, continuous quality assurance, and proactive operational governance to deliver reliable business outcomes.
-              </p>
-            </div>
-          </motion.div>
-        </motion.div>
+
+              {/* Resilience Cards (Box-less Floating Grid matching Tab 1 Features) */}
+              <motion.div
+                variants={container}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-40px" }}
+                className="max-w-5xl mx-auto mb-32"
+              >
+                <div className="text-center space-y-6 mb-16">
+                  <motion.h2 
+                    variants={item}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 shadow-sm mx-auto"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                    Resilience & Reliability
+                  </motion.h2>
+                  <motion.h3 
+                    variants={item}
+                    className="text-3xl md:text-5xl font-serif text-slate-900 dark:text-white leading-tight"
+                  >
+                    Enterprise Resilience Features
+                  </motion.h3>
+                  <motion.p 
+                    variants={item}
+                    className="text-base sm:text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto"
+                  >
+                    Every engagement is governed by proven delivery frameworks, security-first engineering, continuous quality assurance, and operational excellence.
+                  </motion.p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 pt-8 border-t border-[rgba(15,23,42,0.08)] dark:border-slate-800">
+                  {[
+                    { 
+                      title: "Zero-Trust Security", 
+                      desc: "Identity-first access controls.",
+                      icon: Lock 
+                    },
+                    { 
+                      title: "Business Continuity", 
+                      desc: "Proactive strategies to maintain operational workflows.",
+                      icon: Activity 
+                    },
+                    { 
+                      title: "Disaster Recovery", 
+                      desc: "Automated backup and failover strategies.",
+                      icon: RefreshCw 
+                    },
+                    { 
+                      title: "Compliance Readiness", 
+                      desc: "Aligning architectures with regional governance guidelines.",
+                      icon: ShieldCheck 
+                    }
+                  ].map((resCard, idx) => (
+                    <motion.div key={idx} variants={item} className="flex flex-col items-start group">
+                      <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] mb-6">
+                        <resCard.icon className="w-6 h-6" />
+                      </div>
+                      <div className="space-y-2 text-left">
+                        <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                          {resCard.title}
+                        </h4>
+                        <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">
+                          {resCard.desc}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
 
         {/* 6. HOW WE DELIVER (Timeline) */}
         <motion.div
@@ -489,8 +573,9 @@ export default function AboutPage() {
 
             </motion.div>
           )}
-      </AnimatePresence>
-      </div>
+          </AnimatePresence>
+        </div>
+      </section>
 
       {/* 7. PREMIUM CTA */}
       <PremiumCTA variant="about" />

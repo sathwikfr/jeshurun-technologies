@@ -198,19 +198,14 @@ function OfferingStrip({ cap, router, index }: { cap: any; router: any; index: n
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
             className="flex-1 space-y-6 min-w-0"
           >
-            <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${cap.accentBg} ${cap.accentText} border ${cap.accentBorder} text-xs font-bold uppercase tracking-wider`}>
-              <span className={`w-1.5 h-1.5 rounded-full bg-current`} />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20 text-xs font-bold uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               Engineering Delivery
             </div>
 
-            <div className="flex items-center gap-4">
-              <div className={`h-12 w-12 rounded-xl ${cap.accentBg} ${cap.accentText} border ${cap.accentBorder} flex items-center justify-center shrink-0`}>
-                {cap.icon}
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
-                {cap.title}
-              </h2>
-            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
+              {cap.title}
+            </h2>
 
             <p className="text-muted-foreground text-lg leading-relaxed font-medium">
               {cap.description}
@@ -230,7 +225,7 @@ function OfferingStrip({ cap, router, index }: { cap: any; router: any; index: n
               ))}
             </ul>
 
-            <div className="pt-4">
+            <div className="pt-6">
               <button 
                 onClick={() => router.push(`/software/${cap.slug}`)}
                 className="group inline-flex items-center gap-2.5 bg-primary hover:bg-primary/90 text-white font-bold px-6 py-3 rounded-full text-sm transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
