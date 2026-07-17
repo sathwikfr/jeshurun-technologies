@@ -1345,12 +1345,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center relative min-h-screen bg-transparent overflow-x-hidden">
+    <div className="flex flex-col items-center justify-center relative min-h-dvh bg-transparent overflow-x-hidden">
 
       {/* ═══════════════════════════════════════════════════
           HERO CANVAS
       ═══════════════════════════════════════════════════ */}
-      <section id="hero-section" className="relative w-full min-h-screen flex flex-col justify-center overflow-hidden bg-white dark:bg-[#050810]" onMouseMove={handleMouseMove}>
+      <section id="hero-section" className="relative w-full min-h-dvh flex flex-col justify-center overflow-hidden bg-white dark:bg-[#050810]" onMouseMove={handleMouseMove}>
         <style>{`
           .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.85) 40%, rgba(245,248,255,0.55) 58%, rgba(245,248,255,0.15) 72%, transparent 88%); }
           .scrim-mobile { background: linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 60%, transparent 100%); }
@@ -1373,7 +1373,7 @@ export default function Home() {
         <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile dark:hidden" />
 
         {/* Layer 2: Hero Content */}
-        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[110px] xl:pt-[120px] 2xl:pt-[160px] flex flex-col min-h-screen justify-between pointer-events-none">
+        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[110px] xl:pt-[120px] 2xl:pt-[160px] flex flex-col min-h-dvh justify-between pointer-events-none">
           
           <div className="flex flex-col md:flex-row items-center md:items-stretch w-full flex-1 pb-2 lg:pb-4 xl:pb-6 2xl:pb-20 pointer-events-none">
             <motion.div 

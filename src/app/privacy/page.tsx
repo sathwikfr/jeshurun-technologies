@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center bg-transparent min-h-screen">
+    <div className="flex flex-col items-center justify-center bg-transparent min-h-dvh">
       
       {/* Header Banner */}
       <section className="w-full pt-32 pb-20 md:pt-40 md:pb-28 border-b border-border bg-[#F8FAFC]">

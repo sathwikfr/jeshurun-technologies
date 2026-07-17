@@ -351,7 +351,7 @@ function ServiceStrip({
 ───────────────────────────────────────────── */
 export default function Services() {
   return (
-    <div className="flex flex-col min-h-screen bg-transparent">
+    <div className="flex flex-col min-h-dvh bg-transparent">
 
       {/* ════════════════════════════════════════
           HERO

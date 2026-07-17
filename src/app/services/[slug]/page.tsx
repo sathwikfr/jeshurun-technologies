@@ -614,7 +614,7 @@ export default function ServiceDetailPage({
   const titleRest = titleWords.slice(1).join(" ");
 
   return (
-    <div className="min-h-screen bg-background relative overflow-x-hidden">
+    <div className="min-h-dvh bg-background relative overflow-x-hidden">
       <FloatingSidebarNav 
         sections={[
           { id: "overview", label: "Overview" },

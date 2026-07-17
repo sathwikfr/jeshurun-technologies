@@ -73,7 +73,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${inter.variable} ${playfair.variable} antialiased min-h-screen flex flex-col bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${cinzel.variable} ${inter.variable} ${playfair.variable} antialiased min-h-dvh flex flex-col bg-background text-foreground`}
       >
         <script
           type="application/ld+json"

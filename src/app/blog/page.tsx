@@ -188,7 +188,7 @@ export default function BlogPage() {
   const rest = filtered.filter(p => p.id !== featured?.id);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F8FAFC] to-white">
+    <div className="min-h-dvh bg-gradient-to-b from-[#F8FAFC] to-white">
 
       {/* Hero Header */}
       <section className="w-full pt-20 pb-16 md:pt-28 md:pb-20 bg-[#0A1F44] relative overflow-hidden">

@@ -24,7 +24,7 @@ export default async function CMS() {
   const serializedPosts = JSON.parse(JSON.stringify(posts));
 
   return (
-    <div className="flex flex-col min-h-screen bg-transparent p-6 md:p-12 relative overflow-hidden">
+    <div className="flex flex-col min-h-dvh bg-transparent p-6 md:p-12 relative overflow-hidden">
       {/* Soft background shading */}
       <div className="absolute inset-0 bg-[#F8FAFC]/50 -z-10" />
       

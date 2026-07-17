@@ -354,7 +354,7 @@ export default function Technology() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center bg-transparent min-h-screen">
+    <div className="flex flex-col items-center justify-center bg-transparent min-h-dvh">
 
       {/* HERO BANNER */}
       <section className="w-full pt-32 pb-20 md:pt-40 md:pb-28 relative z-10 bg-background overflow-hidden border-b border-border">

@@ -111,7 +111,7 @@ export default function CareersPage() {
   const filtered = activeDept === "All" ? jobs : jobs.filter(j => j.department === activeDept);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F8FAFC] to-white">
+    <div className="min-h-dvh bg-gradient-to-b from-[#F8FAFC] to-white">
 
       {/* Hero */}
       <section className="w-full pt-20 pb-16 md:pt-28 md:pb-24 bg-[#0A1F44] relative overflow-hidden">

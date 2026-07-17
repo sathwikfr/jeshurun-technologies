@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function InsightsPage() {
   return (
-    <div className="min-h-screen bg-background pt-24 pb-20 flex flex-col">
+    <div className="min-h-dvh bg-background pt-24 pb-20 flex flex-col">
       {/* Header */}
       <section className="w-full py-12 md:py-20 relative overflow-hidden">
         <div className="container px-6 sm:px-8 mx-auto relative z-10 text-center">

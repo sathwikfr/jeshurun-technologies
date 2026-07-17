@@ -44,7 +44,7 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent relative px-4">
+    <div className="flex flex-col items-center justify-center min-h-dvh bg-transparent relative px-4">
       {/* Removed glass background for enterprise solid look */}
       
       <motion.div 

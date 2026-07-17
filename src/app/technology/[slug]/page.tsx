@@ -1007,7 +1007,7 @@ export default function TechDetailPage({
   const titleRest = titleWords.slice(1).join(" ");
 
   return (
-    <div className="min-h-screen bg-background relative overflow-x-hidden selection:bg-primary/20">
+    <div className="min-h-dvh bg-background relative overflow-x-hidden selection:bg-primary/20">
       <FloatingSidebarNav 
         sections={[
           { id: "overview", label: "Overview" },

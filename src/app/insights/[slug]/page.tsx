@@ -68,7 +68,7 @@ export default function InsightArticlePage() {
 
   if (!article) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-background text-foreground p-6">
+      <div className="min-h-dvh flex flex-col items-center justify-center bg-background text-foreground p-6">
         <h1 className="text-3xl font-bold mb-4">Report Not Found</h1>
         <p className="text-muted-foreground mb-8">The requested insight report does not exist or has been archived.</p>
         <Link href="/" className="inline-flex items-center gap-2 text-primary font-bold hover:underline">
@@ -140,7 +140,7 @@ export default function InsightArticlePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-background pb-24">
+    <div className="min-h-dvh bg-[#F8FAFC] dark:bg-background pb-24">
       {/* Hero Header Area */}
       <section className="w-full pt-32 pb-20 relative overflow-hidden bg-slate-950 text-white shadow-xl">
         {/* Background Image & Overlay */}

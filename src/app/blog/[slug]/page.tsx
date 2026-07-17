@@ -89,7 +89,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]/50 pb-24">
+    <div className="min-h-dvh bg-[#F8FAFC]/50 pb-24">
       
       {/* Blog Article Hero Header */}
       <section className={`w-full pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br ${post.gradient || "from-blue-900 to-slate-900"} relative overflow-hidden text-white shadow-lg`}>
