@@ -9,7 +9,8 @@ import { Check, ArrowRight, Activity, Zap, Cpu, Server, Database, Globe, Network
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { Button } from "@/components/ui/button";
-import { HeroFieldBackground } from "@/components/HeroFieldBackground";
+
+import { GalaxySpiral } from "@/components/GalaxySpiral";
 
 
 /* ─── ANIMATION VARIANTS ─── */
@@ -112,8 +113,11 @@ export default function CaseStudiesPage() {
       
       {/* ═══════ HERO SECTION ═══════ */}
       <section className="w-full pt-32 pb-16 md:pt-36 md:pb-20 relative overflow-hidden bg-background border-b border-border">
-        {/* NEW UNIFIED BACKGROUND (Blue/Cyan Theme) */}
-        <HeroFieldBackground blobOneColor="bg-blue-600/15" blobTwoColor="bg-cyan-600/15" />
+        
+        {/* Layer 0.5: Galaxy Spiral Particle Animation */}
+        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
+          <GalaxySpiral />
+        </div>
         
         <motion.div 
           variants={container}

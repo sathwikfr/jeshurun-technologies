@@ -1350,18 +1350,19 @@ export default function Home() {
       {/* ═══════════════════════════════════════════════════
           HERO CANVAS
       ═══════════════════════════════════════════════════ */}
-      <section id="hero-section" className="relative w-full min-h-dvh flex flex-col justify-center overflow-hidden bg-white dark:bg-[#050810]" onMouseMove={handleMouseMove}>
+      <section id="hero-section" className="relative w-full min-h-dvh flex flex-col justify-center overflow-hidden bg-background dark:bg-background" onMouseMove={handleMouseMove}>
         <style>{`
           .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.85) 40%, rgba(245,248,255,0.55) 58%, rgba(245,248,255,0.15) 72%, transparent 88%); }
           .scrim-mobile { background: linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 60%, transparent 100%); }
-          .dark .scrim-mobile { background: linear-gradient(to right, rgba(5,8,16,0.98) 0%, rgba(5,8,16,0.95) 60%, rgba(5,8,16,0.7) 85%, transparent 100%); }
-          .scrim-diagonal-dark { background: linear-gradient(110deg, rgba(5,8,16,0.97) 0%, rgba(5,8,16,0.93) 20%, rgba(5,8,16,0.82) 40%, rgba(5,8,16,0.50) 58%, rgba(5,8,16,0.12) 72%, transparent 88%); }
+          .dark .scrim-mobile { background: linear-gradient(to right, rgba(11,14,20,0.98) 0%, rgba(11,14,20,0.95) 60%, rgba(11,14,20,0.7) 85%, transparent 100%); }
+          .scrim-diagonal-dark { background: linear-gradient(110deg, rgba(11,14,20,0.97) 0%, rgba(11,14,20,0.93) 20%, rgba(11,14,20,0.82) 40%, rgba(11,14,20,0.50) 58%, rgba(11,14,20,0.12) 72%, transparent 88%); }
         `}</style>
         
         {/* Layer 0: Full-Bleed Map Background */}
         <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
           <WorldMap forceDark={true} />
         </div>
+
 
         {/* Layer 1: Protective Gradient Scrim (Desktop – Light Mode) */}
         <div className="absolute inset-0 z-10 pointer-events-none hidden md:block dark:hidden scrim-diagonal" />

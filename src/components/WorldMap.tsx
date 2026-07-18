@@ -121,7 +121,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
           : "absolute inset-0 w-full h-full flex flex-col items-center justify-end md:justify-center z-10 overflow-hidden pointer-events-none pb-10 md:pb-0"
       }
       style={isAmbient ? {} : {
-        background: 'radial-gradient(ellipse at 40% 30%, #142848 0%, #0A1830 50%, #050810 100%)',
+        background: 'radial-gradient(ellipse at 40% 30%, #1E40AF 0%, #0F172A 50%, #0B0E14 100%)',
         maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
         WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)'
       }}

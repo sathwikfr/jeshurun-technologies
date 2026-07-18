@@ -22,7 +22,7 @@ import {
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { useRouter } from "next/navigation";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
-import { HeroFieldBackground } from "@/components/HeroFieldBackground";
+import { GalaxySpiral } from "@/components/GalaxySpiral";
 import { AnimatedCounter } from "@/components/HeroStatsPanel";
 import {
   CloudNativeViz,
@@ -270,18 +270,27 @@ export default function Software() {
 
       {/* HERO */}
       <section className="w-full pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden bg-background border-b border-border">
-        {/* NEW UNIFIED BACKGROUND (Blue/Cyan Theme) */}
-        <HeroFieldBackground blobOneColor="bg-blue-600/15" blobTwoColor="bg-cyan-600/15" />
+        
+        {/* Layer 0.5: Galaxy Spiral Particle Animation */}
+        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
+          <GalaxySpiral />
+        </div>
+
         <motion.div variants={enterpriseContainer} initial="hidden" animate="show" className="container px-6 sm:px-8 mx-auto relative z-10">
+          {/* Subtle glowing orb behind text for perfect contrast */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#0B0E14]/70" />
           <div className="flex flex-col items-center text-center space-y-6 max-w-5xl mx-auto">
-            <motion.div variants={enterpriseItem} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/8 border border-primary/20 text-xs font-bold uppercase tracking-wider text-primary shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <motion.div variants={enterpriseItem} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 dark:bg-black/20 backdrop-blur-md border border-primary/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-primary shadow-[0_0_30px_rgba(18,171,219,0.15)] ring-1 ring-white/10">
+              <span className="relative flex w-2 h-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-primary shadow-[0_0_10px_rgba(18,171,219,1)]"></span>
+              </span>
               Software Engineering
             </motion.div>
             
-            <motion.h1 variants={enterpriseItem} className="text-5xl sm:text-6xl lg:text-[4.5rem] font-black tracking-tight leading-none text-foreground drop-shadow-sm relative">
-              <span className="text-[#2563EB]">Enterprise</span>{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4] animate-gradient-text drop-shadow-[0_0_20px_rgba(37,99,235,0.3)]">
+            <motion.h1 variants={enterpriseItem} className="text-6xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tighter leading-[1.05] text-foreground drop-shadow-xl relative z-10">
+              <span className="text-foreground">Enterprise</span>{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#12ABDB] via-[#0070AD] to-[#12ABDB] animate-gradient-text drop-shadow-[0_4px_32px_rgba(18,171,219,0.4)]">
                 Software
               </span>
             </motion.h1>

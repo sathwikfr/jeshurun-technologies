@@ -19,23 +19,19 @@ import Image from "next/image";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { AnimatedCounter } from "@/components/HeroStatsPanel";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
-import { HeroFieldBackground } from "@/components/HeroFieldBackground";
+
+import { GalaxySpiral } from "@/components/GalaxySpiral";
 
 /* ─────────────────────────────────────────────
    Animation variants
 ───────────────────────────────────────────── */
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 90, damping: 22 },
-  },
-};
-
-const container: Variants = {
+const enterpriseContainer: Variants = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
+};
+const enterpriseItem: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 80, damping: 20 } },
 };
 
 // Relying on HeroStatsPanel default stats
@@ -357,48 +353,55 @@ export default function Services() {
           HERO
       ════════════════════════════════════════ */}
       <section className="w-full pt-32 pb-16 md:pt-40 md:pb-20 relative z-10 bg-background overflow-hidden border-b border-border">
-        {/* NEW UNIFIED BACKGROUND */}
-        <HeroFieldBackground blobOneColor="bg-blue-600/15" blobTwoColor="bg-cyan-600/15" />
+
+        
+        {/* Layer 0.5: Galaxy Spiral Particle Animation */}
+        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
+          <GalaxySpiral />
+        </div>
 
         <motion.div
-          variants={container}
+          variants={enterpriseContainer}
           initial="hidden"
           animate="show"
           className="container px-6 sm:px-8 mx-auto relative z-10"
         >
-          <div className="max-w-5xl mx-auto text-center space-y-6">
+          {/* Subtle glowing orb behind text for perfect contrast */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#0B0E14]/70" />
+          <div className="flex flex-col items-center text-center space-y-6 max-w-5xl mx-auto">
             {/* Badge */}
             <motion.div
-              variants={fadeUp}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/8 border border-primary/20 text-xs font-bold uppercase tracking-wider text-primary shadow-sm"
+              variants={enterpriseItem}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 dark:bg-black/20 backdrop-blur-md border border-primary/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-primary shadow-[0_0_30px_rgba(18,171,219,0.15)] ring-1 ring-white/10"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="relative flex w-2 h-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-primary shadow-[0_0_10px_rgba(18,171,219,1)]"></span>
+              </span>
               Enterprise Practice Areas
             </motion.div>
 
             {/* Headline */}
             <motion.h1
-              variants={fadeUp}
-              className="text-5xl sm:text-6xl lg:text-[4.5rem] font-black tracking-tight leading-none text-foreground drop-shadow-sm relative"
+              variants={enterpriseItem}
+              className="text-6xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tighter leading-[1.05] text-foreground drop-shadow-xl relative z-10"
             >
-              Technology consulting{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4] animate-gradient-text drop-shadow-[0_0_20px_rgba(37,99,235,0.3)]">
-                that delivers.
+              <span className="text-foreground">Technology</span>{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#12ABDB] via-[#0070AD] to-[#12ABDB] animate-gradient-text drop-shadow-[0_4px_32px_rgba(18,171,219,0.4)]">
+                Consulting
               </span>
             </motion.h1>
 
             {/* Supporting copy */}
             <motion.p
-              variants={fadeUp}
+              variants={enterpriseItem}
               className="text-slate-700 dark:text-slate-300 text-xl sm:text-2xl leading-relaxed font-semibold max-w-2xl mx-auto"
             >
-              Trusted by enterprise leaders across Ireland, Europe, and the
-              Middle East — our four practice areas cover the full technology
-              lifecycle from strategy to operations.
+              We provide strategic guidance, execute complex implementations, and manage enterprise IT operations to ensure optimal performance and growth.
             </motion.p>
 
             {/* PILL NAVIGATION */}
-            <motion.div variants={fadeUp} className="w-full mt-8 pt-8 relative">
+            <motion.div variants={enterpriseItem} className="w-full mt-8 pt-8 relative">
               <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-background px-4 text-xs font-bold uppercase tracking-widest text-muted-foreground flex items-center gap-2">
                 Explore practice areas <ArrowRight className="w-3 h-3 rotate-90" />

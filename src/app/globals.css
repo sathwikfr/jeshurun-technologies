@@ -158,26 +158,26 @@
 }
 
 .dark {
-  --background: #020617;
+  --background: #0B0E14;
   --foreground: #F8FAFC;
 
-  --card: #0A1128;
+  --card: #151A24;
   --card-foreground: #F8FAFC;
   
-  --popover: #0A1128;
+  --popover: #151A24;
   --popover-foreground: #F8FAFC;
 
-  --border: rgba(59, 130, 246, 0.15);
-  --input: rgba(59, 130, 246, 0.15);
+  --border: rgba(18, 171, 219, 0.15);
+  --input: rgba(18, 171, 219, 0.15);
 
-  --primary: #3B82F6;
+  --primary: #2563EB; /* Unified Blue */
   --primary-foreground: #FFFFFF;
   
-  --secondary: #1E3A8A;
+  --secondary: #0070AD; /* Capgemini Blue */
   --secondary-foreground: #F8FAFC;
 
-  --accent: #06B6D4;
-  --accent-foreground: #020617;
+  --accent: #2B0A3D; /* Capgemini Deep Purple */
+  --accent-foreground: #FFFFFF;
 
   --muted: #475569;
   --muted-foreground: #94A3B8;
@@ -185,23 +185,23 @@
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
 
-  --ring: #06B6D4;
+  --ring: #2563EB;
 
   --section-divider: rgba(59, 130, 246, 0.10);
   --card-shadow: 0 4px 20px rgba(0,0,0,0.3);
 
   /* Hero Theme Variables */
-  --hero-bg-base: radial-gradient(150% 150% at 0% 0%, #020617 0%, #061229 50%, #0F2557 75%, #1E3A8A 85%, #06B6D4 100%);
-  --hero-fog: radial-gradient(ellipse 100% 100% at 60% 50%, rgba(30, 58, 138, 0.2) 0%, transparent 70%);
+  --hero-bg-base: radial-gradient(150% 150% at 0% 0%, #0B0E14 0%, #151A24 50%, #0070AD 85%, #12ABDB 100%);
+  --hero-fog: radial-gradient(ellipse 100% 100% at 60% 50%, rgba(18, 171, 219, 0.15) 0%, transparent 70%);
   --hero-particles-opacity: 0.2;
-  --hero-grid-color: rgba(37, 99, 235, 0.02);
+  --hero-grid-color: rgba(18, 171, 219, 0.03);
   --hero-grid: linear-gradient(var(--hero-grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--hero-grid-color) 1px, transparent 1px);
   --hero-text: #F8FAFC;
   --hero-text-muted: rgba(148,163,184,0.90);
-  --hero-badge-bg: rgba(37,99,235,0.12);
-  --hero-badge-border: rgba(59,130,246,0.30);
-  --hero-badge-text: #60A5FA;
-  --hero-gradient-text: linear-gradient(90deg, #3B82F6 0%, #60A5FA 50%, #38BDF8 100%);
+  --hero-badge-bg: rgba(18, 171, 219, 0.12);
+  --hero-badge-border: rgba(18, 171, 219, 0.30);
+  --hero-badge-text: #12ABDB;
+  --hero-gradient-text: linear-gradient(90deg, #12ABDB 0%, #0070AD 50%, #2B0A3D 100%);
   --hero-btn-secondary: rgba(255,255,255,0.05);
   --hero-btn-secondary-border: rgba(255,255,255,0.15);
   --hero-btn-secondary-text: #E2E8F0;

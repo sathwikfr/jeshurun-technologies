@@ -386,7 +386,7 @@ export function Navbar() {
   }
 
   const forceLightText = false;
-  const navBg = "bg-white/95 dark:bg-[#0B1220]/95 backdrop-blur-md border border-[#E6E9F0] dark:border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.08)]";
+  const navBg = "bg-white/95 dark:bg-background/95 backdrop-blur-md border border-[#E6E9F0] dark:border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.08)]";
 
   return (
     <>

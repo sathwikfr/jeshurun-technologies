@@ -80,6 +80,7 @@ export default function InsightsPage() {
                     </span>
                   </div>
                 </div>
+                </div>
               </TiltCard>
             </Link>
           ))}

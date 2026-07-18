@@ -27,7 +27,8 @@ import {
   Key
 } from "lucide-react";
 import { SpotlightCard } from "@/components/SpotlightCard";
-import { HeroFieldBackground } from "@/components/HeroFieldBackground";
+
+import { GalaxySpiral } from "@/components/GalaxySpiral";
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -133,8 +134,12 @@ ${formData.message}
     <div className="bg-background text-slate-900 dark:text-slate-100 transition-colors duration-300">
       {/* HERO SECTION WRAPPER */}
       <section className="relative w-full pt-32 md:pt-40 pb-16 overflow-hidden border-b border-border">
-        {/* NEW UNIFIED BACKGROUND (Blue/Cyan Theme) */}
-        <HeroFieldBackground blobOneColor="bg-blue-600/15" blobTwoColor="bg-cyan-600/15" />
+
+        
+        {/* Layer 0.5: Galaxy Spiral Particle Animation */}
+        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
+          <GalaxySpiral />
+        </div>
 
         <div className="container px-6 sm:px-8 mx-auto relative z-10">
           {/* HERO CONTENT */}
