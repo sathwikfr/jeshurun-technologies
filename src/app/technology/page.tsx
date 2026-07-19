@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import { motion, Variants, useInView, useReducedMotion } from "framer-motion";
@@ -11,7 +11,6 @@ import Image from "next/image";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 
-import { GalaxySpiral } from "@/components/GalaxySpiral";
 import { AnimatedCounter } from "@/components/HeroStatsPanel";
 
 const enterpriseContainer: Variants = {
@@ -69,7 +68,7 @@ function TechnologyStrip({ tech, router, index }: { tech: any; router: any; inde
 
   return (
     <div id={tech.slug} className="py-16 md:py-24 scroll-mt-28" ref={ref}>
-      <div className="container px-6 sm:px-8 mx-auto">
+      <div className="w-full container px-6 sm:px-8 mx-auto">
         <div className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-10 lg:gap-20 items-center`}>
           {/* IMAGE PANEL */}
           <motion.div
@@ -246,7 +245,7 @@ export default function Technology() {
       accentText: "text-blue-600 dark:text-blue-400",
       accentBorder: "border-blue-500/20",
       stat: "3 Platforms",
-      statLabel: "AWS • Azure • GCP",
+      statLabel: "AWS â€¢ Azure â€¢ GCP",
       tags: ["Multi-Cloud", "Auto-Scaling", "Cost Optimisation"],
       counter: { target: 3, suffix: " Platforms", isNumeric: true }
     },
@@ -358,18 +357,15 @@ export default function Technology() {
     <div className="flex flex-col items-center justify-center bg-transparent min-h-dvh">
 
       {/* HERO BANNER */}
-      <section className="w-full pt-32 pb-20 md:pt-40 md:pb-28 relative z-10 bg-background overflow-hidden border-b border-border">
+      <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center relative z-10 bg-background overflow-hidden border-b border-border">
         
         {/* Layer 0.5: Galaxy Spiral Particle Animation */}
-        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
-          <GalaxySpiral />
-        </div>
 
         <motion.div
           variants={enterpriseContainer}
           initial="hidden"
           animate="show"
-          className="container px-6 sm:px-8 mx-auto relative z-10"
+          className="w-full container px-6 sm:px-8 mx-auto relative z-10"
         >
           {/* Subtle glowing orb behind text for perfect contrast */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#0B0E14]/70" />

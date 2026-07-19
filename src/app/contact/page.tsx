@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -28,7 +28,6 @@ import {
 } from "lucide-react";
 import { SpotlightCard } from "@/components/SpotlightCard";
 
-import { GalaxySpiral } from "@/components/GalaxySpiral";
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -133,15 +132,12 @@ ${formData.message}
   return (
     <div className="bg-background text-slate-900 dark:text-slate-100 transition-colors duration-300">
       {/* HERO SECTION WRAPPER */}
-      <section className="relative w-full pt-32 md:pt-40 pb-16 overflow-hidden border-b border-border">
+      <section className="relative w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center overflow-hidden border-b border-border">
 
         
         {/* Layer 0.5: Galaxy Spiral Particle Animation */}
-        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
-          <GalaxySpiral />
-        </div>
 
-        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           {/* HERO CONTENT */}
           <motion.div 
           variants={container}
@@ -171,7 +167,7 @@ ${formData.message}
             variants={item}
             className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-medium"
           >
-            From secure cloud infrastructure to mission-critical software. Tell us what you’re building—or what's holding you back—and a senior consultant will be in touch within 2 business hours.
+            From secure cloud infrastructure to mission-critical software. Tell us what youâ€™re buildingâ€”or what's holding you backâ€”and a senior consultant will be in touch within 2 business hours.
           </motion.p>
 
           {/* TRUST STRIP */}
@@ -193,7 +189,7 @@ ${formData.message}
                   {stat}
                 </motion.span>
                 {idx < arr.length - 1 && (
-                  <motion.span variants={item} className="hidden sm:inline text-slate-300 dark:text-slate-700">•</motion.span>
+                  <motion.span variants={item} className="hidden sm:inline text-slate-300 dark:text-slate-700">â€¢</motion.span>
                 )}
               </span>
             ))}
@@ -204,7 +200,7 @@ ${formData.message}
 
       {/* MAIN CONTENT SECTION */}
       <section className="relative w-full py-16 bg-transparent">
-        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           {/* MAIN LAYOUT */}
           <div className="grid gap-10 lg:grid-cols-12 max-w-5xl mx-auto items-stretch mb-16">
             
@@ -265,7 +261,7 @@ ${formData.message}
                         animate={{ opacity: 1, y: 0 }}
                         className="flex items-start gap-3 p-4 mb-6 rounded-2xl border text-sm font-semibold bg-rose-50 border-rose-200 text-rose-800 dark:bg-rose-950/30 dark:border-rose-800/40 dark:text-rose-300"
                       >
-                        <span className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white text-xs mt-0.5 bg-rose-500">✕</span>
+                        <span className="shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white text-xs mt-0.5 bg-rose-500">âœ•</span>
                         <span>{submitResult.message}</span>
                       </motion.div>
                     )}
@@ -333,16 +329,16 @@ ${formData.message}
                           disabled={isSubmitting}
                           className="w-full bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus:border-[#0057D9] focus:ring-1 focus:ring-[#0057D9] h-12 rounded-xl pl-3 pr-8 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all appearance-none cursor-pointer outline-none text-sm"
                         >
-                          <option value="+353">🇮🇪 +353</option>
-                          <option value="+1">🇺🇸 +1</option>
-                          <option value="+44">🇬🇧 +44</option>
-                          <option value="+91">🇮🇳 +91</option>
-                          <option value="+971">🇦🇪 +971</option>
-                          <option value="+61">🇦🇺 +61</option>
-                          <option value="+49">🇩🇪 +49</option>
-                          <option value="+33">🇫🇷 +33</option>
-                          <option value="+81">🇯🇵 +81</option>
-                          <option value="+65">🇸🇬 +65</option>
+                          <option value="+353">ðŸ‡®ðŸ‡ª +353</option>
+                          <option value="+1">ðŸ‡ºðŸ‡¸ +1</option>
+                          <option value="+44">ðŸ‡¬ðŸ‡§ +44</option>
+                          <option value="+91">ðŸ‡®ðŸ‡³ +91</option>
+                          <option value="+971">ðŸ‡¦ðŸ‡ª +971</option>
+                          <option value="+61">ðŸ‡¦ðŸ‡º +61</option>
+                          <option value="+49">ðŸ‡©ðŸ‡ª +49</option>
+                          <option value="+33">ðŸ‡«ðŸ‡· +33</option>
+                          <option value="+81">ðŸ‡¯ðŸ‡µ +81</option>
+                          <option value="+65">ðŸ‡¸ðŸ‡¬ +65</option>
                         </select>
                         <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-slate-500">
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
@@ -525,8 +521,8 @@ ${formData.message}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
               {[
                 { label: "Initial Response", val: "< 2 Hours" },
-                { label: "Proposal Turnaround", val: "24–48 Hours" },
-                { label: "Discovery Workshop", val: "1–3 Days" },
+                { label: "Proposal Turnaround", val: "24â€“48 Hours" },
+                { label: "Discovery Workshop", val: "1â€“3 Days" },
                 { label: "Support Coverage", val: "24/7" }
               ].map((stat, i) => (
                 <motion.div key={i} variants={item}>

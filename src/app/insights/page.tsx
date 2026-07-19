@@ -1,4 +1,4 @@
-import { insightsData } from "@/lib/insightsData";
+﻿import { insightsData } from "@/lib/insightsData";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -11,10 +11,10 @@ export const metadata = {
 
 export default function InsightsPage() {
   return (
-    <div className="min-h-dvh bg-background pt-24 pb-20 flex flex-col">
+    <div className="min-h-dvh bg-background pb-20 flex flex-col">
       {/* Header */}
-      <section className="w-full py-12 md:py-20 relative overflow-hidden">
-        <div className="container px-6 sm:px-8 mx-auto relative z-10 text-center">
+      <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center relative overflow-hidden border-b border-border">
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2563EB]/10 text-[#2563EB] mb-6">
             Corporate Intelligence
           </div>
@@ -28,7 +28,7 @@ export default function InsightsPage() {
       </section>
 
       {/* Articles Grid */}
-      <section className="container px-6 sm:px-8 mx-auto py-16 flex-1">
+      <section className="w-full container px-6 sm:px-8 mx-auto py-16 flex-1">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {insightsData.map((insight) => (
             <Link key={insight.slug} href={`/insights/${insight.slug}`} className="block h-full outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-3xl">

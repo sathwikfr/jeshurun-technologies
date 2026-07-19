@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -14,7 +14,6 @@ import { PremiumCTA } from "@/components/PremiumCTA";
 import { SpotlightCard } from "@/components/SpotlightCard";
 import { MethodologyTimeline } from "@/components/MethodologyTimeline";
 import { TiltCard } from "@/components/TiltCard";
-import { GalaxySpiral } from "@/components/GalaxySpiral";
 
 const container: Variants = {
   hidden: { opacity: 0 },
@@ -93,13 +92,10 @@ export default function AboutPage() {
   return (
     <div className="bg-background text-foreground transition-colors duration-300">
       {/* HERO SECTION WRAPPER */}
-      <section className="relative w-full pt-32 md:pt-40 pb-16 overflow-hidden border-b border-border">
+      <section className="relative w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center overflow-hidden border-b border-border">
         {/* Layer 0.5: Galaxy Spiral Particle Animation */}
-        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
-          <GalaxySpiral />
-        </div>
 
-        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           
           {/* 1. HERO CONTENT */}
           <motion.div 
@@ -139,7 +135,7 @@ export default function AboutPage() {
 
       {/* MAIN CONTENT SECTION */}
       <section className="relative w-full py-12">
-        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           {/* TAB TOGGLES (Sticky & Fluid) */}
           <div className="sticky top-24 z-50 flex justify-center mb-12">
             <div className="flex p-1.5 bg-slate-100/70 dark:bg-slate-800/70 rounded-full border border-slate-200 dark:border-slate-700 backdrop-blur-md shadow-sm">
@@ -274,7 +270,7 @@ export default function AboutPage() {
                     variants={item}
                     className="text-base sm:text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto"
                   >
-                    We don't just deliver technology—we architect resilient ecosystems designed to scale and secure your enterprise's future.
+                    We don't just deliver technologyâ€”we architect resilient ecosystems designed to scale and secure your enterprise's future.
                   </motion.p>
                 </div>
                 

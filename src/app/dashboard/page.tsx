@@ -1,4 +1,4 @@
-import { getServerSession } from "next-auth";
+﻿import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -66,7 +66,7 @@ export default async function Dashboard() {
   return (
     <div className="flex flex-col min-h-dvh bg-transparent p-6 md:p-12 relative overflow-hidden">
       {/* Soft background shading */}
-      <div className="absolute inset-0 bg-[#F8FAFC]/50 -z-10" />
+      <div className="absolute inset-0 bg-background -z-10" />
       
       <div className="max-w-6xl mx-auto w-full space-y-8 mt-24 relative z-10">
         

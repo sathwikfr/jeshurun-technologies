@@ -21,7 +21,7 @@ export const insightsData: InsightArticle[] = [
     readTime: "5 min read",
     date: "June 2026",
     image: "/images/insight_cyber_talent_model.png",
-    author: "Sathwik Jeshurun, Principal Security Architect",
+    author: "Jeshurun Team",
     keyInsights: [
       "Security Workforce Trends",
       "Enterprise Cloud Migration",
@@ -65,7 +65,7 @@ Leveraging AI telemetry models to filter signal from noise lets your team spend 
     readTime: "6 min read",
     date: "June 2026",
     image: "/images/insight_human_ai_engineering.png",
-    author: "Sathwik Jeshurun, CTO",
+    author: "Jeshurun Team",
     keyInsights: [
       "Generative AI Integration",
       "Developer Velocity Metrics",
@@ -109,7 +109,7 @@ This ensures that code is robust and security weaknesses are detected long befor
     readTime: "7 min read",
     date: "June 2026",
     image: "/images/insight_cloud_scalability_matrix.png",
-    author: "Sathwik Jeshurun, Cloud Architecture Lead",
+    author: "Jeshurun Team",
     keyInsights: [
       "Multi-Cloud Frameworks",
       "Vendor Lock-in Mitigation",

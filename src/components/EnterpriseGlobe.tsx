@@ -406,9 +406,17 @@ export function EnterpriseGlobe({
         }
         .dublin-energy-core { animation: dublinPulse 3s ease-in-out infinite; }
 
-        @keyframes orbitSpin {
-          from { transform:translate(-50%,-50%) rotateX(70deg) rotateZ(0deg); }
-          to   { transform:translate(-50%,-50%) rotateX(70deg) rotateZ(360deg); }
+        @keyframes orbitSpin1 {
+          from { transform: rotateX(72deg) rotateZ(0deg); }
+          to   { transform: rotateX(72deg) rotateZ(360deg); }
+        }
+        @keyframes orbitSpin2 {
+          from { transform: rotateX(55deg) rotateZ(0deg); }
+          to   { transform: rotateX(55deg) rotateZ(360deg); }
+        }
+        @keyframes orbitSpin3 {
+          from { transform: rotateX(40deg) rotateZ(0deg); }
+          to   { transform: rotateX(40deg) rotateZ(360deg); }
         }
       `}</style>
 
@@ -487,28 +495,67 @@ export function EnterpriseGlobe({
         )}
 
         {/* ── Orbital signal rings (CSS perspective rings) ── */}
-        {[
-          { size: "96%", duration: "40s", opacity: 0.040, border: "1px solid #60a5fa",  delay: "0s"   },
-          { size: "88%", duration: "55s", opacity: 0.028, border: "1px solid #38bdf8",  delay: "-10s" },
-          { size: "80%", duration: "70s", opacity: 0.022, border: "1px dashed #93c5fd", delay: "-22s" },
-        ].map((ring, i) => (
-          <div
-            key={i}
-            className="absolute pointer-events-none"
-            style={{
-              top:          "50%",
-              left:         "50%",
-              width:        ring.size,
-              height:       ring.size,
-              border:       ring.border,
-              borderRadius: "50%",
-              opacity:      ring.opacity,
-              animation:    `orbitSpin ${ring.duration} linear infinite`,
-              animationDelay: ring.delay,
-              zIndex:       5,
-            }}
-          />
-        ))}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "50%",
+            left: "50%",
+            width: "100%",
+            height: "100%",
+            transform: "translate(-50%, -50%)",
+            perspective: "600px",
+            zIndex: 5,
+          }}
+        >
+          {[
+            {
+              size: "92%",
+              duration: "12s",
+              opacity: 0.55,
+              border: "1.5px solid #60a5fa",
+              boxShadow: "0 0 8px 1px rgba(96,165,250,0.35), inset 0 0 8px 1px rgba(96,165,250,0.15)",
+              delay: "0s",
+              anim: "orbitSpin1",
+            },
+            {
+              size: "76%",
+              duration: "18s",
+              opacity: 0.40,
+              border: "1px dashed #38bdf8",
+              boxShadow: "0 0 6px 1px rgba(56,189,248,0.25)",
+              delay: "-6s",
+              anim: "orbitSpin2",
+            },
+            {
+              size: "60%",
+              duration: "26s",
+              opacity: 0.30,
+              border: "1px dashed #93c5fd",
+              boxShadow: "0 0 5px 1px rgba(147,197,253,0.20)",
+              delay: "-12s",
+              anim: "orbitSpin3",
+            },
+          ].map((ring, i) => (
+            <div
+              key={i}
+              className="absolute"
+              style={{
+                top: "50%",
+                left: "50%",
+                width: ring.size,
+                height: ring.size,
+                marginLeft: `calc(-${ring.size} / 2)`,
+                marginTop: `calc(-${ring.size} / 2)`,
+                border: ring.border,
+                borderRadius: "50%",
+                opacity: ring.opacity,
+                boxShadow: ring.boxShadow,
+                animation: `${ring.anim} ${ring.duration} linear infinite`,
+                animationDelay: ring.delay,
+              }}
+            />
+          ))}
+        </div>
 
         {/* ── City label overlays ── */}
         {locations.map((loc) => {

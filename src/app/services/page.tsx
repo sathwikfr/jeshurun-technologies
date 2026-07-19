@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useRef } from "react";
 
 import { motion, type Variants , useInView, useReducedMotion } from "framer-motion";
@@ -20,11 +20,10 @@ import { PremiumCTA } from "@/components/PremiumCTA";
 import { AnimatedCounter } from "@/components/HeroStatsPanel";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 
-import { GalaxySpiral } from "@/components/GalaxySpiral";
 
-/* ─────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Animation variants
-───────────────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const enterpriseContainer: Variants = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
@@ -36,10 +35,10 @@ const enterpriseItem: Variants = {
 
 // Relying on HeroStatsPanel default stats
 
-/* ─────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Services with real case-study proof metrics
    Stats pulled from caseStudiesData.ts
-───────────────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 type ServiceEntry = {
   title: string;
   slug: string;
@@ -144,9 +143,9 @@ const servicesList: ServiceEntry[] = [
   },
 ];
 
-/* ─────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Methodology steps (unchanged from original)
-───────────────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const methodology = [
   {
     title: "Architecture Diagnostics",
@@ -174,9 +173,9 @@ const methodology = [
   },
 ];
 
-/* ─────────────────────────────────────────────
-   ServiceStrip — alternating layout component
-───────────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   ServiceStrip â€” alternating layout component
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function ServiceStrip({
   service,
   index,
@@ -204,13 +203,13 @@ function ServiceStrip({
 
   return (
     <div id={service.slug} className="py-16 md:py-24" ref={ref}>
-      <div className="container px-6 sm:px-8 mx-auto">
+      <div className="w-full container px-6 sm:px-8 mx-auto">
         <div
           className={`flex flex-col ${
             isEven ? "lg:flex-row" : "lg:flex-row-reverse"
           } gap-10 lg:gap-20 items-center`}
         >
-          {/* ── Image Panel ── */}
+          {/* â”€â”€ Image Panel â”€â”€ */}
           <motion.div
             initial={{ opacity: 0, x: isEven ? -32 : 32 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -280,7 +279,7 @@ function ServiceStrip({
             </div>
           </motion.div>
 
-          {/* ── Content Panel ── */}
+          {/* â”€â”€ Content Panel â”€â”€ */}
           <motion.div
             initial={{ opacity: 0, x: isEven ? 32 : -32 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -342,29 +341,26 @@ function ServiceStrip({
   );
 }
 
-/* ─────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    Page
-───────────────────────────────────────────── */
+â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 export default function Services() {
   return (
     <div className="flex flex-col min-h-dvh bg-transparent">
 
-      {/* ════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           HERO
-      ════════════════════════════════════════ */}
-      <section className="w-full pt-32 pb-16 md:pt-40 md:pb-20 relative z-10 bg-background overflow-hidden border-b border-border">
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
+      <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center relative z-10 bg-background overflow-hidden border-b border-border">
 
         
         {/* Layer 0.5: Galaxy Spiral Particle Animation */}
-        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
-          <GalaxySpiral />
-        </div>
 
         <motion.div
           variants={enterpriseContainer}
           initial="hidden"
           animate="show"
-          className="container px-6 sm:px-8 mx-auto relative z-10"
+          className="w-full container px-6 sm:px-8 mx-auto relative z-10"
         >
           {/* Subtle glowing orb behind text for perfect contrast */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#0B0E14]/70" />
@@ -427,18 +423,18 @@ export default function Services() {
         </motion.div>
       </section>
 
-      {/* ════════════════════════════════════════
-          SERVICE STRIPS — alternating layout
-      ════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          SERVICE STRIPS â€” alternating layout
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="w-full bg-background relative z-10 divide-y divide-border">
         {servicesList.map((service, i) => (
           <ServiceStrip key={service.slug} service={service} index={i} />
         ))}
       </section>
 
-      {/* ════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           METHODOLOGY TIMELINE
-      ════════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <ProcessTimeline
         badge="PROCESS"
         title="Enterprise Delivery Methodology"
@@ -446,9 +442,9 @@ export default function Services() {
         steps={methodology}
       />
 
-      {/* ════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           CTA
-      ════════════════════════════════════════ */}
+      â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <PremiumCTA
         variant="services"
         titleTop="Ready to Begin Your"

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ const mockFallbackPosts = [
     id: "1",
     category: "Security",
     tag: "Research Report",
-    title: "Why Today's Cyber Talent Model Is Broken — And How to Fix It",
+    title: "Why Today's Cyber Talent Model Is Broken â€” And How to Fix It",
     excerpt: "Cybersecurity needs hybrid technical and strategic skills, but the workforce hasn't kept pace. Learn the three moves organizations can make to build resilience from within.",
     author: "Jeshurun Editorial",
     date: "June 10, 2026",
@@ -188,27 +188,26 @@ export default function BlogPage() {
   const rest = filtered.filter(p => p.id !== featured?.id);
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-[#F8FAFC] to-white">
+    <div className="min-h-dvh bg-background">
 
       {/* Hero Header */}
-      <section className="w-full pt-20 pb-16 md:pt-28 md:pb-20 bg-[#0A1F44] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,87,217,0.2)_0%,transparent_60%)] pointer-events-none" />
-        <div className="absolute inset-0 opacity-10 pointer-events-none" />
-        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+      <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center bg-background relative overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,87,217,0.08)_0%,transparent_60%)] pointer-events-none z-[2]" />
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
             className="max-w-2xl space-y-4"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card/10 text-xs font-bold uppercase tracking-wider text-blue-300 border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-xs font-bold uppercase tracking-wider text-primary border border-primary/20">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               Corporate Intelligence
             </div>
-            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
-              Insights & Research Reports
+            <h1 className="text-4xl md:text-5xl font-black text-foreground tracking-tight leading-tight">
+              Insights &amp; Research Reports
             </h1>
-            <p className="text-white/60 text-lg font-medium leading-relaxed">
+            <p className="text-muted-foreground text-lg font-medium leading-relaxed">
               Engineering audits, AI telemetry models, and digital transformation guides from the Jeshurun Technologies research team.
             </p>
           </motion.div>
@@ -217,7 +216,7 @@ export default function BlogPage() {
 
       {/* Category Filter */}
       <section className="sticky top-14 z-30 w-full bg-card border-b border-border shadow-sm">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <div className="flex items-center gap-2 overflow-x-auto py-3 scrollbar-none">
             {categories.map((cat) => (
               <button
@@ -236,7 +235,7 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <div className="container px-6 sm:px-8 mx-auto py-16 space-y-16">
+      <div className="w-full container px-6 sm:px-8 mx-auto py-16 space-y-16">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-24 space-y-3">
             <Loader2 className="h-8 w-8 text-[#0057D9] animate-spin" />

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
@@ -76,7 +76,7 @@ export default function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required 
-                    className="h-12 pl-12 bg-[#F8FAFC]/50 border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
+                    className="h-12 pl-12 bg-background border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
                   />
                 </div>
               </div>
@@ -95,7 +95,7 @@ export default function Login() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required 
-                    className="h-12 pl-12 bg-[#F8FAFC]/50 border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
+                    className="h-12 pl-12 bg-background border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
                   />
                 </div>
               </div>

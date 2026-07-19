@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { use, useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
@@ -167,7 +167,7 @@ function AnimatedStatValue({ value }: { value: string }) {
 
 function AccentLine() {
   return (
-    <div className="container px-6 sm:px-8 mx-auto">
+    <div className="w-full container px-6 sm:px-8 mx-auto">
       <motion.div
         variants={expandWidth}
         initial="hidden"
@@ -588,7 +588,7 @@ export default function ServiceDetailPage({
 
   if (!service) {
     return (
-      <div className="container mx-auto px-6 py-32 text-center min-h-[60vh] flex flex-col justify-center items-center">
+      <div className="w-full container mx-auto px-6 py-32 text-center min-h-[60vh] flex flex-col justify-center items-center">
         <h1 className="text-3xl font-extrabold text-foreground">
           Service Not Found
         </h1>
@@ -644,7 +644,7 @@ export default function ServiceDetailPage({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.15)_0%,transparent_60%)]" />
         </div>
 
-        <div className="container px-6 sm:px-8 mx-auto relative z-10 flex flex-col justify-center">
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10 flex flex-col justify-center">
           {/* Breadcrumb — fade in */}
           <motion.div
             initial={{ opacity: 0, x: -12 }}
@@ -709,7 +709,7 @@ export default function ServiceDetailPage({
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
-          className="container px-6 sm:px-8 mx-auto"
+          className="w-full container px-6 sm:px-8 mx-auto"
         >
           <motion.div variants={fadeUp} className="max-w-3xl mx-auto">
             <p className="editorial-pullquote text-foreground text-xl sm:text-2xl md:text-[1.75rem]">
@@ -737,7 +737,7 @@ export default function ServiceDetailPage({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="container px-6 sm:px-8 mx-auto"
+          className="w-full container px-6 sm:px-8 mx-auto"
         >
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             {/* Image column — slide in from left with scale */}
@@ -816,7 +816,7 @@ export default function ServiceDetailPage({
           Typography does the work — no cards, no borders.
       ════════════════════════════════════════════════════════════════ */}
       <section id="capabilities" className="py-20 md:py-28">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -892,7 +892,7 @@ export default function ServiceDetailPage({
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-80px" }}
-            className="container px-6 sm:px-8 mx-auto"
+            className="w-full container px-6 sm:px-8 mx-auto"
           >
             <motion.div variants={fadeUp} className="max-w-3xl mb-16">
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
@@ -951,7 +951,7 @@ export default function ServiceDetailPage({
 
       {/* ── VERIFIED OUTCOMES + TESTIMONIAL ─────────────────────── */}
       <section id="outcomes" className="py-20 md:py-28 border-y border-border">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -1045,7 +1045,7 @@ export default function ServiceDetailPage({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="container px-6 sm:px-8 mx-auto"
+          className="w-full container px-6 sm:px-8 mx-auto"
         >
           <motion.div variants={fadeUp} className="max-w-3xl mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
@@ -1118,7 +1118,7 @@ export default function ServiceDetailPage({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="container px-6 sm:px-8 mx-auto"
+          className="w-full container px-6 sm:px-8 mx-auto"
         >
           <motion.div variants={fadeUp} className="max-w-3xl mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
@@ -1156,7 +1156,7 @@ export default function ServiceDetailPage({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-60px" }}
-          className="container px-6 sm:px-8 mx-auto"
+          className="w-full container px-6 sm:px-8 mx-auto"
         >
           <motion.div variants={fadeUp} className="mb-10">
             <h2 className="font-editorial text-xl sm:text-2xl text-foreground tracking-tight">

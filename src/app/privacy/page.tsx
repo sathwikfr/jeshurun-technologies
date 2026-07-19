@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "framer-motion";
 import { Shield, Lock, Eye, Bell, Globe, Mail } from "lucide-react";
@@ -41,12 +41,12 @@ export default function PrivacyPolicy() {
     <div className="flex flex-col items-center justify-center bg-transparent min-h-dvh">
       
       {/* Header Banner */}
-      <section className="w-full pt-32 pb-20 md:pt-40 md:pb-28 border-b border-border bg-[#F8FAFC]">
+      <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center border-b border-border bg-background relative overflow-hidden">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="container px-6 sm:px-8 mx-auto"
+          className="w-full container px-6 sm:px-8 mx-auto"
         >
           <div className="flex flex-col items-center text-center space-y-6 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0057D9]/5 border border-[#0057D9]/10 text-xs font-bold uppercase tracking-wider text-[#0057D9]">
@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
 
       {/* Main Content Body */}
       <section className="w-full py-20 md:py-28 bg-card">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -86,7 +86,7 @@ export default function PrivacyPolicy() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.05, duration: 0.5 }}
-                    className="p-8 border border-border rounded-2xl bg-[#F8FAFC]/30 hover:bg-card shadow-[0_8px_30px_rgb(0,0,0,0.005)] hover-card-effect group"
+                    className="p-8 border border-border rounded-2xl bg-background/30 hover:bg-card shadow-[0_8px_30px_rgb(0,0,0,0.005)] hover-card-effect group"
                   >
                     <div className="flex items-start gap-4">
                       <div className="h-10 w-10 shrink-0 rounded-xl bg-[#0057D9]/10 text-[#0057D9] flex items-center justify-center group-hover:bg-[#0057D9]/20 group-hover:scale-[1.02] transition-all duration-300">

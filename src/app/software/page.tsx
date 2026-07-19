@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -22,7 +22,6 @@ import {
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { useRouter } from "next/navigation";
 import { ProcessTimeline } from "@/components/ProcessTimeline";
-import { GalaxySpiral } from "@/components/GalaxySpiral";
 import { AnimatedCounter } from "@/components/HeroStatsPanel";
 import {
   CloudNativeViz,
@@ -142,7 +141,7 @@ function OfferingStrip({ cap, router, index }: { cap: any; router: any; index: n
 
   return (
     <div id={cap.slug} className="py-16 md:py-24 scroll-mt-28" ref={ref}>
-      <div className="container px-6 sm:px-8 mx-auto">
+      <div className="w-full container px-6 sm:px-8 mx-auto">
         <div className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-10 lg:gap-20 items-center`}>
           {/* VISUAL PANEL */}
           <motion.div
@@ -269,14 +268,11 @@ export default function Software() {
     <div className="flex flex-col items-center justify-center bg-transparent min-h-dvh">
 
       {/* HERO */}
-      <section className="w-full pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden bg-background border-b border-border">
+      <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center relative overflow-hidden bg-background border-b border-border">
         
         {/* Layer 0.5: Galaxy Spiral Particle Animation */}
-        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
-          <GalaxySpiral />
-        </div>
 
-        <motion.div variants={enterpriseContainer} initial="hidden" animate="show" className="container px-6 sm:px-8 mx-auto relative z-10">
+        <motion.div variants={enterpriseContainer} initial="hidden" animate="show" className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           {/* Subtle glowing orb behind text for perfect contrast */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#0B0E14]/70" />
           <div className="flex flex-col items-center text-center space-y-6 max-w-5xl mx-auto">

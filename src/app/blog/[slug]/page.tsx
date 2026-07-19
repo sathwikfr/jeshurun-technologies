@@ -1,4 +1,4 @@
-import { prisma } from "@/lib/prisma";
+﻿import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, User, ShieldAlert } from "lucide-react";
@@ -89,14 +89,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   };
 
   return (
-    <div className="min-h-dvh bg-[#F8FAFC]/50 pb-24">
+    <div className="min-h-dvh bg-background pb-24">
       
       {/* Blog Article Hero Header */}
-      <section className={`w-full pt-24 pb-16 md:pt-32 md:pb-24 bg-gradient-to-br ${post.gradient || "from-blue-900 to-slate-900"} relative overflow-hidden text-white shadow-lg`}>
-        <div className="absolute inset-0 bg-black/15 pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.08)_0%,transparent_60%)] pointer-events-none" />
+      <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center bg-background relative overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(0,87,217,0.06)_0%,transparent_60%)] pointer-events-none z-[2]" />
         
-        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           <div className="max-w-3xl mx-auto space-y-5">
             
             {/* Back button */}
@@ -137,7 +136,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </section>
 
       {/* Article Content Layout */}
-      <div className="container px-6 sm:px-8 mx-auto -mt-8 relative z-20">
+      <div className="w-full container px-6 sm:px-8 mx-auto -mt-8 relative z-20">
         <SpotlightCard className="max-w-3xl mx-auto p-8 sm:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.02)] hover-card-effect">
           
           {post.excerpt && (

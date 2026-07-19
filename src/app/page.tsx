@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import Link from "next/link";
@@ -583,7 +583,7 @@ function SLAUptimeViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes serverPing {
           0%, 80%, 100% { opacity: 0.3; }
@@ -689,7 +689,7 @@ function CertifiedEngineersViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes certSpin {
           0% { transform: rotate(0deg); }
@@ -739,7 +739,7 @@ function ITConsultingViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes networkPulse {
           0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(30, 95, 255, 0.1); }
@@ -799,7 +799,7 @@ function ProjectManagementViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex flex-col justify-center px-4 py-2 max-w-[200px] relative mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-24 flex flex-col justify-center px-4 py-2 max-w-[200px] relative mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes barFill {
           0%, 10% { transform: scaleX(0); opacity: 0; }
@@ -846,7 +846,7 @@ function TestManagementViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes scanSweep {
           0%, 10% { transform: translateX(-100%); opacity: 0; }
@@ -894,7 +894,7 @@ function InfrastructureViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes serverPulse {
           0%, 100% { opacity: 0.4; }
@@ -951,7 +951,7 @@ function SoftwareEngineeringViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex flex-col justify-start px-3 py-2 max-w-[200px] border border-slate-200 dark:border-slate-700/60 shadow-inner relative mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden">
+    <div ref={ref} className="w-full h-24 flex flex-col justify-start px-3 py-2 max-w-[200px] border border-slate-200 dark:border-slate-700/60 shadow-inner relative mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden">
       <style>{`
         @keyframes scrollCode {
           0% { transform: translateY(0); }
@@ -1004,7 +1004,7 @@ function CloudTransformationViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-between px-4 max-w-[200px] relative mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-24 flex items-center justify-between px-4 max-w-[200px] relative mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes uploadData {
           0% { transform: translateY(20px) translateX(-10px) scale(0.8); opacity: 0; }
@@ -1061,7 +1061,7 @@ function AISolutionsViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes aiPulse {
           0%, 100% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.2), inset 0 0 10px rgba(168, 85, 247, 0.1); }
@@ -1170,7 +1170,7 @@ function DevOpsViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-[#F8FAFC] dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
       <style>{`
         @keyframes drawInfinity {
           0% { stroke-dashoffset: 300; opacity: 0; }
@@ -1447,7 +1447,7 @@ export default function Home() {
 
       {/* ═══════ TRUSTED PARTNERS SECTION ═══════ */}
       <section className="w-full py-16 md:py-20 relative z-10 bg-background" aria-label="Trusted Partners">
-        <div className="container px-6 sm:px-8 mx-auto space-y-8">
+        <div className="w-full container px-6 sm:px-8 mx-auto space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <div className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">
               Our Clients
@@ -1489,7 +1489,7 @@ export default function Home() {
       {/* ═══════ SERVICES SECTION — TWO-TIER REDESIGN ═══════ */}
       <section className="w-full py-20 md:py-32 relative z-10 bg-background border-t border-border overflow-hidden" aria-label="Services">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37,99,235,0.04) 0%, transparent 60%)' }} aria-hidden="true" />
-        <div className="container px-6 sm:px-8 mx-auto space-y-14 relative z-10">
+        <div className="w-full container px-6 sm:px-8 mx-auto space-y-14 relative z-10">
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
@@ -1537,7 +1537,7 @@ export default function Home() {
                       <span key={f} className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/20">{f}</span>
                     ))}
                   </div>
-                  <div className="w-full rounded-xl bg-[#F8FAFC] dark:bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[100px]">
+                  <div className="w-full rounded-xl bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[100px]">
                     <ITConsultingViz />
                   </div>
                   <span className="text-blue-600 dark:text-blue-400 font-bold text-sm inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
@@ -1575,7 +1575,7 @@ export default function Home() {
                       <span key={f} className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border border-indigo-500/20">{f}</span>
                     ))}
                   </div>
-                  <div className="w-full rounded-xl bg-[#F8FAFC] dark:bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[100px]">
+                  <div className="w-full rounded-xl bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[100px]">
                     <ProjectManagementViz />
                   </div>
                   <span className="text-indigo-600 dark:text-indigo-400 font-bold text-sm inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
@@ -1619,7 +1619,7 @@ export default function Home() {
                         </div>
 
                         {VizComponent && (
-                          <div className="w-full rounded-xl bg-[#F8FAFC] dark:bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[90px] overflow-hidden my-1">
+                          <div className="w-full rounded-xl bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[90px] overflow-hidden my-1">
                             <div className="scale-[0.85] origin-center w-full flex justify-center">
                               <VizComponent />
                             </div>
@@ -1651,7 +1651,7 @@ export default function Home() {
 
       {/* ═══════ TECHNOLOGY ECOSYSTEM ═══════ */}
       <section className="w-full py-20 md:py-32 relative z-10 border-t border-border bg-background" aria-label="Technology Ecosystem">
-        <div className="container px-6 sm:px-8 mx-auto space-y-12">
+        <div className="w-full container px-6 sm:px-8 mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2563EB]/8 text-[#2563EB] border border-[#2563EB]/15 mb-2">
               Technology Ecosystem
@@ -1790,7 +1790,7 @@ export default function Home() {
 
       {/* ═══════ CORPORATE INTELLIGENCE (INSIGHTS & RESEARCH REPORTS) ═══════ */}
       <section id="corporate-intelligence" className="w-full py-20 md:py-32 relative z-10 bg-background border-t border-border" aria-label="Corporate Intelligence">
-        <div className="container px-6 sm:px-8 mx-auto space-y-12">
+        <div className="w-full container px-6 sm:px-8 mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2563EB]/8 text-[#2563EB] border border-[#2563EB]/15 mb-2">
               Corporate Intelligence

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -10,10 +10,9 @@ import { SpotlightCard } from "@/components/SpotlightCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { Button } from "@/components/ui/button";
 
-import { GalaxySpiral } from "@/components/GalaxySpiral";
 
 
-/* ─── ANIMATION VARIANTS ─── */
+/* â”€â”€â”€ ANIMATION VARIANTS â”€â”€â”€ */
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -33,12 +32,12 @@ const CASE_STUDIES = caseStudiesData;
 
 const FILTERS = ["All", "Financial Services", "Healthcare", "Manufacturing", "Logistics", "Pharmaceutical", "Insurance"];
 
-function CaseStudyCard({ study, onClick }: { study: CaseStudyArticle, onClick: () => void }) {
+function CaseStudyCard({ study, onClick, compact = false }: { study: CaseStudyArticle, onClick: () => void, compact?: boolean }) {
   return (
     <div onClick={onClick} className="w-full h-full cursor-pointer outline-none flex flex-col">
       <SpotlightCard className="flex-1 flex flex-col p-0 hover-card-effect overflow-hidden group">
         {/* Image Header */}
-        <div className="relative w-full h-48 md:h-52 overflow-hidden bg-slate-900 shrink-0">
+        <div className={`relative w-full ${compact ? 'h-36 md:h-40' : 'h-48 md:h-52'} overflow-hidden bg-slate-900 shrink-0`}>
           <Image 
             src={study.image} 
             alt={study.title}
@@ -49,22 +48,22 @@ function CaseStudyCard({ study, onClick }: { study: CaseStudyArticle, onClick: (
         </div>
         
         {/* Content Body */}
-        <div className="p-5 md:p-6 flex-1 flex flex-col justify-between">
+        <div className={`${compact ? 'p-4 md:p-5' : 'p-5 md:p-6'} flex-1 flex flex-col justify-between`}>
           <div>
-            <h3 className="font-extrabold text-foreground tracking-tight leading-tight mb-4 group-hover:text-[#2563EB] transition-colors text-2xl md:text-3xl text-left">
+            <h3 className={`font-extrabold text-foreground tracking-tight leading-tight mb-4 group-hover:text-[#2563EB] transition-colors ${compact ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'} text-left`}>
               {study.title}
             </h3>
             
-            <div className="space-y-3 mb-6 text-left">
+            <div className={`${compact ? 'space-y-2 mb-4' : 'space-y-3 mb-6'} text-left`}>
               <div>
                 <strong className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Challenge</strong>
-                <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-2">
+                <p className={`text-sm font-medium text-muted-foreground leading-relaxed ${compact ? 'line-clamp-1' : 'line-clamp-2'}`}>
                   {study.challenge}
                 </p>
               </div>
               <div>
                 <strong className="text-xs font-bold text-muted-foreground uppercase tracking-wider block mb-1">Solution</strong>
-                <p className="text-sm font-medium text-muted-foreground leading-relaxed line-clamp-2">
+                <p className={`text-sm font-medium text-muted-foreground leading-relaxed ${compact ? 'line-clamp-1' : 'line-clamp-2'}`}>
                   {study.solution}
                 </p>
               </div>
@@ -85,7 +84,7 @@ function CaseStudyCard({ study, onClick }: { study: CaseStudyArticle, onClick: (
   );
 }
 
-/* ─── MAIN COMPONENT ─── */
+/* â”€â”€â”€ MAIN COMPONENT â”€â”€â”€ */
 export default function CaseStudiesPage() {
   const router = useRouter();
   const [activeFilter, setActiveFilter] = useState("All");
@@ -111,21 +110,18 @@ export default function CaseStudiesPage() {
   return (
     <div className="flex flex-col items-center justify-center bg-transparent min-h-dvh">
       
-      {/* ═══════ HERO SECTION ═══════ */}
-      <section className="w-full pt-32 pb-16 md:pt-36 md:pb-20 relative overflow-hidden bg-background border-b border-border">
+      {/* â•â•â•â•â•â•â• HERO SECTION â•â•â•â•â•â•â• */}
+      <section className="w-full min-h-dvh pt-32 pb-12 md:pt-48 flex items-center relative overflow-hidden bg-background border-b border-border">
         
         {/* Layer 0.5: Galaxy Spiral Particle Animation */}
-        <div className="absolute inset-0 w-full h-full z-[1] overflow-hidden pointer-events-none">
-          <GalaxySpiral />
-        </div>
         
         <motion.div 
           variants={container}
           initial="hidden"
           animate="show"
-          className="container px-6 sm:px-8 mx-auto relative z-10"
+          className="w-full container px-6 sm:px-8 mx-auto relative z-10"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start max-w-6xl mx-auto">
             {/* Left Content */}
             <div className="flex flex-col items-start text-left space-y-6">
               <motion.div variants={item} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/20 text-xs font-bold uppercase tracking-wider text-primary shadow-sm">
@@ -139,17 +135,18 @@ export default function CaseStudiesPage() {
                   Transformations
                 </span>
               </motion.h1>
-              <motion.p variants={item} className="text-muted-foreground text-lg sm:text-xl md:text-2xl leading-relaxed font-semibold max-w-xl">
+              <motion.p variants={item} className="text-muted-foreground text-lg sm:text-xl leading-relaxed font-semibold max-w-xl">
                 Discover how Jeshurun Technologies helps organizations modernize infrastructure, accelerate innovation, reduce costs, and achieve measurable business outcomes.
               </motion.p>
             </div>
 
             {/* Right Featured Case Study */}
-            <motion.div variants={item} className="w-full relative flex justify-center lg:justify-end">
-              <div className="w-full max-w-[500px]">
+            <motion.div variants={item} className="w-full flex justify-center lg:justify-end">
+              <div className="w-full max-w-md">
                 <CaseStudyCard 
                   study={featuredStudy} 
                   onClick={() => router.push(`/case-studies/${featuredStudy.id}`)} 
+                  compact={true}
                 />
               </div>
             </motion.div>
@@ -159,9 +156,9 @@ export default function CaseStudiesPage() {
 
 
 
-      {/* ═══════ CASE STUDIES GRID & FILTERS ═══════ */}
-      <section className="w-full py-16 md:py-24 relative z-10 bg-[#F8FAFC] dark:bg-[#020617]">
-        <div className="container px-6 sm:px-8 mx-auto space-y-12">
+      {/* â•â•â•â•â•â•â• CASE STUDIES GRID & FILTERS â•â•â•â•â•â•â• */}
+      <section className="w-full py-16 md:py-24 relative z-10 bg-background">
+        <div className="w-full container px-6 sm:px-8 mx-auto space-y-12">
           
           {/* Technology Filters */}
           <div className="flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto">

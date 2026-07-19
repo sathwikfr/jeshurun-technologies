@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, type Variants } from "framer-motion";
@@ -111,46 +111,45 @@ export default function CareersPage() {
   const filtered = activeDept === "All" ? jobs : jobs.filter(j => j.department === activeDept);
 
   return (
-    <div className="min-h-dvh bg-gradient-to-b from-[#F8FAFC] to-white">
+    <div className="min-h-dvh bg-background">
 
       {/* Hero */}
-      <section className="w-full pt-20 pb-16 md:pt-28 md:pb-24 bg-[#0A1F44] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(79,70,229,0.2)_0%,transparent_60%)] pointer-events-none" />
-        <div className="absolute inset-0 opacity-10 pointer-events-none" />
-        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+      <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center bg-background relative overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(79,70,229,0.06)_0%,transparent_60%)] pointer-events-none z-[2]" />
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="max-w-3xl space-y-6"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-card/10 text-xs font-bold uppercase tracking-wider text-purple-300 border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-xs font-bold uppercase tracking-wider text-primary border border-primary/20">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               We&rsquo;re Hiring
             </div>
-            <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
+            <h1 className="text-4xl md:text-5xl font-black text-foreground tracking-tight leading-tight">
               Build Your Career at <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] to-[#818CF8]">
                 Jeshurun Technologies
               </span>
             </h1>
-            <p className="text-white/60 text-lg font-medium leading-relaxed max-w-xl">
+            <p className="text-muted-foreground text-lg font-medium leading-relaxed max-w-xl">
               Join a team of passionate engineers, consultants, and architects delivering next-generation IT solutions to enterprise clients across Europe.
             </p>
             <div className="flex items-center gap-6 pt-2">
               <div className="text-center">
-                <p className="text-2xl font-black text-white">{jobs.length}</p>
-                <p className="text-xs text-white/50 font-medium">Open Roles</p>
+                <p className="text-2xl font-black text-foreground">{jobs.length}</p>
+                <p className="text-xs text-muted-foreground font-medium">Open Roles</p>
               </div>
-              <div className="w-px h-10 bg-card/10" />
+              <div className="w-px h-10 bg-border" />
               <div className="text-center">
-                <p className="text-2xl font-black text-white">5</p>
-                <p className="text-xs text-white/50 font-medium">Departments</p>
+                <p className="text-2xl font-black text-foreground">5</p>
+                <p className="text-xs text-muted-foreground font-medium">Departments</p>
               </div>
-              <div className="w-px h-10 bg-card/10" />
+              <div className="w-px h-10 bg-border" />
               <div className="text-center">
-                <p className="text-2xl font-black text-white">🇮🇪</p>
-                <p className="text-xs text-white/50 font-medium">Dublin HQ</p>
+                <p className="text-2xl font-black text-foreground">ðŸ‡®ðŸ‡ª</p>
+                <p className="text-xs text-muted-foreground font-medium">Dublin HQ</p>
               </div>
             </div>
           </motion.div>
@@ -159,7 +158,7 @@ export default function CareersPage() {
 
       {/* Benefits strip */}
       <section className="w-full py-14 bg-card border-b border-border">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             initial="hidden"
             whileInView="show"
@@ -183,7 +182,7 @@ export default function CareersPage() {
       </section>
 
       {/* Job Listings */}
-      <section className="container px-6 sm:px-8 mx-auto py-16 space-y-10">
+      <section className="w-full container px-6 sm:px-8 mx-auto py-16 space-y-10">
 
         {/* Department Filter */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none flex-wrap">
@@ -298,7 +297,7 @@ export default function CareersPage() {
       {/* CTA Banner */}
       <section className="w-full py-20 bg-gradient-to-br from-[#0057D9] to-[#4F46E5] relative overflow-hidden">
         <div className="absolute inset-0 opacity-15 pointer-events-none" />
-        <div className="container px-6 sm:px-8 mx-auto text-center space-y-6 relative z-10">
+        <div className="w-full container px-6 sm:px-8 mx-auto text-center space-y-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

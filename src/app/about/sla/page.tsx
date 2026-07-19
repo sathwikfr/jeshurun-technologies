@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -161,12 +161,12 @@ export default function SlaPage() {
     <div className="flex flex-col items-center justify-center bg-transparent min-h-dvh">
       
       {/* Header Banner */}
-      <section className="w-full pt-32 pb-20 md:pt-40 md:pb-28 border-b border-border bg-[#F8FAFC] dark:bg-slate-900/10">
+      <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center border-b border-border bg-background relative overflow-hidden">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="container px-6 sm:px-8 mx-auto"
+          className="w-full container px-6 sm:px-8 mx-auto"
         >
           <div className="flex flex-col items-center text-center space-y-6 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0057D9]/5 border border-[#0057D9]/10 text-xs font-bold uppercase tracking-wider text-[#0057D9] dark:bg-[#0057D9]/15 dark:text-[#60A5FA]">
@@ -184,7 +184,7 @@ export default function SlaPage() {
 
       {/* SLA Pillar Section & Telemetry Graphic */}
       <section className="w-full py-20 md:py-28 bg-card dark:bg-slate-950 border-b border-border dark:border-border">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-6xl mx-auto">
             {/* Left Content Column */}
             <div className="lg:col-span-6 space-y-8">
@@ -238,8 +238,8 @@ export default function SlaPage() {
       </section>
 
       {/* Interactive SLA Telemetry Simulator (The Wow Factor) */}
-      <section className="w-full py-20 md:py-28 bg-[#F8FAFC] dark:bg-slate-900/10 border-b border-border dark:border-border">
-        <div className="container px-6 sm:px-8 mx-auto">
+      <section className="w-full py-20 md:py-28 bg-background dark:bg-slate-900/10 border-b border-border dark:border-border">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-3">
               <span className="text-[10px] font-bold text-[#0057D9] dark:text-[#60A5FA] uppercase tracking-widest bg-[#0057D9]/5 dark:bg-[#0057D9]/15 border border-[#0057D9]/10 dark:border-[#0057D9]/20 px-3 py-1 rounded-full">
@@ -395,7 +395,7 @@ export default function SlaPage() {
 
       {/* Trust & Compliance Section */}
       <section className="w-full py-20 md:py-28 bg-card dark:bg-slate-950">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="text-center space-y-3">
               <span className="text-[10px] font-bold text-[#0057D9] dark:text-[#60A5FA] uppercase tracking-widest bg-[#0057D9]/5 dark:bg-[#0057D9]/15 border border-[#0057D9]/10 dark:border-[#0057D9]/20 px-3 py-1 rounded-full">

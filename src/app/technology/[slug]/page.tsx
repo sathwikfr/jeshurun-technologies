@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { use, useState, useRef, useEffect, useMemo } from "react";
 import Link from "next/link";
@@ -159,7 +159,7 @@ function AnimatedStatValue({ value }: { value: string }) {
 
 function AccentLine() {
   return (
-    <div className="container px-6 sm:px-8 mx-auto">
+    <div className="w-full container px-6 sm:px-8 mx-auto">
       <motion.div
         variants={expandWidth}
         initial="hidden"
@@ -992,7 +992,7 @@ export default function TechDetailPage({
 
   if (!tech) {
     return (
-      <div className="container mx-auto px-6 py-32 text-center min-h-[60vh] flex flex-col justify-center items-center">
+      <div className="w-full container mx-auto px-6 py-32 text-center min-h-[60vh] flex flex-col justify-center items-center">
         <h1 className="text-3xl font-bold text-foreground">Technology Not Found</h1>
         <p className="text-muted-foreground mt-2">The requested technology page does not exist.</p>
         <Link href="/technology" className="mt-6 text-primary font-semibold flex items-center gap-1.5 hover:underline">
@@ -1034,7 +1034,7 @@ export default function TechDetailPage({
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.15)_0%,transparent_60%)]" />
         </div>
 
-        <div className="container px-6 sm:px-8 mx-auto relative z-10 flex flex-col justify-center">
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10 flex flex-col justify-center">
           {/* Breadcrumb — fade in */}
           <motion.div
             initial={{ opacity: 0, x: -12 }}
@@ -1093,7 +1093,7 @@ export default function TechDetailPage({
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
           variants={stagger}
-          className="container px-6 sm:px-8 mx-auto"
+          className="w-full container px-6 sm:px-8 mx-auto"
         >
           <motion.div variants={fadeUp} className="max-w-3xl mx-auto">
             <p className="editorial-pullquote text-foreground text-xl sm:text-2xl md:text-[1.75rem]">
@@ -1116,7 +1116,7 @@ export default function TechDetailPage({
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
-          className="container px-6 sm:px-8 mx-auto"
+          className="w-full container px-6 sm:px-8 mx-auto"
         >
           <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             {/* Image column — slide in from left with scale */}
@@ -1204,7 +1204,7 @@ export default function TechDetailPage({
 
       {/* ── 4. CORE CAPABILITIES ───────────────────────────────────── */}
       <section id="capabilities" className="py-20 md:py-28">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -1269,7 +1269,7 @@ export default function TechDetailPage({
 
       {/* ── 5. MEASURABLE OUTCOMES ─────────────────────────────────── */}
       <section className="py-24 md:py-32">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -1332,7 +1332,7 @@ export default function TechDetailPage({
 
       {/* ── VERIFIED OUTCOMES + TESTIMONIAL ─────────────────────── */}
       <section id="testimonial" className="py-20 md:py-28 border-y border-border">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -1416,7 +1416,7 @@ export default function TechDetailPage({
 
       {/* ── 7. IMPACT COMPARISON ───────────────────────────────────── */}
       <section id="comparison" className="py-20 md:py-28">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -1489,7 +1489,7 @@ export default function TechDetailPage({
 
       {/* ── 9. FREQUENTLY ASKED QUESTIONS ──────────────────────────── */}
       <section id="faqs" className="py-20 md:py-28">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -1522,7 +1522,7 @@ export default function TechDetailPage({
 
       {/* ── 10. RELATED TECHNOLOGIES ───────────────────────────────── */}
       <section id="related" className="py-16 md:py-20">
-        <div className="container px-6 sm:px-8 mx-auto">
+        <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             variants={stagger}
             initial="hidden"

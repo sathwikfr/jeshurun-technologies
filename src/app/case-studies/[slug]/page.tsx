@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
@@ -139,7 +139,7 @@ export default function CaseStudyArticlePage() {
   };
 
   return (
-    <div className="min-h-dvh bg-[#F8FAFC] dark:bg-background pb-24">
+    <div className="min-h-dvh bg-background pb-24">
       {/* Hero Header Area */}
       <section className="w-full pt-32 pb-20 relative overflow-hidden bg-slate-950 text-white shadow-xl">
         {/* Background Image & Overlay */}
@@ -156,7 +156,7 @@ export default function CaseStudyArticlePage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.12)_0%,transparent_60%)]" />
         </div>
 
-        <div className="container px-6 sm:px-8 mx-auto relative z-10">
+        <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           <div className="max-w-4xl mx-auto space-y-6">
             {/* Back button */}
             <Link
@@ -190,7 +190,7 @@ export default function CaseStudyArticlePage() {
 
       {/* Metrics Banner */}
       <section className="bg-card border-y border-border relative z-20 py-8 shadow-sm">
-        <div className="container px-6 sm:px-8 mx-auto max-w-4xl">
+        <div className="w-full container px-6 sm:px-8 mx-auto max-w-4xl">
           <div className="grid grid-cols-3 gap-6 text-center">
             {article.metrics.map((m, idx) => (
               <div key={idx} className="space-y-1">
@@ -207,7 +207,7 @@ export default function CaseStudyArticlePage() {
       </section>
 
       {/* Main Content Layout */}
-      <div className="container px-6 sm:px-8 mx-auto mt-12">
+      <div className="w-full container px-6 sm:px-8 mx-auto mt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
           {/* Table of Contents - Sidebar */}
           <aside className="lg:col-span-3 lg:block hidden">

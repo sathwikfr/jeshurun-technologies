@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -82,7 +82,7 @@ export default function Register() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required 
-                    className="h-12 pl-12 bg-[#F8FAFC]/50 border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
+                    className="h-12 pl-12 bg-background border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
                   />
                 </div>
               </div>
@@ -99,7 +99,7 @@ export default function Register() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required 
-                    className="h-12 pl-12 bg-[#F8FAFC]/50 border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
+                    className="h-12 pl-12 bg-background border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
                   />
                 </div>
               </div>
@@ -115,7 +115,7 @@ export default function Register() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required 
-                    className="h-12 pl-12 bg-[#F8FAFC]/50 border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
+                    className="h-12 pl-12 bg-background border border-border focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] rounded-xl"
                   />
                 </div>
               </div>
