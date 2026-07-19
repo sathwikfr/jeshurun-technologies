@@ -1,13 +1,23 @@
 ﻿"use client";
 
+
+
 import { useState, useEffect } from "react";
+
 import { useRouter } from "next/navigation";
+
 import { motion, AnimatePresence } from "framer-motion";
+
 import Link from "next/link";
+
 import Image from "next/image";
+
 import { Check, ArrowRight, Activity, Zap, Cpu, Server, Database, Globe, Network, Lock, Code2, LineChart, PieChart, TrendingUp, BarChart3, Users, DollarSign, Target, Award, Compass, Search } from "lucide-react";
+
 import { SpotlightCard } from "@/components/SpotlightCard";
+
 import { PremiumCTA } from "@/components/PremiumCTA";
+
 import { Button } from "@/components/ui/button";
 
 
@@ -25,6 +35,7 @@ const item = {
   hidden: { opacity: 0, y: 25 },
   show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 90, damping: 22 } }
 };
+
 
 import { caseStudiesData, CaseStudyArticle } from "@/lib/caseStudiesData";
 

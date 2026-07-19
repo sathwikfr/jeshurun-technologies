@@ -1,9 +1,17 @@
-﻿import { getServerSession } from "next-auth";
+﻿
+
+import { getServerSession } from "next-auth";
+
 import { authOptions } from "@/lib/auth";
+
 import { redirect } from "next/navigation";
+
 import { prisma } from "@/lib/prisma";
+
 import { Lead } from "@prisma/client";
+
 import { CRMContent } from "@/components/CRMContent";
+
 import { SplineChart } from "@/components/SplineChart";
 
 export default async function CRM() {

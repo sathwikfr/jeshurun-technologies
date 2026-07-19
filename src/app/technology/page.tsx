@@ -1,15 +1,25 @@
 ﻿"use client";
 
+
+
+import { SpiralDustBackground } from "@/components/effects/SpiralDustBackground";
 import { useState, useEffect, useRef } from "react";
+
 import { motion, Variants, useInView, useReducedMotion } from "framer-motion";
+
 import {
   Cloud, Database, ShieldCheck, Cpu, Network, Workflow, ArrowRight,
   Code2, Settings,
   Compass, Globe, Check } from "lucide-react";
+
 import { useRouter } from "next/navigation";
+
 import Image from "next/image";
+
 import { PremiumCTA } from "@/components/PremiumCTA";
+
 import { ProcessTimeline } from "@/components/ProcessTimeline";
+
 
 import { AnimatedCounter } from "@/components/HeroStatsPanel";
 
@@ -358,6 +368,7 @@ export default function Technology() {
 
       {/* HERO BANNER */}
       <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center relative z-10 bg-background overflow-hidden border-b border-border">
+        <SpiralDustBackground lightVariant="light-minimal" />
         
         {/* Layer 0.5: Galaxy Spiral Particle Animation */}
 

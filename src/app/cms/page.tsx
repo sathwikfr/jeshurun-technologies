@@ -1,7 +1,13 @@
-﻿import { getServerSession } from "next-auth";
+﻿
+
+import { getServerSession } from "next-auth";
+
 import { authOptions } from "@/lib/auth";
+
 import { redirect } from "next/navigation";
+
 import { prisma } from "@/lib/prisma";
+
 import { CMSContent } from "@/components/CMSContent";
 
 export default async function CMS() {

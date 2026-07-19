@@ -1,6 +1,9 @@
 ﻿"use client";
 
+
+
 import { motion } from "framer-motion";
+
 import { Scale, FileText, UserCheck, ShieldAlert, Award, HelpCircle } from "lucide-react";
 
 export default function TermsOfService() {

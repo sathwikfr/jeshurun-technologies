@@ -1,7 +1,13 @@
-﻿import { insightsData } from "@/lib/insightsData";
+﻿
+
+import { insightsData } from "@/lib/insightsData";
+
 import Link from "next/link";
+
 import Image from "next/image";
+
 import { ArrowRight } from "lucide-react";
+
 import { TiltCard } from "@/components/TiltCard";
 
 export const metadata = {

@@ -1,9 +1,16 @@
 ﻿"use client";
 
+
+
+import { SpiralDustBackground } from "@/components/effects/SpiralDustBackground";
 import { use, useState, useRef, useEffect, useMemo } from "react";
+
 import Link from "next/link";
+
 import Image from "next/image";
+
 import { motion, AnimatePresence, useInView, useReducedMotion, type Variants } from "framer-motion";
+
 import {
   ArrowLeft,
   Check,
@@ -21,12 +28,19 @@ import {
   Zap,
   ShieldCheck,
 } from "lucide-react";
+
 import { PremiumCTA } from "@/components/PremiumCTA";
+
 import { HeroFieldBackground } from "@/components/HeroFieldBackground";
+
 import { AnimatedArchitectureDiagram } from "@/components/AnimatedArchitectureDiagram";
+
 import { AnimatedServiceVisual } from "@/components/AnimatedServiceVisual";
+
 import { FloatingSidebarNav } from "@/components/FloatingSidebarNav";
+
 import { ExpertSpotlight } from "@/components/ExpertSpotlight";
+
 import { RelatedCaseStudies } from "@/components/RelatedCaseStudies";
 
 /* ==========================================================================

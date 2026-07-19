@@ -1,11 +1,19 @@
 ﻿"use client";
 
+
+
 import React, { useEffect, useState, useRef } from "react";
+
 import Link from "next/link";
+
 import Image from "next/image";
+
 import { useParams, useRouter } from "next/navigation";
+
 import { Calendar, Clock, Share2, Tag, ArrowLeft, ArrowRight, Play, Quote, MapPin, Briefcase, User, ShieldAlert } from "lucide-react";
+
 import { SpotlightCard } from "@/components/SpotlightCard";
+
 import { caseStudiesData, CaseStudyArticle } from "@/lib/caseStudiesData";
 
 export default function CaseStudyArticlePage() {

@@ -1,6 +1,9 @@
 ﻿"use client";
 
+
+
 import { motion } from "framer-motion";
+
 import { Shield, Lock, Eye, Bell, Globe, Mail } from "lucide-react";
 
 export default function PrivacyPolicy() {

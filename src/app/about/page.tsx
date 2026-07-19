@@ -1,8 +1,13 @@
 ﻿"use client";
 
+
+
 import { useState } from "react";
+
 import Image from "next/image";
+
 import { motion, AnimatePresence, type Variants } from "framer-motion";
+
 import { 
   Building, Globe, Target, ShieldCheck, 
   Cloud, BarChart, Users, ArrowRight,
@@ -10,9 +15,13 @@ import {
   Activity, RefreshCw, Laptop, Key, Workflow, Search,
   User, Link
 } from "lucide-react";
+
 import { PremiumCTA } from "@/components/PremiumCTA";
+
 import { SpotlightCard } from "@/components/SpotlightCard";
+
 import { MethodologyTimeline } from "@/components/MethodologyTimeline";
+
 import { TiltCard } from "@/components/TiltCard";
 
 const container: Variants = {

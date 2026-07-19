@@ -1,7 +1,13 @@
-﻿import { prisma } from "@/lib/prisma";
+﻿
+
+import { prisma } from "@/lib/prisma";
+
 import { notFound } from "next/navigation";
+
 import Link from "next/link";
+
 import { ArrowLeft, Calendar, Clock, User, ShieldAlert } from "lucide-react";
+
 import { SpotlightCard } from "@/components/SpotlightCard";
 
 export const dynamic = "force-dynamic";

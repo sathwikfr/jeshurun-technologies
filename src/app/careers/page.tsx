@@ -1,8 +1,13 @@
 ﻿"use client";
 
+
+
 import { useState } from "react";
+
 import { motion, type Variants } from "framer-motion";
+
 import Link from "next/link";
+
 import { MapPin, Clock, Briefcase, ArrowRight, Users, Zap, Heart, Globe, ChevronDown } from "lucide-react";
 
 const departments = ["All", "Engineering", "Consulting", "Project Management", "Quality Assurance", "Infrastructure"];

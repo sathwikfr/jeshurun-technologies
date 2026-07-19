@@ -1,24 +1,45 @@
 ﻿"use client";
 
+
+
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
+
 import Link from "next/link";
+
 import { useRouter } from "next/navigation";
+
 import Image from "next/image";
+
 import { Button } from "@/components/ui/button";
+
 import { motion, Variants, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+
 import { ArrowRight, Activity, Monitor, Shield, Layers, Users, Clock, Award, Briefcase, Globe, Code, Cloud, Server, Cpu, Zap, Infinity, Brain, ShieldCheck, ChevronRight, Play, Headset, BarChart, Mail } from "lucide-react";
+
 import { PremiumCTA } from "@/components/PremiumCTA";
+
 import { SpotlightCard } from "@/components/SpotlightCard";
+
 import { MethodologyTimeline } from "@/components/MethodologyTimeline";
+
 import dynamic from "next/dynamic";
+
 import { TechOrbit } from "@/components/TechOrbit";
+
 import { AwsLogo, AzureLogo, GcpLogo, ReactLogo, NextJsLogo, NodeJsLogo, DockerLogo, KubernetesLogo, PythonLogo, TerraformLogo, GithubActionsLogo } from "@/components/TechLogos";
+
 import { CloudROICalculator } from "@/components/CloudROICalculator";
+
 import { insightsData } from "@/lib/insightsData";
+
 import { caseStudiesData } from "@/lib/caseStudiesData";
+
 import { HeroBackground } from "@/components/HeroBackground";
+
 import { GlobalNetworkMap } from "@/components/GlobalNetworkMap";
+
 import { WorldMap } from "@/components/WorldMap";
+
 import { HeroStatsPanel } from "@/components/HeroStatsPanel";
 
 

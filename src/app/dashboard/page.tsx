@@ -1,10 +1,19 @@
-﻿import { getServerSession } from "next-auth";
+﻿
+
+import { getServerSession } from "next-auth";
+
 import { authOptions } from "@/lib/auth";
+
 import { redirect } from "next/navigation";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Users, BarChart3, CheckCircle, Activity, Clock, ArrowRight } from "lucide-react";
+
 import { SplineChart } from "@/components/SplineChart";
+
 import { prisma } from "@/lib/prisma";
+
 import { Lead } from "@prisma/client";
 
 export default async function Dashboard() {

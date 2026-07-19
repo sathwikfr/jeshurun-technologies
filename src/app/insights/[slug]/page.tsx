@@ -1,11 +1,19 @@
 ﻿"use client";
 
+
+
 import React, { useEffect, useState, useRef } from "react";
+
 import Link from "next/link";
+
 import Image from "next/image";
+
 import { useParams, useRouter } from "next/navigation";
+
 import { ArrowLeft, Calendar, Clock, User, ShieldAlert, ArrowRight } from "lucide-react";
+
 import { SpotlightCard } from "@/components/SpotlightCard";
+
 import { insightsData, InsightArticle } from "@/lib/insightsData";
 
 export default function InsightArticlePage() {

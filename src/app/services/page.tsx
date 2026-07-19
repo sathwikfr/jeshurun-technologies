@@ -1,7 +1,12 @@
 ﻿"use client";
+
+
+import { SpiralDustBackground } from "@/components/effects/SpiralDustBackground";
 import { useRef } from "react";
 
+
 import { motion, type Variants , useInView, useReducedMotion } from "framer-motion";
+
 import {
   Layers,
   Activity,
@@ -14,10 +19,15 @@ import {
   Milestone,
   Brain,
   Search, PenTool, CheckCircle2 } from "lucide-react";
+
 import Link from "next/link";
+
 import Image from "next/image";
+
 import { PremiumCTA } from "@/components/PremiumCTA";
+
 import { AnimatedCounter } from "@/components/HeroStatsPanel";
+
 import { ProcessTimeline } from "@/components/ProcessTimeline";
 
 
@@ -352,6 +362,7 @@ export default function Services() {
           HERO
       â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center relative z-10 bg-background overflow-hidden border-b border-border">
+        <SpiralDustBackground lightVariant="light-minimal" />
 
         
         {/* Layer 0.5: Galaxy Spiral Particle Animation */}

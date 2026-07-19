@@ -1,10 +1,17 @@
 ﻿"use client";
 
+
+
 import { useState, useEffect } from "react";
+
 import { useRouter } from "next/navigation";
+
 import { motion, type Variants } from "framer-motion";
+
 import Link from "next/link";
+
 import { ArrowRight, Clock, Calendar, Tag, Loader2 } from "lucide-react";
+
 import { SpotlightCard } from "@/components/SpotlightCard";
 
 const categories = ["All", "Cloud", "AI & Automation", "Security", "Infrastructure", "Consulting"];
