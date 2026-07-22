@@ -145,35 +145,41 @@ export default function AboutPage() {
       {/* MAIN CONTENT SECTION */}
       <section className="relative w-full py-12">
         <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
-          {/* TAB TOGGLES (Sticky & Fluid) */}
-          <div className="sticky top-24 z-50 flex flex-col items-center justify-center mb-12 gap-2">
-            <div className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-              Select Tab To Explore Content
+          {/* TAB TOGGLES (Sticky Segmented Control) */}
+          <div className="sticky top-24 z-50 flex justify-center mb-12">
+            <div className="flex p-1.5 bg-white/95 dark:bg-slate-900/95 rounded-full border border-slate-200/90 dark:border-slate-800 backdrop-blur-xl shadow-lg gap-1">
+              {(["who", "delivery"] as const).map((tab) => (
+                <button 
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 z-10 flex items-center gap-2 cursor-pointer ${
+                    activeTab === tab 
+                      ? "text-white" 
+                      : "text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
+                  }`}
+                >
+                  {activeTab === tab && (
+                    <motion.div
+                      layoutId="activeTabPill"
+                      className="absolute inset-0 bg-blue-600 rounded-full -z-10 shadow-md"
+                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    />
+                  )}
+                  {tab === "who" ? (
+                    <>
+                      <Users className={`w-4 h-4 transition-colors ${activeTab === "who" ? "text-white" : "text-blue-600 dark:text-blue-400"}`} />
+                      <span>Who We Are</span>
+                    </>
+                  ) : (
+                    <>
+                      <ShieldCheck className={`w-4 h-4 transition-colors ${activeTab === "delivery" ? "text-white" : "text-emerald-500 dark:text-emerald-400"}`} />
+                      <span>Delivery & Quality Standards</span>
+                    </>
+                  )}
+                </button>
+              ))}
             </div>
-            <div className="flex p-1.5 bg-slate-100/90 dark:bg-slate-900/90 rounded-full border border-slate-200 dark:border-slate-800 backdrop-blur-md shadow-md">
-            {(["who", "delivery"] as const).map((tab) => (
-              <button 
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`relative px-6 py-2.5 rounded-full text-sm font-bold transition-colors duration-200 z-10 ${
-                  activeTab === tab 
-                    ? "text-white" 
-                    : "text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
-                }`}
-              >
-                {activeTab === tab && (
-                  <motion.div
-                    layoutId="activeTabPill"
-                    className="absolute inset-0 bg-blue-600 rounded-full -z-10 shadow-md"
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                  />
-                )}
-                <span className="relative z-10">{tab === "who" ? "Who We Are" : "Delivery & Quality Standards"}</span>
-              </button>
-            ))}
           </div>
-        </div>
 
         <AnimatePresence mode="wait">
           {activeTab === "who" && (
