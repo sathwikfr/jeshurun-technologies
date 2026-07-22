@@ -146,8 +146,12 @@ export default function AboutPage() {
       <section className="relative w-full py-12">
         <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           {/* TAB TOGGLES (Sticky & Fluid) */}
-          <div className="sticky top-24 z-50 flex justify-center mb-12">
-            <div className="flex p-1.5 bg-slate-100/70 dark:bg-slate-800/70 rounded-full border border-slate-200 dark:border-slate-700 backdrop-blur-md shadow-sm">
+          <div className="sticky top-24 z-50 flex flex-col items-center justify-center mb-12 gap-2">
+            <div className="inline-flex items-center gap-1.5 text-[10px] font-extrabold uppercase tracking-widest text-blue-600 dark:text-blue-400 bg-blue-500/10 px-3 py-1 rounded-full border border-blue-500/20 shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+              Select Tab To Explore Content
+            </div>
+            <div className="flex p-1.5 bg-slate-100/90 dark:bg-slate-900/90 rounded-full border border-slate-200 dark:border-slate-800 backdrop-blur-md shadow-md">
             {(["who", "delivery"] as const).map((tab) => (
               <button 
                 key={tab}
