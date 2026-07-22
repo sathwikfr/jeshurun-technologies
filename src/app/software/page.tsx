@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -286,7 +286,7 @@ export default function Software() {
 
         <motion.div variants={enterpriseContainer} initial="hidden" animate="show" className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           {/* Subtle glowing orb behind text for perfect contrast */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#0B0E14]/70" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#121212]/70" />
           <div className="flex flex-col items-center text-center space-y-6 max-w-5xl mx-auto">
             <motion.div variants={enterpriseItem} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 dark:bg-black/20 backdrop-blur-md border border-primary/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-primary shadow-[0_0_30px_rgba(18,171,219,0.15)] ring-1 ring-white/10">
               <span className="relative flex w-2 h-2">

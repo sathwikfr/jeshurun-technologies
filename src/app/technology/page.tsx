@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -379,7 +379,7 @@ export default function Technology() {
           className="w-full container px-6 sm:px-8 mx-auto relative z-10"
         >
           {/* Subtle glowing orb behind text for perfect contrast */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#0B0E14]/70" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#121212]/70" />
           <div className="flex flex-col items-center text-center space-y-6 max-w-5xl mx-auto">
             <motion.div
               variants={enterpriseItem}

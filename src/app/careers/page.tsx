@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -301,7 +301,7 @@ export default function CareersPage() {
 
       {/* CTA Banner */}
       <section className="w-full py-20 bg-gradient-to-br from-[#0057D9] to-[#4F46E5] relative overflow-hidden">
-        <div className="absolute inset-0 opacity-15 pointer-events-none" />
+        {/* Background removed to enforce uniform theme color */}
         <div className="w-full container px-6 sm:px-8 mx-auto text-center space-y-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

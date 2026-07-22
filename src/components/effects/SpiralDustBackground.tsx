@@ -195,8 +195,6 @@ export function SpiralDustBackground({
       }
 
       ctx.clearRect(0, 0, width, height);
-      ctx.fillStyle = currentPreset.background;
-      ctx.fillRect(0, 0, width, height);
 
       const cx = width * centerX;
       const cy = height * centerY;

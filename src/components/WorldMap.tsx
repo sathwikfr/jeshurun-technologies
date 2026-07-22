@@ -121,7 +121,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
           : "absolute inset-0 w-full h-full flex flex-col items-center justify-end md:justify-center z-10 overflow-hidden pointer-events-none pb-10 md:pb-0"
       }
       style={isAmbient ? {} : {
-        background: 'radial-gradient(ellipse at 40% 30%, #1E40AF 0%, #0F172A 50%, #0B0E14 100%)',
+        background: 'radial-gradient(ellipse at 40% 30%, #1c1c1c 0%, #151515 50%, #121212 100%)',
         maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)',
         WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%)'
       }}
@@ -135,7 +135,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
             left: '-30%',
             width: '100%',
             height: '100%',
-            background: 'radial-gradient(ellipse at 30% 40%, rgba(94, 200, 255, 0.4) 0%, rgba(63, 169, 245, 0.15) 30%, transparent 60%)',
+            background: 'radial-gradient(ellipse at 30% 40%, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 30%, transparent 60%)',
             filter: 'blur(50px)'
           }}
         />

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -188,7 +188,7 @@ export default function SlaPage() {
       </section>
 
       {/* SLA Pillar Section & Telemetry Graphic */}
-      <section className="w-full py-20 md:py-28 bg-card dark:bg-slate-950 border-b border-border dark:border-border">
+      <section className="w-full py-20 md:py-28 bg-background border-b border-border">
         <div className="w-full container px-6 sm:px-8 mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-6xl mx-auto">
             {/* Left Content Column */}
@@ -205,7 +205,7 @@ export default function SlaPage() {
               {/* Grid of SLA Metrics */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 {slaPillars.map((item, idx) => (
-                  <div key={idx} className="space-y-2 p-5 rounded-2xl bg-background dark:bg-slate-900/40 border border-border dark:border-border hover-card-effect">
+                  <div key={idx} className="space-y-2 p-5 rounded-2xl bg-card/60 border border-border hover-card-effect">
                     <span className="text-lg font-extrabold text-[#0057D9] dark:text-[#60A5FA]">
                       {item.metric}
                     </span>
@@ -222,7 +222,7 @@ export default function SlaPage() {
 
             {/* Right Graphic Column */}
             <div className="lg:col-span-6 relative">
-              <div className="relative group overflow-hidden rounded-3xl border border-border dark:border-border shadow-lg bg-background dark:bg-slate-900/40 h-80">
+              <div className="relative group overflow-hidden rounded-3xl border border-border shadow-lg bg-background h-80">
                 <Image 
                   src="/about_sla_standards.png" 
                   alt="Network Monitoring Dashboard Visual"
@@ -243,7 +243,7 @@ export default function SlaPage() {
       </section>
 
       {/* Interactive SLA Telemetry Simulator (The Wow Factor) */}
-      <section className="w-full py-20 md:py-28 bg-background dark:bg-slate-900/10 border-b border-border dark:border-border">
+      <section className="w-full py-20 md:py-28 bg-background border-b border-border">
         <div className="w-full container px-6 sm:px-8 mx-auto">
           <div className="max-w-5xl mx-auto space-y-12">
             <div className="text-center space-y-3">
@@ -399,7 +399,7 @@ export default function SlaPage() {
       </section>
 
       {/* Trust & Compliance Section */}
-      <section className="w-full py-20 md:py-28 bg-card dark:bg-slate-950">
+      <section className="w-full py-20 md:py-28 bg-background">
         <div className="w-full container px-6 sm:px-8 mx-auto">
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="text-center space-y-3">
@@ -420,9 +420,9 @@ export default function SlaPage() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="p-6 bg-background dark:bg-slate-900 border border-border dark:border-border rounded-2xl text-center space-y-3 hover-card-effect"
+                  className="p-6 bg-card/60 border border-border rounded-2xl text-center space-y-3 hover-card-effect"
                 >
-                  <div className="mx-auto h-12 w-12 rounded-xl bg-card dark:bg-slate-950 flex items-center justify-center shadow-inner border border-border dark:border-border">
+                  <div className="mx-auto h-12 w-12 rounded-xl bg-background flex items-center justify-center shadow-inner border border-border">
                     {acc.icon}
                   </div>
                   <h4 className="font-bold text-sm text-[#0A1F44] dark:text-white">{acc.title}</h4>

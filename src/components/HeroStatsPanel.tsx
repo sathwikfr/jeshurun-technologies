@@ -196,7 +196,7 @@ export function HeroStatsPanel({ stats }: { stats?: HeroStat[] }) {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-        className="w-full rounded-2xl bg-white/50 dark:bg-[#080f1f]/60 backdrop-blur-xl border border-black/8 dark:border-white/10 shadow-xl overflow-hidden"
+        className="w-full rounded-2xl bg-white/50 dark:bg-[#1c1c1c]/90 backdrop-blur-xl border border-black/8 dark:border-white/10 shadow-xl overflow-hidden"
       >
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-black/8 dark:divide-white/8">
           {displayStats.map((stat, i) => (

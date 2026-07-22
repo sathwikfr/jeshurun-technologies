@@ -811,7 +811,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="md:hidden border-b border-border dark:border-border bg-card/95 dark:bg-slate-950/95 backdrop-blur-md overflow-hidden"
+            className="md:hidden border-b border-border bg-background/95 backdrop-blur-md overflow-hidden"
           >
             <div className="px-6 pt-6 pb-28 space-y-4 max-h-[calc(100vh-80px)] overflow-y-auto">
               {/* Mobile Search Input */}

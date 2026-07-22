@@ -16,7 +16,8 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-geist-sans);
+  --font-heading: var(--font-geist-sans), var(--font-inter), sans-serif;
+  --font-serif: var(--font-playfair), Georgia, serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -83,7 +84,7 @@
   --border: #E5E7EB;
   --input: #E5E7EB;
 
-  --primary: #2563EB;
+  --primary: #0033A0; /* Cognizant Primary Blue (for Light Mode) */
   --primary-foreground: #FFFFFF;
   
   --secondary: #F8FAFC;
@@ -98,7 +99,7 @@
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
 
-  --ring: #2563EB;
+  --ring: #0033A0;
   --radius: 0.75rem;
 
   --section-divider: #E5E7EB;
@@ -119,7 +120,7 @@
   --sidebar-accent: #F1F5F9;
   --sidebar-accent-foreground: #1E293B;
   --sidebar-border: #E5E7EB;
-  --sidebar-ring: #2563EB;
+  --sidebar-ring: #0033A0;
 
   /* Hero Theme Variables */
   --hero-bg-base: radial-gradient(120% 120% at 10% 10%, #FFFFFF 0%, #F8FAFC 60%, #EEF2F6 100%);
@@ -129,28 +130,28 @@
   --hero-grid: linear-gradient(var(--hero-grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--hero-grid-color) 1px, transparent 1px);
   --hero-text: #0F172A;
   --hero-text-muted: #475569;
-  --hero-badge-bg: rgba(37,99,235,0.1);
-  --hero-badge-border: rgba(37,99,235,0.2);
-  --hero-badge-text: #1D4ED8;
-  --hero-gradient-text: linear-gradient(90deg, #1E40AF 0%, #2563EB 50%, #3B82F6 100%);
+  --hero-badge-bg: rgba(0, 51, 160, 0.08);
+  --hero-badge-border: rgba(0, 51, 160, 0.2);
+  --hero-badge-text: #0033A0;
+  --hero-gradient-text: linear-gradient(90deg, #00227B 0%, #0033A0 50%, #2563EB 100%);
   --hero-btn-secondary: rgba(255,255,255,0.8);
-  --hero-btn-secondary-border: rgba(37,99,235,0.2);
+  --hero-btn-secondary-border: rgba(0,51,160,0.2);
   --hero-btn-secondary-text: #0F172A;
   --hero-btn-secondary-hover: rgba(255,255,255,1);
   --hero-stats-bg: rgba(255,255,255,0.75);
-  --hero-stats-border: rgba(37,99,235,0.12);
-  --hero-stats-divider: rgba(37,99,235,0.08);
+  --hero-stats-border: rgba(0,51,160,0.12);
+  --hero-stats-divider: rgba(0,51,160,0.08);
   --hero-icon-bg: #EFF6FF;
-  --hero-icon-color: #2563EB;
+  --hero-icon-color: #0033A0;
   --hero-card-bg: rgba(255,255,255,0.6);
-  --hero-card-border: rgba(37,99,235,0.15);
+  --hero-card-border: rgba(0,51,160,0.15);
   --hero-card-text-primary: #0F172A;
   --hero-card-text-secondary: #475569;
-  --hero-card-divider: rgba(37,99,235,0.1);
+  --hero-card-divider: rgba(0,51,160,0.1);
   --hero-pill-bar: rgba(255,255,255,0.4);
-  --hero-pill-bar-border: rgba(37,99,235,0.1);
+  --hero-pill-bar-border: rgba(0,51,160,0.1);
   --hero-pill-bg: rgba(255,255,255,0.7);
-  --hero-pill-border: rgba(37,99,235,0.2);
+  --hero-pill-border: rgba(0,51,160,0.2);
   --hero-pill-text: #0F172A;
   --hero-status-color: #059669;
   --hero-status-text: #059669;
@@ -158,69 +159,69 @@
 }
 
 .dark {
-  --background: #0B0E14;
+  --background: #121212;
   --foreground: #F8FAFC;
 
-  --card: #151A24;
+  --card: #1C1C1C;
   --card-foreground: #F8FAFC;
   
-  --popover: #151A24;
+  --popover: #1C1C1C;
   --popover-foreground: #F8FAFC;
 
-  --border: rgba(18, 171, 219, 0.15);
-  --input: rgba(18, 171, 219, 0.15);
+  --border: #333333;
+  --input: #333333;
 
-  --primary: #2563EB; /* Unified Blue */
+  --primary: #3B82F6;
   --primary-foreground: #FFFFFF;
   
-  --secondary: #0070AD; /* Capgemini Blue */
+  --secondary: #1E293B;
   --secondary-foreground: #F8FAFC;
 
-  --accent: #2B0A3D; /* Capgemini Deep Purple */
-  --accent-foreground: #FFFFFF;
+  --accent: #38BDF8;
+  --accent-foreground: #121212;
 
-  --muted: #475569;
-  --muted-foreground: #94A3B8;
+  --muted: #262626;
+  --muted-foreground: #A3A3A3;
 
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
 
-  --ring: #2563EB;
+  --ring: #3B82F6;
 
-  --section-divider: rgba(59, 130, 246, 0.10);
-  --card-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  --section-divider: #262626;
+  --card-shadow: 0 4px 20px rgba(0,0,0,0.4);
 
   /* Hero Theme Variables */
-  --hero-bg-base: radial-gradient(150% 150% at 0% 0%, #0B0E14 0%, #151A24 50%, #0070AD 85%, #12ABDB 100%);
-  --hero-fog: radial-gradient(ellipse 100% 100% at 60% 50%, rgba(18, 171, 219, 0.15) 0%, transparent 70%);
-  --hero-particles-opacity: 0.2;
-  --hero-grid-color: rgba(18, 171, 219, 0.03);
+  --hero-bg-base: #121212;
+  --hero-fog: transparent;
+  --hero-particles-opacity: 0.15;
+  --hero-grid-color: rgba(255, 255, 255, 0.03);
   --hero-grid: linear-gradient(var(--hero-grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--hero-grid-color) 1px, transparent 1px);
   --hero-text: #F8FAFC;
-  --hero-text-muted: rgba(148,163,184,0.90);
+  --hero-text-muted: #A3A3A3;
   --hero-badge-bg: rgba(18, 171, 219, 0.12);
   --hero-badge-border: rgba(18, 171, 219, 0.30);
   --hero-badge-text: #12ABDB;
-  --hero-gradient-text: linear-gradient(90deg, #12ABDB 0%, #0070AD 50%, #2B0A3D 100%);
+  --hero-gradient-text: linear-gradient(90deg, #12ABDB 0%, #0070AD 50%, #38BDF8 100%);
   --hero-btn-secondary: rgba(255,255,255,0.05);
   --hero-btn-secondary-border: rgba(255,255,255,0.15);
   --hero-btn-secondary-text: #E2E8F0;
   --hero-btn-secondary-hover: rgba(255,255,255,0.10);
-  --hero-stats-bg: rgba(2,11,24,0.65);
-  --hero-stats-border: rgba(255,255,255,0.08);
-  --hero-stats-divider: rgba(255,255,255,0.05);
-  --hero-icon-bg: rgba(59,130,246,0.12);
+  --hero-stats-bg: rgba(28, 28, 28, 0.90);
+  --hero-stats-border: rgba(255, 255, 255, 0.08);
+  --hero-stats-divider: rgba(255, 255, 255, 0.06);
+  --hero-icon-bg: rgba(59, 130, 246, 0.12);
   --hero-icon-color: #60A5FA;
-  --hero-card-bg: rgba(6,15,35,0.88);
-  --hero-card-border: rgba(59,130,246,0.25);
-  --hero-card-text-primary: #93C5FD;
-  --hero-card-text-secondary: rgba(148,163,184,0.70);
-  --hero-card-divider: rgba(255,255,255,0.07);
-  --hero-pill-bar: rgba(2,11,24,0.65);
-  --hero-pill-bar-border: rgba(255,255,255,0.06);
-  --hero-pill-bg: rgba(255,255,255,0.05);
-  --hero-pill-border: rgba(255,255,255,0.09);
-  --hero-pill-text: rgba(226,232,240,0.85);
+  --hero-card-bg: rgba(28, 28, 28, 0.90);
+  --hero-card-border: rgba(255, 255, 255, 0.08);
+  --hero-card-text-primary: #F8FAFC;
+  --hero-card-text-secondary: rgba(148, 163, 184, 0.80);
+  --hero-card-divider: rgba(255, 255, 255, 0.07);
+  --hero-pill-bar: rgba(28, 28, 28, 0.90);
+  --hero-pill-bar-border: rgba(255, 255, 255, 0.06);
+  --hero-pill-bg: rgba(255, 255, 255, 0.05);
+  --hero-pill-border: rgba(255, 255, 255, 0.09);
+  --hero-pill-text: rgba(226, 232, 240, 0.85);
   --hero-status-color: #22C55E;
   --hero-status-text: #4ADE80;
   --hero-status-glow: 0 0 8px #22C55E;

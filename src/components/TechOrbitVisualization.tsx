@@ -205,7 +205,7 @@ export function TechOrbitVisualization() {
                 <path d="M20 -5 L0 5 L0 20 L20 10 Z" fill="url(#nodeRight)" />
               </g>
             </svg>
-            <div className="w-12 h-12 bg-white dark:bg-[#0f172a] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.15)] border border-[#FF9900]/40 flex items-center justify-center p-2">
+            <div className="w-12 h-12 bg-white dark:bg-[#161616] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.15)] border border-[#FF9900]/40 flex items-center justify-center p-2">
               <AwsLogo className="w-full h-full object-contain" />
             </div>
           </div>
@@ -226,7 +226,7 @@ export function TechOrbitVisualization() {
                 <path d="M20 -5 L0 5 L0 20 L20 10 Z" fill="url(#nodeRight)" />
               </g>
             </svg>
-            <div className="w-12 h-12 bg-white dark:bg-[#0f172a] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.15)] border border-[#00A4EF]/40 flex items-center justify-center p-2">
+            <div className="w-12 h-12 bg-white dark:bg-[#161616] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.15)] border border-[#00A4EF]/40 flex items-center justify-center p-2">
               <AzureLogo className="w-full h-full object-contain" />
             </div>
           </div>
@@ -247,7 +247,7 @@ export function TechOrbitVisualization() {
                 <path d="M20 -5 L0 5 L0 20 L20 10 Z" fill="url(#nodeRight)" />
               </g>
             </svg>
-            <div className="w-12 h-12 bg-white dark:bg-[#0f172a] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.15)] border border-[#4285F4]/40 flex items-center justify-center p-2">
+            <div className="w-12 h-12 bg-white dark:bg-[#161616] rounded-xl shadow-[0_10px_20px_rgba(0,0,0,0.15)] border border-[#4285F4]/40 flex items-center justify-center p-2">
               <GcpLogo className="w-full h-full object-contain" />
             </div>
           </div>
@@ -257,7 +257,7 @@ export function TechOrbitVisualization() {
 
       {/* Floating UI Cards */}
       <motion.div 
-        className="absolute top-10 right-2 md:right-4 z-40 bg-white dark:bg-slate-900 border border-slate-200 dark:border-cyan-500/30 rounded-xl p-3 shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8)] w-48"
+        className="absolute top-10 right-2 md:right-4 z-40 bg-white dark:bg-[#161616] border border-slate-200 dark:border-cyan-500/30 rounded-xl p-3 shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.8)] w-48"
         initial={{ opacity: 0, y: 30, x: 20 }}
         animate={isInView ? { opacity: 1, y: 0, x: 0 } : { opacity: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 
 import { motion, Variants, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
-import { ArrowRight, Activity, Monitor, Shield, Layers, Users, Clock, Award, Briefcase, Globe, Code, Cloud, Server, Cpu, Zap, Infinity, Brain, ShieldCheck, ChevronRight, Play, Headset, BarChart, Mail } from "lucide-react";
+import { ArrowRight, Activity, Monitor, Shield, Layers, Users, Clock, Award, Briefcase, Globe, Code, Cloud, Server, Cpu, Zap, Infinity, Brain, ShieldCheck, ChevronRight, Play, Headset, BarChart, Mail, Kanban } from "lucide-react";
 
 import { PremiumCTA } from "@/components/PremiumCTA";
 
@@ -129,134 +129,49 @@ const techCategories = [
 
 const refinedTechCategories = [
   {
-    category: "Cloud Platforms",
+    category: "Cloud platforms",
     items: [
-      { name: "AWS", logo: <AwsLogo className="w-10 h-10" />, desc: "Enterprise Cloud Platform", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=300", color: "#FF9900" },
-      { name: "Azure", logo: <AzureLogo className="w-10 h-10" />, desc: "Microsoft Cloud Services", image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=300", color: "#0078D4" },
-      { name: "GCP", logo: <GcpLogo className="w-10 h-10" />, desc: "Scalable Infrastructure", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=300", color: "#4285F4" },
+      { name: "Amazon Web Services", logo: <AwsLogo className="w-5 h-5 object-contain" /> },
+      { name: "Microsoft Azure", logo: <AzureLogo className="w-5 h-5 object-contain" /> },
+      { name: "Google Cloud", logo: <GcpLogo className="w-5 h-5 object-contain" /> },
     ]
   },
   {
     category: "Engineering",
     items: [
-      { name: "React", logo: <ReactLogo className="w-10 h-10" />, desc: "Component Architecture", image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=300", color: "#61DAFB" },
-      { name: "Next.js", logo: <NextJsLogo className="w-10 h-10" />, desc: "Server Side Rendering", image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=300", color: "#ffffff" },
-      { name: "Node.js", logo: <NodeJsLogo className="w-10 h-10" />, desc: "Scalable Runtime Engine", image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=300", color: "#339933" },
-      { name: "Python", logo: <PythonLogo className="w-10 h-10" />, desc: "Data & Systems Analysis", image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=300", color: "#3776AB" },
+      { name: "React", logo: <ReactLogo className="w-5 h-5 object-contain" /> },
+      { name: "Next.js", logo: <NextJsLogo className="w-5 h-5 object-contain" /> },
+      { name: "Node.js", logo: <NodeJsLogo className="w-5 h-5 object-contain" /> },
+      { name: "Python", logo: <PythonLogo className="w-5 h-5 object-contain" /> },
     ]
   },
   {
-    category: "DevOps & Infrastructure",
+    category: "DevOps and infrastructure",
     items: [
-      { name: "Docker", logo: <DockerLogo className="w-10 h-10" />, desc: "Container Platform", image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&q=80&w=300", color: "#2496ED" },
-      { name: "Kubernetes", logo: <KubernetesLogo className="w-10 h-10" />, desc: "Container Orchestration", image: "https://images.unsplash.com/photo-1618401471353-b98aedd07871?auto=format&fit=crop&q=80&w=300", color: "#326CE5" },
-      { name: "DevOps", logo: <Infinity className="w-8 h-8 text-[#06B6D4]" />, desc: "Continuous Pipelines", image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=300", color: "#06B6D4" },
+      { name: "Docker", logo: <DockerLogo className="w-5 h-5 object-contain" /> },
+      { name: "Kubernetes", logo: <KubernetesLogo className="w-5 h-5 object-contain" /> },
+      { name: "DevOps", logo: <Infinity className="w-5 h-5 text-blue-500" /> },
     ]
   },
   {
-    category: "Security & Intelligence",
+    category: "Security and intelligence",
     items: [
-      { name: "AI", logo: <Brain className="w-8 h-8 text-[#8B5CF6]" />, desc: "Neural System Models", image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&q=80&w=300", color: "#8B5CF6" },
-      { name: "Cybersecurity", logo: <ShieldCheck className="w-8 h-8 text-[#EF4444]" />, desc: "Threat Vector Auditing", image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=300", color: "#EF4444" },
-      { name: "Compliance", logo: <Shield className="w-8 h-8 text-[#10B981]" />, desc: "HIPAA & PCI-DSS Audits", image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&q=80&w=300", color: "#10B981" },
+      { name: "AI", logo: <Brain className="w-5 h-5 text-purple-500 dark:text-purple-400" /> },
+      { name: "Cybersecurity", logo: <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400" /> },
+      { name: "Compliance", logo: <Award className="w-5 h-5 text-amber-500 dark:text-amber-400" /> },
     ]
   }
 ];
 
 function TechCard({ tech }: { tech: typeof refinedTechCategories[0]["items"][0] }) {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    const checkDark = () => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    };
-    checkDark();
-    const observer = new MutationObserver(checkDark);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"]
-    });
-    return () => observer.disconnect();
-  }, []);
-
-  const brandColor = tech.name === "Next.js" ? (isDark ? "#ffffff" : "#0f172a") : tech.color;
-
   return (
-    <div className="relative group w-full h-[120px] isolate">
-      {/* Ambient base glow (soft radial) - Stays on the floor */}
-      <div 
-        className="absolute -bottom-3 left-1/2 w-[75%] h-[32px] rounded-[50%] blur-[12px] opacity-75 dark:opacity-[0.85] pointer-events-none transition-all duration-500 group-hover:opacity-100 group-hover:scale-[1.3] z-0"
-        style={{ 
-          backgroundColor: brandColor,
-          transform: 'translateX(-50%) translateZ(0)'
-        }}
-      />
-      
-      {/* Sharp glass edge (3D pedestal effect) - Stays on the floor */}
-      <div 
-        className="absolute -bottom-1 left-1/2 w-[65%] h-[20px] rounded-[100%] pointer-events-none transition-all duration-500 opacity-100 group-hover:scale-110 z-0"
-        style={{ 
-          borderBottom: `3px solid ${brandColor}`,
-          boxShadow: `inset 0 -12px 20px -4px ${brandColor}`,
-          filter: `drop-shadow(0 -2px 6px ${brandColor})`,
-          transform: 'translateX(-50%) translateZ(0)'
-        }}
-      />
-
-      {/* The Lifting Card Container */}
-      <div
-        className="relative flex flex-col items-center justify-center h-full bg-card border rounded-2xl cursor-pointer overflow-hidden p-4 text-center select-none z-10 transition-all duration-500 group-hover:-translate-y-2.5"
-        style={{
-          borderColor: `${brandColor}40`,
-          boxShadow: `0 4px 10px ${brandColor}06`,
-        }}
-      >
-        {/* Dynamic Inner border that lights up with brand color on hover */}
-        <div 
-          className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100"
-          style={{ boxShadow: `inset 0 0 0 1px ${brandColor}80` }}
-        />
-      {/* Real Unsplash background image with low opacity on idle, zooming on hover */}
-      <div className="absolute inset-0 z-0 overflow-hidden bg-slate-50/50 dark:bg-slate-950/40 pointer-events-none">
-        <Image
-          src={tech.image}
-          alt={tech.name}
-          fill
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 15vw"
-          className="object-cover opacity-[0.04] dark:opacity-[0.06] group-hover:opacity-[0.16] dark:group-hover:opacity-[0.24] scale-[1.02] group-hover:scale-[1.12] transition-all duration-500 ease-out pointer-events-none"
-        />
-        {/* Color overlay matching tech color */}
-        <div 
-          className="absolute inset-0 transition-opacity duration-500 pointer-events-none opacity-5 dark:opacity-3 group-hover:opacity-10 dark:group-hover:opacity-10"
-          style={{ 
-            backgroundColor: brandColor
-          }}
-        />
+    <div className="group flex items-center gap-3 p-3 lg:p-4 rounded-lg border border-slate-200 dark:border-[#333333] bg-white dark:bg-[#1c1c1c] hover:bg-slate-50 dark:hover:bg-[#252525] transition-colors cursor-default shadow-sm dark:shadow-none">
+      <div className="w-8 h-8 rounded shrink-0 bg-slate-100 dark:bg-[#2d2d2d] border border-slate-200 dark:border-[#404040] flex items-center justify-center p-1.5 text-slate-700 dark:text-slate-300">
+        {tech.logo}
       </div>
-
-      {/* Card Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full w-full pointer-events-none">
-        {/* Logo container: colorful on idle, slightly scales and shifts on hover */}
-        <div 
-          className="w-10 h-10 flex items-center justify-center transition-all duration-300 shrink-0 opacity-90 group-hover:opacity-100 group-hover:-translate-y-1"
-        >
-          {tech.logo}
-        </div>
-
-        <span 
-          className="text-xs font-black text-foreground mt-2 transition-transform duration-300 group-hover:-translate-y-0.5"
-        >
-          {tech.name}
-        </span>
-
-        {/* Description fades in on hover */}
-        <p 
-          className="text-[9px] text-muted-foreground font-bold transition-opacity duration-300 mt-1 max-w-[130px] line-clamp-2 leading-relaxed opacity-0 group-hover:opacity-100"
-        >
-          {tech.desc}
-        </p>
-      </div>
-    </div>
+      <span className="text-sm font-semibold text-slate-900 dark:text-slate-200">
+        {tech.name}
+      </span>
     </div>
   );
 }
@@ -567,30 +482,32 @@ function EnterpriseClientsViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   
-  // Use first 5 logos to create the overlapping avatar row
   const displayLogos = trustLogos.slice(0, 5);
 
   return (
-    <div ref={ref} className="w-full h-16 flex items-center justify-start relative mt-3 bg-transparent overflow-hidden">
-      <div className="flex items-center justify-center -space-x-3 px-2">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-1 bg-transparent overflow-hidden">
+      {/* Connecting Network Beam */}
+      <div className="absolute inset-x-8 top-1/2 -translate-y-1/2 h-0.5 bg-gradient-to-r from-blue-500/20 via-blue-500/50 to-emerald-500/20 z-0" />
+      
+      <div className="flex items-center justify-center -space-x-2 px-2 relative z-10">
         {displayLogos.map((logo, index) => (
           <div 
             key={logo.name}
-            className="w-10 h-10 rounded-full border-2 border-[#F8FAFC] dark:border-[#0F172A] bg-white dark:bg-white flex items-center justify-center overflow-hidden shadow-sm relative transition-all duration-300 hover:-translate-y-1 hover:z-50"
+            className="w-9 h-9 rounded-full border-2 border-white dark:border-[#1c1c1c] bg-white flex items-center justify-center overflow-hidden shadow-md relative transition-all duration-300 hover:scale-110 hover:z-50"
             style={{
               opacity: isInView ? 1 : 0,
               transform: isInView ? 'scale(1)' : 'scale(0.8)',
-              transition: `all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 0.1}s`,
+              transition: `all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 0.08}s`,
               zIndex: 10 - index
             }}
             title={logo.name}
           >
-            <div className="relative w-7 h-7 flex items-center justify-center">
+            <div className="relative w-6 h-6 flex items-center justify-center">
               <Image 
                 src={logo.src}
                 alt={logo.name}
                 fill
-                className="object-contain"
+                className="object-contain p-0.5"
               />
             </div>
           </div>
@@ -604,32 +521,31 @@ function SLAUptimeViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-1 overflow-hidden">
       <style>{`
         @keyframes serverPing {
-          0%, 80%, 100% { opacity: 0.3; }
-          90% { opacity: 1; box-shadow: 0 0 8px #22C55E; }
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 6px #10B981; }
         }
         @keyframes scanLine {
           0% { transform: translateX(-100%); opacity: 0; }
-          10%, 90% { opacity: 1; }
-          100% { transform: translateX(200%); opacity: 0; }
+          20%, 80% { opacity: 1; }
+          100% { transform: translateX(250%); opacity: 0; }
         }
       `}</style>
       
-      {/* Background Matrix */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center gap-3">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="flex flex-col gap-1.5">
+      {/* Background Uptime Matrix */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center gap-2.5">
+        {[...Array(7)].map((_, i) => (
+          <div key={i} className="flex flex-col gap-1">
             {[...Array(3)].map((_, j) => (
               <div 
                 key={j} 
-                className="w-4 h-1.5 rounded-[1px] bg-[#22C55E]"
+                className="w-3.5 h-1.5 rounded-[2px] bg-emerald-500"
                 style={{
-                  animation: "serverPing 4s infinite",
-                  animationDelay: `${(i * 3 + j) * 0.15}s`,
+                  animation: "serverPing 3s ease-in-out infinite",
+                  animationDelay: `${(i * 3 + j) * 0.12}s`,
                   animationPlayState: isInView ? "running" : "paused",
-                  opacity: 0.3
                 }}
               />
             ))}
@@ -637,13 +553,14 @@ function SLAUptimeViz() {
         ))}
       </div>
 
-      {/* Scanner Effect */}
-      <div className="absolute inset-y-0 w-8 bg-gradient-to-r from-transparent via-[#22C55E]/20 to-transparent z-10"
-           style={{ animation: "scanLine 3s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+      {/* High-Tech Scanner Sweep */}
+      <div className="absolute inset-y-0 w-10 bg-gradient-to-r from-transparent via-emerald-400/30 to-transparent z-10"
+           style={{ animation: "scanLine 2.5s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }} />
            
-      {/* 99.9% Badge */}
-      <div className="absolute z-20 px-1.5 py-0.5 bg-white dark:bg-[#0B1220] border border-[#22C55E]/40 rounded text-[8px] font-bold text-[#22C55E] tracking-wider shadow-[0_0_10px_rgba(34,197,94,0.15)]">
-        UP
+      {/* 99.9% Active Status Badge */}
+      <div className="absolute z-20 px-2 py-0.5 bg-white/90 dark:bg-[#1c1c1c]/90 backdrop-blur border border-emerald-500/50 rounded-full text-[9px] font-extrabold text-emerald-600 dark:text-emerald-400 tracking-wider shadow-[0_0_12px_rgba(16,185,129,0.3)] flex items-center gap-1">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        99.99% UP
       </div>
     </div>
   );
@@ -652,55 +569,84 @@ function SLAUptimeViz() {
 function ExperienceTimelineViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "-10px" });
-  
+
   return (
-    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-gradient-to-br from-slate-100 to-slate-50 dark:from-[#0F172A] dark:to-[#0B1121] overflow-hidden border border-slate-200/50 dark:border-slate-800/80 shadow-inner group">
-      
-      {/* Background Track */}
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-1 overflow-hidden px-1">
+      <style>{`
+        @keyframes drawExpCurve {
+          0% { stroke-dashoffset: 220; }
+          100% { stroke-dashoffset: 0; }
+        }
+        @keyframes expParticle {
+          0% { stroke-dashoffset: 80; opacity: 0; }
+          20%, 80% { opacity: 1; }
+          100% { stroke-dashoffset: -80; opacity: 0; }
+        }
+      `}</style>
+
+      {/* Trajectory Area & Curve */}
       <div className="absolute inset-0 z-0 flex items-center justify-center">
-        <svg className="w-full h-full overflow-visible" viewBox="0 0 160 64">
-          <path d="M 20 32 L 140 32" className="stroke-slate-300 dark:stroke-slate-700" strokeWidth="2" fill="none" strokeLinecap="round" />
-          
-          <motion.path 
-            d="M 20 32 L 140 32" 
-            stroke="url(#blueGlowExp)" 
-            strokeWidth="3"
-            fill="none" 
-            strokeLinecap="round" 
-            initial={{ pathLength: 0 }}
-            animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-          />
+        <svg className="w-full h-full overflow-visible" viewBox="0 0 200 54" fill="none">
           <defs>
-            <linearGradient id="blueGlowExp" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stopColor="#60A5FA" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#2563EB" />
+            <linearGradient id="expCurveGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#3B82F6" />
+              <stop offset="60%" stopColor="#2563EB" />
+              <stop offset="100%" stopColor="#10B981" />
+            </linearGradient>
+            <linearGradient id="expFillGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.25" />
+              <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
             </linearGradient>
           </defs>
+
+          {/* Baseline track */}
+          <line x1="12" y1="44" x2="188" y2="44" stroke="currentColor" strokeWidth="1" className="text-slate-200 dark:text-slate-800" strokeDasharray="3 3" />
+
+          {/* Area Fill Under Curve */}
+          <motion.path 
+            d="M 12 44 C 50 44, 80 34, 110 22 C 140 10, 165 8, 188 8 L 188 44 Z" 
+            fill="url(#expFillGradient)"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ duration: 1 }}
+          />
+
+          {/* Glowing Animated Trajectory Path */}
+          <path 
+            d="M 12 44 C 50 44, 80 34, 110 22 C 140 10, 165 8, 188 8" 
+            stroke="url(#expCurveGradient)" 
+            strokeWidth="2.5" 
+            strokeLinecap="round" 
+            strokeDasharray="220" 
+            style={{ animation: `drawExpCurve 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards ${isInView ? "running" : "paused"}` }} 
+          />
+
+          {/* High-speed Particle Stream on Path */}
+          <path 
+            d="M 12 44 C 50 44, 80 34, 110 22 C 140 10, 165 8, 188 8" 
+            stroke="#60A5FA" 
+            strokeWidth="3" 
+            strokeLinecap="round" 
+            strokeDasharray="15 120"
+            style={{ animation: `expParticle 2.5s linear infinite ${isInView ? "running" : "paused"}` }} 
+          />
+
+          {/* Milestone Circle Nodes */}
+          <circle cx="12" cy="44" r="3" className="fill-blue-500" />
+          <circle cx="70" cy="38" r="3" className="fill-blue-600" />
+          <circle cx="125" cy="18" r="3.5" className="fill-blue-500" />
+          <circle cx="188" cy="8" r="4.5" className="fill-emerald-400" />
         </svg>
       </div>
 
-      {/* Nodes */}
-      <div className="absolute inset-0 z-10 flex items-center justify-between px-[18px]">
-        {[...Array(5)].map((_, i) => (
-          <div key={i} className="relative flex items-center justify-center w-3 h-3">
-            <div className="absolute w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-700" />
-            
-            <motion.div 
-              className="absolute w-3 h-3 rounded-full bg-white dark:bg-[#0F172A] border-2 border-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.8)]"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: "backOut", delay: i * 0.3 }}
-            />
-            
-            {/* Ambient Pulse After Draw */}
-            <motion.div
-              className="absolute w-3 h-3 rounded-full bg-blue-400 opacity-0"
-              animate={isInView ? { scale: [1, 2.5], opacity: [0, 0.4, 0] } : {}}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1.5 + (i * 0.2) }}
-            />
-          </div>
-        ))}
+      {/* Year & Milestone Badges */}
+      <div className="absolute bottom-0.5 inset-x-2 flex justify-between text-[8px] font-mono font-bold text-slate-400 dark:text-slate-500 pointer-events-none">
+        <span>2017</span>
+        <span>2020</span>
+        <span>2023</span>
+        <span className="text-emerald-600 dark:text-emerald-400 font-extrabold flex items-center gap-0.5 bg-emerald-500/10 px-1 rounded border border-emerald-500/30">
+          9+ Yrs
+        </span>
       </div>
     </div>
   );
@@ -710,45 +656,48 @@ function CertifiedEngineersViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-3 rounded-md bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative mt-1 overflow-hidden">
       <style>{`
         @keyframes certSpin {
           0% { transform: rotate(0deg); }
           100% { transform: rotate(360deg); }
         }
         @keyframes certPop {
-          0%, 100% { transform: translateY(0); box-shadow: 0 0 0 rgba(0,0,0,0); }
-          50% { transform: translateY(-4px); box-shadow: 0 4px 10px rgba(14,165,233,0.3); }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-4px); }
         }
       `}</style>
 
-      {/* Background Orbit/Lines */}
+      {/* Orbit Track */}
       <div className="absolute inset-0 z-0 flex items-center justify-center">
         <svg className="w-full h-full" viewBox="0 0 160 64">
-           <path d="M 80 40 C 50 40, 20 20, 50 20 C 80 20, 110 20, 110 40 C 140 40, 140 20, 110 20" fill="none" className="stroke-[#0EA5E9] opacity-20" strokeWidth="1" strokeDasharray="4 4" />
+           <path d="M 30 32 Q 80 12, 130 32 T 30 32" fill="none" className="stroke-blue-500/20 dark:stroke-blue-400/20" strokeWidth="1.5" strokeDasharray="4 4" />
         </svg>
       </div>
 
       <div className="absolute inset-0 z-10 flex items-center justify-center gap-4">
-        {/* Code Eng */}
-        <div className="w-7 h-7 rounded bg-white dark:bg-[#0B1220] border border-[#0EA5E9]/50 flex items-center justify-center relative"
-             style={{ animation: "certPop 3s ease-in-out infinite 0s", animationPlayState: isInView ? "running" : "paused" }}>
-           <Code className="w-3.5 h-3.5 text-[#0EA5E9]" />
-           <div className="absolute -inset-1 border border-[#0EA5E9]/20 rounded border-dashed" style={{ animation: "certSpin 8s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+        {/* Full-Stack Engineer Badge */}
+        <div className="w-8 h-8 rounded-lg bg-white dark:bg-[#161616] border border-cyan-500/50 flex items-center justify-center relative shadow-[0_0_10px_rgba(6,182,212,0.2)]"
+             style={{ animation: `certPop 3.5s ease-in-out infinite 0s ${isInView ? "running" : "paused"}` }}>
+           <Code className="w-4 h-4 text-cyan-500" />
+           <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-cyan-500 rounded-full border border-white dark:border-[#1c1c1c] flex items-center justify-center text-[6px] text-white font-bold">✓</div>
+           <div className="absolute -inset-1 border border-cyan-500/30 rounded-lg border-dashed" style={{ animation: `certSpin 8s linear infinite ${isInView ? "running" : "paused"}` }} />
         </div>
         
-        {/* Cloud Eng */}
-        <div className="w-8 h-8 rounded bg-white dark:bg-[#0B1220] border border-[#3B82F6]/50 flex items-center justify-center relative z-20"
-             style={{ animation: "certPop 3s ease-in-out infinite 1s", animationPlayState: isInView ? "running" : "paused" }}>
-           <Cloud className="w-4 h-4 text-[#3B82F6]" />
-           <div className="absolute -inset-1 border border-[#3B82F6]/30 rounded-md border-dashed" style={{ animation: "certSpin 10s linear infinite reverse", animationPlayState: isInView ? "running" : "paused" }} />
+        {/* Cloud Architect Badge */}
+        <div className="w-9 h-9 rounded-xl bg-white dark:bg-[#161616] border border-blue-500/60 flex items-center justify-center relative z-20 shadow-[0_0_12px_rgba(59,130,246,0.3)]"
+             style={{ animation: `certPop 3.5s ease-in-out infinite 1s ${isInView ? "running" : "paused"}` }}>
+           <Cloud className="w-4.5 h-4.5 text-blue-500" />
+           <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 rounded-full border border-white dark:border-[#1c1c1c] flex items-center justify-center text-[7px] text-white font-bold">✓</div>
+           <div className="absolute -inset-1 border border-blue-500/40 rounded-xl border-dashed" style={{ animation: `certSpin 10s linear infinite reverse ${isInView ? "running" : "paused"}` }} />
         </div>
         
-        {/* Security Eng */}
-        <div className="w-7 h-7 rounded bg-white dark:bg-[#0B1220] border border-[#16A34A]/50 flex items-center justify-center relative"
-             style={{ animation: "certPop 3s ease-in-out infinite 2s", animationPlayState: isInView ? "running" : "paused" }}>
-           <ShieldCheck className="w-3.5 h-3.5 text-[#16A34A]" />
-           <div className="absolute -inset-1 border border-[#16A34A]/20 rounded border-dashed" style={{ animation: "certSpin 8s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
+        {/* Security & QA Specialist Badge */}
+        <div className="w-8 h-8 rounded-lg bg-white dark:bg-[#161616] border border-emerald-500/50 flex items-center justify-center relative shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+             style={{ animation: `certPop 3.5s ease-in-out infinite 2s ${isInView ? "running" : "paused"}` }}>
+           <ShieldCheck className="w-4 h-4 text-emerald-500" />
+           <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 rounded-full border border-white dark:border-[#1c1c1c] flex items-center justify-center text-[6px] text-white font-bold">✓</div>
+           <div className="absolute -inset-1 border border-emerald-500/30 rounded-lg border-dashed" style={{ animation: `certSpin 8s linear infinite ${isInView ? "running" : "paused"}` }} />
         </div>
       </div>
     </div>
@@ -760,7 +709,7 @@ function ITConsultingViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 relative flex items-center justify-center mt-2 overflow-hidden">
       <style>{`
         @keyframes networkPulse {
           0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(30, 95, 255, 0.1); }
@@ -784,10 +733,10 @@ function ITConsultingViz() {
           </g>
           {/* Animated data pulses */}
           <g className="stroke-[#22D3EE] dark:stroke-[#3B82F6]" strokeWidth="2" fill="none" strokeDasharray="15 150" strokeLinecap="round">
-            <path d="M 100 48 L 40 25" style={{ animation: "flowData 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 100 48 L 160 25" style={{ animation: "flowData 2.5s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 100 48 L 40 75" style={{ animation: "flowData 2.2s linear infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 100 48 L 160 75" style={{ animation: "flowData 2.8s linear infinite 1.5s", animationPlayState: isInView ? "running" : "paused" }} />
+            <path d="M 100 48 L 40 25" style={{ animation: `flowData 2s linear infinite ${isInView ? "running" : "paused"}` }} />
+            <path d="M 100 48 L 160 25" style={{ animation: `flowData 2.5s linear infinite 0.5s ${isInView ? "running" : "paused"}` }} />
+            <path d="M 100 48 L 40 75" style={{ animation: `flowData 2.2s linear infinite 1s ${isInView ? "running" : "paused"}` }} />
+            <path d="M 100 48 L 160 75" style={{ animation: `flowData 2.8s linear infinite 1.5s ${isInView ? "running" : "paused"}` }} />
           </g>
           {/* Outer Nodes */}
           <g className="fill-[#1E5FFF]">
@@ -802,61 +751,90 @@ function ITConsultingViz() {
       {/* Center Node */}
       <div 
         className="relative z-10 w-10 h-10 bg-white dark:bg-[#0B1220] border border-[#1E5FFF]/50 rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(30,95,255,0.2)] dark:shadow-[0_0_15px_rgba(30,95,255,0.4)]"
-        style={{ animation: "networkPulse 3s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }}
+        style={{ animation: `networkPulse 3s ease-in-out infinite ${isInView ? "running" : "paused"}` }}
       >
         <div className="w-4 h-4 bg-gradient-to-br from-[#22D3EE] to-[#1E5FFF] rounded-full" />
       </div>
       
       {/* Node Labels */}
-      <div className="absolute top-[8px] left-[15px] text-[8px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">DISCOVER</div>
-      <div className="absolute top-[8px] right-[25px] text-[8px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">PLAN</div>
-      <div className="absolute bottom-[8px] left-[25px] text-[8px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">ALIGN</div>
-      <div className="absolute bottom-[8px] right-[15px] text-[8px] font-bold text-slate-500 dark:text-slate-400 tracking-wider">SCALE</div>
+      <div className="absolute top-1 left-3 text-[9px] font-extrabold text-slate-900 dark:text-white tracking-wider">DISCOVER</div>
+      <div className="absolute top-1 right-3 text-[9px] font-extrabold text-slate-900 dark:text-white tracking-wider">PLAN</div>
+      <div className="absolute bottom-1 left-3 text-[9px] font-extrabold text-slate-900 dark:text-white tracking-wider">ALIGN</div>
+      <div className="absolute bottom-1 right-3 text-[9px] font-extrabold text-slate-900 dark:text-white tracking-wider">SCALE</div>
     </div>
   );
 }
 
 function ProjectManagementViz() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: false, margin: "100px" });
+  const isInView = useInView(ref, { once: false, margin: "-10px" });
+
   return (
-    <div ref={ref} className="w-full h-24 flex flex-col justify-center px-4 py-2 max-w-[200px] relative mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-20 flex flex-col justify-between relative mt-1 overflow-hidden px-2 py-1">
       <style>{`
-        @keyframes barFill {
-          0%, 10% { transform: scaleX(0); opacity: 0; }
-          30%, 90% { transform: scaleX(1); opacity: 1; }
-          100% { transform: scaleX(0); opacity: 0; }
+        @keyframes sprintProgress1 {
+          0%, 10% { width: 0%; opacity: 0; }
+          40%, 90% { width: 48%; opacity: 1; }
+          100% { width: 0%; opacity: 0; }
         }
-        @keyframes floatTask {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-3px); }
+        @keyframes sprintProgress2 {
+          0%, 20% { width: 0%; opacity: 0; }
+          50%, 90% { width: 64%; opacity: 1; }
+          100% { width: 0%; opacity: 0; }
+        }
+        @keyframes sprintProgress3 {
+          0%, 35% { width: 0%; opacity: 0; }
+          65%, 90% { width: 100%; opacity: 1; }
+          100% { width: 0%; opacity: 0; }
+        }
+        @keyframes pulseCheck {
+          0%, 100% { transform: scale(1); opacity: 0.6; }
+          50% { transform: scale(1.25); opacity: 1; box-shadow: 0 0 8px #10B981; }
         }
       `}</style>
       
-      {/* Background grid */}
-      <div className="absolute inset-0 opacity-10 dark:opacity-20 flex justify-between px-6 py-2">
-        <div className="w-px h-full bg-[#1E5FFF]" />
-        <div className="w-px h-full bg-[#1E5FFF]" />
-        <div className="w-px h-full bg-[#1E5FFF]" />
-        <div className="w-px h-full bg-[#1E5FFF]" />
+      {/* Header Phase Labels - Positioned safely above the bars */}
+      <div className="flex justify-between items-center text-[9px] font-mono font-extrabold text-slate-900 dark:text-white border-b border-slate-200/60 dark:border-slate-800/80 pb-1 mb-1">
+        <span className="text-slate-900 dark:text-white font-extrabold">PLANNING</span>
+        <span className="text-slate-900 dark:text-white font-extrabold">SPRINTS</span>
+        <span className="text-slate-900 dark:text-white font-extrabold">DELIVERY</span>
       </div>
 
-      <div className="flex flex-col gap-3 z-10 w-full relative">
-        {/* Row 1 */}
-        <div className="w-full h-3 bg-slate-200/50 dark:bg-slate-800/50 rounded-sm relative flex items-center px-1">
-          <div className="absolute left-1 h-1.5 w-[40%] bg-gradient-to-r from-[#1E5FFF] to-[#22D3EE] rounded-sm origin-left shadow-[0_0_8px_rgba(30,95,255,0.4)]" style={{ animation: "barFill 4s ease-out infinite", animationPlayState: isInView ? "running" : "paused" }} />
-          <div className="absolute left-[45%] w-[30%] h-4 bg-white dark:bg-[#0B1220] rounded-sm border border-slate-300 dark:border-slate-600 shadow-sm" style={{ animation: "floatTask 3s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }} />
+      {/* Grid Background Columns */}
+      <div className="absolute inset-x-2 top-6 bottom-1 opacity-15 dark:opacity-25 flex justify-between pointer-events-none">
+        <div className="w-px h-full bg-blue-500" />
+        <div className="w-px h-full bg-purple-500" />
+        <div className="w-px h-full bg-emerald-500" />
+      </div>
+
+      {/* Sprint Progress Bars */}
+      <div className="flex flex-col gap-2 relative z-10 my-auto">
+        {/* Sprint 1: Backlog & Planning */}
+        <div className="w-full h-2 bg-slate-100 dark:bg-slate-800/80 rounded-full relative flex items-center overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.6)]"
+            style={{ animation: `sprintProgress1 4s ease-in-out infinite ${isInView ? "running" : "paused"}` }} 
+          />
         </div>
         
-        {/* Row 2 */}
-        <div className="w-full h-3 bg-slate-200/50 dark:bg-slate-800/50 rounded-sm relative flex items-center px-1">
-          <div className="absolute left-[30%] h-1.5 w-[50%] bg-gradient-to-r from-[#A855F7] to-[#EC4899] rounded-sm origin-left shadow-[0_0_8px_rgba(168,85,247,0.4)]" style={{ animation: "barFill 4s ease-out infinite 0.8s", animationPlayState: isInView ? "running" : "paused" }} />
+        {/* Sprint 2: Agile Execution */}
+        <div className="w-full h-2 bg-slate-100 dark:bg-slate-800/80 rounded-full relative flex items-center pl-[25%] overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-purple-600 to-pink-500 rounded-full shadow-[0_0_8px_rgba(168,85,247,0.6)]"
+            style={{ animation: `sprintProgress2 4s ease-in-out infinite ${isInView ? "running" : "paused"}` }} 
+          />
         </div>
         
-        {/* Row 3 */}
-        <div className="w-full h-3 bg-slate-200/50 dark:bg-slate-800/50 rounded-sm relative flex items-center px-1">
-          <div className="absolute left-[10%] h-1.5 w-[70%] bg-gradient-to-r from-[#22C55E] to-[#10B981] rounded-sm origin-left shadow-[0_0_8px_rgba(34,197,94,0.4)]" style={{ animation: "barFill 4s ease-out infinite 1.5s", animationPlayState: isInView ? "running" : "paused" }} />
-          <div className="absolute left-[85%] w-2 h-2 rounded-full bg-[#22C55E] shadow-[0_0_5px_#22C55E]" style={{ animation: "floatTask 3s ease-in-out infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
+        {/* Sprint 3: Quality Delivery & Release */}
+        <div className="w-full h-2 bg-slate-100 dark:bg-slate-800/80 rounded-full relative flex items-center pl-[30%] overflow-hidden">
+          <div 
+            className="h-full bg-gradient-to-r from-emerald-600 to-teal-400 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.6)]"
+            style={{ animation: `sprintProgress3 4s ease-in-out infinite ${isInView ? "running" : "paused"}` }} 
+          />
+          <div 
+            className="w-2.5 h-2.5 rounded-full bg-emerald-400 absolute right-1 shadow-[0_0_6px_#10B981]"
+            style={{ animation: `pulseCheck 2s ease-in-out infinite ${isInView ? "running" : "paused"}` }}
+          />
         </div>
       </div>
     </div>
@@ -867,7 +845,7 @@ function TestManagementViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative max-w-[200px] mt-2 overflow-hidden">
       <style>{`
         @keyframes scanSweep {
           0%, 10% { transform: translateX(-100%); opacity: 0; }
@@ -892,10 +870,10 @@ function TestManagementViz() {
       <div className="flex items-center gap-3 z-10 w-full px-6 relative">
         {[0, 1, 2, 3].map((i) => (
           <div key={i} className="flex-1 aspect-square rounded-md bg-slate-300 dark:bg-slate-700/50 border border-slate-400 dark:border-slate-600 flex items-center justify-center relative overflow-hidden transition-all duration-300"
-            style={{ animation: `passGlow 4s ease-out infinite ${i * 0.3}s`, animationPlayState: isInView ? "running" : "paused" }}>
+            style={{ animation: `passGlow 4s ease-out infinite ${i * 0.3}s ${isInView ? "running" : "paused"}` }}>
             {/* Checkmark Icon */}
             <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}
-              style={{ animation: `checkmarkPop 4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite ${i * 0.3}s`, animationPlayState: isInView ? "running" : "paused" }}>
+              style={{ animation: `checkmarkPop 4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite ${i * 0.3}s ${isInView ? "running" : "paused"}` }}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
@@ -904,7 +882,7 @@ function TestManagementViz() {
         {/* Scanner Line */}
         <div 
           className="absolute top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-[#22D3EE] to-transparent shadow-[0_0_15px_#22D3EE] z-20 left-4"
-          style={{ animation: "scanSweep 4s linear infinite", animationPlayState: isInView ? "running" : "paused" }}
+          style={{ animation: `scanSweep 4s linear infinite ${isInView ? "running" : "paused"}` }}
         />
       </div>
     </div>
@@ -915,7 +893,7 @@ function InfrastructureViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative max-w-[200px] mt-2 overflow-hidden">
       <style>{`
         @keyframes serverPulse {
           0%, 100% { opacity: 0.4; }
@@ -935,9 +913,10 @@ function InfrastructureViz() {
             <path d="M 60 48 L 140 30" />
             <path d="M 60 48 L 140 66" />
           </g>
-          <g className="stroke-[#22C55E]" strokeWidth="2" fill="none" strokeDasharray="10 60" strokeLinecap="round">
-            <path d="M 60 48 L 140 30" style={{ animation: "dataLink 2s linear infinite", animationPlayState: isInView ? "running" : "paused" }} />
-            <path d="M 60 48 L 140 66" style={{ animation: "dataLink 2.5s linear infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
+          {/* Data links */}
+          <g stroke="#22D3EE" strokeWidth="1.5" strokeDasharray="10 40" fill="none">
+            <path d="M 50 35 L 150 48" style={{ animation: `dataLink 3s linear infinite ${isInView ? "running" : "paused"}` }} />
+            <path d="M 50 60 L 150 48" style={{ animation: `dataLink 3s linear infinite 0.5s ${isInView ? "running" : "paused"}` }} />
           </g>
         </svg>
       </div>
@@ -948,7 +927,7 @@ function InfrastructureViz() {
           <div className="absolute -inset-1 bg-gradient-to-r from-[#1E5FFF]/0 via-[#1E5FFF]/10 to-[#1E5FFF]/0 blur-sm rounded-lg" />
           {[0, 1, 2, 3].map(i => (
             <div key={i} className="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-sm flex items-center px-1 gap-1">
-              <div className="w-1 h-1 rounded-full bg-[#22C55E]" style={{ animation: `serverPulse ${2 + i * 0.5}s ease-in-out infinite`, animationPlayState: isInView ? "running" : "paused" }} />
+              <div className="w-1 h-1 rounded-full bg-[#22C55E]" style={{ animation: `serverPulse ${2 + i * 0.5}s ease-in-out infinite ${isInView ? "running" : "paused"}` }} />
               <div className="flex-1 h-0.5 bg-slate-200 dark:bg-slate-600 rounded-full" />
             </div>
           ))}
@@ -956,12 +935,16 @@ function InfrastructureViz() {
 
         {/* Child Nodes */}
         <div className="flex flex-col gap-3 z-10">
-          <div className="w-8 h-6 bg-white dark:bg-[#0B1220] border border-slate-300 dark:border-[#22C55E]/50 rounded-md shadow-md flex flex-col justify-center px-1.5 gap-1">
-             <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" style={{ animation: "serverPulse 2s ease-in-out infinite 0.5s", animationPlayState: isInView ? "running" : "paused" }} />
-          </div>
-          <div className="w-8 h-6 bg-white dark:bg-[#0B1220] border border-slate-300 dark:border-[#22C55E]/50 rounded-md shadow-md flex flex-col justify-center px-1.5 gap-1">
-             <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" style={{ animation: "serverPulse 3s ease-in-out infinite 1s", animationPlayState: isInView ? "running" : "paused" }} />
-          </div>
+          {[0, 1, 2].map((i) => (
+            <div key={i} className="w-8 h-4 bg-white dark:bg-[#0B1220] border border-slate-300 dark:border-slate-700 rounded flex items-center justify-between px-1.5 shadow-sm">
+              <div className="flex gap-0.5">
+                <div className="w-1 h-1 rounded-full bg-[#1E5FFF]" />
+                <div className="w-1 h-1 rounded-full bg-[#1E5FFF]" />
+              </div>
+              <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E]"
+                   style={{ animation: `serverPulse 2s ease-in-out infinite ${i * 0.2}s ${isInView ? "running" : "paused"}` }} />
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -972,7 +955,7 @@ function SoftwareEngineeringViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex flex-col justify-start px-3 py-2 max-w-[200px] border border-slate-200 dark:border-slate-700/60 shadow-inner relative mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden">
+    <div ref={ref} className="w-full h-16 flex flex-col justify-start px-3 py-2 max-w-[200px] relative mt-2 overflow-hidden">
       <style>{`
         @keyframes scrollCode {
           0% { transform: translateY(0); }
@@ -1003,10 +986,10 @@ function SoftwareEngineeringViz() {
 
       {/* Code Area */}
       <div className="relative flex-1 w-full overflow-hidden font-mono text-[7px] leading-[14px] text-slate-700 dark:text-slate-300 z-10"
-           style={{ animation: "compileGlow 4s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused", border: "1px solid", borderRadius: "4px", padding: "2px 4px" }}>
+           style={{ animation: `compileGlow 4s ease-in-out infinite ${isInView ? "running" : "paused"}`, border: "1px solid", borderRadius: "4px", padding: "2px 4px" }}>
         
         <div className="absolute top-0 left-0 right-0 flex flex-col"
-             style={{ animation: "scrollCode 10s steps(4, end) infinite", animationPlayState: isInView ? "running" : "paused" }}>
+             style={{ animation: `scrollCode 10s steps(4, end) infinite ${isInView ? "running" : "paused"}` }}>
           
           <div className="flex"><span className="text-[#A855F7]">fn</span>&nbsp;<span className="text-[#1E5FFF] dark:text-[#3B82F6]">main</span>()&nbsp;&#123;</div>
           <div className="flex pl-2"><span className="text-[#10B981]">let</span>&nbsp;sys&nbsp;=&nbsp;System::new();</div>
@@ -1025,7 +1008,7 @@ function CloudTransformationViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-between px-4 max-w-[200px] relative mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 flex items-center justify-between px-4 max-w-[200px] relative mt-2 overflow-hidden">
       <style>{`
         @keyframes uploadData {
           0% { transform: translateY(20px) translateX(-10px) scale(0.8); opacity: 0; }
@@ -1047,7 +1030,7 @@ function CloudTransformationViz() {
       <div className="flex flex-col gap-1.5 z-10">
         {[0, 1].map(i => (
           <div key={i} className="w-8 h-3.5 bg-white dark:bg-[#0B1220] border border-slate-300 dark:border-slate-600 rounded flex items-center px-1 shadow-sm relative">
-            <div className="w-1 h-1 rounded-full bg-[#1E5FFF]" style={{ animation: "serverOn 2s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }} />
+            <div className="w-1 h-1 rounded-full bg-[#1E5FFF]" style={{ animation: `serverOn 2s ease-in-out infinite ${isInView ? "running" : "paused"}` }} />
           </div>
         ))}
       </div>
@@ -1060,8 +1043,7 @@ function CloudTransformationViz() {
              key={i}
              className="absolute w-2 h-2 rounded bg-gradient-to-tr from-[#1E5FFF] to-[#22D3EE] shadow-[0_0_8px_rgba(30,95,255,0.6)]"
              style={{ 
-               animation: `uploadData ${2 + i * 0.5}s ease-in-out infinite ${i * 0.4}s`,
-               animationPlayState: isInView ? "running" : "paused",
+               animation: `uploadData ${2 + i * 0.5}s ease-in-out infinite ${i * 0.4}s ${isInView ? "running" : "paused"}`,
                opacity: 0
              }}
            />
@@ -1070,7 +1052,7 @@ function CloudTransformationViz() {
 
       {/* Cloud Environment (Right) */}
       <div className="relative z-10 text-[#1E5FFF] bg-white dark:bg-[#0B1220] rounded-xl p-1.5 border border-[#1E5FFF]/40 shadow-md flex items-center justify-center"
-           style={{ animation: "cloudPulse 4s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }}>
+           style={{ animation: `cloudPulse 4s ease-in-out infinite ${isInView ? "running" : "paused"}` }}>
         <Cloud className="w-7 h-7" />
         <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#22C55E] rounded-full border-2 border-white dark:border-[#0F172A]" />
       </div>
@@ -1082,7 +1064,7 @@ function AISolutionsViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 relative max-w-[200px] flex items-center justify-center mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 relative flex items-center justify-center mt-2 overflow-hidden">
       <style>{`
         @keyframes aiPulse {
           0%, 100% { box-shadow: 0 0 10px rgba(168, 85, 247, 0.2), inset 0 0 10px rgba(168, 85, 247, 0.1); }
@@ -1145,7 +1127,7 @@ function AISolutionsViz() {
       {/* Central Chip */}
       <div 
         className="relative z-10 w-[42px] h-[42px] bg-white dark:bg-[#0A0F1C] border border-purple-400 dark:border-[#A855F7] flex items-center justify-center rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.15)] dark:shadow-[0_0_15px_rgba(168,85,247,0.3)]"
-        style={{ animation: "aiPulse 3s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused" }}
+        style={{ animation: `aiPulse 3s ease-in-out infinite ${isInView ? "running" : "paused"}` }}
       >
         {/* Inner glow frame */}
         <div className="absolute inset-[2px] border border-purple-300/50 dark:border-[#22D3EE]/30 rounded-[1px]" />
@@ -1191,7 +1173,7 @@ function DevOpsViz() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: false, margin: "100px" });
   return (
-    <div ref={ref} className="w-full h-24 flex items-center justify-center relative max-w-[200px] mt-2 rounded-lg bg-background dark:bg-[#0F172A] overflow-hidden border border-slate-200 dark:border-slate-700/60 shadow-inner">
+    <div ref={ref} className="w-full h-16 flex items-center justify-center relative max-w-[200px] mt-2 overflow-hidden">
       <style>{`
         @keyframes drawInfinity {
           0% { stroke-dashoffset: 300; opacity: 0; }
@@ -1226,7 +1208,7 @@ function DevOpsViz() {
              className="stroke-[#22C55E]" 
              strokeLinecap="round"
              strokeDasharray="40 260"
-             style={{ animation: "drawInfinity 3s linear infinite", animationPlayState: isInView ? "running" : "paused", filter: "drop-shadow(0 0 4px #22C55E)" }}
+             style={{ animation: `drawInfinity 3s linear infinite ${isInView ? "running" : "paused"}`, filter: "drop-shadow(0 0 4px #22C55E)" }}
            />
         </svg>
       </div>
@@ -1234,11 +1216,11 @@ function DevOpsViz() {
       {/* Nodes */}
       <div className="absolute inset-0 z-10">
          {/* Build Node */}
-         <div className="absolute w-6 h-6 rounded-full bg-white dark:bg-[#0B1220] border-2 border-[#22C55E] flex items-center justify-center" style={{ animation: "pulseNode 3s ease-in-out infinite", animationPlayState: isInView ? "running" : "paused", left: "calc(50% - 30px)", top: "50%" }}>
+         <div className="absolute w-6 h-6 rounded-full bg-white dark:bg-[#0B1220] border-2 border-[#22C55E] flex items-center justify-center" style={{ animation: `pulseNode 3s ease-in-out infinite ${isInView ? "running" : "paused"}`, left: "calc(50% - 30px)", top: "50%" }}>
            <Code className="w-3 h-3 text-[#22C55E]" />
          </div>
          {/* Deploy Node */}
-         <div className="absolute w-6 h-6 rounded-full bg-white dark:bg-[#0B1220] border-2 border-[#1E5FFF] flex items-center justify-center" style={{ animation: "pulseNodeBlue 3s ease-in-out infinite 1.5s", animationPlayState: isInView ? "running" : "paused", left: "calc(50% + 30px)", top: "50%" }}>
+         <div className="absolute w-6 h-6 rounded-full bg-white dark:bg-[#0B1220] border-2 border-[#1E5FFF] flex items-center justify-center" style={{ animation: `pulseNodeBlue 3s ease-in-out infinite 1.5s ${isInView ? "running" : "paused"}`, left: "calc(50% + 30px)", top: "50%" }}>
            <Cloud className="w-3 h-3 text-[#1E5FFF]" />
          </div>
       </div>
@@ -1302,7 +1284,7 @@ export default function Home() {
     {
       title: "IT Consulting",
       desc: "Strategic technology planning to align your technical assets with key business metrics.",
-      icon: <Layers className="w-6 h-6" />,
+      icon: <Layers className="w-5 h-5" />,
       href: "/services/it-consulting",
       tags: ["Tech Roadmap", "Architecture Design", "Digital Transformation"],
       viz: ITConsultingViz
@@ -1310,7 +1292,7 @@ export default function Home() {
     {
       title: "Project Management",
       desc: "Methodical agile project delivery ensuring deadlines are met with quality safeguards.",
-      icon: <Activity className="w-6 h-6" />,
+      icon: <Kanban className="w-5 h-5" />,
       href: "/services/project-management",
       tags: ["Agile & Scrum", "Risk Management", "Stakeholder Alignment"],
       viz: ProjectManagementViz
@@ -1318,7 +1300,7 @@ export default function Home() {
     {
       title: "Test Management",
       desc: "Rigorous quality assurance testing pipelines built for modern enterprise applications.",
-      icon: <Shield className="w-6 h-6" />,
+      icon: <ShieldCheck className="w-5 h-5" />,
       href: "/services/test-management",
       tags: ["QA Automation", "CI/CD Setup"],
       viz: TestManagementViz
@@ -1326,7 +1308,7 @@ export default function Home() {
     {
       title: "Infrastructure Management",
       desc: "Optimized, secure network architectures and server migrations built for scale.",
-      icon: <Monitor className="w-6 h-6" />,
+      icon: <Server className="w-5 h-5" />,
       href: "/services/infrastructure-management",
       tags: ["Cloud Networks", "24/7 Monitoring"],
       viz: InfrastructureViz
@@ -1334,7 +1316,7 @@ export default function Home() {
     {
       title: "Software Engineering",
       desc: "Custom enterprise applications built with modern architectures and clean code practices.",
-      icon: <Code className="w-6 h-6" />,
+      icon: <Code className="w-5 h-5" />,
       href: "/software",
       tags: ["Full-Stack", "Enterprise APIs"],
       viz: SoftwareEngineeringViz
@@ -1342,7 +1324,7 @@ export default function Home() {
     {
       title: "Cloud Transformation",
       desc: "Architecting resilient multi-cloud environments and accelerating migration to modernize enterprise infrastructure.",
-      icon: <Cloud className="w-6 h-6" />,
+      icon: <Cloud className="w-5 h-5" />,
       href: "/technology/cloud-solutions",
       tags: ["Multi-Cloud", "Migration"],
       viz: CloudTransformationViz
@@ -1350,7 +1332,7 @@ export default function Home() {
     {
       title: "AI Solutions",
       desc: "Deploying predictive models and generative AI pipelines to automate workflows and unlock operational intelligence.",
-      icon: <Cpu className="w-6 h-6" />,
+      icon: <Cpu className="w-5 h-5" />,
       href: "/technology/ai-machine-learning",
       tags: ["Generative AI", "Predictive Analytics"],
       viz: AISolutionsViz
@@ -1358,7 +1340,7 @@ export default function Home() {
     {
       title: "DevOps",
       desc: "Streamlined CI/CD pipelines, infrastructure as code, and container orchestration at scale.",
-      icon: <Zap className="w-6 h-6" />,
+      icon: <Infinity className="w-5 h-5" />,
       href: "/technology/devops",
       tags: ["IaC", "Containerization"],
       viz: DevOpsViz
@@ -1375,8 +1357,8 @@ export default function Home() {
         <style>{`
           .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.85) 40%, rgba(245,248,255,0.55) 58%, rgba(245,248,255,0.15) 72%, transparent 88%); }
           .scrim-mobile { background: linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 60%, transparent 100%); }
-          .dark .scrim-mobile { background: linear-gradient(to right, rgba(11,14,20,0.98) 0%, rgba(11,14,20,0.95) 60%, rgba(11,14,20,0.7) 85%, transparent 100%); }
-          .scrim-diagonal-dark { background: linear-gradient(110deg, rgba(11,14,20,0.97) 0%, rgba(11,14,20,0.93) 20%, rgba(11,14,20,0.82) 40%, rgba(11,14,20,0.50) 58%, rgba(11,14,20,0.12) 72%, transparent 88%); }
+          .dark .scrim-mobile { background: linear-gradient(to right, rgba(18,18,18,0.98) 0%, rgba(18,18,18,0.95) 60%, rgba(18,18,18,0.7) 85%, transparent 100%); }
+          .scrim-diagonal-dark { background: linear-gradient(110deg, rgba(18,18,18,0.97) 0%, rgba(18,18,18,0.93) 20%, rgba(18,18,18,0.82) 40%, rgba(18,18,18,0.50) 58%, rgba(18,18,18,0.12) 72%, transparent 88%); }
         `}</style>
         
         {/* Layer 0: Full-Bleed Map Background */}
@@ -1470,7 +1452,7 @@ export default function Home() {
       <section className="w-full py-16 md:py-20 relative z-10 bg-background" aria-label="Trusted Partners">
         <div className="w-full container px-6 sm:px-8 mx-auto space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
               Our Clients
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Trusted by Enterprise Leaders</h2>
@@ -1509,12 +1491,11 @@ export default function Home() {
 
       {/* ═══════ SERVICES SECTION — TWO-TIER REDESIGN ═══════ */}
       <section className="w-full py-20 md:py-32 relative z-10 bg-background border-t border-border overflow-hidden" aria-label="Services">
-        <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37,99,235,0.04) 0%, transparent 60%)' }} aria-hidden="true" />
         <div className="w-full container px-6 sm:px-8 mx-auto space-y-14 relative z-10">
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-primary/10 text-primary border border-primary/20 mb-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
               How We Deliver
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">One Partner. Full Technology Lifecycle.</h2>
@@ -1555,10 +1536,10 @@ export default function Home() {
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {services[0].tags?.map(f => (
-                      <span key={f} className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/20">{f}</span>
+                      <span key={f} className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-[#222222] text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-[#333333] hover:border-blue-500/40 transition-colors">{f}</span>
                     ))}
                   </div>
-                  <div className="w-full rounded-xl bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[100px]">
+                  <div className="w-full flex items-center justify-center py-2 flex-1 min-h-[100px]">
                     <ITConsultingViz />
                   </div>
                   <span className="text-blue-600 dark:text-blue-400 font-bold text-sm inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
@@ -1581,7 +1562,7 @@ export default function Home() {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <div className="h-10 w-10 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center mb-3 group-hover:bg-indigo-500/20 transition-colors duration-200">
-                        <Activity className="w-5 h-5" />
+                        {services[1].icon}
                       </div>
                       <h3 className="text-xl font-bold text-foreground">Project Management</h3>
                       <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed max-w-[260px]">Methodical agile project delivery ensuring deadlines are met with quality safeguards.</p>
@@ -1593,10 +1574,10 @@ export default function Home() {
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {services[1].tags?.map(f => (
-                      <span key={f} className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 border border-indigo-500/20">{f}</span>
+                      <span key={f} className="text-[11px] font-medium px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-[#222222] text-slate-700 dark:text-slate-300 border border-slate-200/80 dark:border-[#333333] hover:border-indigo-500/40 transition-colors">{f}</span>
                     ))}
                   </div>
-                  <div className="w-full rounded-xl bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[100px]">
+                  <div className="w-full flex items-center justify-center py-2 flex-1 min-h-[100px]">
                     <ProjectManagementViz />
                   </div>
                   <span className="text-indigo-600 dark:text-indigo-400 font-bold text-sm inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
@@ -1640,7 +1621,7 @@ export default function Home() {
                         </div>
 
                         {VizComponent && (
-                          <div className="w-full rounded-xl bg-background/60 border border-border flex items-center justify-center py-2 flex-1 min-h-[90px] overflow-hidden my-1">
+                          <div className="w-full flex items-center justify-center py-2 flex-1 min-h-[90px] overflow-hidden my-1">
                             <div className="scale-[0.85] origin-center w-full flex justify-center">
                               <VizComponent />
                             </div>
@@ -1671,139 +1652,124 @@ export default function Home() {
 
 
       {/* ═══════ TECHNOLOGY ECOSYSTEM ═══════ */}
-      <section className="w-full py-20 md:py-32 relative z-10 border-t border-border bg-background" aria-label="Technology Ecosystem">
-        <div className="w-full container px-6 sm:px-8 mx-auto space-y-12">
+      <section className="w-full py-24 relative z-10 border-t border-border bg-background" aria-label="Technology Ecosystem">
+        <div className="w-full container px-6 sm:px-8 mx-auto space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2563EB]/8 text-[#2563EB] border border-[#2563EB]/15 mb-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
               Technology Ecosystem
             </div>
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Enterprise-Grade Technology Stack</h2>
-            <p className="text-muted-foreground text-lg font-medium leading-relaxed">Industry-leading tools and platforms powering our consulting and delivery capabilities.</p>
+            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Enterprise-grade technology stack</h2>
+            <p className="text-slate-600 dark:text-slate-400 text-lg font-medium">Industry-leading tools and platforms powering our consulting and delivery capabilities</p>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 pt-8">
-            {/* Left: Stats Box */}
-            <div className="lg:col-span-5 flex items-start">
-              <div className="w-full grid grid-cols-2 gap-4 h-full">
-                <SpotlightCard borderGlow={false} className="flex flex-col justify-end h-full shadow-sm hover-card-effect p-5">
-                  <div className="flex flex-col items-start gap-2 mb-3">
-                    <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
-                      <Users size={18} />
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-black text-foreground leading-none"><AnimatedCounter target={stats.clientsCount} /></h4>
-                    </div>
-                  </div>
-                  <div className="w-full">
-                    <p className="text-xs font-bold text-foreground">Enterprise Clients</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5 mb-2">across Ireland & Europe</p>
-                    <EnterpriseClientsViz />
-                  </div>
-                </SpotlightCard>
-
-                <SpotlightCard borderGlow={false} className="flex flex-col justify-end h-full shadow-sm hover-card-effect p-5">
-                  <div className="flex flex-col items-start gap-2 mb-3">
-                    <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
-                      <Award size={18} />
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-black text-foreground leading-none"><AnimatedCounter target={99.9} suffix="%" /></h4>
-                    </div>
-                  </div>
-                  <div className="w-full">
-                    <p className="text-xs font-bold text-foreground">SLA Uptime</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5 mb-2">guaranteed availability</p>
-                    <SLAUptimeViz />
-                  </div>
-                </SpotlightCard>
-
-                <SpotlightCard borderGlow={false} className="flex flex-col justify-end h-full shadow-sm hover-card-effect p-5">
-                  <div className="flex flex-col items-start gap-2 mb-3">
-                    <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
-                      <Clock size={18} />
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-black text-foreground leading-none"><AnimatedCounter target={stats.experienceYears} suffix="+" /></h4>
-                    </div>
-                  </div>
-                  <div className="w-full">
-                    <p className="text-xs font-bold text-foreground">Years Experience</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5 mb-2">in enterprise IT</p>
-                    <ExperienceTimelineViz />
-                  </div>
-                </SpotlightCard>
-
-                <SpotlightCard borderGlow={false} className="flex flex-col justify-end h-full shadow-sm hover-card-effect p-5">
-                  <div className="flex flex-col items-start gap-2 mb-3">
-                    <div className="w-9 h-9 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[#2563EB] flex items-center justify-center shrink-0">
-                      <Briefcase size={18} />
-                    </div>
-                    <div>
-                      <h4 className="text-2xl font-black text-foreground leading-none"><AnimatedCounter target={stats.engineersCount} /></h4>
-                    </div>
-                  </div>
-                  <div className="w-full">
-                    <p className="text-xs font-bold text-foreground">Certified Engineers</p>
-                    <p className="text-[10px] text-muted-foreground mt-0.5 mb-2">across disciplines</p>
-                    <CertifiedEngineersViz />
-                  </div>
-                </SpotlightCard>
+          {/* Top Row: Formal Stat Cards with Micro Visualizations */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
+              <div>
+                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.clientsCount} /></span>
+                <span className="text-sm font-semibold text-slate-900 dark:text-white block">Enterprise clients</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">Across Ireland and Europe</span>
+              </div>
+              <div className="flex items-center justify-center h-16">
+                <EnterpriseClientsViz />
               </div>
             </div>
 
-            {/* Right: Categorized Technology Ecosystem Grid */}
-            <div className="lg:col-span-7 space-y-8 pl-0 lg:pl-8">
-              {/* Cloud Platforms & Engineering (First 2 categories) */}
-              {refinedTechCategories.slice(0, 2).map((cat) => (
-                <div key={cat.category} className="space-y-3">
-                  <div className="flex items-center justify-between border-b-2 border-primary/20 pb-2">
-                    <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">
-                      {cat.category}
-                    </h4>
-                    <Link href="/technology" className="text-[12px] font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-1 group/link">
-                      View all <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5" />
-                    </Link>
-                  </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                    {cat.items.map((tech) => (
-                      <TechCard key={tech.name} tech={tech} />
-                    ))}
-                  </div>
-                </div>
-              ))}
+            <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
+              <div>
+                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={99.9} suffix="%" /></span>
+                <span className="text-sm font-semibold text-slate-900 dark:text-white block">SLA uptime</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">Guaranteed availability</span>
+              </div>
+              <div className="flex items-center justify-center h-16">
+                <SLAUptimeViz />
+              </div>
+            </div>
 
-              {/* DevOps & Security Side-by-Side */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {refinedTechCategories.slice(2, 4).map((cat) => (
-                  <div key={cat.category} className="space-y-3">
-                    <div className="flex items-center justify-between border-b-2 border-primary/20 pb-2">
-                      <h4 className="text-xs font-black uppercase tracking-wider text-muted-foreground font-mono">
-                        {cat.category}
-                      </h4>
-                      <Link href="/technology" className="text-[12px] font-bold text-primary hover:text-primary/80 transition-colors flex items-center gap-1 group/link">
-                        View all <ChevronRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5" />
-                      </Link>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      {cat.items.map((tech) => (
-                        <TechCard key={tech.name} tech={tech} />
-                      ))}
-                    </div>
-                  </div>
+            <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
+              <div>
+                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.experienceYears} suffix="+" /></span>
+                <span className="text-sm font-semibold text-slate-900 dark:text-white block">Years experience</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">In enterprise IT</span>
+              </div>
+              <div className="flex items-center justify-center h-16">
+                <ExperienceTimelineViz />
+              </div>
+            </div>
+
+            <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
+              <div>
+                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.engineersCount} /></span>
+                <span className="text-sm font-semibold text-slate-900 dark:text-white block">Certified engineers</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">Across disciplines</span>
+              </div>
+              <div className="flex items-center justify-center h-16">
+                <CertifiedEngineersViz />
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Row: Tabular Tech Categories */}
+          <div className="space-y-10 pt-4">
+            {/* Cloud Platforms */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#333333] pb-3">
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Cloud platforms</h4>
+                <Link href="/technology" className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                  View all
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {refinedTechCategories[0].items.map((tech) => (
+                  <TechCard key={tech.name} tech={tech} />
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Explore CTA Row */}
-          <div className="flex justify-center pt-2">
-            <a
-              href="/technology"
-              className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors group"
-            >
-              Explore Our Full Technology Stack
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:translate-x-1 transition-transform duration-200"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
+            {/* Engineering */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#333333] pb-3">
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Engineering</h4>
+                <Link href="/technology" className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                  View all
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {refinedTechCategories[1].items.map((tech) => (
+                  <TechCard key={tech.name} tech={tech} />
+                ))}
+              </div>
+            </div>
+
+            {/* DevOps and Security Side-by-Side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#333333] pb-3">
+                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white">DevOps and infrastructure</h4>
+                  <Link href="/technology" className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                    View all
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {refinedTechCategories[2].items.map((tech) => (
+                    <TechCard key={tech.name} tech={tech} />
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#333333] pb-3">
+                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Security and intelligence</h4>
+                  <Link href="/technology" className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                    View all
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {refinedTechCategories[3].items.map((tech) => (
+                    <TechCard key={tech.name} tech={tech} />
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -1813,7 +1779,7 @@ export default function Home() {
       <section id="corporate-intelligence" className="w-full py-20 md:py-32 relative z-10 bg-background border-t border-border" aria-label="Corporate Intelligence">
         <div className="w-full container px-6 sm:px-8 mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2563EB]/8 text-[#2563EB] border border-[#2563EB]/15 mb-2">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
               Corporate Intelligence
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">
@@ -1844,7 +1810,7 @@ export default function Home() {
         <div className="w-full px-6 sm:px-12 md:px-24 lg:px-32 py-10 md:py-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-1 max-w-md">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-primary mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
                 Stay Connected
               </div>
               <h3 className="text-xl font-extrabold text-foreground tracking-tight">

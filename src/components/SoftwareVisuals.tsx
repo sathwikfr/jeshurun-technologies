@@ -124,7 +124,7 @@ export function CloudNativeViz() {
 
       {/* ── Floating Card: Replicas Running (Top-Right) ─────────────── */}
       <motion.div
-        className="absolute top-8 right-4 md:right-8 z-20 bg-white/90 dark:bg-[#030f1a]/85 backdrop-blur-md border border-slate-200 dark:border-green-500/30 rounded-xl p-3 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-44"
+        className="absolute top-8 right-4 md:right-8 z-20 bg-white/90 dark:bg-[#161616]/90 backdrop-blur-md border border-slate-200 dark:border-green-500/30 rounded-xl p-3 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-44"
         initial={{ opacity: 0, x: 30 }}
         animate={isInView ? { opacity: 1, x: 0, ...float(0.4, 9) } : { opacity: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
@@ -151,7 +151,7 @@ export function CloudNativeViz() {
 
       {/* ── Floating Card: CI/CD Pipeline (Bottom-Right) ──────────── */}
       <motion.div
-        className="absolute bottom-14 right-0 md:-right-2 z-20 bg-white/90 dark:bg-[#030f1a]/85 backdrop-blur-md border border-slate-200 dark:border-green-500/30 rounded-xl p-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-48"
+        className="absolute bottom-14 right-0 md:-right-2 z-20 bg-white/90 dark:bg-[#161616]/90 backdrop-blur-md border border-slate-200 dark:border-green-500/30 rounded-xl p-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-48"
         initial={{ opacity: 0, x: 30 }}
         animate={isInView ? { opacity: 1, x: 0, ...float(1.2, 8) } : { opacity: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
@@ -187,7 +187,7 @@ export function CloudNativeViz() {
 
       {/* ── Floating Card: Auto-Scale Status (Left) ──────────────────── */}
       <motion.div
-        className="absolute top-1/2 -translate-y-1/2 left-0 md:left-2 z-20 bg-white/90 dark:bg-[#030f1a]/85 backdrop-blur-md border border-slate-200 dark:border-cyan-500/30 rounded-xl p-4 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-44"
+        className="absolute top-1/2 -translate-y-1/2 left-0 md:left-2 z-20 bg-white/90 dark:bg-[#161616]/90 backdrop-blur-md border border-slate-200 dark:border-cyan-500/30 rounded-xl p-4 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-44"
         initial={{ opacity: 0, x: -30 }}
         animate={isInView ? { opacity: 1, x: 0, ...float(2, 11) } : { opacity: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
@@ -382,7 +382,7 @@ export function LegacyModernizationViz() {
       
       {/* 1. System Health Card (Top Left) */}
       <motion.div
-        className="absolute top-6 left-0 md:left-4 z-20 bg-white/90 dark:bg-[#030f1a]/85 backdrop-blur-md border rounded-xl p-3 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-44 transition-colors duration-700"
+        className="absolute top-6 left-0 md:left-4 z-20 bg-white/90 dark:bg-[#161616]/90 backdrop-blur-md border rounded-xl p-3 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-44 transition-colors duration-700"
         style={{ borderColor: !isAfter ? 'rgba(239,68,68,0.3)' : 'rgba(52,211,153,0.3)' }}
         initial={{ opacity: 0, x: -30 }}
         animate={isInView ? { opacity: 1, x: 0, ...float(0.5, 9) } : { opacity: 0 }}
@@ -425,7 +425,7 @@ export function LegacyModernizationViz() {
 
       {/* 2. Deploy Cycle Card (Bottom Right) */}
       <motion.div
-        className="absolute bottom-12 right-0 md:right-4 z-20 bg-white/90 dark:bg-[#030f1a]/85 backdrop-blur-md border rounded-xl p-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-48 transition-colors duration-700"
+        className="absolute bottom-12 right-0 md:right-4 z-20 bg-white/90 dark:bg-[#161616]/90 backdrop-blur-md border rounded-xl p-3.5 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-48 transition-colors duration-700"
         style={{ borderColor: !isAfter ? 'rgba(239,68,68,0.3)' : 'rgba(52,211,153,0.3)' }}
         initial={{ opacity: 0, x: 30 }}
         animate={isInView ? { opacity: 1, x: 0, ...float(1.2, 7) } : { opacity: 0 }}
@@ -456,7 +456,7 @@ export function LegacyModernizationViz() {
 
       {/* 3. Risk Level Indicator (Top Right) */}
       <motion.div
-        className="absolute top-1/2 -translate-y-1/2 right-0 md:right-8 z-20 bg-white/90 dark:bg-[#030f1a]/85 backdrop-blur-md border rounded-xl p-3 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-40 flex items-center gap-3 transition-colors duration-700"
+        className="absolute top-1/2 -translate-y-1/2 right-0 md:right-8 z-20 bg-white/90 dark:bg-[#161616]/90 backdrop-blur-md border rounded-xl p-3 shadow-[0_8px_30px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] w-40 flex items-center gap-3 transition-colors duration-700"
         style={{ borderColor: !isAfter ? 'rgba(239,68,68,0.3)' : 'rgba(52,211,153,0.3)' }}
         initial={{ opacity: 0, x: 30 }}
         animate={isInView ? { opacity: 1, x: 0, ...float(1.8, 10) } : { opacity: 0 }}
