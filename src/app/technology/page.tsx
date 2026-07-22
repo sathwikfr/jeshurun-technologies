@@ -255,7 +255,7 @@ export default function Technology() {
       accentText: "text-blue-600 dark:text-blue-400",
       accentBorder: "border-blue-500/20",
       stat: "3 Platforms",
-      statLabel: "AWS â€¢ Azure â€¢ GCP",
+      statLabel: "AWS • Azure • GCP",
       tags: ["Multi-Cloud", "Auto-Scaling", "Cost Optimisation"],
       counter: { target: 3, suffix: " Platforms", isNumeric: true }
     },

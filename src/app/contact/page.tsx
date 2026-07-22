@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -177,7 +177,7 @@ ${formData.message}
             variants={item}
             className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-medium"
           >
-            From secure cloud infrastructure to mission-critical software. Tell us what youâ€™re buildingâ€”or what's holding you backâ€”and a senior consultant will be in touch within 2 business hours.
+            From secure cloud infrastructure to mission-critical software. Tell us what you're building — or what's holding you back — and a senior consultant will be in touch within 2 business hours.
           </motion.p>
 
           {/* TRUST STRIP */}
@@ -199,7 +199,7 @@ ${formData.message}
                   {stat}
                 </motion.span>
                 {idx < arr.length - 1 && (
-                  <motion.span variants={item} className="hidden sm:inline text-slate-300 dark:text-slate-700">â€¢</motion.span>
+                  <motion.span variants={item} className="hidden sm:inline text-slate-300 dark:text-slate-700 font-bold">•</motion.span>
                 )}
               </span>
             ))}
@@ -531,8 +531,8 @@ ${formData.message}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
               {[
                 { label: "Initial Response", val: "< 2 Hours" },
-                { label: "Proposal Turnaround", val: "24â€“48 Hours" },
-                { label: "Discovery Workshop", val: "1â€“3 Days" },
+                { label: "Proposal Turnaround", val: "24-48 Hours" },
+                { label: "Discovery Workshop", val: "1-3 Days" },
                 { label: "Support Coverage", val: "24/7" }
               ].map((stat, i) => (
                 <motion.div key={i} variants={item}>

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -279,7 +279,7 @@ export default function AboutPage() {
                     variants={item}
                     className="text-base sm:text-lg text-slate-600 dark:text-slate-400 font-medium leading-relaxed max-w-2xl mx-auto"
                   >
-                    We don't just deliver technologyâ€”we architect resilient ecosystems designed to scale and secure your enterprise's future.
+                    We don't just deliver technology — we architect resilient ecosystems designed to scale and secure your enterprise's future.
                   </motion.p>
                 </div>
                 

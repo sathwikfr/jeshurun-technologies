@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -21,7 +21,7 @@ const mockFallbackPosts = [
     id: "1",
     category: "Security",
     tag: "Research Report",
-    title: "Why Today's Cyber Talent Model Is Broken â€” And How to Fix It",
+    title: "Why Today's Cyber Talent Model Is Broken — And How to Fix It",
     excerpt: "Cybersecurity needs hybrid technical and strategic skills, but the workforce hasn't kept pace. Learn the three moves organizations can make to build resilience from within.",
     author: "Jeshurun Editorial",
     date: "June 10, 2026",
