@@ -249,7 +249,7 @@ export function MethodologyTimeline({
                         }`}>
                           0{i + 1}
                         </span>
-                        <h4 className={`text-lg sm:text-xl font-serif transition-colors duration-500 ${isActive ? "text-slate-900 dark:text-white" : "text-foreground"}`}>
+                        <h4 className={`text-lg sm:text-xl font-bold transition-colors duration-500 ${isActive ? "text-slate-900 dark:text-white" : "text-foreground"}`}>
                           {stage.title}
                         </h4>
                       </div>

@@ -153,7 +153,9 @@ export default function CareersPage() {
               </div>
               <div className="w-px h-10 bg-border" />
               <div className="text-center">
-                <p className="text-2xl font-black text-foreground">ðŸ‡®ðŸ‡ª</p>
+                <div className="h-8 flex items-center justify-center">
+                  <img src="https://flagcdn.com/w40/ie.png" alt="Ireland" className="w-7 h-4.5 rounded-[2px] shadow-xs object-cover" />
+                </div>
                 <p className="text-xs text-muted-foreground font-medium">Dublin HQ</p>
               </div>
             </div>

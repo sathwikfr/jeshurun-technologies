@@ -2,20 +2,13 @@
 
 
 
-import { useState } from "react";
-
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-
 import { Input } from "@/components/ui/input";
-
 import { Textarea } from "@/components/ui/textarea";
-
 import { Label } from "@/components/ui/label";
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
 import { motion, AnimatePresence, type Variants } from "framer-motion";
-
 import { 
   MapPin, 
   Mail, 
@@ -33,10 +26,23 @@ import {
   Laptop,
   Server,
   Workflow,
-  Key
+  Key,
+  ChevronDown
 } from "lucide-react";
-
 import { SpotlightCard } from "@/components/SpotlightCard";
+
+const COUNTRY_OPTIONS = [
+  { code: "+353", iso: "ie", name: "Ireland" },
+  { code: "+1", iso: "us", name: "United States" },
+  { code: "+44", iso: "gb", name: "United Kingdom" },
+  { code: "+91", iso: "in", name: "India" },
+  { code: "+971", iso: "ae", name: "UAE" },
+  { code: "+61", iso: "au", name: "Australia" },
+  { code: "+49", iso: "de", name: "Germany" },
+  { code: "+33", iso: "fr", name: "France" },
+  { code: "+81", iso: "jp", name: "Japan" },
+  { code: "+65", iso: "sg", name: "Singapore" },
+];
 
 
 const container: Variants = {
@@ -70,6 +76,20 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState<{ success: boolean; message: string } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const countryDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(event.target as Node)) {
+        setIsCountryOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const selectedCountry = COUNTRY_OPTIONS.find((c) => c.code === formData.countryCode) || COUNTRY_OPTIONS[0];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -165,7 +185,7 @@ ${formData.message}
           
           <motion.h1 
             variants={item}
-            className="text-4xl sm:text-5xl md:text-6xl font-serif tracking-tight leading-[1.15] text-foreground"
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.15] text-foreground"
           >
             <span className="text-slate-900 dark:text-white block">Let's Solve Your Hardest</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 block">
@@ -223,7 +243,7 @@ ${formData.message}
           >
             <SpotlightCard className="p-6 md:p-8 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden flex-1">
               <div className="space-y-2 mb-8 border-b border-slate-200/50 dark:border-slate-800/50 pb-6">
-                <h2 className="text-2xl md:text-3xl font-serif text-slate-900 dark:text-white tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                   Start a Conversation
                 </h2>
                 <p className="text-slate-600 dark:text-slate-400 font-medium text-sm sm:text-base leading-relaxed">
@@ -331,28 +351,47 @@ ${formData.message}
                   <div className="space-y-2">
                     <Label htmlFor="phone" className="text-sm font-bold text-slate-700 dark:text-slate-300">Phone Number</Label>
                     <div className="flex gap-2">
-                      <div className="relative w-28 shrink-0">
-                        <select
-                          id="countryCode"
-                          value={formData.countryCode}
-                          onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+                      <div className="relative shrink-0" ref={countryDropdownRef}>
+                        <button
+                          type="button"
+                          onClick={() => setIsCountryOpen(!isCountryOpen)}
                           disabled={isSubmitting}
-                          className="w-full bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus:border-[#0057D9] focus:ring-1 focus:ring-[#0057D9] h-12 rounded-xl pl-3 pr-8 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all appearance-none cursor-pointer outline-none text-sm"
+                          className="h-12 px-3 bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus:border-[#0057D9] focus:ring-1 focus:ring-[#0057D9] rounded-xl flex items-center gap-2 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all cursor-pointer text-sm"
                         >
-                          <option value="+353">ðŸ‡®ðŸ‡ª +353</option>
-                          <option value="+1">ðŸ‡ºðŸ‡¸ +1</option>
-                          <option value="+44">ðŸ‡¬ðŸ‡§ +44</option>
-                          <option value="+91">ðŸ‡®ðŸ‡³ +91</option>
-                          <option value="+971">ðŸ‡¦ðŸ‡ª +971</option>
-                          <option value="+61">ðŸ‡¦ðŸ‡º +61</option>
-                          <option value="+49">ðŸ‡©ðŸ‡ª +49</option>
-                          <option value="+33">ðŸ‡«ðŸ‡· +33</option>
-                          <option value="+81">ðŸ‡¯ðŸ‡µ +81</option>
-                          <option value="+65">ðŸ‡¸ðŸ‡¬ +65</option>
-                        </select>
-                        <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-slate-500">
-                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 9l-7 7-7-7"></path></svg>
-                        </div>
+                          <img
+                            src={`https://flagcdn.com/w40/${selectedCountry.iso}.png`}
+                            alt={selectedCountry.name}
+                            className="w-5 h-3.5 object-cover rounded-[2px] shadow-xs"
+                          />
+                          <span>{selectedCountry.code}</span>
+                          <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform ${isCountryOpen ? "rotate-180" : ""}`} />
+                        </button>
+
+                        {isCountryOpen && (
+                          <div className="absolute top-full left-0 mt-1 w-52 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl z-50 overflow-hidden py-1 max-h-60 overflow-y-auto">
+                            {COUNTRY_OPTIONS.map((c) => (
+                              <button
+                                key={c.iso}
+                                type="button"
+                                onClick={() => {
+                                  setFormData({ ...formData, countryCode: c.code });
+                                  setIsCountryOpen(false);
+                                }}
+                                className={`w-full px-3 py-2 text-left text-sm flex items-center gap-2.5 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors ${
+                                  formData.countryCode === c.code ? "bg-slate-100/80 dark:bg-slate-800 font-bold text-[#0057D9]" : "text-slate-700 dark:text-slate-300"
+                                }`}
+                              >
+                                <img
+                                  src={`https://flagcdn.com/w40/${c.iso}.png`}
+                                  alt={c.name}
+                                  className="w-5 h-3.5 object-cover rounded-[2px] shadow-xs"
+                                />
+                                <span className="flex-1 truncate">{c.name}</span>
+                                <span className="text-xs font-mono opacity-60">{c.code}</span>
+                              </button>
+                            ))}
+                          </div>
+                        )}
                       </div>
                       <Input 
                         id="phone" 

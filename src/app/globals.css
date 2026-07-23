@@ -84,7 +84,7 @@
   --border: #E5E7EB;
   --input: #E5E7EB;
 
-  --primary: #0033A0; /* Cognizant Primary Blue (for Light Mode) */
+  --primary: #2563EB; /* Normal Blue */
   --primary-foreground: #FFFFFF;
   
   --secondary: #F8FAFC;
@@ -99,7 +99,7 @@
   --destructive: #EF4444;
   --destructive-foreground: #FFFFFF;
 
-  --ring: #0033A0;
+  --ring: #2563EB;
   --radius: 0.75rem;
 
   --section-divider: #E5E7EB;
@@ -120,7 +120,7 @@
   --sidebar-accent: #F1F5F9;
   --sidebar-accent-foreground: #1E293B;
   --sidebar-border: #E5E7EB;
-  --sidebar-ring: #0033A0;
+  --sidebar-ring: #2563EB;
 
   /* Hero Theme Variables */
   --hero-bg-base: radial-gradient(120% 120% at 10% 10%, #FFFFFF 0%, #F8FAFC 60%, #EEF2F6 100%);
@@ -130,28 +130,28 @@
   --hero-grid: linear-gradient(var(--hero-grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--hero-grid-color) 1px, transparent 1px);
   --hero-text: #0F172A;
   --hero-text-muted: #475569;
-  --hero-badge-bg: rgba(0, 51, 160, 0.08);
-  --hero-badge-border: rgba(0, 51, 160, 0.2);
-  --hero-badge-text: #0033A0;
-  --hero-gradient-text: linear-gradient(90deg, #00227B 0%, #0033A0 50%, #2563EB 100%);
+  --hero-badge-bg: rgba(37, 99, 235, 0.08);
+  --hero-badge-border: rgba(37, 99, 235, 0.2);
+  --hero-badge-text: #2563EB;
+  --hero-gradient-text: linear-gradient(90deg, #1D4ED8 0%, #2563EB 50%, #3B82F6 100%);
   --hero-btn-secondary: rgba(255,255,255,0.8);
-  --hero-btn-secondary-border: rgba(0,51,160,0.2);
+  --hero-btn-secondary-border: rgba(37,99,235,0.2);
   --hero-btn-secondary-text: #0F172A;
   --hero-btn-secondary-hover: rgba(255,255,255,1);
   --hero-stats-bg: rgba(255,255,255,0.75);
-  --hero-stats-border: rgba(0,51,160,0.12);
-  --hero-stats-divider: rgba(0,51,160,0.08);
+  --hero-stats-border: rgba(37,99,235,0.12);
+  --hero-stats-divider: rgba(37,99,235,0.08);
   --hero-icon-bg: #EFF6FF;
-  --hero-icon-color: #0033A0;
+  --hero-icon-color: #2563EB;
   --hero-card-bg: rgba(255,255,255,0.6);
-  --hero-card-border: rgba(0,51,160,0.15);
+  --hero-card-border: rgba(37,99,235,0.15);
   --hero-card-text-primary: #0F172A;
   --hero-card-text-secondary: #475569;
-  --hero-card-divider: rgba(0,51,160,0.1);
+  --hero-card-divider: rgba(37,99,235,0.1);
   --hero-pill-bar: rgba(255,255,255,0.4);
-  --hero-pill-bar-border: rgba(0,51,160,0.1);
+  --hero-pill-bar-border: rgba(37,99,235,0.1);
   --hero-pill-bg: rgba(255,255,255,0.7);
-  --hero-pill-border: rgba(0,51,160,0.2);
+  --hero-pill-border: rgba(37,99,235,0.2);
   --hero-pill-text: #0F172A;
   --hero-status-color: #059669;
   --hero-status-text: #059669;

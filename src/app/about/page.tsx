@@ -115,7 +115,7 @@ export default function AboutPage() {
         >
           <motion.div 
             variants={item}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
             ABOUT JESHURUN TECHNOLOGIES
@@ -123,7 +123,7 @@ export default function AboutPage() {
           
           <motion.h1 
             variants={item}
-            className="text-4xl sm:text-5xl md:text-6xl font-serif tracking-tight leading-[1.15] text-foreground"
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.15] text-foreground"
           >
             <span className="text-slate-900 dark:text-white block">Where Mission-Critical</span>
             <span className="text-slate-900 dark:text-white block">Enterprise Technology</span>
@@ -209,7 +209,7 @@ export default function AboutPage() {
                   
                   <motion.h2 
                     variants={item}
-                    className="text-3xl md:text-4xl font-serif tracking-tight text-slate-900 dark:text-white"
+                    className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white"
                   >
                     About Jeshurun Technologies
                   </motion.h2>
@@ -281,7 +281,7 @@ export default function AboutPage() {
                   </motion.h2>
                   <motion.h3 
                     variants={item}
-                    className="text-3xl md:text-5xl font-serif text-slate-900 dark:text-white leading-tight"
+                    className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight"
                   >
                     Why Organizations Trust Jeshurun
                   </motion.h3>
@@ -361,7 +361,7 @@ export default function AboutPage() {
             
             <motion.h2 
               variants={item}
-              className="text-3xl md:text-4xl font-serif tracking-tight text-slate-900 dark:text-white"
+              className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white"
             >
               Meet Our Leadership
             </motion.h2>
@@ -449,7 +449,7 @@ export default function AboutPage() {
                   
                   <motion.h2 
                     variants={item}
-                    className="text-3xl md:text-4xl font-serif tracking-tight text-slate-900 dark:text-white"
+                    className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white"
                   >
                     Delivery & Quality Standards
                   </motion.h2>
@@ -520,7 +520,7 @@ export default function AboutPage() {
                   </motion.h2>
                   <motion.h3 
                     variants={item}
-                    className="text-3xl md:text-5xl font-serif text-slate-900 dark:text-white leading-tight"
+                    className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight"
                   >
                     Enterprise Resilience Features
                   </motion.h3>

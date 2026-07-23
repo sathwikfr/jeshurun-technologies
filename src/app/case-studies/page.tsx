@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -139,7 +139,7 @@ export default function CaseStudiesPage() {
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
                 Enterprise Proof Points
               </motion.div>
-              <motion.h1 variants={item} className="text-5xl sm:text-6xl md:text-7xl font-serif tracking-tight leading-none">
+              <motion.h1 variants={item} className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-none">
                 <span className="text-blue-600 dark:text-blue-500">Proven Enterprise</span>{' '}
                 <br className="hidden sm:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4]">

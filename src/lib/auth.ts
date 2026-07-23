@@ -49,7 +49,7 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (session.user) {
+      if (session?.user) {
         (session.user as { role?: unknown }).role = token.role;
         (session.user as { id?: unknown }).id = token.id;
       }
@@ -62,5 +62,6 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt"
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET || "supersecret_jeshurun_tech_key_2026",
+  debug: process.env.NODE_ENV === "development",
 };
