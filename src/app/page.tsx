@@ -1452,7 +1452,8 @@ export default function Home() {
       <section className="w-full py-16 md:py-20 relative z-10 bg-background" aria-label="Trusted Partners">
         <div className="w-full container px-6 sm:px-8 mx-auto space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               Our Clients
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Trusted by Enterprise Leaders</h2>
@@ -1495,7 +1496,8 @@ export default function Home() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               How We Deliver
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">One Partner. Full Technology Lifecycle.</h2>
@@ -1655,7 +1657,8 @@ export default function Home() {
       <section className="w-full py-24 relative z-10 border-t border-border bg-background" aria-label="Technology Ecosystem">
         <div className="w-full container px-6 sm:px-8 mx-auto space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               Technology Ecosystem
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Enterprise-grade technology stack</h2>
@@ -1779,7 +1782,8 @@ export default function Home() {
       <section id="corporate-intelligence" className="w-full py-20 md:py-32 relative z-10 bg-background border-t border-border" aria-label="Corporate Intelligence">
         <div className="w-full container px-6 sm:px-8 mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
               Corporate Intelligence
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">
@@ -1810,7 +1814,8 @@ export default function Home() {
         <div className="w-full px-6 sm:px-12 md:px-24 lg:px-32 py-10 md:py-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-1 max-w-md">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30 mb-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                 Stay Connected
               </div>
               <h3 className="text-xl font-extrabold text-foreground tracking-tight">

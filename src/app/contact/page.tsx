@@ -241,7 +241,7 @@ ${formData.message}
             transition={{ type: "spring", stiffness: 90, damping: 22, delay: 0.2 }}
             className="lg:col-span-7 flex flex-col"
           >
-            <SpotlightCard className="p-6 md:p-8 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden flex-1">
+            <SpotlightCard className="p-6 md:p-8 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-[#18181c] dark:to-[#121214] border border-slate-200/50 dark:border-zinc-800/80 shadow-xl overflow-hidden flex-1">
               <div className="space-y-2 mb-8 border-b border-slate-200/50 dark:border-slate-800/50 pb-6">
                 <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                   Start a Conversation
@@ -306,7 +306,7 @@ ${formData.message}
                         value={formData.firstName} 
                         onChange={handleChange} 
                         disabled={isSubmitting} 
-                        className="bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
+                        className="bg-slate-50/50 dark:bg-zinc-900/60 border border-[rgba(15,23,42,0.08)] dark:border-zinc-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
                       />
                     </div>
                     <div className="space-y-2">
@@ -317,7 +317,7 @@ ${formData.message}
                         value={formData.lastName} 
                         onChange={handleChange} 
                         disabled={isSubmitting} 
-                        className="bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
+                        className="bg-slate-50/50 dark:bg-zinc-900/60 border border-[rgba(15,23,42,0.08)] dark:border-zinc-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
                       />
                     </div>
                   </div>
@@ -332,7 +332,7 @@ ${formData.message}
                         value={formData.email} 
                         onChange={handleChange} 
                         disabled={isSubmitting} 
-                        className="bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
+                        className="bg-slate-50/50 dark:bg-zinc-900/60 border border-[rgba(15,23,42,0.08)] dark:border-zinc-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
                       />
                     </div>
                     <div className="space-y-2">
@@ -343,7 +343,7 @@ ${formData.message}
                         value={formData.company} 
                         onChange={handleChange} 
                         disabled={isSubmitting} 
-                        className="bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
+                        className="bg-slate-50/50 dark:bg-zinc-900/60 border border-[rgba(15,23,42,0.08)] dark:border-zinc-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
                       />
                     </div>
                   </div>
@@ -356,7 +356,7 @@ ${formData.message}
                           type="button"
                           onClick={() => setIsCountryOpen(!isCountryOpen)}
                           disabled={isSubmitting}
-                          className="h-12 px-3 bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus:border-[#0057D9] focus:ring-1 focus:ring-[#0057D9] rounded-xl flex items-center gap-2 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all cursor-pointer text-sm"
+                          className="h-12 px-3 bg-slate-50/50 dark:bg-zinc-900/60 border border-[rgba(15,23,42,0.08)] dark:border-zinc-800 focus:border-[#0057D9] focus:ring-1 focus:ring-[#0057D9] rounded-xl flex items-center gap-2 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all cursor-pointer text-sm"
                         >
                           <img
                             src={`https://flagcdn.com/w40/${selectedCountry.iso}.png`}
@@ -400,7 +400,7 @@ ${formData.message}
                         value={formData.phone} 
                         onChange={handleChange} 
                         disabled={isSubmitting} 
-                        className="flex-1 bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
+                        className="flex-1 bg-slate-50/50 dark:bg-zinc-900/60 border border-[rgba(15,23,42,0.08)] dark:border-zinc-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] h-12 rounded-xl px-4 text-slate-900 dark:text-white font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
                       />
                     </div>
                   </div>
@@ -442,7 +442,7 @@ ${formData.message}
                       value={formData.message}
                       onChange={handleChange}
                       disabled={isSubmitting}
-                      className="min-h-[140px] bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] text-sm leading-relaxed rounded-xl p-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
+                      className="min-h-[140px] bg-slate-50/50 dark:bg-zinc-900/60 border border-[rgba(15,23,42,0.08)] dark:border-zinc-800 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] text-sm leading-relaxed rounded-xl p-4 text-slate-900 dark:text-white placeholder-slate-400 font-semibold disabled:opacity-50 hover:shadow-[0_0_8px_rgba(59,130,246,0.1)] transition-all outline-none" 
                       required 
                     />
                   </div>
@@ -483,7 +483,7 @@ ${formData.message}
             className="lg:col-span-5 flex flex-col gap-6"
           >
             {/* COMPANY OVERVIEW */}
-            <SpotlightCard className="p-6 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group">
+            <SpotlightCard className="p-6 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-[#18181c] dark:to-[#121214] border border-slate-200/50 dark:border-zinc-800/80 shadow-xl overflow-hidden group">
               <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2 border-b border-[rgba(15,23,42,0.08)] dark:border-slate-800 pb-3 mb-4">
                 <Building2 className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 Company Overview
@@ -511,7 +511,7 @@ ${formData.message}
             </SpotlightCard>
 
             {/* GLOBAL HEADQUARTERS CARD WITH MAP */}
-            <SpotlightCard className="p-6 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group flex-1 flex flex-col">
+            <SpotlightCard className="p-6 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-[#18181c] dark:to-[#121214] border border-slate-200/50 dark:border-zinc-800/80 shadow-xl overflow-hidden group flex-1 flex flex-col">
               <h3 className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-2 border-b border-[rgba(15,23,42,0.08)] dark:border-slate-800 pb-3 mb-4">
                 <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                 Global Headquarters
@@ -560,7 +560,7 @@ ${formData.message}
           viewport={{ once: true, margin: "-40px" }}
           className="max-w-5xl mx-auto mb-16"
         >
-          <SpotlightCard className="rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 p-6 md:p-8">
+          <SpotlightCard className="rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-[#18181c] dark:to-[#121214] border border-slate-200/50 dark:border-zinc-800/80 shadow-xl p-6 md:p-8">
             <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
               <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center justify-center gap-2">
                 <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
@@ -575,7 +575,7 @@ ${formData.message}
                 { label: "Support Coverage", val: "24/7" }
               ].map((stat, i) => (
                 <motion.div key={i} variants={item}>
-                  <SpotlightCard className="p-4 bg-slate-50/50 dark:bg-slate-900/50 border border-[rgba(15,23,42,0.08)] dark:border-slate-800 rounded-2xl">
+                  <SpotlightCard className="p-4 bg-slate-50/50 dark:bg-zinc-900/60 border border-[rgba(15,23,42,0.08)] dark:border-zinc-800 rounded-2xl">
                     <div className="text-xl md:text-2xl font-black text-blue-600 dark:text-blue-400">{stat.val}</div>
                     <div className="text-[10px] uppercase font-bold text-slate-550 dark:text-slate-450 mt-1.5">{stat.label}</div>
                   </SpotlightCard>

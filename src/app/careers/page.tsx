@@ -164,7 +164,7 @@ export default function CareersPage() {
       </section>
 
       {/* Benefits strip */}
-      <section className="w-full py-14 bg-card border-b border-border">
+      <section className="w-full py-14 bg-background border-b border-border">
         <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div
             initial="hidden"

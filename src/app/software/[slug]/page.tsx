@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -600,7 +600,7 @@ export default function SoftwareDetailPage({
       />
 
       {/* ── 1. HERO ────────────────────────────────────────────────── */}
-      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-950 text-white shadow-xl">
+      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-950 dark:bg-background text-white shadow-xl">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -609,10 +609,10 @@ export default function SoftwareDetailPage({
             fill
             sizes="100vw"
             priority
-            className="object-cover object-top opacity-90"
+            className="object-cover object-top opacity-50 dark:opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/40 dark:from-background dark:via-background/80 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950 dark:from-background/50 dark:to-background" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.15)_0%,transparent_60%)]" />
         </div>
 
@@ -700,39 +700,8 @@ export default function SoftwareDetailPage({
           viewport={{ once: true, margin: "-80px" }}
           className="w-full container px-6 sm:px-8 mx-auto"
         >
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-            {/* Image column — slide in from left with scale */}
-            <motion.div variants={slideInLeft} className="lg:col-span-5">
-              <motion.div
-                className="relative overflow-hidden group aspect-[4/3] flex items-center justify-center"
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {/* Background ambient glow */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08)_0%,transparent_70%)]" />
-                
-                {/* Interactive Visual Component */}
-                <div className="absolute inset-0">
-                  {slug === "cloud-native" && <CloudNativeViz />}
-                  {slug === "legacy-modernization" && <LegacyModernizationViz />}
-                  {slug === "mobile-architecture" && <MobileArchitectureViz />}
-                  {slug === "enterprise-api" && <EnterpriseAPIViz />}
-                  {slug === "data-pipelines" && <DataPipelinesViz />}
-                </div>
-
-                {/* Viewfinder Corners */}
-                <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-cyan-500/30" />
-                <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-cyan-500/30" />
-                <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyan-500/30" />
-                <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyan-500/30" />
-
-                {/* Subtle border glow on hover */}
-                <div className="absolute inset-0 rounded-xl border border-white/0 group-hover:border-cyan-500/20 transition-colors duration-300 pointer-events-none" />
-              </motion.div>
-            </motion.div>
-
-            {/* Narrative column — slide in from right */}
-            <motion.div variants={slideInRight} className="lg:col-span-7 space-y-8">
+          <div className="max-w-4xl">
+            <motion.div variants={slideInRight} className="space-y-8">
               <div className="space-y-3">
                 <motion.p
                   initial={{ opacity: 0, x: 12 }}

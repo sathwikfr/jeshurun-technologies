@@ -30,7 +30,7 @@ export function FloatingWidgets() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={scrollToTop}
-            className="back-to-top-btn fixed bottom-6 right-24 z-40 bg-[#0057D9] hover:bg-[#2563EB] text-white px-4 py-2.5 h-11 rounded-xl shadow-lg font-bold text-xs flex items-center gap-2 transition-all hover:scale-[1.02] duration-300 border border-transparent hover:border-white/10 cursor-pointer"
+            className="back-to-top-btn fixed bottom-6 right-[92px] z-40 bg-[#0057D9] hover:bg-[#2563EB] text-white px-4 h-11 rounded-full shadow-[0_8px_20px_rgba(0,87,217,0.3)] font-bold text-xs flex items-center gap-2 transition-all hover:scale-[1.03] duration-300 border border-white/10 cursor-pointer"
           >
             <span>Back to top</span>
             <ArrowUp className="w-3.5 h-3.5" />

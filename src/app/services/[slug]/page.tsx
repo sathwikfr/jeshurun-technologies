@@ -642,7 +642,7 @@ export default function ServiceDetailPage({
           SECTION 1 — EDITORIAL HERO
           Typography-led, confident. Playfair Display headline.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-950 text-white shadow-xl">
+      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-950 dark:bg-background text-white shadow-xl">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -651,11 +651,11 @@ export default function ServiceDetailPage({
             fill
             sizes="100vw"
             priority
-            className="object-cover object-top opacity-90"
+            className="object-cover object-top opacity-50 dark:opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.15)_0%,transparent_60%)]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/40 dark:from-background dark:via-background/80 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950 dark:from-background/50 dark:to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.15)_0%,transparent_60%)]" />
         </div>
 
         <div className="w-full container px-6 sm:px-8 mx-auto relative z-10 flex flex-col justify-center">

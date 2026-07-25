@@ -222,7 +222,7 @@ export default function BlogPage() {
       </section>
 
       {/* Category Filter */}
-      <section className="sticky top-14 z-30 w-full bg-card border-b border-border shadow-sm">
+      <section className="sticky top-14 z-30 w-full bg-background/95 backdrop-blur-md border-b border-border shadow-sm">
         <div className="w-full container px-6 sm:px-8 mx-auto">
           <div className="flex items-center gap-2 overflow-x-auto py-3 scrollbar-none">
             {categories.map((cat) => (

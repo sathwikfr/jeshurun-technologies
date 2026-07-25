@@ -18,7 +18,7 @@ import {
   Cpu,
   Milestone,
   Brain,
-  Search, PenTool, CheckCircle2 } from "lucide-react";
+  Search, ScanSearch, PenTool, CheckCircle2 } from "lucide-react";
 
 import Link from "next/link";
 
@@ -160,7 +160,7 @@ const methodology = [
   {
     title: "Architecture Diagnostics",
     desc: "We perform full legacy architecture diagnostics and evaluate system readiness.",
-    icon: <Search className="w-6 h-6" />,
+    icon: <ScanSearch className="w-6 h-6" />,
     accentColor: "blue-600"
   },
   {

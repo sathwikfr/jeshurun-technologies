@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -66,7 +66,7 @@ export default function TermsOfService() {
       </section>
 
       {/* Main Content Body */}
-      <section className="w-full py-20 md:py-28 bg-card">
+      <section className="w-full py-20 md:py-28 bg-background">
         <div className="w-full container px-6 sm:px-8 mx-auto">
           <motion.div 
             initial={{ opacity: 0, y: 30 }}

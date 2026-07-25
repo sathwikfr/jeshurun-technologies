@@ -24,7 +24,7 @@ import {
   Shield,
   Zap,
   Package,
-  Search, PenTool, CloudUpload } from "lucide-react";
+  Search, ScanSearch, PenTool, CloudUpload } from "lucide-react";
 
 import { PremiumCTA } from "@/components/PremiumCTA";
 
@@ -252,7 +252,7 @@ function OfferingStrip({ cap, router, index }: { cap: any; router: any; index: n
 }
 
 const SDLC_STAGES = [
-  { title: "Product Discovery", desc: "Business analysis, requirements gathering, and solution definition.", icon: <Search className="w-6 h-6" />, accentColor: "blue-600" },
+  { title: "Product Discovery", desc: "Business analysis, requirements gathering, and solution definition.", icon: <ScanSearch className="w-6 h-6" />, accentColor: "blue-600" },
   { title: "Architecture & Design", desc: "System blueprinting, UX planning, and technical design.", icon: <PenTool className="w-6 h-6" />, accentColor: "blue-500" },
   { title: "Engineering & Quality Assurance", desc: "Development, testing, code review, and performance optimization.", icon: <Code2 className="w-6 h-6" />, accentColor: "cyan-500" },
   { title: "Deployment & Long-Term Support", desc: "Production deployment, monitoring, maintenance, and continuous improvement.", icon: <CloudUpload className="w-6 h-6" />, accentColor: "cyan-400" },

@@ -1,13 +1,13 @@
 "use client";
 
-import { ReactNode, useState } from "react";
-import { motion } from "framer-motion";
+import { ReactNode, useState, useRef } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 
 export interface ProcessStep {
   title: string;
   desc: string;
   icon: ReactNode;
-  accentColor: string; // "blue-600", "blue-500", "cyan-500", "cyan-400"
+  accentColor?: string;
 }
 
 interface ProcessTimelineProps {
@@ -19,125 +19,176 @@ interface ProcessTimelineProps {
 
 export function ProcessTimeline({ badge, title, subtitle, steps }: ProcessTimelineProps) {
   const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-80px" });
+  const shouldReduceMotion = useReducedMotion();
 
-  const colorMap: Record<string, { borderBottom: string; borderAll: string; bg: string; text: string; bgSolid: string }> = {
-    "blue-600": { borderBottom: "border-b-blue-600", borderAll: "border-blue-600", bg: "bg-blue-600/10", text: "text-blue-600 dark:text-blue-400", bgSolid: "bg-blue-600" },
-    "blue-500": { borderBottom: "border-b-blue-500", borderAll: "border-blue-500", bg: "bg-blue-500/10", text: "text-blue-500 dark:text-blue-400", bgSolid: "bg-blue-500" },
-    "cyan-500": { borderBottom: "border-b-cyan-500", borderAll: "border-cyan-500", bg: "bg-cyan-500/10", text: "text-cyan-500 dark:text-cyan-400", bgSolid: "bg-cyan-500" },
-    "cyan-400": { borderBottom: "border-b-cyan-400", borderAll: "border-cyan-400", bg: "bg-cyan-400/10", text: "text-cyan-600 dark:text-cyan-400", bgSolid: "bg-cyan-500" },
-  };
+  // Calculate width percentage for filled blue timeline segment up to hovered card
+  const activeLineWidthPercent = hoveredStep !== null && steps.length > 1
+    ? (hoveredStep / (steps.length - 1)) * 100
+    : 0;
 
   return (
-    <section className="w-full pt-24 pb-32 bg-transparent relative">
+    <section ref={containerRef} className="w-full py-20 md:py-28 bg-transparent relative overflow-hidden">
       <div className="container px-6 sm:px-8 mx-auto max-w-7xl relative z-10">
-        <div className="text-center mb-20 space-y-4">
-          <span className="text-sm font-bold text-primary uppercase tracking-widest bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full">
+        
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20 space-y-4">
+          <span className="inline-flex items-center gap-2 text-xs font-bold text-foreground/80 uppercase tracking-widest bg-secondary border border-border px-4 py-1.5 rounded-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
             {badge}
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight mt-4">
+          
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight max-w-3xl mx-auto">
             {title}
           </h2>
+          
           {subtitle && (
-            <p className="text-muted-foreground text-lg md:text-xl font-medium max-w-2xl mx-auto mt-4">
+            <p className="text-muted-foreground text-base sm:text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
               {subtitle}
             </p>
           )}
-          {/* Gradient underline bar restored */}
-          <div className="w-24 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-400 mx-auto mt-8 rounded-full shadow-sm" />
+
+          <div className="w-16 h-1 bg-border dark:bg-zinc-800 mx-auto mt-6 rounded-full" />
         </div>
 
         <div className="relative">
-          {/* Horizontal Timeline Line */}
-          <div className="hidden md:block absolute top-[44px] left-0 w-full h-[2px] bg-border z-0">
-            <motion.div 
-              className="h-full bg-gradient-to-r from-blue-600 to-cyan-400"
-              initial={{ width: "0%" }}
-              whileInView={{ width: "100%" }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
-            />
-            {/* Hover Pulse Animation */}
-            {hoveredStep !== null && (
-              <motion.div
-                className="absolute top-0 left-0 h-full w-[10%] bg-gradient-to-r from-transparent via-white to-transparent opacity-80"
-                initial={{ left: "-10%", opacity: 0 }}
-                animate={{ 
-                  left: ["-10%", `${hoveredStep * 25 + 5}%`],
-                  opacity: [0, 1, 0]
-                }}
-                transition={{
-                  duration: 0.8,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                }}
+          {/* ════════════════════════════════════════════════════════════════
+              DESKTOP CONNECTED TIMELINE LINE & STEP MARKERS
+          ════════════════════════════════════════════════════════════════ */}
+          <div className="hidden md:block relative w-full mb-10">
+            {/* Background Track Line (Neutral by default) */}
+            <div className="absolute top-1/2 left-[12.5%] right-[12.5%] -translate-y-1/2 h-[2px] bg-slate-200 dark:bg-zinc-800 z-0">
+              {/* Blue Filled Segment — Only active on hover */}
+              <div
+                className="h-full bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 rounded-full shadow-[0_0_8px_rgba(37,99,235,0.5)] transition-all duration-300 ease-out"
+                style={{ width: `${activeLineWidthPercent}%` }}
               />
-            )}
+            </div>
+
+            {/* Step Marker Dots Row */}
+            <div className="grid grid-cols-4 gap-6 lg:gap-8 relative z-10">
+              {steps.map((_, i) => {
+                const isHovered = hoveredStep === i;
+                const isPassed = hoveredStep !== null && i < hoveredStep;
+
+                return (
+                  <div key={i} className="flex justify-center items-center">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: (isInView || shouldReduceMotion) ? 1 : 0 }}
+                      transition={{ duration: 0.4, delay: shouldReduceMotion ? 0 : i * 0.12 }}
+                      onMouseEnter={() => setHoveredStep(i)}
+                      onMouseLeave={() => setHoveredStep(null)}
+                      className={`w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer ${
+                        isHovered
+                          ? "bg-blue-500 text-white scale-125 border-blue-400 ring-4 ring-blue-500/25 shadow-[0_0_14px_rgba(37,99,235,0.6)] z-20"
+                          : isPassed
+                          ? "bg-blue-500/20 border-2 border-blue-500 text-blue-500 z-10"
+                          : "bg-background dark:bg-[#121214] border-2 border-slate-300 dark:border-zinc-700 z-10"
+                      }`}
+                    >
+                      <span className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                        isHovered
+                          ? "bg-white"
+                          : isPassed
+                          ? "bg-blue-500"
+                          : "bg-slate-400 dark:bg-zinc-600"
+                      }`} />
+                    </motion.div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+          {/* ════════════════════════════════════════════════════════════════
+              MOBILE VERTICAL CONNECTED TIMELINE LINE
+          ════════════════════════════════════════════════════════════════ */}
+          <div className="block md:hidden absolute left-5 top-6 bottom-6 w-[2px] bg-slate-200 dark:bg-zinc-800 z-0">
+            <div
+              className="w-full bg-gradient-to-b from-blue-600 via-blue-500 to-blue-400 rounded-full shadow-[0_0_8px_rgba(37,99,235,0.5)] transition-all duration-300 ease-out"
+              style={{ height: `${activeLineWidthPercent}%` }}
+            />
+          </div>
+
+          {/* ════════════════════════════════════════════════════════════════
+              STEP CARDS GRID
+          ════════════════════════════════════════════════════════════════ */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8 relative z-10 pl-12 md:pl-0">
             {steps.map((step, i) => {
-              const mappedColors = colorMap[step.accentColor] || colorMap["blue-600"];
+              const isHovered = hoveredStep === i;
+              const isPassed = hoveredStep !== null && i < hoveredStep;
+
               return (
-                <div 
-                  key={i} 
-                  className="h-full flex flex-col items-center md:items-start text-center md:text-left group"
-                  onMouseEnter={() => setHoveredStep(i)}
-                  onMouseLeave={() => setHoveredStep(null)}
-                >
-                  {/* Step Number Above */}
-                  <div className="w-full flex justify-center md:justify-start mb-6">
-                    <span className="text-xs font-black text-muted-foreground/50 tracking-widest bg-background px-2 relative z-10">
-                      STEP 0{i + 1}
-                    </span>
+                <div key={i} className="relative flex flex-col h-full">
+                  {/* Mobile Marker Dot */}
+                  <div className="block md:hidden absolute -left-12 top-6 -translate-x-1/2 z-10">
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      isHovered
+                        ? "bg-blue-500 scale-125 ring-4 ring-blue-500/25 shadow-[0_0_12px_rgba(37,99,235,0.6)]"
+                        : isPassed
+                        ? "bg-blue-500/20 border-2 border-blue-500"
+                        : "bg-background dark:bg-[#121214] border-2 border-slate-300 dark:border-zinc-700"
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${
+                        isHovered
+                          ? "bg-white"
+                          : isPassed
+                          ? "bg-blue-500"
+                          : "bg-slate-400 dark:bg-zinc-600"
+                      }`} />
+                    </div>
                   </div>
 
-                  {/* Circular Node */}
-                  <div className="hidden md:flex w-full justify-start mb-8 relative">
-                    {/* Glow Effect */}
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ 
-                        opacity: hoveredStep === i ? 0.6 : 0, 
-                        scale: hoveredStep === i ? 1.8 : 0.8 
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className={`absolute w-5 h-5 rounded-full ${mappedColors.bgSolid} blur-md z-0 ml-6`}
-                    />
-                    
-                    {/* Main Node */}
-                    <motion.div 
-                      initial={{ scale: 0 }}
-                      whileInView={{ scale: 1 }}
-                      animate={{ scale: hoveredStep === i ? 1.3 : 1 }}
-                      viewport={{ once: true }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className={`w-5 h-5 rounded-full border-4 ${mappedColors.borderAll} z-10 ml-6 transition-colors duration-300 ${
-                        hoveredStep === i ? mappedColors.bgSolid : "bg-background"
-                      }`}
-                    />
-                  </div>
-
-                  {/* Content Card with bottom border */}
+                  {/* Editorial Card — Restrained Blue Top Border on Hover */}
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: i * 0.15 }}
-                    className={`flex-1 w-full flex flex-col bg-card border border-border p-8 rounded-2xl shadow-sm hover-card-effect border-b-4 ${mappedColors.borderBottom} transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-lg`}
+                    initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24 }}
+                    animate={{ opacity: (isInView || shouldReduceMotion) ? 1 : 0, y: (isInView || shouldReduceMotion) ? 0 : 24 }}
+                    transition={{ duration: 0.5, delay: shouldReduceMotion ? 0 : i * 0.12 }}
+                    onMouseEnter={() => setHoveredStep(i)}
+                    onMouseLeave={() => setHoveredStep(null)}
+                    className={`relative flex-1 w-full flex flex-col bg-card dark:bg-[#18181c] border border-border dark:border-zinc-800/80 border-t-[3px] p-6 sm:p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1.5 group overflow-hidden ${
+                      isHovered
+                        ? "border-t-blue-500 dark:border-t-blue-400 shadow-xl"
+                        : "border-t-slate-300 dark:border-t-zinc-800 shadow-sm"
+                    }`}
                   >
-                    {/* Icon in soft circular badge */}
-                    <div className={`w-14 h-14 rounded-full ${mappedColors.bg} flex items-center justify-center ${mappedColors.text} mb-6 shrink-0`}>
-                      {step.icon}
+                    {/* Top Row: Eyebrow on left, Composed Visual Unit (Bare Icon + Ghost Numeral) on right */}
+                    <div className="relative z-10 flex items-start justify-between gap-4 mb-8 sm:mb-10">
+                      {/* Step Eyebrow */}
+                      <span className="text-[10px] font-extrabold uppercase tracking-widest text-muted-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 pt-2 sm:pt-3">
+                        PHASE 0{i + 1}
+                      </span>
+
+                      {/* Composed Visual Unit: Bare Icon + Ghost Numeral */}
+                      <div className="flex items-center gap-2.5 sm:gap-3 select-none pointer-events-none -mt-2 -mr-2 sm:-mr-3">
+                        {/* Bare Outlined Icon (32-36px, no fill/border/padding box) */}
+                        <div className={`transition-all duration-300 flex items-center justify-center [&>svg]:!w-8 [&>svg]:!h-8 sm:[&>svg]:!w-9 sm:[&>svg]:!h-9 [&>svg]:!stroke-[1.5] ${
+                          isHovered
+                            ? "text-blue-600 dark:text-blue-400 scale-[1.08]"
+                            : "text-slate-400 dark:text-zinc-500 scale-100"
+                        }`}>
+                          {step.icon}
+                        </div>
+
+                        {/* Ghost Numeral (editorial, low opacity 8-9%) */}
+                        <span className="text-6xl sm:text-7xl font-black font-editorial text-foreground/[0.08] dark:text-white/[0.09] tracking-tighter leading-none">
+                          0{i + 1}
+                        </span>
+                      </div>
                     </div>
 
-                    <h4 className="text-xl font-bold text-foreground mb-3 min-h-[3.5rem]">
+                    {/* Step Title */}
+                    <h3 className="relative z-10 text-lg sm:text-xl font-bold text-foreground mb-3 leading-snug">
                       {step.title}
-                    </h4>
+                    </h3>
                     
-                    {/* Underline Accent */}
-                    <div className={`w-10 h-1 rounded-full ${mappedColors.bgSolid} mb-4 opacity-70`} />
+                    {/* Title Accent Underline */}
+                    <div className="relative z-10 w-8 h-0.5 bg-border dark:bg-zinc-800 group-hover:bg-blue-500 group-hover:w-14 transition-all duration-300 mb-4" />
 
-                    <p className="text-sm font-medium text-muted-foreground leading-relaxed">
+                    {/* Description Text — Always 100% visible */}
+                    <p className="relative z-10 text-sm font-medium text-muted-foreground leading-relaxed flex-1">
                       {step.desc}
                     </p>
                   </motion.div>

@@ -17,7 +17,7 @@ export function RelatedCaseStudies({ category }: { category?: string }) {
   if (!related || related.length === 0) return null;
 
   return (
-    <section className="py-20 md:py-28 bg-card border-t border-border">
+    <section className="py-20 md:py-28 bg-background border-t border-border">
       <div className="container px-6 sm:px-8 mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6">
           <div>

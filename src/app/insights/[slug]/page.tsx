@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -150,7 +150,7 @@ export default function InsightArticlePage() {
   return (
     <div className="min-h-dvh bg-background pb-24">
       {/* Hero Header Area */}
-      <section className="w-full pt-32 pb-20 relative overflow-hidden bg-slate-950 text-white shadow-xl">
+      <section className="w-full pt-32 pb-20 relative overflow-hidden bg-slate-950 dark:bg-background text-white shadow-xl">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -159,9 +159,10 @@ export default function InsightArticlePage() {
             fill
             priority
             style={{ viewTransitionName: `insight-image-${article.slug}` }}
-            className="object-cover opacity-60"
+            className="object-cover opacity-50 dark:opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/40 dark:from-background dark:via-background/80 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950 dark:from-background/50 dark:to-background" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.12)_0%,transparent_60%)]" />
         </div>
 

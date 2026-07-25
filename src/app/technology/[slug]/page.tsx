@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 
 
@@ -29,6 +29,16 @@ import {
 import { PremiumCTA } from "@/components/PremiumCTA";
 
 import { TechOrbitVisualization } from "@/components/TechOrbitVisualization";
+
+import { DataManagementVisualization } from "@/components/DataManagementVisualization";
+
+import { CybersecurityVisualization } from "@/components/CybersecurityVisualization";
+
+import { AiMachineLearningVisualization } from "@/components/AiMachineLearningVisualization";
+
+import { NetworkInfrastructureVisualization } from "@/components/NetworkInfrastructureVisualization";
+
+import { DevOpsVisualization } from "@/components/DevOpsVisualization";
 
 import { FloatingSidebarNav } from "@/components/FloatingSidebarNav";
 
@@ -1030,7 +1040,7 @@ export default function TechDetailPage({
       />
 
       {/* ── 1. HERO ────────────────────────────────────────────────── */}
-      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-950 text-white shadow-xl">
+      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-950 dark:bg-background text-white shadow-xl">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -1039,10 +1049,10 @@ export default function TechDetailPage({
             fill
             sizes="100vw"
             priority
-            className="object-cover object-top opacity-90"
+            className="object-cover object-top opacity-50 dark:opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/40 dark:from-background dark:via-background/80 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950 dark:from-background/50 dark:to-background" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(6,182,212,0.15)_0%,transparent_60%)]" />
         </div>
 
@@ -1130,11 +1140,11 @@ export default function TechDetailPage({
           viewport={{ once: true, margin: "-80px" }}
           className="w-full container px-6 sm:px-8 mx-auto"
         >
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-stretch">
             {/* Image column — slide in from left with scale */}
-            <motion.div variants={slideInLeft} className="lg:col-span-5">
+            <motion.div variants={slideInLeft} className="lg:col-span-5 h-full flex flex-col">
               <motion.div
-                className="relative group aspect-[4/3] flex items-center justify-center"
+                className="relative group h-full flex items-center justify-center overflow-hidden"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
@@ -1142,9 +1152,31 @@ export default function TechDetailPage({
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08)_0%,transparent_70%)]" />
                 
                 {/* Interactive Visual Component */}
-                <div className="absolute inset-0 p-8 flex items-center justify-center">
+                <div className="absolute inset-0 flex items-center justify-center">
                   {slug === "cloud-solutions" ? (
-                    <TechOrbitVisualization />
+                    <div className="scale-[0.74] xs:scale-[0.8] sm:scale-[0.83] md:scale-[0.85] lg:scale-[0.76] xl:scale-[0.81] origin-center transition-transform duration-300">
+                      <TechOrbitVisualization />
+                    </div>
+                  ) : slug === "data-management" ? (
+                    <div className="scale-[0.74] xs:scale-[0.8] sm:scale-[0.83] md:scale-[0.85] lg:scale-[0.76] xl:scale-[0.81] origin-center transition-transform duration-300">
+                      <DataManagementVisualization />
+                    </div>
+                  ) : slug === "cybersecurity" ? (
+                    <div className="scale-[0.74] xs:scale-[0.8] sm:scale-[0.83] md:scale-[0.85] lg:scale-[0.76] xl:scale-[0.81] origin-center transition-transform duration-300">
+                      <CybersecurityVisualization />
+                    </div>
+                  ) : slug === "ai-machine-learning" ? (
+                    <div className="scale-[0.74] xs:scale-[0.8] sm:scale-[0.83] md:scale-[0.85] lg:scale-[0.76] xl:scale-[0.81] origin-center transition-transform duration-300">
+                      <AiMachineLearningVisualization />
+                    </div>
+                  ) : slug === "network-infrastructure" ? (
+                    <div className="scale-[0.74] xs:scale-[0.8] sm:scale-[0.83] md:scale-[0.85] lg:scale-[0.76] xl:scale-[0.81] origin-center transition-transform duration-300">
+                      <NetworkInfrastructureVisualization />
+                    </div>
+                  ) : slug === "devops" ? (
+                    <div className="scale-[0.74] xs:scale-[0.8] sm:scale-[0.83] md:scale-[0.85] lg:scale-[0.76] xl:scale-[0.81] origin-center transition-transform duration-300">
+                      <DevOpsVisualization />
+                    </div>
                   ) : (
                     <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-white/10">
                       <Image
@@ -1157,11 +1189,11 @@ export default function TechDetailPage({
                   )}
                 </div>
 
-                {/* Viewfinder Corners */}
-                <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-cyan-500/30" />
-                <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-cyan-500/30" />
-                <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyan-500/30" />
-                <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyan-500/30" />
+                {/* Viewfinder Corners - positioned at exact box boundaries (top-0 / bottom-0) */}
+                <div className="absolute top-0 left-0 w-4 h-4 border-t border-l border-cyan-500/40 pointer-events-none" />
+                <div className="absolute top-0 right-0 w-4 h-4 border-t border-r border-cyan-500/40 pointer-events-none" />
+                <div className="absolute bottom-0 left-0 w-4 h-4 border-b border-l border-cyan-500/40 pointer-events-none" />
+                <div className="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-cyan-500/40 pointer-events-none" />
 
                 {/* Subtle border glow on hover */}
                 <div className="absolute inset-0 rounded-xl border border-white/0 group-hover:border-cyan-500/20 transition-colors duration-300 pointer-events-none" />

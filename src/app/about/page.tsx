@@ -13,7 +13,7 @@ import {
   Cloud, BarChart, Users, ArrowRight,
   Code2, Lock, CheckCircle2, Server, Cpu, 
   Activity, RefreshCw, Laptop, Key, Workflow, Search,
-  User, Link
+  User, Link, MousePointerClick
 } from "lucide-react";
 
 import { PremiumCTA } from "@/components/PremiumCTA";
@@ -115,9 +115,9 @@ export default function AboutPage() {
         >
           <motion.div 
             variants={item}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-widest bg-blue-500/10 dark:bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/20 dark:border-blue-500/30"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
             ABOUT JESHURUN TECHNOLOGIES
           </motion.div>
           
@@ -146,13 +146,17 @@ export default function AboutPage() {
       <section className="relative w-full py-12">
         <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           {/* TAB TOGGLES (Sticky Segmented Control) */}
-          <div className="sticky top-24 z-50 flex justify-center mb-12">
-            <div className="flex p-1.5 bg-white/95 dark:bg-slate-900/95 rounded-full border border-slate-200/90 dark:border-slate-800 backdrop-blur-xl shadow-lg gap-1">
+          <div className="sticky top-24 z-50 flex flex-col items-center mb-12">
+            <div className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-2 flex items-center gap-1.5">
+              <MousePointerClick className="w-3.5 h-3.5 text-blue-500" />
+              <span>Click tab to view in detail</span>
+            </div>
+            <div className="flex p-1.5 bg-white/95 dark:bg-zinc-900/95 rounded-full border border-slate-200/90 dark:border-zinc-800 backdrop-blur-xl shadow-lg gap-1">
               {(["who", "delivery"] as const).map((tab) => (
                 <button 
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`relative px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-200 z-10 flex items-center gap-2 cursor-pointer ${
+                  className={`relative px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 z-10 flex items-center justify-center cursor-pointer ${
                     activeTab === tab 
                       ? "text-white" 
                       : "text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
@@ -165,17 +169,7 @@ export default function AboutPage() {
                       transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     />
                   )}
-                  {tab === "who" ? (
-                    <>
-                      <Users className={`w-4 h-4 transition-colors ${activeTab === "who" ? "text-white" : "text-blue-600 dark:text-blue-400"}`} />
-                      <span>Who We Are</span>
-                    </>
-                  ) : (
-                    <>
-                      <ShieldCheck className={`w-4 h-4 transition-colors ${activeTab === "delivery" ? "text-white" : "text-emerald-500 dark:text-emerald-400"}`} />
-                      <span>Delivery & Quality Standards</span>
-                    </>
-                  )}
+                  <span>{tab === "who" ? "Who We Are" : "Delivery & Quality Standards"}</span>
                 </button>
               ))}
             </div>

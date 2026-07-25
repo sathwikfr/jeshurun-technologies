@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, Send, X, Bot, RotateCcw } from "lucide-react";
+import { MessageSquare, Send, X, Bot, RotateCcw, CornerDownRight, CornerRightUp, ArrowRight } from "lucide-react";
 
 type Message = {
   role: "user" | "assistant";
@@ -20,6 +20,31 @@ const INITIAL_MESSAGE: Message = {
   timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
   quickReplies: ["Our Services", "Pricing & Quotes", "Where You're Based", "Get in Touch"]
 };
+
+function AIIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      {/* Letter A */}
+      <path d="M6.5 7.5L9.5 14.5L12.5 7.5" />
+      <path d="M7.8 11.5H11.2" />
+      
+      {/* Letter I */}
+      <path d="M16 7.5V14.5" />
+      
+      {/* Corner arrow underneath pointing right */}
+      <path d="M5.5 16.5V19.5H14.5" />
+      <path d="M12 17L14.5 19.5L12 22" />
+    </svg>
+  );
+}
 
 export function AIChatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -178,7 +203,7 @@ export function AIChatbot() {
       }
       
       const data = await res.json();
-      streamReply(data.reply, [], newMessages);
+      streamReply(data.reply, data.quickReplies || [], newMessages);
     } catch (err) {
       console.error(err);
       setIsTyping(false);
@@ -214,63 +239,68 @@ export function AIChatbot() {
             transition={{ type: "spring", stiffness: 200, damping: 22 }}
             className="mb-4 origin-bottom-right"
           >
-            <Card className="w-[340px] h-[480px] flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.12)] bg-card/95 backdrop-blur-md border border-border rounded-2xl overflow-hidden">
+            <Card className="w-[340px] sm:w-[360px] h-[500px] flex flex-col shadow-2xl bg-card border border-border rounded-2xl overflow-hidden">
               
-              {/* Header */}
-              <CardHeader className="bg-slate-50 dark:bg-slate-900 border-b border-border py-3.5 px-4 flex flex-row items-center justify-between shadow-sm z-10">
-                <div className="flex items-center gap-2">
-                  <div className="h-7 w-7 rounded-lg bg-[#0057D9]/10 flex items-center justify-center text-[#0057D9]">
-                    <Bot className="w-4 h-4" />
+              {/* Header — Minimal & Restrained */}
+              <div className="border-b border-border/60 py-3 px-4 flex flex-row items-center justify-between z-10 bg-card">
+                <div className="flex items-center gap-2.5">
+                  <div className="h-7 w-7 rounded-lg bg-primary text-primary-foreground font-black text-xs flex items-center justify-center tracking-tight shadow-sm select-none">
+                    AI
                   </div>
-                  <div>
-                    <CardTitle className="text-sm font-extrabold text-foreground tracking-tight">Jeshurun AI</CardTitle>
-                    <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1 mt-0.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 relative">
-                        <span className="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-75" />
-                      </span>
-                      Online
-                    </div>
-                  </div>
+                  <span className="text-sm font-extrabold text-foreground tracking-tight">Assistant</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-muted-foreground" onClick={clearConversation} aria-label="Clear Conversation" title="Clear Conversation">
+                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0 rounded-lg hover:bg-secondary text-muted-foreground" onClick={clearConversation} aria-label="Clear Conversation" title="Clear Conversation">
                     <RotateCcw className="w-3.5 h-3.5" />
                   </Button>
-                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 text-muted-foreground" onClick={() => setIsOpen(false)} aria-label="Close Chatbot">
+                  <Button variant="ghost" size="sm" className="h-7 w-7 p-0 rounded-lg hover:bg-secondary text-muted-foreground" onClick={() => setIsOpen(false)} aria-label="Close Chatbot">
                     <X className="w-4 h-4" />
                   </Button>
                 </div>
-              </CardHeader>
+              </div>
 
-              {/* Chat Messages */}
-              <CardContent className="flex-1 overflow-y-auto p-4 space-y-5 bg-[#FAFBFD] dark:bg-[#0A0C10]">
-                {mounted && messages.map((msg, i) => (
-                  <motion.div 
-                    key={i} 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} space-y-1`}
-                  >
-                    <div className="flex items-end gap-2 max-w-[85%]">
-                      {msg.role === "assistant" && (
-                        <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[#0057D9]/10 flex items-center justify-center text-[#0057D9] mb-0.5">
-                          <Bot className="w-3 h-3" />
-                        </div>
-                      )}
-                      <div className={`p-3 text-sm font-medium leading-relaxed ${
+              {/* Chat Content Body */}
+              <CardContent className="flex-1 overflow-y-auto p-4 space-y-4 bg-background/50">
+                {mounted && messages.map((msg, i) => {
+                  const isInitialGreeting = i === 0 && msg.role === "assistant";
+
+                  if (isInitialGreeting) {
+                    return (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="py-2"
+                      >
+                        <p className="text-sm font-medium text-foreground/90 leading-relaxed">
+                          {msg.content}
+                        </p>
+                      </motion.div>
+                    );
+                  }
+
+                  return (
+                    <motion.div 
+                      key={i} 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"} space-y-1`}
+                    >
+                      <div className={`p-3 text-sm font-medium leading-relaxed max-w-[85%] ${
                         msg.role === "user" 
-                          ? "bg-[#0057D9] text-white rounded-2xl rounded-br-sm shadow-sm" 
-                          : "bg-white dark:bg-slate-800 text-foreground rounded-2xl rounded-bl-sm border border-slate-100 dark:border-slate-700 shadow-sm"
+                          ? "bg-primary text-primary-foreground rounded-2xl rounded-br-sm shadow-sm" 
+                          : "bg-muted text-foreground rounded-2xl rounded-bl-sm border border-border/60 shadow-sm"
                       }`}>
                         {msg.content}
                       </div>
-                    </div>
-                    <span className={`text-[10px] text-muted-foreground font-medium px-8 ${msg.role === "user" ? "text-right" : "text-left"}`}>
-                      {msg.timestamp}
-                    </span>
-                  </motion.div>
-                ))}
+                      <span className="text-[10px] text-muted-foreground font-medium px-1">
+                        {msg.timestamp}
+                      </span>
+                    </motion.div>
+                  );
+                })}
                 
                 {/* Typing Indicator */}
                 {isTyping && (
@@ -279,58 +309,59 @@ export function AIChatbot() {
                     animate={{ opacity: 1, y: 0 }}
                     className="flex flex-col items-start space-y-1"
                   >
-                    <div className="flex items-end gap-2 max-w-[85%]">
-                      <div className="flex-shrink-0 h-6 w-6 rounded-full bg-[#0057D9]/10 flex items-center justify-center text-[#0057D9] mb-0.5">
-                        <Bot className="w-3 h-3" />
-                      </div>
-                      <div className="bg-white dark:bg-slate-800 rounded-2xl rounded-bl-sm border border-slate-100 dark:border-slate-700 p-3.5 shadow-sm flex items-center gap-1.5 h-[42px]">
-                        <motion.span animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0 }} className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500" />
-                        <motion.span animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0.15 }} className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500" />
-                        <motion.span animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0.3 }} className="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-500" />
-                      </div>
+                    <div className="bg-muted rounded-2xl rounded-bl-sm border border-border/60 p-3 shadow-sm flex items-center gap-1.5 h-[38px]">
+                      <motion.span animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0 }} className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60" />
+                      <motion.span animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0.15 }} className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60" />
+                      <motion.span animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0.3 }} className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60" />
                     </div>
                   </motion.div>
                 )}
-                <div ref={chatEndRef} />
-              </CardContent>
-
-              {/* Chat Input & Suggestion Chips */}
-              <div className="p-3 border-t border-border bg-white dark:bg-slate-900 shadow-[0_-4px_10px_rgba(0,0,0,0.02)]">
-                {/* Suggestion Chips */}
+                
+                {/* Outlined Vertical Stack Quick Action Chips */}
                 <AnimatePresence>
                   {currentChips.length > 0 && (
                     <motion.div 
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: 'auto' }}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="flex flex-wrap gap-1.5 pb-3 pt-1 select-none"
+                      className="flex flex-col gap-2 pt-2 select-none"
                     >
                       {currentChips.map((chip, index) => (
                         <button
                           key={index}
                           type="button"
                           onClick={() => handleChipClick(chip)}
-                          className="text-[11px] font-bold text-[#0057D9] dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 border border-blue-100 dark:border-blue-800/50 rounded-full px-3 py-1.5 hover:bg-[#0057D9] hover:text-white dark:hover:bg-blue-600 transition-colors duration-200"
+                          className="w-full text-left text-xs font-semibold text-primary dark:text-blue-400 bg-transparent border border-primary/30 dark:border-primary/40 rounded-xl px-3.5 py-2.5 hover:bg-primary/10 transition-colors duration-200 flex items-center justify-between group cursor-pointer"
                         >
-                          {chip}
+                          <span>{chip}</span>
+                          <ArrowRight className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 transition-transform" />
                         </button>
                       ))}
                     </motion.div>
                   )}
                 </AnimatePresence>
                 
-                {/* Input form */}
-                <form onSubmit={handleSend} className="flex gap-2 items-end">
+                <div ref={chatEndRef} />
+              </CardContent>
+
+              {/* Flattened Input Area */}
+              <div className="p-3 border-t border-border bg-card">
+                <form onSubmit={handleSend} className="relative flex items-center w-full">
                   <Input 
                     value={input} 
                     onChange={(e) => setInput(e.target.value)} 
                     placeholder="Type a message..." 
                     disabled={isTyping}
-                    className="flex-1 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 focus-visible:ring-1 focus-visible:ring-[#0057D9] focus-visible:border-[#0057D9] min-h-[44px] text-sm rounded-xl px-4 py-2"
+                    className="w-full bg-background/60 border border-border focus-visible:ring-1 focus-visible:ring-primary focus-visible:border-primary h-11 text-sm rounded-xl pl-4 pr-10"
                   />
-                  <Button type="submit" size="sm" disabled={isTyping || !input.trim()} className="bg-[#0057D9] hover:bg-[#2563EB] text-white font-bold h-[44px] w-[44px] p-0 rounded-xl flex items-center justify-center flex-shrink-0 transition-transform active:scale-95">
-                    <Send className="w-4 h-4 ml-0.5" />
-                  </Button>
+                  <button 
+                    type="submit" 
+                    disabled={isTyping || !input.trim()} 
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-primary/80 disabled:opacity-30 p-1.5 transition-colors cursor-pointer"
+                    aria-label="Send message"
+                  >
+                    <Send className="w-4 h-4" />
+                  </button>
                 </form>
               </div>
 
@@ -348,16 +379,21 @@ export function AIChatbot() {
           whileTap={{ scale: 0.95 }}
         >
           <Button 
-            className="h-14 w-14 rounded-full shadow-[0_10px_30px_rgba(0,87,217,0.25)] bg-[#0057D9] hover:bg-[#2563EB] text-white flex items-center justify-center transition-colors duration-300 relative group" 
+            className="h-11 w-11 rounded-full shadow-[0_8px_20px_rgba(0,87,217,0.3)] bg-[#0057D9] hover:bg-[#2563EB] text-white flex flex-col items-center justify-center transition-all duration-300 relative group cursor-pointer border border-white/10" 
             onClick={() => {
               setIsOpen(true);
               setHasUnread(false);
             }}
-            aria-label="Toggle Chatbot"
+            aria-label="Open AI chat assistant"
           >
-            <MessageSquare className="w-6 h-6" />
+            <div className="flex flex-col items-center justify-center -space-y-0.5 pointer-events-none">
+              <span className="text-[10px] font-black tracking-tight leading-none uppercase text-white select-none">
+                AI
+              </span>
+              <CornerDownRight className="w-3 h-3 text-white/90" />
+            </div>
             {hasUnread && (
-              <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-red-500 border-2 border-white dark:border-slate-900 rounded-full"></span>
+              <span className="absolute top-0.5 right-0.5 w-2.5 h-2.5 bg-red-500 border-2 border-background rounded-full"></span>
             )}
           </Button>
         </motion.div>
