@@ -531,10 +531,80 @@ export function Navbar() {
 
         </nav>
 
-        {/* Right Section: Contact Us, Theme Toggle & Search Input */}
+        {/* Right Section: Search Input, Contact Us & Theme Toggle */}
         <div className="flex items-center gap-2 lg:gap-3 shrink-0">
+          {/* Search Input (Positioned to the left of Theme Toggle) */}
+          <div className="hidden md:flex relative group items-center">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-[#2563EB] transition-colors" />
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="h-10 pl-10 pr-4 rounded-full text-[13px] font-medium bg-slate-100/80 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 focus:border-[#2563EB]/40 dark:focus:border-white/30 focus:bg-white dark:focus:bg-slate-950/80 focus:shadow-sm outline-none w-28 md:w-32 lg:w-40 focus:w-32 md:focus:w-40 lg:focus:w-52 transition-all duration-300 placeholder:text-muted-foreground text-slate-900 dark:text-white"
+              aria-label="Search site"
+            />
+            <AnimatePresence>
+              {searchQuery.length > 0 && (
+                <motion.div
+                  key="search-dropdown"
+                  initial={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                  className="absolute top-14 right-0 w-80 bg-card/95 backdrop-blur-xl dark:bg-slate-900/95 border border-border dark:border-border rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col max-h-[400px] z-50"
+                >
+                  {(() => {
+                    const query = searchQuery.toLowerCase();
+                    const results = searchIndex.filter(item => 
+                      item.title.toLowerCase().includes(query) || 
+                      item.desc.toLowerCase().includes(query)
+                    );
+
+                    if (results.length === 0) {
+                      return (
+                        <div className="p-4 text-center">
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground font-medium">
+                            No results found for &quot;
+                            <span className="text-foreground dark:text-white font-bold">
+                              {searchQuery}
+                            </span>
+                            &quot;
+                          </p>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div className="overflow-y-auto p-2">
+                        <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 px-3 pt-2">Search Results</div>
+                        <div className="flex flex-col gap-1">
+                          {results.map((result, idx) => (
+                            <Link 
+                              key={idx} 
+                              href={result.href}
+                              onClick={() => setSearchQuery("")}
+                              className="flex flex-col p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors group"
+                            >
+                              <span className="text-sm font-bold text-foreground dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                {result.title}
+                              </span>
+                              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
+                                {result.desc}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <div className="hidden md:flex items-center gap-2 lg:gap-3 shrink-0">
-            {/* 1. Contact Us Button */}
+            {/* Contact Us Button */}
             {(() => {
               const isContactActive = pathname === "/contact";
               return (
@@ -633,76 +703,6 @@ export function Navbar() {
               {mounted && theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             </div>
           </button>
-
-          {/* 2. Search Input (Positioned on the far right end of the navbar pill) */}
-          <div className="hidden md:flex relative group items-center">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-[#2563EB] transition-colors" />
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-10 pl-10 pr-4 rounded-full text-[13px] font-medium bg-slate-100/80 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 focus:border-[#2563EB]/40 dark:focus:border-white/30 focus:bg-white dark:focus:bg-slate-950/80 focus:shadow-sm outline-none w-28 md:w-32 lg:w-40 focus:w-32 md:focus:w-40 lg:focus:w-52 transition-all duration-300 placeholder:text-muted-foreground text-slate-900 dark:text-white"
-              aria-label="Search site"
-            />
-            <AnimatePresence>
-              {searchQuery.length > 0 && (
-                <motion.div
-                  key="search-dropdown"
-                  initial={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: 10, scale: 0.95, filter: "blur(4px)" }}
-                  transition={{ duration: 0.2, ease: "easeInOut" }}
-                  className="absolute top-14 right-0 w-80 bg-card/95 backdrop-blur-xl dark:bg-slate-900/95 border border-border dark:border-border rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col max-h-[400px] z-50"
-                >
-                  {(() => {
-                    const query = searchQuery.toLowerCase();
-                    const results = searchIndex.filter(item => 
-                      item.title.toLowerCase().includes(query) || 
-                      item.desc.toLowerCase().includes(query)
-                    );
-
-                    if (results.length === 0) {
-                      return (
-                        <div className="p-4 text-center">
-                          <p className="text-sm text-muted-foreground dark:text-muted-foreground font-medium">
-                            No results found for &quot;
-                            <span className="text-foreground dark:text-white font-bold">
-                              {searchQuery}
-                            </span>
-                            &quot;
-                          </p>
-                        </div>
-                      );
-                    }
-
-                    return (
-                      <div className="overflow-y-auto p-2">
-                        <div className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-2 px-3 pt-2">Search Results</div>
-                        <div className="flex flex-col gap-1">
-                          {results.map((result, idx) => (
-                            <Link 
-                              key={idx} 
-                              href={result.href}
-                              onClick={() => setSearchQuery("")}
-                              className="flex flex-col p-3 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors group"
-                            >
-                              <span className="text-sm font-bold text-foreground dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                {result.title}
-                              </span>
-                              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 line-clamp-1 mt-0.5">
-                                {result.desc}
-                              </span>
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    );
-                  })()}
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
         </div>
       </div>
     </div>
