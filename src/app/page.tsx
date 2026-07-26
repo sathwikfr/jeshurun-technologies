@@ -253,7 +253,7 @@ const refinedTechCategories = [
 
 function TechCard({ tech }: { tech: typeof refinedTechCategories[0]["items"][0] }) {
   return (
-    <div className={`group relative flex items-center gap-3.5 p-3.5 lg:p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/80 backdrop-blur-xs transition-all duration-300 cursor-default shadow-xs dark:shadow-none hover:-translate-y-0.5 ${tech.bgHover}`}>
+    <div className={`group relative flex items-center gap-3.5 p-3.5 lg:p-4 rounded-xl border border-slate-200 dark:border-[#333333] bg-white dark:bg-[#1c1c1c] shadow-xs dark:shadow-none transition-all duration-300 cursor-default hover:-translate-y-0.5 ${tech.bgHover}`}>
       <div className={`w-10 h-10 rounded-xl shrink-0 border flex items-center justify-center p-2 transition-all duration-300 ${tech.iconBg}`}>
         <div className={tech.animClass}>
           {tech.logo}
