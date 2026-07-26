@@ -13,7 +13,7 @@ import {
   Cloud, BarChart, Users, ArrowRight,
   Code2, Lock, CheckCircle2, Server, Cpu, 
   Activity, RefreshCw, Laptop, Key, Workflow, Search,
-  User, Link, MousePointerClick
+  User, Link
 } from "lucide-react";
 
 import { PremiumCTA } from "@/components/PremiumCTA";
@@ -147,9 +147,8 @@ export default function AboutPage() {
         <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           {/* TAB TOGGLES (Sticky Segmented Control) */}
           <div className="sticky top-24 z-50 flex flex-col items-center mb-12">
-            <div className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-2 flex items-center gap-1.5">
-              <MousePointerClick className="w-3.5 h-3.5 text-blue-500" />
-              <span>Click tab to view in detail</span>
+            <div className="text-sm sm:text-base font-semibold font-sans text-blue-600 dark:text-blue-400 mb-3 text-center">
+              Select each tab to view in detail.
             </div>
             <div className="flex p-1.5 bg-white/95 dark:bg-zinc-900/95 rounded-full border border-slate-200/90 dark:border-zinc-800 backdrop-blur-xl shadow-lg gap-1">
               {(["who", "delivery"] as const).map((tab) => (

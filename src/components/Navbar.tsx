@@ -388,8 +388,8 @@ export function Navbar() {
   const forceLightText = false;
   const isMenuOpen = Boolean(activeMenu || isMobileOpen || searchQuery);
   const navBg = isMenuOpen || isScrolled
-    ? "bg-white/85 dark:bg-slate-950/85 backdrop-blur-xl border border-slate-200/80 dark:border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
-    : "bg-white/35 dark:bg-slate-950/30 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)]";
+    ? "bg-white/85 dark:bg-zinc-950/85 backdrop-blur-xl border border-slate-200/80 dark:border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.25)]"
+    : "bg-white/35 dark:bg-transparent backdrop-blur-md border border-white/20 dark:border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.1)]";
 
   return (
     <>
@@ -541,7 +541,7 @@ export function Navbar() {
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="h-10 pl-10 pr-4 rounded-full text-[13px] font-medium bg-slate-100/80 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 focus:border-[#2563EB]/40 dark:focus:border-white/30 focus:bg-white dark:focus:bg-slate-950/80 focus:shadow-sm outline-none w-28 md:w-32 lg:w-40 focus:w-32 md:focus:w-40 lg:focus:w-52 transition-all duration-300 placeholder:text-muted-foreground text-slate-900 dark:text-white"
+              className="h-10 pl-10 pr-4 rounded-full text-[13px] font-medium bg-slate-100/80 dark:bg-white/5 border border-slate-200/50 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20 focus:border-[#2563EB]/40 dark:focus:border-white/30 focus:bg-white dark:focus:bg-zinc-900/90 focus:shadow-sm outline-none w-28 md:w-32 lg:w-40 focus:w-32 md:focus:w-40 lg:focus:w-52 transition-all duration-300 placeholder:text-muted-foreground text-slate-900 dark:text-white"
               aria-label="Search site"
             />
             <AnimatePresence>
