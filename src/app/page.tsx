@@ -131,47 +131,144 @@ const refinedTechCategories = [
   {
     category: "Cloud platforms",
     items: [
-      { name: "Amazon Web Services", logo: <AwsLogo className="w-5 h-5 object-contain" /> },
-      { name: "Microsoft Azure", logo: <AzureLogo className="w-5 h-5 object-contain" /> },
-      { name: "Google Cloud", logo: <GcpLogo className="w-5 h-5 object-contain" /> },
+      { 
+        name: "AWS", 
+        subName: "Amazon Web Services", 
+        logo: <AwsLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-amber-500/50 hover:shadow-[0_6px_25px_rgba(245,158,11,0.2)] dark:hover:border-amber-500/40 dark:hover:shadow-[0_6px_25px_rgba(245,158,11,0.25)]",
+        iconBg: "bg-amber-500/10 dark:bg-amber-500/15 border-amber-500/20",
+        animClass: "group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300"
+      },
+      { 
+        name: "Azure", 
+        subName: "Microsoft Azure", 
+        logo: <AzureLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-blue-500/50 hover:shadow-[0_6px_25px_rgba(0,120,212,0.2)] dark:hover:border-blue-500/40 dark:hover:shadow-[0_6px_25px_rgba(0,120,212,0.25)]",
+        iconBg: "bg-blue-500/10 dark:bg-blue-500/15 border-blue-500/20",
+        animClass: "group-hover:scale-115 group-hover:-rotate-6 transition-transform duration-300"
+      },
+      { 
+        name: "GCP", 
+        subName: "Google Cloud", 
+        logo: <GcpLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-emerald-500/50 hover:shadow-[0_6px_25px_rgba(66,133,244,0.2)] dark:hover:border-emerald-500/40 dark:hover:shadow-[0_6px_25px_rgba(66,133,244,0.25)]",
+        iconBg: "bg-emerald-500/10 dark:bg-emerald-500/15 border-emerald-500/20",
+        animClass: "group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300"
+      },
     ]
   },
   {
     category: "Engineering",
     items: [
-      { name: "React", logo: <ReactLogo className="w-5 h-5 object-contain" /> },
-      { name: "Next.js", logo: <NextJsLogo className="w-5 h-5 object-contain" /> },
-      { name: "Node.js", logo: <NodeJsLogo className="w-5 h-5 object-contain" /> },
-      { name: "Python", logo: <PythonLogo className="w-5 h-5 object-contain" /> },
+      { 
+        name: "React", 
+        subName: "React", 
+        logo: <ReactLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-cyan-500/50 hover:shadow-[0_6px_25px_rgba(97,218,251,0.2)] dark:hover:border-cyan-500/40",
+        iconBg: "bg-cyan-500/10 dark:bg-cyan-500/15 border-cyan-500/20",
+        animClass: "group-hover:rotate-180 transition-transform duration-700 ease-in-out"
+      },
+      { 
+        name: "Next.js", 
+        subName: "Next.js", 
+        logo: <NextJsLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-slate-400 dark:hover:border-slate-500 hover:shadow-[0_6px_25px_rgba(15,23,42,0.15)] dark:hover:shadow-[0_6px_25px_rgba(255,255,255,0.1)]",
+        iconBg: "bg-slate-200/80 dark:bg-slate-800 border-slate-300 dark:border-slate-700",
+        animClass: "group-hover:scale-115 transition-transform duration-300"
+      },
+      { 
+        name: "Node.js", 
+        subName: "Node.js", 
+        logo: <NodeJsLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-emerald-500/50 hover:shadow-[0_6px_25px_rgba(51,153,51,0.2)] dark:hover:border-emerald-500/40",
+        iconBg: "bg-emerald-500/10 dark:bg-emerald-500/15 border-emerald-500/20",
+        animClass: "group-hover:scale-115 group-hover:-rotate-6 transition-transform duration-300"
+      },
+      { 
+        name: "Python", 
+        subName: "Python", 
+        logo: <PythonLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-blue-500/50 hover:shadow-[0_6px_25px_rgba(55,118,171,0.2)] dark:hover:border-blue-500/40",
+        iconBg: "bg-blue-500/10 dark:bg-blue-500/15 border-blue-500/20",
+        animClass: "group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300"
+      },
     ]
   },
   {
     category: "DevOps and infrastructure",
     items: [
-      { name: "Docker", logo: <DockerLogo className="w-5 h-5 object-contain" /> },
-      { name: "Kubernetes", logo: <KubernetesLogo className="w-5 h-5 object-contain" /> },
-      { name: "DevOps", logo: <Infinity className="w-5 h-5 text-blue-500" /> },
+      { 
+        name: "Docker", 
+        subName: "Docker", 
+        logo: <DockerLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-sky-500/50 hover:shadow-[0_6px_25px_rgba(36,150,237,0.2)] dark:hover:border-sky-500/40",
+        iconBg: "bg-sky-500/10 dark:bg-sky-500/15 border-sky-500/20",
+        animClass: "group-hover:-translate-y-1 transition-transform duration-300"
+      },
+      { 
+        name: "Kubernetes", 
+        subName: "Kubernetes", 
+        logo: <KubernetesLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-indigo-500/50 hover:shadow-[0_6px_25px_rgba(50,108,229,0.2)] dark:hover:border-indigo-500/40",
+        iconBg: "bg-indigo-500/10 dark:bg-indigo-500/15 border-indigo-500/20",
+        animClass: "group-hover:rotate-45 transition-transform duration-500"
+      },
+      { 
+        name: "DevOps", 
+        subName: "CI/CD & Automation", 
+        logo: <Infinity className="w-5 h-5 text-blue-500" />,
+        bgHover: "hover:border-blue-500/50 hover:shadow-[0_6px_25px_rgba(59,130,246,0.2)] dark:hover:border-blue-500/40",
+        iconBg: "bg-blue-500/10 dark:bg-blue-500/15 border-blue-500/20",
+        animClass: "group-hover:scale-125 transition-transform duration-300"
+      },
     ]
   },
   {
     category: "Security and intelligence",
     items: [
-      { name: "AI", logo: <Brain className="w-5 h-5 text-purple-500 dark:text-purple-400" /> },
-      { name: "Cybersecurity", logo: <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400" /> },
-      { name: "Compliance", logo: <Award className="w-5 h-5 text-amber-500 dark:text-amber-400" /> },
+      { 
+        name: "AI", 
+        logo: <Brain className="w-5 h-5 text-purple-500 dark:text-purple-400" />,
+        bgHover: "hover:border-purple-500/50 hover:shadow-[0_6px_25px_rgba(168,85,247,0.2)] dark:hover:border-purple-500/40",
+        iconBg: "bg-purple-500/10 dark:bg-purple-500/15 border-purple-500/20",
+        animClass: "group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300"
+      },
+      { 
+        name: "Cybersecurity", 
+        logo: <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />,
+        bgHover: "hover:border-emerald-500/50 hover:shadow-[0_6px_25px_rgba(16,185,129,0.2)] dark:hover:border-emerald-500/40",
+        iconBg: "bg-emerald-500/10 dark:bg-emerald-500/15 border-emerald-500/20",
+        animClass: "group-hover:scale-115 group-hover:-rotate-6 transition-transform duration-300"
+      },
+      { 
+        name: "Compliance", 
+        logo: <Award className="w-5 h-5 text-amber-500 dark:text-amber-400" />,
+        bgHover: "hover:border-amber-500/50 hover:shadow-[0_6px_25px_rgba(245,158,11,0.2)] dark:hover:border-amber-500/40",
+        iconBg: "bg-amber-500/10 dark:bg-amber-500/15 border-amber-500/20",
+        animClass: "group-hover:scale-115 group-hover:-translate-y-0.5 transition-transform duration-300"
+      },
     ]
   }
 ];
 
 function TechCard({ tech }: { tech: typeof refinedTechCategories[0]["items"][0] }) {
   return (
-    <div className="group flex items-center gap-3 p-3 lg:p-4 rounded-lg border border-slate-200 dark:border-[#333333] bg-white dark:bg-[#1c1c1c] hover:bg-slate-50 dark:hover:bg-[#252525] transition-colors cursor-default shadow-sm dark:shadow-none">
-      <div className="w-8 h-8 rounded shrink-0 bg-slate-100 dark:bg-[#2d2d2d] border border-slate-200 dark:border-[#404040] flex items-center justify-center p-1.5 text-slate-700 dark:text-slate-300">
-        {tech.logo}
+    <div className={`group relative flex items-center gap-3.5 p-3.5 lg:p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/80 backdrop-blur-xs transition-all duration-300 cursor-default shadow-xs dark:shadow-none hover:-translate-y-0.5 ${tech.bgHover}`}>
+      <div className={`w-10 h-10 rounded-xl shrink-0 border flex items-center justify-center p-2 transition-all duration-300 ${tech.iconBg}`}>
+        <div className={tech.animClass}>
+          {tech.logo}
+        </div>
       </div>
-      <span className="text-sm font-semibold text-slate-900 dark:text-slate-200">
-        {tech.name}
-      </span>
+      <div className="flex flex-col min-w-0">
+        <span className="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug truncate">
+          {tech.name}
+        </span>
+        {tech.subName && (
+          <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate leading-tight mt-0.5">
+            {tech.subName}
+          </span>
+        )}
+      </div>
     </div>
   );
 }
@@ -1753,7 +1850,7 @@ export default function Home() {
                     View all
                   </Link>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {refinedTechCategories[2].items.map((tech) => (
                     <TechCard key={tech.name} tech={tech} />
                   ))}
@@ -1766,7 +1863,7 @@ export default function Home() {
                     View all
                   </Link>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {refinedTechCategories[3].items.map((tech) => (
                     <TechCard key={tech.name} tech={tech} />
                   ))}
