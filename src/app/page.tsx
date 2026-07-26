@@ -134,7 +134,7 @@ const refinedTechCategories = [
       { 
         name: "AWS", 
         subName: "Amazon Web Services", 
-        logo: <AwsLogo className="w-5 h-5 object-contain" />,
+        logo: <AwsLogo className="w-6 h-6 object-contain" />,
         bgHover: "hover:border-amber-500/50 hover:shadow-[0_6px_25px_rgba(245,158,11,0.2)] dark:hover:border-amber-500/40 dark:hover:shadow-[0_6px_25px_rgba(245,158,11,0.25)]",
         iconBg: "bg-amber-500/10 dark:bg-amber-500/15 border-amber-500/20",
         animClass: "group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300"
