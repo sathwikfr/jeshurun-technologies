@@ -371,7 +371,7 @@ export function CMSContent({ initialPosts }: CMSContentProps) {
                   className="w-4 h-4 rounded text-[#0057D9] focus:ring-[#0057D9] cursor-pointer"
                 />
                 <Label htmlFor="published" className="text-xs font-bold text-foreground dark:text-slate-350 cursor-pointer select-none">
-                  Publish immediately (Visible publically on /blog)
+                  Publish immediately
                 </Label>
               </div>
 

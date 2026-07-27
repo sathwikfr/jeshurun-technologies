@@ -288,10 +288,10 @@ export default function Software() {
           {/* Subtle glowing orb behind text for perfect contrast */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-background/60 blur-[100px] rounded-full pointer-events-none -z-10 dark:bg-[#121212]/70" />
           <div className="flex flex-col items-center text-center space-y-6 max-w-5xl mx-auto">
-            <motion.div variants={enterpriseItem} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 dark:bg-black/20 backdrop-blur-md border border-primary/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-primary shadow-[0_0_30px_rgba(18,171,219,0.15)] ring-1 ring-white/10">
+            <motion.div variants={enterpriseItem} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15">
               <span className="relative flex w-2 h-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full w-2 h-2 bg-primary shadow-[0_0_10px_rgba(18,171,219,1)]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
               </span>
               Software Engineering
             </motion.div>

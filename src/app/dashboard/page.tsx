@@ -1,4 +1,4 @@
-﻿
+
 
 import { getServerSession } from "next-auth";
 
@@ -81,10 +81,14 @@ export default async function Dashboard() {
         
         {/* Welcome Header */}
         <div className="space-y-2">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0057D9]/5 border border-[#0057D9]/10 text-xs font-bold uppercase tracking-wider text-[#0057D9]">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15">
+            <span className="relative flex w-2 h-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+              <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+            </span>
             Enterprise Portal
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-[#0A1F44]">
+          <h1 className="text-4xl font-extrabold tracking-tight text-[#0A1F44] dark:text-white">
             Welcome, {session.user?.name}
           </h1>
           <p className="text-muted-foreground text-lg font-semibold">
@@ -102,7 +106,7 @@ export default async function Dashboard() {
               <Users className="h-5 w-5 text-[#0057D9]" />
             </CardHeader>
             <CardContent className="pt-3">
-              <p className="text-4xl font-extrabold text-[#0A1F44] tracking-tight">{leadsCount}</p>
+              <p className="text-4xl font-extrabold text-[#0A1F44] dark:text-white tracking-tight">{leadsCount}</p>
               <p className="text-xs font-semibold text-muted-foreground mt-2">
                 {leadsCount > 0 ? "Pipeline synchronization active" : "No new submissions this week"}
               </p>
@@ -116,7 +120,7 @@ export default async function Dashboard() {
               <BarChart3 className="h-5 w-5 text-[#0057D9]" />
             </CardHeader>
             <CardContent className="pt-3">
-              <p className="text-4xl font-extrabold text-[#0A1F44] tracking-tight">{clientsCount}</p>
+              <p className="text-4xl font-extrabold text-[#0A1F44] dark:text-white tracking-tight">{clientsCount}</p>
               <p className="text-xs font-semibold text-muted-foreground mt-2">
                 {clientsCount > 0 ? `${clientsCount} active partnerships verified` : "Establish connections in settings"}
               </p>

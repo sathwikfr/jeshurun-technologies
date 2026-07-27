@@ -1486,14 +1486,12 @@ export default function Home() {
             >
               
               {/* 1. BADGE/PILL */}
-              <motion.div variants={enterpriseItem} className="flex items-center gap-2.5 bg-[#EEF3FF] border border-[#D6E4FF] dark:bg-white/5 dark:border-white/10 rounded-full px-4 py-1.5 shadow-sm backdrop-blur-md">
-                <div className="relative flex h-2 w-2 items-center justify-center">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-500 opacity-75 dark:bg-[#5EC8FF]"></span>
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-600 dark:bg-[#5EC8FF]"></span>
-                </div>
-                <span className="text-[13px] lg:text-[14px] font-bold text-blue-700 dark:text-white tracking-wider uppercase">
-                  GLOBAL ENTERPRISE CONSULTING
+              <motion.div variants={enterpriseItem} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15">
+                <span className="relative flex w-2 h-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
                 </span>
+                GLOBAL ENTERPRISE CONSULTING
               </motion.div>
 
               <div className="flex flex-col items-center md:items-start w-full gap-3 lg:gap-4 2xl:gap-6">
@@ -1549,8 +1547,11 @@ export default function Home() {
       <section className="w-full py-16 md:py-20 relative z-10 bg-background" aria-label="Trusted Partners">
         <div className="w-full container px-6 sm:px-8 mx-auto space-y-8">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mb-2">
+              <span className="relative flex w-2 h-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+              </span>
               Our Clients
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Trusted by Enterprise Leaders</h2>
@@ -1593,8 +1594,11 @@ export default function Home() {
 
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mb-2">
+              <span className="relative flex w-2 h-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+              </span>
               How We Deliver
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">One Partner. Full Technology Lifecycle.</h2>
@@ -1754,8 +1758,11 @@ export default function Home() {
       <section className="w-full py-24 relative z-10 border-t border-border bg-background" aria-label="Technology Ecosystem">
         <div className="w-full container px-6 sm:px-8 mx-auto space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mb-2">
+              <span className="relative flex w-2 h-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+              </span>
               Technology Ecosystem
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Enterprise-grade technology stack</h2>
@@ -1879,8 +1886,11 @@ export default function Home() {
       <section id="corporate-intelligence" className="w-full py-20 md:py-32 relative z-10 bg-background border-t border-border" aria-label="Corporate Intelligence">
         <div className="w-full container px-6 sm:px-8 mx-auto space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mb-2">
+              <span className="relative flex w-2 h-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+              </span>
               Corporate Intelligence
             </div>
             <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">
@@ -1895,13 +1905,7 @@ export default function Home() {
               <InsightCard key={insight.slug} insight={insight} />
             ))}
           </div>
-          {/* View All Insights */}
-          <div className="flex justify-center pt-4">
-            <Link href="/insights" className="group inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors duration-200">
-              View All Insights
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
-            </Link>
-          </div>
+
         </div>
       </section>
 
@@ -1911,8 +1915,11 @@ export default function Home() {
         <div className="w-full px-6 sm:px-12 md:px-24 lg:px-32 py-10 md:py-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div className="space-y-1 max-w-md">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mb-2">
+                <span className="relative flex w-2 h-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+                </span>
                 Stay Connected
               </div>
               <h3 className="text-xl font-extrabold text-foreground tracking-tight">

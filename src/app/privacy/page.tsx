@@ -52,10 +52,14 @@ export default function PrivacyPolicy() {
           className="w-full container px-6 sm:px-8 mx-auto"
         >
           <div className="flex flex-col items-center text-center space-y-6 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0057D9]/5 border border-[#0057D9]/10 text-xs font-bold uppercase tracking-wider text-[#0057D9]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15">
+              <span className="relative flex w-2 h-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+              </span>
               Legal Agreement
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-[#0A1F44]">
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-[#0A1F44] dark:text-white">
               Privacy Policy
             </h1>
             <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed font-semibold">
@@ -96,7 +100,7 @@ export default function PrivacyPolicy() {
                         {sec.icon}
                       </div>
                       <div className="space-y-2">
-                        <h3 className="text-xl font-bold text-[#0A1F44]">{sec.title}</h3>
+                        <h3 className="text-xl font-bold text-[#0A1F44] dark:text-white">{sec.title}</h3>
                         <p className="text-muted-foreground text-base leading-relaxed font-medium">
                           {sec.content}
                         </p>

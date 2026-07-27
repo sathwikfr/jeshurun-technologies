@@ -1,4 +1,4 @@
-﻿
+
 
 import { insightsData } from "@/lib/insightsData";
 
@@ -21,7 +21,11 @@ export default function InsightsPage() {
       {/* Header */}
       <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center relative overflow-hidden border-b border-border">
         <div className="w-full container px-6 sm:px-8 mx-auto relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-[#2563EB]/10 text-[#2563EB] mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mb-6">
+            <span className="relative flex w-2 h-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+              <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+            </span>
             Corporate Intelligence
           </div>
           <h1 className="text-4xl font-extrabold sm:text-5xl lg:text-6xl text-foreground tracking-tight max-w-4xl mx-auto mb-6">

@@ -45,7 +45,7 @@ function matchRuleBasedResponse(lowercaseMessage: string): string {
   }
 
   if (lowercaseMessage.match(/career|job|hiring|work|apply|recru|position|opening/)) {
-    return "We are actively recruiting cloud architects, agile delivery leads, and QA automation engineers. View open positions on our Careers page at /careers or submit your CV directly to careers@jeshuruntech.com.";
+    return "We are always interested in connecting with outstanding technology talent. Please reach out directly through our contact page at /contact or email your credentials to careers@jeshuruntech.com.";
   }
 
   if (lowercaseMessage.match(/who are you|what is this|about jeshurun|what do you do|company/)) {

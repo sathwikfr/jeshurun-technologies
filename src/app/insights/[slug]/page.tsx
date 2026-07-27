@@ -176,10 +176,16 @@ export default function InsightArticlePage() {
               <ArrowLeft className="w-4 h-4" /> Back to Insights
             </Link>
 
-            <div className="flex items-center gap-3 flex-wrap pt-2">
-              <span className="text-[10px] font-black text-white uppercase tracking-widest bg-blue-600 px-3 py-1 rounded-full border border-blue-500/30">
-                {article.category}
-              </span>
+            <div className="pt-2">
+              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-white shadow-[0_0_25px_rgba(255,255,255,0.1)] ring-1 ring-white/15">
+                <span className="relative flex w-2 h-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+                </span>
+                <span>INSIGHT</span>
+                <span className="opacity-40 text-xs font-normal">•</span>
+                <span className="text-blue-300">{article.category}</span>
+              </div>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] max-w-3xl">

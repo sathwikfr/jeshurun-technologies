@@ -115,9 +115,12 @@ export default function AboutPage() {
         >
           <motion.div 
             variants={item}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-secondary border border-border text-foreground text-xs font-bold uppercase tracking-widest mb-2 shadow-xs"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mb-2"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+            <span className="relative flex w-2 h-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+              <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+            </span>
             ABOUT JESHURUN TECHNOLOGIES
           </motion.div>
           
@@ -194,9 +197,12 @@ export default function AboutPage() {
                 <div className="text-center space-y-4">
                   <motion.div 
                     variants={item}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                    <span className="relative flex w-2 h-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+                    </span>
                     About Us
                   </motion.div>
                   
@@ -267,9 +273,12 @@ export default function AboutPage() {
                 <div className="text-center space-y-6 mb-16">
                   <motion.h2 
                     variants={item}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 shadow-sm mx-auto"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mx-auto"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                    <span className="relative flex w-2 h-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+                    </span>
                     Our Differentiator
                   </motion.h2>
                   <motion.h3 
@@ -346,9 +355,12 @@ export default function AboutPage() {
           <div className="text-center mb-12 space-y-4">
             <motion.div 
               variants={item}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+              <span className="relative flex w-2 h-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+              </span>
               Leadership Team
             </motion.div>
             
@@ -434,9 +446,12 @@ export default function AboutPage() {
                 <div className="text-center space-y-4">
                   <motion.div 
                     variants={item}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 shadow-sm"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                    <span className="relative flex w-2 h-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+                    </span>
                     Delivery & Quality Standards
                   </motion.div>
                   
@@ -506,9 +521,12 @@ export default function AboutPage() {
                 <div className="text-center space-y-6 mb-16">
                   <motion.h2 
                     variants={item}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/5 border border-blue-600/20 text-xs font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 shadow-sm mx-auto"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mx-auto"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-blue-400" />
+                    <span className="relative flex w-2 h-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                      <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+                    </span>
                     Resilience & Reliability
                   </motion.h2>
                   <motion.h3 
