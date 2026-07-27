@@ -1914,7 +1914,7 @@ export default function Home() {
       <div className="relative z-10 border-t border-b border-border/60 bg-background mt-20">
         <div className="w-full px-6 sm:px-12 md:px-24 lg:px-32 py-10 md:py-12">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div className="space-y-1 max-w-md">
+            <div className="space-y-2 max-w-xl">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mb-2">
                 <span className="relative flex w-2 h-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
@@ -1922,10 +1922,10 @@ export default function Home() {
                 </span>
                 Stay Connected
               </div>
-              <h3 className="text-xl font-extrabold text-foreground tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
                 Enterprise Technology Insights
               </h3>
-              <p className="text-sm text-muted-foreground font-medium leading-relaxed">
+              <p className="text-sm sm:text-base text-muted-foreground font-medium leading-relaxed">
                 Research reports, cloud strategies, and digital transformation briefs — delivered to your inbox.
               </p>
             </div>
