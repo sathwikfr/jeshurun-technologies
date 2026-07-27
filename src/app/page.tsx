@@ -263,7 +263,7 @@ function TechCard({ tech }: { tech: typeof refinedTechCategories[0]["items"][0] 
         <span className="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug truncate">
           {tech.name}
         </span>
-        {tech.subName && (
+        {'subName' in tech && tech.subName && (
           <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate leading-tight mt-0.5">
             {tech.subName}
           </span>
