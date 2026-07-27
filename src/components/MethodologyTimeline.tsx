@@ -70,9 +70,13 @@ export function MethodologyTimeline({
     <section className="w-full py-24 bg-transparent relative overflow-hidden">
       <div className="container px-6 sm:px-8 mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-16 space-y-4">
-          <span className="text-sm font-bold text-primary uppercase tracking-widest bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-extrabold uppercase tracking-[0.12em] text-slate-900 dark:text-white shadow-xs">
+            <span className="relative flex w-1.5 h-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+              <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,1)]"></span>
+            </span>
             {badge}
-          </span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight">
             {title}
           </h2>

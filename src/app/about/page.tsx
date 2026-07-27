@@ -446,11 +446,11 @@ export default function AboutPage() {
                 <div className="text-center space-y-4">
                   <motion.div 
                     variants={item}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15"
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-extrabold uppercase tracking-[0.12em] text-slate-900 dark:text-white shadow-xs"
                   >
-                    <span className="relative flex w-2 h-2">
+                    <span className="relative flex w-1.5 h-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-                      <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+                      <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,1)]"></span>
                     </span>
                     Delivery & Quality Standards
                   </motion.div>
@@ -521,11 +521,11 @@ export default function AboutPage() {
                 <div className="text-center space-y-6 mb-16">
                   <motion.h2 
                     variants={item}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mx-auto"
+                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-extrabold uppercase tracking-[0.12em] text-slate-900 dark:text-white shadow-xs mx-auto"
                   >
-                    <span className="relative flex w-2 h-2">
+                    <span className="relative flex w-1.5 h-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-                      <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+                      <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,1)]"></span>
                     </span>
                     Resilience & Reliability
                   </motion.h2>
