@@ -92,94 +92,62 @@ export function PremiumCTA({ variant, titleTop: customTitleTop, titleHighlight: 
   const description = customDescription || data.description;
 
   return (
-    <section className="w-full py-8 md:py-12 relative z-10 bg-transparent overflow-hidden" aria-label="Call to Action">
+    <section className="w-full py-10 md:py-16 relative z-10 bg-transparent overflow-hidden" aria-label="Call to Action">
       <div className="container px-4 sm:px-6 mx-auto relative z-10 flex justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="group w-full max-w-2xl relative"
+          className="w-full max-w-3xl text-center py-6 sm:py-8"
         >
-          {/* Subtle Outer Glow Aura */}
-          <div 
-            className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-600/15 via-cyan-500/15 to-blue-600/15 opacity-30 group-hover:opacity-100 transition-opacity duration-700 blur-md" 
-            aria-hidden="true" 
-          />
-
-          {/* Compact Main Card Container */}
-          <div className="relative bg-card/90 dark:bg-slate-900/90 backdrop-blur-xl border border-border/80 rounded-2xl px-6 sm:px-10 py-8 md:py-10 text-center shadow-[0_10px_35px_rgba(0,0,0,0.04)] dark:shadow-[0_15px_45px_rgba(0,0,0,0.35)] overflow-hidden">
-            
-            {/* Ambient Background Radial Glow */}
-            <div
-              className="absolute inset-0 pointer-events-none z-0"
-              style={{
-                background: "radial-gradient(ellipse at top, rgba(37,99,235,0.06) 0%, rgba(6,182,212,0.03) 50%, transparent 80%)",
-              }}
-              aria-hidden="true"
-            />
-
-            {/* Subtle Blueprint Grid Pattern */}
-            <div
-              className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.06] pointer-events-none"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgba(37,99,235,0.2) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(37,99,235,0.2) 1px, transparent 1px)
-                `,
-                backgroundSize: "24px 24px",
-              }}
-              aria-hidden="true"
-            />
-
-            {/* Compact Pill Badge with Glowing Blue Dot */}
-            <div className="relative z-10 flex justify-center mb-3">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-extrabold uppercase tracking-[0.12em] text-slate-900 dark:text-white shadow-xs">
-                <span className="relative flex w-1.5 h-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,1)]"></span>
-                </span>
-                ENTERPRISE READY
-              </div>
+          {/* Merged Clean Badge (No transparent tint boxes or dark blue bg) */}
+          <div className="flex justify-center mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/80 border border-border/60 text-xs font-extrabold uppercase tracking-[0.12em] text-foreground shadow-xs">
+              <span className="relative flex w-1.5 h-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
+                <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,1)]"></span>
+              </span>
+              ENTERPRISE READY
             </div>
+          </div>
 
-            {/* Content Stack */}
-            <div className="relative z-10 space-y-4">
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight leading-[1.2] max-w-xl mx-auto">
-                {titleTop}{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
-                  {titleHighlight}
-                </span>
-              </h2>
+          {/* Content Stack */}
+          <div className="space-y-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground tracking-tight leading-[1.2] max-w-2xl mx-auto">
+              {titleTop}{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
+                {titleHighlight}
+              </span>
+            </h2>
 
-              <p className="text-muted-foreground text-xs sm:text-sm font-medium leading-relaxed max-w-md mx-auto">
-                {description}
-              </p>
+            <p className="text-muted-foreground text-sm sm:text-base font-medium leading-relaxed max-w-lg mx-auto">
+              {description}
+            </p>
 
-              {/* Action Buttons Row */}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-2">
-                <Link href={data.primaryButtonHref}>
+            {/* Action Buttons Row */}
+            <div className="flex flex-col sm:flex-row gap-3.5 justify-center items-center pt-3">
+              <Link href={data.primaryButtonHref}>
+                <Button
+                  size="sm"
+                  className="h-11 px-7 text-xs font-bold bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-[0_4px_15px_rgba(37,99,235,0.3)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.45)] transition-all duration-300 rounded-full hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  <span>{data.primaryButtonText}</span>
+                  <ArrowRight className="ml-1.5 w-3.5 h-3.5" aria-hidden="true" />
+                </Button>
+              </Link>
+
+              {data.secondaryButtonText && data.secondaryButtonHref && (
+                <Link href={data.secondaryButtonHref}>
                   <Button
                     size="sm"
-                    className="h-10 px-6 text-xs font-bold bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-[0_4px_15px_rgba(37,99,235,0.3)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.45)] transition-all duration-300 rounded-full hover:scale-[1.02] active:scale-[0.98]"
+                    variant="outline"
+                    className="h-11 px-7 text-xs font-bold border-border/80 bg-secondary/80 hover:bg-secondary text-foreground transition-all duration-300 rounded-full hover:scale-[1.02] active:scale-[0.98]"
                   >
-                    <span>{data.primaryButtonText}</span>
-                    <ArrowRight className="ml-1.5 w-3.5 h-3.5" aria-hidden="true" />
+                    <span>{data.secondaryButtonText}</span>
                   </Button>
                 </Link>
-
-                {data.secondaryButtonText && data.secondaryButtonHref && (
-                  <Link href={data.secondaryButtonHref}>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="h-10 px-6 text-xs font-bold border-border/80 bg-background/80 hover:bg-accent hover:border-primary/30 text-foreground transition-all duration-300 rounded-full hover:scale-[1.02] active:scale-[0.98]"
-                    >
-                      <span>{data.secondaryButtonText}</span>
-                    </Button>
-                  </Link>
-                )}
-              </div>
+              )}
             </div>
           </div>
         </motion.div>
