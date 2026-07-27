@@ -153,12 +153,12 @@ export default function AboutPage() {
             <div className="text-sm sm:text-base font-semibold font-sans text-blue-600 dark:text-blue-400 mb-3 text-center">
               Select each tab to view in detail.
             </div>
-            <div className="flex p-1.5 bg-white/95 dark:bg-zinc-900/95 rounded-full border border-slate-200/90 dark:border-zinc-800 backdrop-blur-xl shadow-lg gap-1">
+            <div className="flex p-1 bg-white/95 dark:bg-zinc-900/95 rounded-full border border-slate-200/90 dark:border-zinc-800 backdrop-blur-xl shadow-md gap-1">
               {(["who", "delivery"] as const).map((tab) => (
                 <button 
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`relative px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 z-10 flex items-center justify-center cursor-pointer ${
+                  className={`relative px-4 py-2 sm:px-5 sm:py-2 rounded-full text-xs font-bold transition-all duration-200 z-10 flex items-center justify-center cursor-pointer ${
                     activeTab === tab 
                       ? "text-white" 
                       : "text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
@@ -167,11 +167,11 @@ export default function AboutPage() {
                   {activeTab === tab && (
                     <motion.div
                       layoutId="activeTabPill"
-                      className="absolute inset-0 bg-blue-600 rounded-full -z-10 shadow-md"
+                      className="absolute inset-0 bg-[#2563EB] rounded-full -z-10 shadow-sm"
                       transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     />
                   )}
-                  <span>{tab === "who" ? "Who We Are" : "Delivery & Quality Standards"}</span>
+                  <span>{tab === "who" ? "Who We Are" : "Delivery & Standards"}</span>
                 </button>
               ))}
             </div>
@@ -476,29 +476,32 @@ export default function AboutPage() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-40px" }}
-                className="max-w-2xl mx-auto mb-14 mt-6 relative"
+                className="max-w-4xl mx-auto mb-20 mt-8 relative"
               >
-                <SpotlightCard className="relative p-6 sm:p-8 rounded-2xl bg-white/90 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 shadow-sm overflow-hidden group">
+                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group">
+                  {/* Decorative background glow */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-blue-500/10 blur-[60px] pointer-events-none rounded-full" />
+                  
                   <motion.h2 
                     variants={item}
-                    className="text-xs font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 text-center mb-4"
+                    className="text-lg sm:text-xl font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 text-center mb-8"
                   >
                     Our Commitment
                   </motion.h2>
                   
-                  <div className="max-w-xl mx-auto text-center space-y-4 relative z-10">
+                  <div className="max-w-3xl mx-auto text-center space-y-8 relative z-10">
                     <motion.p 
                       variants={item}
-                      className="text-xl sm:text-2xl font-serif text-slate-900 dark:text-white leading-snug"
+                      className="text-2xl md:text-3xl font-serif text-slate-900 dark:text-white leading-snug"
                     >
                       We build secure, scalable, and resilient solutions.
                     </motion.p>
                     
-                    <motion.div variants={item} className="h-px w-16 bg-slate-200 dark:bg-zinc-800 mx-auto" />
+                    <motion.div variants={item} className="h-px w-24 bg-blue-200 dark:bg-blue-800 mx-auto" />
                     
                     <motion.p 
                       variants={item}
-                      className="text-xs sm:text-sm font-serif font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-lg mx-auto"
+                      className="text-base sm:text-lg font-serif font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto"
                     >
                       By leveraging proven engineering practices, continuous quality assurance, and proactive operational governance, we consistently deliver reliable business outcomes.
                     </motion.p>
