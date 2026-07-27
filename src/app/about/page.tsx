@@ -478,30 +478,27 @@ export default function AboutPage() {
                 viewport={{ once: true, margin: "-40px" }}
                 className="max-w-4xl mx-auto mb-20 mt-8 relative"
               >
-                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group">
-                  {/* Decorative background glow */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-blue-500/10 blur-[60px] pointer-events-none rounded-full" />
-                  
+                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-card border border-border shadow-sm overflow-hidden group">
                   <motion.h2 
                     variants={item}
-                    className="text-lg sm:text-xl font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 text-center mb-8"
+                    className="text-base sm:text-lg font-black uppercase tracking-[0.2em] text-muted-foreground text-center mb-6"
                   >
                     Our Commitment
                   </motion.h2>
                   
-                  <div className="max-w-3xl mx-auto text-center space-y-8 relative z-10">
+                  <div className="max-w-3xl mx-auto text-center space-y-6 relative z-10">
                     <motion.p 
                       variants={item}
-                      className="text-2xl md:text-3xl font-serif text-slate-900 dark:text-white leading-snug"
+                      className="text-2xl md:text-3xl font-bold text-foreground leading-snug tracking-tight"
                     >
                       We build secure, scalable, and resilient solutions.
                     </motion.p>
                     
-                    <motion.div variants={item} className="h-px w-24 bg-blue-200 dark:bg-blue-800 mx-auto" />
+                    <motion.div variants={item} className="h-px w-16 bg-border mx-auto" />
                     
                     <motion.p 
                       variants={item}
-                      className="text-base sm:text-lg font-serif font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl mx-auto"
+                      className="text-base sm:text-lg font-medium text-muted-foreground leading-relaxed max-w-2xl mx-auto"
                     >
                       By leveraging proven engineering practices, continuous quality assurance, and proactive operational governance, we consistently deliver reliable business outcomes.
                     </motion.p>
