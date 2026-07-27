@@ -476,29 +476,29 @@ export default function AboutPage() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-40px" }}
-                className="max-w-4xl mx-auto mb-20 mt-8 relative"
+                className="max-w-2xl mx-auto mb-14 mt-6 relative"
               >
-                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-card border border-border shadow-sm overflow-hidden group">
+                <SpotlightCard className="relative p-6 sm:p-8 rounded-2xl bg-white/90 dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 shadow-sm overflow-hidden group">
                   <motion.h2 
                     variants={item}
-                    className="text-base sm:text-lg font-black uppercase tracking-[0.2em] text-muted-foreground text-center mb-6"
+                    className="text-xs font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 text-center mb-4"
                   >
                     Our Commitment
                   </motion.h2>
                   
-                  <div className="max-w-3xl mx-auto text-center space-y-6 relative z-10">
+                  <div className="max-w-xl mx-auto text-center space-y-4 relative z-10">
                     <motion.p 
                       variants={item}
-                      className="text-2xl md:text-3xl font-bold text-foreground leading-snug tracking-tight"
+                      className="text-xl sm:text-2xl font-serif text-slate-900 dark:text-white leading-snug"
                     >
                       We build secure, scalable, and resilient solutions.
                     </motion.p>
                     
-                    <motion.div variants={item} className="h-px w-16 bg-border mx-auto" />
+                    <motion.div variants={item} className="h-px w-16 bg-slate-200 dark:bg-zinc-800 mx-auto" />
                     
                     <motion.p 
                       variants={item}
-                      className="text-base sm:text-lg font-medium text-muted-foreground leading-relaxed max-w-2xl mx-auto"
+                      className="text-xs sm:text-sm font-serif font-medium text-slate-600 dark:text-slate-400 leading-relaxed max-w-lg mx-auto"
                     >
                       By leveraging proven engineering practices, continuous quality assurance, and proactive operational governance, we consistently deliver reliable business outcomes.
                     </motion.p>
