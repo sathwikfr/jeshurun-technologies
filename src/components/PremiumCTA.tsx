@@ -92,88 +92,88 @@ export function PremiumCTA({ variant, titleTop: customTitleTop, titleHighlight: 
   const description = customDescription || data.description;
 
   return (
-    <section className="w-full py-16 md:py-24 relative z-10 bg-transparent overflow-hidden" aria-label="Call to Action">
-      <div className="container px-6 sm:px-8 mx-auto relative z-10 flex justify-center">
+    <section className="w-full py-8 md:py-12 relative z-10 bg-transparent overflow-hidden" aria-label="Call to Action">
+      <div className="container px-4 sm:px-6 mx-auto relative z-10 flex justify-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="group w-full max-w-4xl relative"
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="group w-full max-w-2xl relative"
         >
           {/* Subtle Outer Glow Aura */}
           <div 
-            className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-600/20 via-cyan-500/20 to-blue-600/20 opacity-40 group-hover:opacity-100 transition-opacity duration-700 blur-lg" 
+            className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-blue-600/15 via-cyan-500/15 to-blue-600/15 opacity-30 group-hover:opacity-100 transition-opacity duration-700 blur-md" 
             aria-hidden="true" 
           />
 
-          {/* Main Card Container */}
-          <div className="relative bg-card/90 dark:bg-slate-900/90 backdrop-blur-xl border border-border/80 rounded-3xl px-8 sm:px-14 py-16 md:py-20 text-center shadow-[0_20px_50px_rgba(0,0,0,0.06)] dark:shadow-[0_25px_60px_rgba(0,0,0,0.4)] overflow-hidden">
+          {/* Compact Main Card Container */}
+          <div className="relative bg-card/90 dark:bg-slate-900/90 backdrop-blur-xl border border-border/80 rounded-2xl px-6 sm:px-10 py-8 md:py-10 text-center shadow-[0_10px_35px_rgba(0,0,0,0.04)] dark:shadow-[0_15px_45px_rgba(0,0,0,0.35)] overflow-hidden">
             
             {/* Ambient Background Radial Glow */}
             <div
               className="absolute inset-0 pointer-events-none z-0"
               style={{
-                background: "radial-gradient(ellipse at top, rgba(37,99,235,0.08) 0%, rgba(6,182,212,0.04) 50%, transparent 80%)",
+                background: "radial-gradient(ellipse at top, rgba(37,99,235,0.06) 0%, rgba(6,182,212,0.03) 50%, transparent 80%)",
               }}
               aria-hidden="true"
             />
 
             {/* Subtle Blueprint Grid Pattern */}
             <div
-              className="absolute inset-0 z-0 opacity-[0.04] dark:opacity-[0.08] pointer-events-none"
+              className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.06] pointer-events-none"
               style={{
                 backgroundImage: `
                   linear-gradient(rgba(37,99,235,0.2) 1px, transparent 1px),
                   linear-gradient(90deg, rgba(37,99,235,0.2) 1px, transparent 1px)
                 `,
-                backgroundSize: "32px 32px",
+                backgroundSize: "24px 24px",
               }}
               aria-hidden="true"
             />
 
-            {/* Standardized Pill Badge with Glowing Blue Dot */}
-            <div className="relative z-10 flex justify-center mb-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.06)] dark:shadow-[0_0_30px_rgba(255,255,255,0.12)] ring-1 ring-black/10 dark:ring-white/15">
-                <span className="relative flex w-2 h-2">
+            {/* Compact Pill Badge with Glowing Blue Dot */}
+            <div className="relative z-10 flex justify-center mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/15 dark:border-white/15 text-xs font-extrabold uppercase tracking-[0.12em] text-black dark:text-white shadow-xs">
+                <span className="relative flex w-1.5 h-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
+                  <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,1)]"></span>
                 </span>
                 ENTERPRISE READY
               </div>
             </div>
 
             {/* Content Stack */}
-            <div className="relative z-10 space-y-6">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-foreground tracking-tight leading-[1.15] max-w-2xl mx-auto">
+            <div className="relative z-10 space-y-4">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight leading-[1.2] max-w-xl mx-auto">
                 {titleTop}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
                   {titleHighlight}
                 </span>
               </h2>
 
-              <p className="text-muted-foreground text-base sm:text-lg font-medium leading-relaxed max-w-xl mx-auto">
+              <p className="text-muted-foreground text-xs sm:text-sm font-medium leading-relaxed max-w-md mx-auto">
                 {description}
               </p>
 
               {/* Action Buttons Row */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center pt-2">
                 <Link href={data.primaryButtonHref}>
                   <Button
-                    size="lg"
-                    className="h-12 px-8 text-sm font-bold bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-[0_8px_25px_rgba(37,99,235,0.35)] hover:shadow-[0_12px_30px_rgba(37,99,235,0.5)] transition-all duration-300 rounded-full hover:scale-[1.02] active:scale-[0.98]"
+                    size="sm"
+                    className="h-10 px-6 text-xs font-bold bg-[#2563EB] hover:bg-[#1D4ED8] text-white shadow-[0_4px_15px_rgba(37,99,235,0.3)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.45)] transition-all duration-300 rounded-full hover:scale-[1.02] active:scale-[0.98]"
                   >
                     <span>{data.primaryButtonText}</span>
-                    <ArrowRight className="ml-2 w-4 h-4" aria-hidden="true" />
+                    <ArrowRight className="ml-1.5 w-3.5 h-3.5" aria-hidden="true" />
                   </Button>
                 </Link>
 
                 {data.secondaryButtonText && data.secondaryButtonHref && (
                   <Link href={data.secondaryButtonHref}>
                     <Button
-                      size="lg"
+                      size="sm"
                       variant="outline"
-                      className="h-12 px-8 text-sm font-bold border-border/80 bg-background/80 hover:bg-accent hover:border-primary/30 text-foreground transition-all duration-300 rounded-full hover:scale-[1.02] active:scale-[0.98]"
+                      className="h-10 px-6 text-xs font-bold border-border/80 bg-background/80 hover:bg-accent hover:border-primary/30 text-foreground transition-all duration-300 rounded-full hover:scale-[1.02] active:scale-[0.98]"
                     >
                       <span>{data.secondaryButtonText}</span>
                     </Button>
