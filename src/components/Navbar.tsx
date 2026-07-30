@@ -15,7 +15,6 @@ import {
   Phone,
 } from "lucide-react";
 import { HeaderLogo } from "@/components/HeaderLogo";
-import { useSession, signOut } from "next-auth/react";
 import { useTheme } from "next-themes";
 
 const menuData = {
@@ -367,7 +366,7 @@ export function Navbar() {
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
-  const { data: session } = useSession();
+
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -618,20 +617,6 @@ export function Navbar() {
               );
             })()}
 
-            {session && (
-              <div className="flex items-center gap-3">
-                <span className="text-sm font-extrabold text-foreground dark:text-white bg-slate-100 dark:bg-slate-900 px-3 py-1.5 rounded-xl border border-border dark:border-border">
-                  {session.user?.name}
-                </span>
-                <Button
-                  onClick={() => signOut({ callbackUrl: "/" })}
-                  size="sm"
-                  className="bg-rose-600 hover:bg-rose-700 text-white font-bold h-10 px-4 rounded-xl text-sm shadow-sm transition-all"
-                >
-                  Sign Out
-                </Button>
-              </div>
-            )}
           </div>
           <button
             onClick={() => setIsMobileOpen(!isMobileOpen)}
@@ -964,32 +949,6 @@ export function Navbar() {
                   <Phone className="w-4 h-4" />
                   <span>Contact Us</span>
                 </Link>
-                {session ? (
-                  <div className="flex flex-col gap-2 pt-2">
-                    <span className="text-sm font-bold text-muted-foreground">
-                      Logged in as {session.user?.name}
-                    </span>
-                    <Button
-                      onClick={() => {
-                        setIsMobileOpen(false);
-                        signOut({ callbackUrl: "/" });
-                      }}
-                      className="bg-rose-600 hover:bg-rose-700 text-white font-bold h-11 w-full rounded-xl"
-                    >
-                      Sign Out
-                    </Button>
-                  </div>
-                ) : (
-                  <Link
-                    href="/login"
-                    onClick={() => setIsMobileOpen(false)}
-                    className="w-full"
-                  >
-                    <Button className="bg-[#0057D9] hover:bg-[#2563EB] text-white font-bold h-11 w-full rounded-xl">
-                      Sign In
-                    </Button>
-                  </Link>
-                )}
               </div>
             </div>
           </motion.div>
