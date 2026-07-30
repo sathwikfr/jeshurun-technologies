@@ -1573,7 +1573,7 @@ export default function Home() {
                         src={logo.src} 
                         alt={`${logo.name} Logo`} 
                         fill
-                        className="object-contain select-none pointer-events-none transition-all duration-500"
+                        className="object-contain select-none pointer-events-none transition-all duration-500 grayscale opacity-60 mix-blend-multiply dark:invert dark:mix-blend-screen dark:opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:mix-blend-normal dark:group-hover:invert-0"
                       />
                     </div>
                   ))}
