@@ -1456,9 +1456,9 @@ export default function Home() {
       <section id="hero-section" className="relative w-full min-h-dvh flex flex-col justify-center overflow-hidden bg-background dark:bg-background" onMouseMove={handleMouseMove}>
         <style>{`
           .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.85) 40%, rgba(245,248,255,0.55) 58%, rgba(245,248,255,0.15) 72%, transparent 88%); }
-          .scrim-mobile { background: linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.9) 60%, transparent 100%); }
-          .dark .scrim-mobile { background: linear-gradient(to right, rgba(18,18,18,0.98) 0%, rgba(18,18,18,0.95) 60%, rgba(18,18,18,0.7) 85%, transparent 100%); }
           .scrim-diagonal-dark { background: linear-gradient(110deg, rgba(18,18,18,0.97) 0%, rgba(18,18,18,0.93) 20%, rgba(18,18,18,0.82) 40%, rgba(18,18,18,0.50) 58%, rgba(18,18,18,0.12) 72%, transparent 88%); }
+          .scrim-mobile { background: rgba(248,250,255,0.96); }
+          .dark .scrim-mobile { background: rgba(11,18,32,0.96); }
         `}</style>
         
         {/* Layer 0: Full-Bleed Map Background */}
@@ -1473,8 +1473,8 @@ export default function Home() {
         {/* Layer 1: Protective Gradient Scrim (Desktop – Dark Mode) */}
         <div className="absolute inset-0 z-10 pointer-events-none hidden md:block light-hidden scrim-diagonal-dark" />
         
-        {/* Layer 1: Protective Gradient Scrim (Mobile - Stronger & Wider) */}
-        <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile dark:hidden" />
+        {/* Layer 1: Protective Scrim (Mobile – both themes, near-opaque so map is fully obscured) */}
+        <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile" />
 
         {/* Layer 2: Hero Content */}
         <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[110px] xl:pt-[120px] 2xl:pt-[160px] flex flex-col min-h-dvh justify-between pointer-events-none">
@@ -1489,7 +1489,7 @@ export default function Home() {
             >
               
               {/* 1. BADGE/PILL */}
-              <motion.div variants={enterpriseItem} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-blue-600 dark:text-blue-400 shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15">
+              <motion.div variants={enterpriseItem} className="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[10px] sm:text-[13px] font-extrabold uppercase tracking-[0.08em] sm:tracking-[0.15em] text-blue-600 dark:text-blue-400 shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15">
                 <span className="relative flex w-2 h-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
                   <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
