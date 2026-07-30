@@ -757,14 +757,14 @@ export default function ServiceDetailPage({
             {/* Image column — slide in from left with scale */}
             <motion.div variants={slideInLeft} className="lg:col-span-5">
               <motion.div
-                className="relative overflow-hidden group aspect-[4/3] flex items-center justify-center"
+                className="relative overflow-hidden group aspect-square md:aspect-[4/3] flex items-center justify-center"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
                 {/* Background ambient glow */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08)_0%,transparent_70%)]" />
                 
-                <div className="scale-[0.6] md:scale-[0.75]">
+                <div className="scale-[0.45] sm:scale-[0.55] md:scale-[0.75]">
                   <AnimatedServiceVisual slug={slug} />
                 </div>
 
