@@ -875,27 +875,39 @@ export function Navbar() {
                 return (
                   <div key={item.label} className="space-y-1">
                     {hasDropdown ? (
-                      <button
-                        onClick={() =>
-                          setMobileActiveMenu(
-                            mobileActiveMenu === item.label ? null : item.label,
-                          )
-                        }
-                        className="w-full text-left py-2 text-base font-bold text-muted-foreground  hover:text-slate-900 dark:hover:text-white flex items-center justify-between"
-                      >
-                        <span>{item.label}</span>
-                        <span
-                          className="text-[10px] transition-transform duration-200"
-                          style={{
-                            transform:
-                              mobileActiveMenu === item.label
-                                ? "rotate(180deg)"
-                                : "rotate(0deg)",
+                      <div className="flex items-center justify-between w-full py-2 group">
+                        <Link
+                          href={item.href}
+                          onClick={() => {
+                            setIsMobileOpen(false);
+                            setMobileActiveMenu(null);
                           }}
+                          className="text-base font-bold text-muted-foreground hover:text-slate-900 dark:hover:text-white flex-1"
                         >
-                          ▼
-                        </span>
-                      </button>
+                          {item.label}
+                        </Link>
+                        <button
+                          onClick={() =>
+                            setMobileActiveMenu(
+                              mobileActiveMenu === item.label ? null : item.label,
+                            )
+                          }
+                          className="p-2 -mr-2 text-muted-foreground hover:text-slate-900 dark:hover:text-white transition-colors flex items-center justify-center"
+                          aria-label={`Toggle ${item.label} menu`}
+                        >
+                          <span
+                            className="text-[10px] transition-transform duration-200 inline-block"
+                            style={{
+                              transform:
+                                mobileActiveMenu === item.label
+                                  ? "rotate(180deg)"
+                                  : "rotate(0deg)",
+                            }}
+                          >
+                            ▼
+                          </span>
+                        </button>
+                      </div>
                     ) : (
                       <Link
                         href={item.href}
