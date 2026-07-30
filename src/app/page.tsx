@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 
 import { motion, Variants, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
-import { ArrowRight, Activity, Monitor, Shield, Layers, Users, Clock, Briefcase, Globe, Code, Cloud, Server, Cpu, Zap, Infinity, ChevronRight, Play, Headset, BarChart, Mail, Kanban } from "lucide-react";
+import { ArrowRight, Activity, Monitor, Shield, Layers, Users, Clock, Award, Briefcase, Globe, Code, Cloud, Server, Cpu, Zap, Infinity, Brain, ShieldCheck, ChevronRight, Play, Headset, BarChart, Mail, Kanban } from "lucide-react";
 
 import { PremiumCTA } from "@/components/PremiumCTA";
 
@@ -121,8 +121,8 @@ const techCategories = [
   {
     category: "Security & Intelligence",
     items: [
-      { name: "AI", icon: <Brain className="w-5 h-5" />, color: "#8B5CF6" },
-      { name: "Cybersecurity", icon: <ShieldCheck className="w-5 h-5" />, color: "#EF4444" },
+      { name: "AI", icon: <AiLogo className="w-5 h-5" />, color: "#6366F1" },
+      { name: "Cybersecurity", icon: <CybersecurityLogo className="w-5 h-5" />, color: "#0D9488" },
     ]
   }
 ];
