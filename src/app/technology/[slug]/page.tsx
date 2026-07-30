@@ -1280,6 +1280,10 @@ export default function TechDetailPage({
                   <motion.div
                     key={idx}
                     variants={tableRow}
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, margin: "-20px" }}
+                    transition={{ delay: idx * 0.08 }}
                     whileHover={{ x: 8 }}
                     className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-6 sm:py-8 border-b border-border group cursor-default"
                   >
