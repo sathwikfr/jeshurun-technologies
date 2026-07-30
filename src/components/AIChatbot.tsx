@@ -379,7 +379,7 @@ export function AIChatbot() {
           whileTap={{ scale: 0.95 }}
         >
           <Button 
-            className="h-11 w-11 rounded-full shadow-[0_8px_20px_rgba(0,87,217,0.3)] bg-[#0057D9] hover:bg-[#2563EB] text-white flex flex-col items-center justify-center transition-all duration-300 relative group cursor-pointer border border-white/10" 
+            className="h-10 w-10 rounded-full shadow-[0_8px_20px_rgba(0,87,217,0.3)] bg-[#0057D9] hover:bg-[#2563EB] text-white flex flex-col items-center justify-center transition-all duration-300 relative group cursor-pointer border border-white/10" 
             onClick={() => {
               setIsOpen(true);
               setHasUnread(false);
@@ -387,10 +387,10 @@ export function AIChatbot() {
             aria-label="Open AI chat assistant"
           >
             <div className="flex flex-col items-center justify-center -space-y-0.5 pointer-events-none">
-              <span className="text-[10px] font-black tracking-tight leading-none uppercase text-white select-none">
+              <span className="text-[9px] font-black tracking-tight leading-none uppercase text-white select-none">
                 AI
               </span>
-              <CornerDownRight className="w-3 h-3 text-white/90" />
+              <CornerDownRight className="w-2.5 h-2.5 text-white/90" />
             </div>
             {hasUnread && (
               <span className="absolute top-0.5 right-0.5 w-2.5 h-2.5 bg-red-500 border-2 border-background rounded-full"></span>
