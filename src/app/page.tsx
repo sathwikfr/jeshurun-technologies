@@ -574,7 +574,7 @@ const trustLogos = [
   { name: "Boston Scientific", src: "/logos/bostonScien.svg" },
   { name: "Ergo", src: "/logos/ergo.svg" },
   { name: "Pfizer", src: "/logos/pfizer.svg" },
-  { name: "Tech Placements", src: "/logos/techPlacements.jpeg" },
+  { name: "Tech Placements", src: "/logos/techPlacements.png" },
 ];
 
 // --- MICRO-VISUALIZATION COMPONENTS FOR TECH STAT CARDS ---
@@ -1560,13 +1560,13 @@ export default function Home() {
             ref={marqueeRef}
             className="relative w-full overflow-hidden py-6"
             style={{
-              maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+              maskImage: 'linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)'
             }}
           >
             <div className="flex w-max will-change-transform" style={{ animation: 'marquee 30s linear infinite', animationPlayState: isMarqueeInView ? 'running' : 'paused' }} onMouseEnter={(e) => (e.currentTarget.style.animationPlayState = 'paused')} onMouseLeave={(e) => (e.currentTarget.style.animationPlayState = isMarqueeInView ? 'running' : 'paused')}>
               {[...Array(2)].map((_, i) => (
-                <div key={i} className="flex items-center gap-20 pr-20">
+                <div key={i} className="flex items-center gap-16 md:gap-20 px-8 md:px-10">
                   {trustLogos.map((logo, index) => (
                     <div key={`${logo.name}-${index}`} className="flex items-center justify-center min-w-[140px] hover:scale-[1.02] transition-transform duration-500 group relative">
                       <Image 
