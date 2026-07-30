@@ -229,25 +229,25 @@ const refinedTechCategories = [
       { 
         name: "AI", 
         subName: "Artificial Intelligence",
-        logo: <AiLogo className="w-6 h-6 object-contain" />,
+        logo: <AiLogo className="w-7 h-7 object-contain" />,
         bgHover: "hover:border-indigo-500/50 hover:shadow-[0_6px_25px_rgba(99,102,241,0.25)] dark:hover:border-indigo-500/40 dark:hover:shadow-[0_6px_25px_rgba(99,102,241,0.3)]",
-        iconBg: "bg-transparent border-slate-200 dark:border-slate-700",
+        iconBg: "bg-indigo-500/10 dark:bg-indigo-500/15 border-indigo-500/20",
         animClass: "group-hover:scale-110 transition-transform duration-300"
       },
       { 
         name: "Cybersecurity", 
         subName: "Security & Identity",
-        logo: <CybersecurityLogo className="w-6 h-6 object-contain" />,
+        logo: <CybersecurityLogo className="w-7 h-7 object-contain" />,
         bgHover: "hover:border-teal-500/50 hover:shadow-[0_6px_25px_rgba(13,148,136,0.25)] dark:hover:border-teal-500/40 dark:hover:shadow-[0_6px_25px_rgba(13,148,136,0.3)]",
-        iconBg: "bg-transparent border-slate-200 dark:border-slate-700",
+        iconBg: "bg-teal-500/10 dark:bg-teal-500/15 border-teal-500/20",
         animClass: "group-hover:scale-110 transition-transform duration-300"
       },
       { 
         name: "Compliance", 
         subName: "Governance & Auditing",
-        logo: <ComplianceLogo className="w-6 h-6 object-contain" />,
+        logo: <ComplianceLogo className="w-7 h-7 object-contain" />,
         bgHover: "hover:border-rose-500/50 hover:shadow-[0_6px_25px_rgba(225,29,72,0.2)] dark:hover:border-rose-500/40 dark:hover:shadow-[0_6px_25px_rgba(225,29,72,0.25)]",
-        iconBg: "bg-transparent border-slate-200 dark:border-slate-700",
+        iconBg: "bg-rose-500/10 dark:bg-rose-500/15 border-rose-500/20",
         animClass: "group-hover:scale-110 transition-transform duration-300"
       },
     ]
