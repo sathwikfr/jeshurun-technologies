@@ -780,7 +780,7 @@ export default function ServiceDetailPage({
             </motion.div>
 
             {/* Narrative column — slide in from right */}
-            <motion.div variants={slideInRight} className="lg:col-span-7 space-y-8">
+            <motion.div variants={slideInRight} className="lg:col-span-7 space-y-8 min-w-0">
               <div className="space-y-3">
                 <motion.p
                   initial={{ opacity: 0, x: 12 }}
@@ -839,7 +839,7 @@ export default function ServiceDetailPage({
             className="grid lg:grid-cols-12 gap-12 lg:gap-20"
           >
             {/* Sticky label */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-4 min-w-0">
               <motion.div variants={fadeUp} className="lg:sticky lg:top-32 space-y-6">
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
@@ -855,7 +855,7 @@ export default function ServiceDetailPage({
               </motion.div>
             </div>
             
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-8 min-w-0">
               <div className="border-t border-border">
                 {service.features.map((feature, idx) => (
                   <motion.div
@@ -928,7 +928,7 @@ export default function ServiceDetailPage({
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.15 }}
-                  className="bg-background p-8 sm:p-10 relative group overflow-hidden"
+                  className="bg-background p-8 sm:p-10 relative group overflow-hidden min-w-0"
                 >
                   {/* Subtle top border sweeping glow on hover */}
                   <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -translate-x-full group-hover:translate-x-0" />
@@ -974,7 +974,7 @@ export default function ServiceDetailPage({
             className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch"
           >
             {/* Outcomes */}
-            <motion.div variants={fadeUp} className="flex flex-col h-full lg:pr-8 lg:py-10">
+            <motion.div variants={fadeUp} className="flex flex-col h-full min-w-0 lg:pr-8 lg:py-10">
               <div className="mb-12">
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
                   Client Success
@@ -1013,7 +1013,7 @@ export default function ServiceDetailPage({
             </motion.div>
 
             {/* Testimonial */}
-            <motion.div variants={fadeUp} className="h-full">
+            <motion.div variants={fadeUp} className="h-full min-w-0">
               <div className="p-8 lg:p-10 rounded-3xl border border-border h-full flex flex-col justify-between relative overflow-hidden">
                 
                 <div className="relative z-10">
@@ -1082,12 +1082,12 @@ export default function ServiceDetailPage({
               transition={{ duration: 0.5 }}
               className="grid grid-cols-2 bg-background"
             >
-              <div className="px-6 py-4 border-b border-border">
+              <div className="px-6 py-4 border-b border-border min-w-0">
                 <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                   Without strategic partner
                 </span>
               </div>
-              <div className="px-6 py-4 border-b border-l border-border">
+              <div className="px-6 py-4 border-b border-l border-border min-w-0">
                 <span className="text-xs font-bold uppercase tracking-widest text-foreground">
                   With Jeshurun Technologies
                 </span>
@@ -1105,12 +1105,12 @@ export default function ServiceDetailPage({
                 transition={{ delay: i * 0.08 }}
                 className="grid grid-cols-2 border-t border-border first:border-t-0 group"
               >
-                <div className="px-6 py-5 bg-red-500/[0.02] dark:bg-red-500/[0.04] group-hover:bg-red-500/[0.04] dark:group-hover:bg-red-500/[0.07] transition-colors duration-200">
+                <div className="px-6 py-5 bg-red-500/[0.02] dark:bg-red-500/[0.04] group-hover:bg-red-500/[0.04] dark:group-hover:bg-red-500/[0.07] transition-colors duration-200 min-w-0">
                   <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                     {row.without}
                   </p>
                 </div>
-                <div className="px-6 py-5 border-l border-border bg-emerald-500/[0.02] dark:bg-emerald-500/[0.04] group-hover:bg-emerald-500/[0.04] dark:group-hover:bg-emerald-500/[0.07] transition-colors duration-200">
+                <div className="px-6 py-5 border-l border-border bg-emerald-500/[0.02] dark:bg-emerald-500/[0.04] group-hover:bg-emerald-500/[0.04] dark:group-hover:bg-emerald-500/[0.07] transition-colors duration-200 min-w-0">
                   <p className="text-sm text-foreground font-semibold leading-relaxed">
                     {row.with}
                   </p>
