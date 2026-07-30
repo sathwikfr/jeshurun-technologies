@@ -12,7 +12,7 @@ export function ExpertSpotlight({
   description?: string;
 }) {
   return (
-    <div className="mt-16 p-8 rounded-3xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-6 sm:gap-8 relative overflow-hidden group">
+    <div className="mt-16 p-8 rounded-3xl bg-transparent border border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-center sm:items-start md:items-center gap-6 sm:gap-8 relative overflow-hidden group">
       {/* Background glow */}
       <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
