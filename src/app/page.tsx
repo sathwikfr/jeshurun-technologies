@@ -231,7 +231,7 @@ const refinedTechCategories = [
         subName: "Artificial Intelligence",
         logo: <AiLogo className="w-5 h-5 object-contain" />,
         bgHover: "hover:border-indigo-500/50 hover:shadow-[0_6px_25px_rgba(99,102,241,0.25)] dark:hover:border-indigo-500/40 dark:hover:shadow-[0_6px_25px_rgba(99,102,241,0.3)]",
-        iconBg: "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200 dark:border-indigo-800/50",
+        iconBg: "bg-transparent border-slate-200 dark:border-slate-700",
         animClass: "group-hover:scale-110 transition-transform duration-300"
       },
       { 
@@ -239,7 +239,7 @@ const refinedTechCategories = [
         subName: "Security & Identity",
         logo: <CybersecurityLogo className="w-5 h-5 object-contain" />,
         bgHover: "hover:border-teal-500/50 hover:shadow-[0_6px_25px_rgba(13,148,136,0.25)] dark:hover:border-teal-500/40 dark:hover:shadow-[0_6px_25px_rgba(13,148,136,0.3)]",
-        iconBg: "bg-teal-50 dark:bg-teal-950/40 border-teal-200 dark:border-teal-800/50",
+        iconBg: "bg-transparent border-slate-200 dark:border-slate-700",
         animClass: "group-hover:scale-110 transition-transform duration-300"
       },
       { 
@@ -247,7 +247,7 @@ const refinedTechCategories = [
         subName: "Governance & Auditing",
         logo: <ComplianceLogo className="w-5 h-5 object-contain" />,
         bgHover: "hover:border-rose-500/50 hover:shadow-[0_6px_25px_rgba(225,29,72,0.2)] dark:hover:border-rose-500/40 dark:hover:shadow-[0_6px_25px_rgba(225,29,72,0.25)]",
-        iconBg: "bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800/50",
+        iconBg: "bg-transparent border-slate-200 dark:border-slate-700",
         animClass: "group-hover:scale-110 transition-transform duration-300"
       },
     ]
@@ -263,11 +263,11 @@ function TechCard({ tech }: { tech: typeof refinedTechCategories[0]["items"][0] 
         </div>
       </div>
       <div className="flex flex-col min-w-0">
-        <span className="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug truncate">
+        <span className="text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
           {tech.name}
         </span>
         {'subName' in tech && tech.subName && (
-          <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 truncate leading-tight mt-0.5">
+          <span className="text-[11px] font-medium text-slate-500 dark:text-slate-400 leading-tight mt-0.5">
             {tech.subName}
           </span>
         )}
