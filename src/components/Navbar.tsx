@@ -761,10 +761,7 @@ export function Navbar() {
                   return (
                     <div className="space-y-6 flex flex-col justify-between h-full">
                       <div>
-                        <span className="text-[10px] font-extrabold uppercase tracking-widest text-primary bg-primary/10 px-2.5 py-1 rounded-md">
-                          Core Practice
-                        </span>
-                        <h4 className="text-2xl font-black text-foreground tracking-tight mt-3">
+                        <h4 className="text-2xl font-black text-foreground tracking-tight">
                           {currentTab.title}
                         </h4>
                         <p className="text-muted-foreground text-base leading-relaxed mt-2 font-semibold">
