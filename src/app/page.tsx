@@ -569,11 +569,11 @@ function CaseStudyCard({ study }: CaseStudyCardProps) {
 }
 
 const trustLogos = [
-  { name: "Astellas", src: "/logos/astellas.webp" },
-  { name: "Vodafone", src: "/logos/vodafone.webp" },
+  { name: "Astellas", src: "/logos/astellas.svg" },
+  { name: "Vodafone", src: "/logos/vodafone.svg" },
   { name: "Boston Scientific", src: "/logos/bostonScien.svg" },
-  { name: "Ergo", src: "/logos/ergo.webp" },
-  { name: "Pfizer", src: "/logos/pfizer.webp" },
+  { name: "Ergo", src: "/logos/ergo.svg" },
+  { name: "Pfizer", src: "/logos/pfizer.svg" },
   { name: "Tech Placements", src: "/logos/techPlacements.jpeg" },
 ];
 
@@ -1568,12 +1568,13 @@ export default function Home() {
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex items-center gap-20 pr-20">
                   {trustLogos.map((logo, index) => (
-                    <div key={`${logo.name}-${index}`} className="flex items-center justify-center min-w-[140px] h-12 hover:scale-[1.02] transition-transform duration-500 group relative">
+                    <div key={`${logo.name}-${index}`} className="flex items-center justify-center min-w-[140px] hover:scale-[1.02] transition-transform duration-500 group relative">
                       <Image 
                         src={logo.src} 
                         alt={`${logo.name} Logo`} 
-                        fill
-                        className="object-contain select-none pointer-events-none transition-all duration-500 grayscale opacity-60 mix-blend-multiply dark:invert dark:mix-blend-screen dark:opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:mix-blend-normal dark:group-hover:invert-0"
+                        width={200}
+                        height={40}
+                        className="h-9 w-auto object-contain select-none pointer-events-none transition-all duration-300 opacity-80 group-hover:opacity-100 dark:brightness-[1.3] dark:contrast-[1.2]"
                       />
                     </div>
                   ))}
