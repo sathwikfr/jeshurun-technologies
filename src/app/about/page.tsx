@@ -115,11 +115,11 @@ export default function AboutPage() {
         >
           <motion.div 
             variants={item}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/80 border border-border/60 text-xs font-extrabold uppercase tracking-[0.12em] text-foreground shadow-xs mb-2"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mb-2"
           >
-            <span className="relative flex w-1.5 h-1.5">
+            <span className="relative flex w-2 h-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-              <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,1)]"></span>
+              <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
             </span>
             ABOUT JESHURUN TECHNOLOGIES
           </motion.div>
@@ -153,12 +153,12 @@ export default function AboutPage() {
             <div className="text-sm sm:text-base font-semibold font-sans text-blue-600 dark:text-blue-400 mb-3 text-center">
               Select each tab to view in detail.
             </div>
-            <div className="flex p-1 bg-white/95 dark:bg-zinc-900/95 rounded-full border border-slate-200/90 dark:border-zinc-800 backdrop-blur-xl shadow-md gap-1">
+            <div className="flex p-1.5 bg-white/95 dark:bg-zinc-900/95 rounded-full border border-slate-200/90 dark:border-zinc-800 backdrop-blur-xl shadow-lg gap-1">
               {(["who", "delivery"] as const).map((tab) => (
                 <button 
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`relative px-4 py-2 sm:px-5 sm:py-2 rounded-full text-xs font-bold transition-all duration-200 z-10 flex items-center justify-center cursor-pointer ${
+                  className={`relative px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 z-10 flex items-center justify-center cursor-pointer ${
                     activeTab === tab 
                       ? "text-white" 
                       : "text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400"
@@ -167,11 +167,11 @@ export default function AboutPage() {
                   {activeTab === tab && (
                     <motion.div
                       layoutId="activeTabPill"
-                      className="absolute inset-0 bg-[#2563EB] rounded-full -z-10 shadow-sm"
+                      className="absolute inset-0 bg-blue-600 rounded-full -z-10 shadow-md"
                       transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     />
                   )}
-                  <span>{tab === "who" ? "Who We Are" : "Delivery & Standards"}</span>
+                  <span>{tab === "who" ? "Who We Are" : "Delivery & Quality Standards"}</span>
                 </button>
               ))}
             </div>
@@ -230,13 +230,10 @@ export default function AboutPage() {
                 viewport={{ once: true, margin: "-40px" }}
                 className="max-w-4xl mx-auto mb-20 relative"
               >
-                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group">
-                  {/* Decorative background glow */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-blue-500/10 blur-[60px] pointer-events-none rounded-full" />
-                  
+                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-white dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 shadow-xl overflow-hidden group">
                   <motion.h2 
                     variants={item}
-                    className="text-lg sm:text-xl font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 text-center mb-8"
+                    className="text-lg sm:text-xl font-black uppercase tracking-[0.2em] text-slate-700 dark:text-zinc-300 text-center mb-8"
                   >
                     Who We Are
                   </motion.h2>
@@ -249,7 +246,7 @@ export default function AboutPage() {
                       Jeshurun Technologies helps organizations modernize technology, optimize operations, and accelerate digital transformation.
                     </motion.p>
                     
-                    <motion.div variants={item} className="h-px w-24 bg-blue-200 dark:bg-blue-800 mx-auto" />
+                    <motion.div variants={item} className="h-px w-24 bg-slate-200 dark:bg-zinc-800 mx-auto" />
                     
                     <motion.p 
                       variants={item}
@@ -446,13 +443,13 @@ export default function AboutPage() {
                 <div className="text-center space-y-4">
                   <motion.div 
                     variants={item}
-                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/80 border border-border/60 text-xs font-extrabold uppercase tracking-[0.12em] text-foreground shadow-xs"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15"
                   >
-                    <span className="relative flex w-1.5 h-1.5">
+                    <span className="relative flex w-2 h-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-                      <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,1)]"></span>
+                      <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
                     </span>
-                    DELIVERY STANDARDS
+                    Delivery & Quality Standards
                   </motion.div>
                   
                   <motion.h2 
@@ -478,13 +475,10 @@ export default function AboutPage() {
                 viewport={{ once: true, margin: "-40px" }}
                 className="max-w-4xl mx-auto mb-20 mt-8 relative"
               >
-                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-slate-900/50 dark:to-slate-950/50 border border-slate-200/50 dark:border-slate-800/50 shadow-xl shadow-blue-900/5 overflow-hidden group">
-                  {/* Decorative background glow */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-32 bg-blue-500/10 blur-[60px] pointer-events-none rounded-full" />
-                  
+                <SpotlightCard className="relative p-8 md:p-12 rounded-3xl bg-white dark:bg-zinc-900/90 border border-slate-200 dark:border-zinc-800 shadow-xl overflow-hidden group">
                   <motion.h2 
                     variants={item}
-                    className="text-lg sm:text-xl font-black uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400 text-center mb-8"
+                    className="text-lg sm:text-xl font-black uppercase tracking-[0.2em] text-slate-700 dark:text-zinc-300 text-center mb-8"
                   >
                     Our Commitment
                   </motion.h2>
@@ -497,7 +491,7 @@ export default function AboutPage() {
                       We build secure, scalable, and resilient solutions.
                     </motion.p>
                     
-                    <motion.div variants={item} className="h-px w-24 bg-blue-200 dark:bg-blue-800 mx-auto" />
+                    <motion.div variants={item} className="h-px w-24 bg-slate-200 dark:bg-zinc-800 mx-auto" />
                     
                     <motion.p 
                       variants={item}
@@ -521,13 +515,13 @@ export default function AboutPage() {
                 <div className="text-center space-y-6 mb-16">
                   <motion.h2 
                     variants={item}
-                    className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/80 border border-border/60 text-xs font-extrabold uppercase tracking-[0.12em] text-foreground shadow-xs mx-auto"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15 mx-auto"
                   >
-                    <span className="relative flex w-1.5 h-1.5">
+                    <span className="relative flex w-2 h-2">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-                      <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-[#2563EB] shadow-[0_0_8px_rgba(37,99,235,1)]"></span>
+                      <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
                     </span>
-                    RESILIENCE & RELIABILITY
+                    Resilience & Reliability
                   </motion.h2>
                   <motion.h3 
                     variants={item}
