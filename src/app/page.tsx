@@ -229,7 +229,7 @@ const refinedTechCategories = [
       { 
         name: "AI", 
         subName: "Artificial Intelligence",
-        logo: <AiLogo className="w-5 h-5 object-contain" />,
+        logo: <AiLogo className="w-6 h-6 object-contain" />,
         bgHover: "hover:border-indigo-500/50 hover:shadow-[0_6px_25px_rgba(99,102,241,0.25)] dark:hover:border-indigo-500/40 dark:hover:shadow-[0_6px_25px_rgba(99,102,241,0.3)]",
         iconBg: "bg-transparent border-slate-200 dark:border-slate-700",
         animClass: "group-hover:scale-110 transition-transform duration-300"
@@ -237,7 +237,7 @@ const refinedTechCategories = [
       { 
         name: "Cybersecurity", 
         subName: "Security & Identity",
-        logo: <CybersecurityLogo className="w-5 h-5 object-contain" />,
+        logo: <CybersecurityLogo className="w-6 h-6 object-contain" />,
         bgHover: "hover:border-teal-500/50 hover:shadow-[0_6px_25px_rgba(13,148,136,0.25)] dark:hover:border-teal-500/40 dark:hover:shadow-[0_6px_25px_rgba(13,148,136,0.3)]",
         iconBg: "bg-transparent border-slate-200 dark:border-slate-700",
         animClass: "group-hover:scale-110 transition-transform duration-300"
@@ -245,7 +245,7 @@ const refinedTechCategories = [
       { 
         name: "Compliance", 
         subName: "Governance & Auditing",
-        logo: <ComplianceLogo className="w-5 h-5 object-contain" />,
+        logo: <ComplianceLogo className="w-6 h-6 object-contain" />,
         bgHover: "hover:border-rose-500/50 hover:shadow-[0_6px_25px_rgba(225,29,72,0.2)] dark:hover:border-rose-500/40 dark:hover:shadow-[0_6px_25px_rgba(225,29,72,0.25)]",
         iconBg: "bg-transparent border-slate-200 dark:border-slate-700",
         animClass: "group-hover:scale-110 transition-transform duration-300"
@@ -1851,33 +1851,33 @@ export default function Home() {
               </div>
             </div>
 
-            {/* DevOps and Security Side-by-Side */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#333333] pb-3">
-                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white">DevOps and infrastructure</h4>
-                  <Link href="/technology" className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
-                    View all
-                  </Link>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {refinedTechCategories[2].items.map((tech) => (
-                    <TechCard key={tech.name} tech={tech} />
-                  ))}
-                </div>
+            {/* DevOps and infrastructure */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#333333] pb-3">
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white">DevOps and infrastructure</h4>
+                <Link href="/technology" className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                  View all
+                </Link>
               </div>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#333333] pb-3">
-                  <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Security and intelligence</h4>
-                  <Link href="/technology" className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
-                    View all
-                  </Link>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {refinedTechCategories[3].items.map((tech) => (
-                    <TechCard key={tech.name} tech={tech} />
-                  ))}
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {refinedTechCategories[2].items.map((tech) => (
+                  <TechCard key={tech.name} tech={tech} />
+                ))}
+              </div>
+            </div>
+
+            {/* Security and intelligence */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-between border-b border-slate-200 dark:border-[#333333] pb-3">
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Security and intelligence</h4>
+                <Link href="/technology" className="text-xs font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                  View all
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {refinedTechCategories[3].items.map((tech) => (
+                  <TechCard key={tech.name} tech={tech} />
+                ))}
               </div>
             </div>
           </div>
