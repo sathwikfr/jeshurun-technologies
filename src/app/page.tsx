@@ -1457,12 +1457,10 @@ export default function Home() {
         <style>{`
           .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.85) 40%, rgba(245,248,255,0.55) 58%, rgba(245,248,255,0.15) 72%, transparent 88%); }
           .scrim-diagonal-dark { background: linear-gradient(110deg, rgba(18,18,18,0.97) 0%, rgba(18,18,18,0.93) 20%, rgba(18,18,18,0.82) 40%, rgba(18,18,18,0.50) 58%, rgba(18,18,18,0.12) 72%, transparent 88%); }
-          .scrim-mobile { background: rgba(248,250,255,0.96); }
-          .dark .scrim-mobile { background: rgba(11,18,32,0.96); }
         `}</style>
         
         {/* Layer 0: Full-Bleed Map Background */}
-        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden opacity-25 md:opacity-100">
           <WorldMap forceDark={true} />
         </div>
 
@@ -1472,9 +1470,6 @@ export default function Home() {
 
         {/* Layer 1: Protective Gradient Scrim (Desktop – Dark Mode) */}
         <div className="absolute inset-0 z-10 pointer-events-none hidden md:block light-hidden scrim-diagonal-dark" />
-        
-        {/* Layer 1: Protective Scrim (Mobile – both themes, near-opaque so map is fully obscured) */}
-        <div className="absolute inset-0 z-10 pointer-events-none md:hidden scrim-mobile" />
 
         {/* Layer 2: Hero Content */}
         <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[110px] xl:pt-[120px] 2xl:pt-[160px] flex flex-col min-h-dvh justify-between pointer-events-none">
@@ -1520,7 +1515,7 @@ export default function Home() {
                 <Link
                   href="/contact"
                   aria-label="Schedule a consultation"
-                  className="text-[15px] md:text-base bg-[#0B1220] hover:bg-[#161e30] active:bg-[#060d1a] text-white font-bold rounded-full py-3 px-7 lg:py-3.5 lg:px-8 border border-white/20 hover:border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.5)] flex items-center justify-center transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
+                  className="text-[15px] md:text-base bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold rounded-full py-3 px-7 lg:py-3.5 lg:px-8 shadow-[0_4px_20px_rgba(37,99,235,0.45)] hover:shadow-[0_6px_28px_rgba(37,99,235,0.55)] flex items-center justify-center transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
                 >
                   Schedule Consultation <span className="ml-2" aria-hidden="true">→</span>
                 </Link>
