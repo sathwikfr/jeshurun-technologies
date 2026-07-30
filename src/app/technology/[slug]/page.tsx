@@ -1385,7 +1385,7 @@ export default function TechDetailPage({
             className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch"
           >
             {/* Outcomes */}
-            <motion.div variants={fadeUp} className="flex flex-col h-full lg:pr-8 lg:py-10">
+            <motion.div variants={fadeUp} className="flex flex-col h-full min-w-0 lg:pr-8 lg:py-10">
               <div className="mb-12">
                 <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
                   Client Success
@@ -1424,7 +1424,7 @@ export default function TechDetailPage({
             </motion.div>
 
             {/* Testimonial */}
-            <motion.div variants={fadeUp} className="h-full">
+            <motion.div variants={fadeUp} className="h-full min-w-0">
               <div className="p-8 lg:p-10 rounded-3xl border border-border h-full flex flex-col justify-between relative overflow-hidden">
                 
                 <div className="relative z-10">
@@ -1489,12 +1489,12 @@ export default function TechDetailPage({
                 transition={{ duration: 0.5 }}
                 className="grid grid-cols-2 bg-background"
               >
-                <div className="px-6 py-4 border-b border-border">
+                <div className="px-6 py-4 border-b border-border min-w-0">
                   <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
                     Without strategic partner
                   </span>
                 </div>
-                <div className="px-6 py-4 border-b border-l border-border">
+                <div className="px-6 py-4 border-b border-l border-border min-w-0">
                   <span className="text-xs font-bold uppercase tracking-widest text-foreground">
                     With Jeshurun Technologies
                   </span>
@@ -1512,12 +1512,12 @@ export default function TechDetailPage({
                   transition={{ delay: i * 0.08 }}
                   className="grid grid-cols-2 border-t border-border first:border-t-0 group"
                 >
-                  <div className="px-6 py-5 bg-red-500/[0.02] dark:bg-red-500/[0.04] group-hover:bg-red-500/[0.04] dark:group-hover:bg-red-500/[0.07] transition-colors duration-200">
+                  <div className="px-6 py-5 bg-red-500/[0.02] dark:bg-red-500/[0.04] group-hover:bg-red-500/[0.04] dark:group-hover:bg-red-500/[0.07] transition-colors duration-200 min-w-0">
                     <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                       {row.without}
                     </p>
                   </div>
-                  <div className="px-6 py-5 border-l border-border bg-emerald-500/[0.02] dark:bg-emerald-500/[0.04] group-hover:bg-emerald-500/[0.04] dark:group-hover:bg-emerald-500/[0.07] transition-colors duration-200">
+                  <div className="px-6 py-5 border-l border-border bg-emerald-500/[0.02] dark:bg-emerald-500/[0.04] group-hover:bg-emerald-500/[0.04] dark:group-hover:bg-emerald-500/[0.07] transition-colors duration-200 min-w-0">
                     <p className="text-sm text-foreground font-semibold leading-relaxed">
                       {row.with}
                     </p>
