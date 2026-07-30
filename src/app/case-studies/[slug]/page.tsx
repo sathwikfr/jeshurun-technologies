@@ -222,7 +222,7 @@ export default function CaseStudyArticlePage() {
       <div className="w-full container px-6 sm:px-8 mx-auto mt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto">
           {/* Table of Contents - Sidebar */}
-          <aside className="lg:col-span-3 lg:block hidden">
+          <aside className="lg:col-span-3 lg:block hidden min-w-0">
             <SpotlightCard className="sticky top-28 p-0 space-y-5 hover-card-effect overflow-hidden">
               <h4 className="text-xs font-black uppercase text-foreground tracking-wider pb-3 border-b border-border/60 text-left">
                 Case Study Outline
@@ -257,7 +257,7 @@ export default function CaseStudyArticlePage() {
           </aside>
 
           {/* Article Text Content */}
-          <main className="lg:col-span-9 bg-card border border-border p-8 sm:p-12 rounded-3xl shadow-[0_4px_30px_rgba(0,0,0,0.01)]">
+          <main className="lg:col-span-9 bg-card border border-border p-8 sm:p-12 rounded-3xl shadow-[0_4px_30px_rgba(0,0,0,0.01)] min-w-0">
             {article.excerpt && (
               <p className="text-lg md:text-xl font-bold text-foreground leading-relaxed border-b border-border pb-8 mb-8 text-left">
                 {article.excerpt}
