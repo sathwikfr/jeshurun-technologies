@@ -1140,11 +1140,11 @@ export default function TechDetailPage({
           viewport={{ once: true, margin: "-80px" }}
           className="w-full container px-6 sm:px-8 mx-auto"
         >
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-stretch">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
             {/* Image column — slide in from left with scale */}
-            <motion.div variants={slideInLeft} className="lg:col-span-5 h-full flex flex-col">
+            <motion.div variants={slideInLeft} className="lg:col-span-5 min-w-0">
               <motion.div
-                className="relative group h-full flex items-center justify-center overflow-hidden"
+                className="w-full relative overflow-hidden group aspect-square md:aspect-[4/3] flex items-center justify-center"
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               >
@@ -1201,7 +1201,7 @@ export default function TechDetailPage({
             </motion.div>
 
             {/* Narrative column — slide in from right */}
-            <motion.div variants={slideInRight} className="lg:col-span-7 space-y-8">
+            <motion.div variants={slideInRight} className="lg:col-span-7 space-y-8 min-w-0">
               <div className="space-y-3">
                 <motion.p
                   initial={{ opacity: 0, x: 12 }}
@@ -1257,7 +1257,7 @@ export default function TechDetailPage({
             className="grid lg:grid-cols-12 gap-12 lg:gap-20"
           >
             {/* Sticky label */}
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-4 min-w-0">
               <motion.div variants={fadeUp} className="lg:sticky lg:top-32 space-y-6">
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
@@ -1274,7 +1274,7 @@ export default function TechDetailPage({
             </div>
 
             {/* Numbered list */}
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-8 min-w-0">
               <div className="border-t border-border">
                 {tech.features.map((feature, idx) => (
                   <motion.div

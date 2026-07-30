@@ -754,7 +754,7 @@ export default function SoftwareDetailPage({
             viewport={{ once: true, margin: "-80px" }}
             className="grid lg:grid-cols-12 gap-12 lg:gap-20"
           >
-            <div className="lg:col-span-4">
+            <div className="lg:col-span-4 min-w-0">
               <motion.div variants={fadeUp} className="lg:sticky lg:top-32 space-y-6">
                 <div>
                   <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
@@ -769,7 +769,7 @@ export default function SoftwareDetailPage({
                 </p>
               </motion.div>
             </div>
-            <div className="lg:col-span-8">
+            <div className="lg:col-span-8 min-w-0">
               <div className="border-t border-border">
                 {category.features.map((feature, idx) => (
                   <motion.div
