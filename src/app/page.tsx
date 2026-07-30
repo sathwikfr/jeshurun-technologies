@@ -1520,7 +1520,7 @@ export default function Home() {
                 <Link
                   href="/contact"
                   aria-label="Schedule a consultation"
-                  className="text-[15px] md:text-base bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold rounded-full py-3 px-7 lg:py-3.5 lg:px-8 shadow-[0_4px_20px_rgba(37,99,235,0.45)] hover:shadow-[0_6px_28px_rgba(37,99,235,0.55)] flex items-center justify-center transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
+                  className="text-[15px] md:text-base bg-[#0B1220] hover:bg-[#161e30] active:bg-[#060d1a] text-white font-bold rounded-full py-3 px-7 lg:py-3.5 lg:px-8 border border-white/20 hover:border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.35)] hover:shadow-[0_6px_28px_rgba(0,0,0,0.5)] flex items-center justify-center transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
                 >
                   Schedule Consultation <span className="ml-2" aria-hidden="true">→</span>
                 </Link>
