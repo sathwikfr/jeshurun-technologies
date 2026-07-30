@@ -569,12 +569,12 @@ function CaseStudyCard({ study }: CaseStudyCardProps) {
 }
 
 const trustLogos = [
-  { name: "Astellas", src: "/logos/astellas.svg" },
-  { name: "Vodafone", src: "/logos/vodafone.svg" },
+  { name: "Astellas", src: "/logos/astellas.webp" },
+  { name: "Vodafone", src: "/logos/vodafone.webp" },
   { name: "Boston Scientific", src: "/logos/bostonScien.svg" },
-  { name: "Ergo", src: "/logos/ergo.svg" },
-  { name: "Pfizer", src: "/logos/pfizer.svg" },
-  { name: "Tech Placements", src: "/logos/techPlacements.png" },
+  { name: "Ergo", src: "/logos/ergo.webp" },
+  { name: "Pfizer", src: "/logos/pfizer.webp" },
+  { name: "Tech Placements", src: "/logos/techPlacements.jpeg" },
 ];
 
 // --- MICRO-VISUALIZATION COMPONENTS FOR TECH STAT CARDS ---
@@ -1560,21 +1560,20 @@ export default function Home() {
             ref={marqueeRef}
             className="relative w-full overflow-hidden py-6"
             style={{
-              maskImage: 'linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent, black 40px, black calc(100% - 40px), transparent)'
+              maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+              WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
             }}
           >
             <div className="flex w-max will-change-transform" style={{ animation: 'marquee 30s linear infinite', animationPlayState: isMarqueeInView ? 'running' : 'paused' }} onMouseEnter={(e) => (e.currentTarget.style.animationPlayState = 'paused')} onMouseLeave={(e) => (e.currentTarget.style.animationPlayState = isMarqueeInView ? 'running' : 'paused')}>
               {[...Array(2)].map((_, i) => (
-                <div key={i} className="flex items-center gap-16 md:gap-20 px-8 md:px-10">
+                <div key={i} className="flex items-center gap-20 pr-20">
                   {trustLogos.map((logo, index) => (
-                    <div key={`${logo.name}-${index}`} className="flex items-center justify-center min-w-[140px] hover:scale-[1.02] transition-transform duration-500 group relative">
+                    <div key={`${logo.name}-${index}`} className="flex items-center justify-center min-w-[140px] h-12 hover:scale-[1.02] transition-transform duration-500 group relative">
                       <Image 
                         src={logo.src} 
                         alt={`${logo.name} Logo`} 
-                        width={200}
-                        height={40}
-                        className="h-9 w-auto object-contain select-none pointer-events-none transition-all duration-300 opacity-80 group-hover:opacity-100 dark:brightness-[1.3] dark:contrast-[1.2]"
+                        fill
+                        className="object-contain select-none pointer-events-none transition-all duration-500"
                       />
                     </div>
                   ))}
