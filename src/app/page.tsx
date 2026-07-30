@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 
 import { motion, Variants, useInView, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 
-import { ArrowRight, Activity, Monitor, Shield, Layers, Users, Clock, Award, Briefcase, Globe, Code, Cloud, Server, Cpu, Zap, Infinity, Brain, ShieldCheck, ChevronRight, Play, Headset, BarChart, Mail, Kanban } from "lucide-react";
+import { ArrowRight, Activity, Monitor, Shield, Layers, Users, Clock, Briefcase, Globe, Code, Cloud, Server, Cpu, Zap, Infinity, ChevronRight, Play, Headset, BarChart, Mail, Kanban } from "lucide-react";
 
 import { PremiumCTA } from "@/components/PremiumCTA";
 
@@ -26,7 +26,7 @@ import dynamic from "next/dynamic";
 
 import { TechOrbit } from "@/components/TechOrbit";
 
-import { AwsLogo, AzureLogo, GcpLogo, ReactLogo, NextJsLogo, NodeJsLogo, DockerLogo, KubernetesLogo, PythonLogo, TerraformLogo, GithubActionsLogo } from "@/components/TechLogos";
+import { AwsLogo, AzureLogo, GcpLogo, ReactLogo, NextJsLogo, NodeJsLogo, DockerLogo, KubernetesLogo, PythonLogo, TerraformLogo, GithubActionsLogo, AiLogo, CybersecurityLogo, ComplianceLogo } from "@/components/TechLogos";
 
 import { CloudROICalculator } from "@/components/CloudROICalculator";
 
@@ -228,24 +228,27 @@ const refinedTechCategories = [
     items: [
       { 
         name: "AI", 
-        logo: <Brain className="w-5 h-5 text-purple-500 dark:text-purple-400" />,
-        bgHover: "hover:border-purple-500/50 hover:shadow-[0_6px_25px_rgba(168,85,247,0.2)] dark:hover:border-purple-500/40",
-        iconBg: "bg-purple-500/10 dark:bg-purple-500/15 border-purple-500/20",
-        animClass: "group-hover:scale-115 group-hover:rotate-6 transition-transform duration-300"
+        subName: "Artificial Intelligence",
+        logo: <AiLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-indigo-500/50 hover:shadow-[0_6px_25px_rgba(99,102,241,0.25)] dark:hover:border-indigo-500/40 dark:hover:shadow-[0_6px_25px_rgba(99,102,241,0.3)]",
+        iconBg: "bg-indigo-50 dark:bg-indigo-950/40 border-indigo-200 dark:border-indigo-800/50",
+        animClass: "group-hover:scale-110 transition-transform duration-300"
       },
       { 
         name: "Cybersecurity", 
-        logo: <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />,
-        bgHover: "hover:border-emerald-500/50 hover:shadow-[0_6px_25px_rgba(16,185,129,0.2)] dark:hover:border-emerald-500/40",
-        iconBg: "bg-emerald-500/10 dark:bg-emerald-500/15 border-emerald-500/20",
-        animClass: "group-hover:scale-115 group-hover:-rotate-6 transition-transform duration-300"
+        subName: "Security & Identity",
+        logo: <CybersecurityLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-teal-500/50 hover:shadow-[0_6px_25px_rgba(13,148,136,0.25)] dark:hover:border-teal-500/40 dark:hover:shadow-[0_6px_25px_rgba(13,148,136,0.3)]",
+        iconBg: "bg-teal-50 dark:bg-teal-950/40 border-teal-200 dark:border-teal-800/50",
+        animClass: "group-hover:scale-110 transition-transform duration-300"
       },
       { 
         name: "Compliance", 
-        logo: <Award className="w-5 h-5 text-amber-500 dark:text-amber-400" />,
-        bgHover: "hover:border-amber-500/50 hover:shadow-[0_6px_25px_rgba(245,158,11,0.2)] dark:hover:border-amber-500/40",
-        iconBg: "bg-amber-500/10 dark:bg-amber-500/15 border-amber-500/20",
-        animClass: "group-hover:scale-115 group-hover:-translate-y-0.5 transition-transform duration-300"
+        subName: "Governance & Auditing",
+        logo: <ComplianceLogo className="w-5 h-5 object-contain" />,
+        bgHover: "hover:border-rose-500/50 hover:shadow-[0_6px_25px_rgba(225,29,72,0.2)] dark:hover:border-rose-500/40 dark:hover:shadow-[0_6px_25px_rgba(225,29,72,0.25)]",
+        iconBg: "bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800/50",
+        animClass: "group-hover:scale-110 transition-transform duration-300"
       },
     ]
   }
