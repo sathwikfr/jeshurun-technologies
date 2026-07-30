@@ -377,12 +377,6 @@ export function Navbar() {
     { label: "About", href: "/about" },
   ];
 
-  if (session) {
-    navItems.push(
-      { label: "Dashboard", href: "/dashboard" },
-      { label: "CRM", href: "/crm" },
-    );
-  }
 
   const forceLightText = false;
   const isMenuOpen = Boolean(activeMenu || isMobileOpen || searchQuery);
