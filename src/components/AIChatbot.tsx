@@ -229,16 +229,33 @@ export function AIChatbot() {
     : [];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <>
+      {/* Mobile backdrop — only visible below sm breakpoint when chatbot is open */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 30, scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 200, damping: 22 }}
-            className="mb-4 origin-bottom-right"
-          >
+            key="chatbot-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm sm:hidden"
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
+
+      <div className="fixed bottom-6 right-6 z-50">
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: 30, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 30, scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 200, damping: 22 }}
+              className="mb-4 origin-bottom-right"
+            >
             <Card className="w-[340px] sm:w-[360px] h-[500px] flex flex-col shadow-2xl bg-card border border-border rounded-2xl overflow-hidden">
               
               {/* Header — Minimal & Restrained */}
@@ -397,7 +414,8 @@ export function AIChatbot() {
             )}
           </Button>
         </motion.div>
-      )}
+        )}
     </div>
+    </>
   );
 }

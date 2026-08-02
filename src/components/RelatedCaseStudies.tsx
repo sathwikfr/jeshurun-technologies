@@ -37,6 +37,7 @@ export function RelatedCaseStudies({ category }: { category?: string }) {
                   src={study.image}
                   alt={study.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent opacity-60 transition-opacity group-hover:opacity-40" />

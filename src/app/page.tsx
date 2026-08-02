@@ -40,7 +40,7 @@ import { GlobalNetworkMap } from "@/components/GlobalNetworkMap";
 
 import { WorldMap } from "@/components/WorldMap";
 
-import { HeroStatsPanel } from "@/components/HeroStatsPanel";
+
 
 
 const enterpriseContainer: Variants = {
@@ -321,6 +321,7 @@ function InsightCard({ insight }: InsightCardProps) {
           src={insight.image} 
           alt={insight.title}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-[1.05] transition-all duration-700"
         />
         {/* Duotone Gradient Overlay */}
@@ -607,6 +608,7 @@ function EnterpriseClientsViz() {
                 src={logo.src}
                 alt={logo.name}
                 fill
+                sizes="24px"
                 className="object-contain p-0.5"
               />
             </div>
@@ -1533,8 +1535,6 @@ export default function Home() {
             <div className="hidden md:block md:w-[40%] lg:w-[50%]"></div>
           </div>
           
-          {/* 5. STATS CARDS (Bottom Aligned) */}
-          <HeroStatsPanel />
         </div>
       </section>
 
@@ -1573,6 +1573,7 @@ export default function Home() {
                         src={logo.src} 
                         alt={`${logo.name} Logo`} 
                         fill
+                        sizes="140px"
                         className="object-contain select-none pointer-events-none transition-all duration-500"
                       />
                     </div>

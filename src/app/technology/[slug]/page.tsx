@@ -42,7 +42,7 @@ import { DevOpsVisualization } from "@/components/DevOpsVisualization";
 
 import { FloatingSidebarNav } from "@/components/FloatingSidebarNav";
 
-import { ExpertSpotlight } from "@/components/ExpertSpotlight";
+
 
 import { RelatedCaseStudies } from "@/components/RelatedCaseStudies";
 
@@ -1183,6 +1183,7 @@ export default function TechDetailPage({
                         src={tech.image}
                         alt={tech.title}
                         fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
                         className="object-cover"
                       />
                     </div>
@@ -1378,89 +1379,6 @@ export default function TechDetailPage({
         </div>
       </section>
 
-      {/* ── VERIFIED OUTCOMES + TESTIMONIAL ─────────────────────── */}
-      <section id="testimonial" className="py-20 md:py-28 border-y border-border">
-        <div className="w-full container px-6 sm:px-8 mx-auto">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-stretch"
-          >
-            {/* Outcomes */}
-            <motion.div variants={fadeUp} className="flex flex-col h-full min-w-0 lg:pr-8 lg:py-10">
-              <div className="mb-12">
-                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
-                  Client Success
-                </p>
-                <h3 className="text-3xl md:text-4xl lg:text-5xl font-editorial text-foreground leading-tight">
-                  Verified engagement outcomes.
-                </h3>
-              </div>
-              
-              <div className="flex-grow flex flex-col justify-between">
-                <div className="space-y-6 mb-8">
-                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold border-b border-border pb-3">Verified Outcomes</p>
-                  <ul className="space-y-5">
-                    {(tech.caseStudyOutcomes || tech.benefits.slice(0, 3)).map((outcome: string, i: number) => (
-                      <li key={i} className="flex items-start gap-4">
-                        <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                          <Check className="w-3.5 h-3.5 text-primary" />
-                        </div>
-                        <span className="text-base font-medium text-foreground leading-snug">{outcome}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-6 pt-6 border-t border-border">
-                  <div>
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-2">Engagement Type</div>
-                    <div className="text-sm font-bold text-foreground">Enterprise Build</div>
-                  </div>
-                  <div>
-                    <div className="text-[10px] uppercase tracking-widest text-muted-foreground font-bold mb-2">Region</div>
-                    <div className="text-sm font-bold text-foreground">Europe & Global</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Testimonial */}
-            <motion.div variants={fadeUp} className="h-full min-w-0">
-              <div className="p-8 lg:p-10 rounded-3xl border border-border h-full flex flex-col justify-between relative overflow-hidden">
-                
-                <div className="relative z-10">
-                  <Quote className="w-8 h-8 text-primary mb-8" />
-                  <blockquote className="text-base md:text-lg lg:text-xl font-editorial text-foreground leading-relaxed mb-10">
-                    &ldquo;{tech.testimonial.quote || "The federated GraphQL layer completely transformed how our frontend teams consume data. Development cycles are significantly faster now."}&rdquo;
-                  </blockquote>
-                </div>
-                
-                <div className="flex items-center gap-4 pt-6 border-t border-border/50 relative z-10 flex-wrap">
-                  <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center font-bold text-primary-foreground text-sm shrink-0">
-                    {(tech.testimonial.author || "Elena Rodriguez").split(" ").map((n) => n[0]).join("")}
-                  </div>
-                  <div className="flex-1 min-w-0 pr-4 border-r border-border/50">
-                    <div className="text-sm font-bold text-foreground truncate">{tech.testimonial.author || "Elena Rodriguez"}</div>
-                    <div className="text-[10px] text-muted-foreground uppercase tracking-widest truncate">
-                      {tech.testimonial.role || "Lead Software Architect"} · {tech.testimonial.company || "E-commerce Enterprise"}
-                    </div>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <div className="text-2xl font-editorial text-foreground">{tech.testimonial.stat || "3X"}</div>
-                    <div className="text-[9px] font-bold uppercase tracking-widest text-primary">{tech.testimonial.statLabel || "DEVELOPMENT VELOCITY"}</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-          <motion.div variants={fadeUp}>
-            <ExpertSpotlight />
-          </motion.div>
-        </div>
-      </section>
 
       {/* ── 7. IMPACT COMPARISON ───────────────────────────────────── */}
       <section id="comparison" className="py-20 md:py-28">

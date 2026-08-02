@@ -79,22 +79,22 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
   }, [isDarkMode]);
 
   const cities = [
-    { name: "LONDON", isHub: true, x: 430, y: 138, offsetX: -16, offsetY: 0, anchor: "end" as const, fontSize: 5.5, labelW: 34, dotR: 2, info: "European Hub" },
-    { name: "DÜSSELDORF", isHub: true, x: 444, y: 139, offsetX: 10, offsetY: -8, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 2, info: "Partner Hub" },
-    { name: "FRANKFURT", isHub: false, x: 448, y: 142, offsetX: 14, offsetY: 12, anchor: "start" as const, fontSize: 5.5, labelW: 46, dotR: 1.5, info: "FinTech Hub" },
-    { name: "BOSTON", isHub: true, x: 275, y: 163, offsetX: -12, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 36, dotR: 2, info: "North American HQ" },
-    { name: "NEW YORK", isHub: true, x: 267, y: 167, offsetX: 12, offsetY: -12, anchor: "start" as const, fontSize: 5.5, labelW: 44, dotR: 2, info: "Financial Hub" },
-    { name: "SAN FRANCISCO", isHub: false, x: 158, y: 175, offsetX: 12, offsetY: 4, anchor: "start" as const, fontSize: 5.5, labelW: 66, dotR: 1.5, info: "West Coast Hub" },
-    { name: "DUBAI", isHub: false, x: 558, y: 210, offsetX: -10, offsetY: -12, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 1.5, info: "MEA Hub" },
-    { name: "HYDERABAD", isHub: true, x: 615, y: 232, offsetX: -12, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 48, dotR: 2, info: "APAC Engineering" },
-    { name: "SINGAPORE", isHub: false, x: 678, y: 276, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 48, dotR: 1.5, info: "APAC Hub" },
-    { name: "TOKYO", isHub: true, x: 743, y: 181, offsetX: -12, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 32, dotR: 2, info: "East Asia Operations" },
-    { name: "PARIS", isHub: false, x: 435, y: 145, offsetX: -8, offsetY: 15, anchor: "end" as const, fontSize: 5.5, labelW: 28, dotR: 1.5, info: "Regional Office" },
-    { name: "AMSTERDAM", isHub: false, x: 440, y: 136, offsetX: 4, offsetY: -18, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "Data Center" },
-    { name: "SÃO PAULO", isHub: false, x: 322, y: 345, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 50, dotR: 1.5, info: "South American Hub" },
-    { name: "JOHANNESBURG", isHub: false, x: 495, y: 353, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 68, dotR: 1.5, info: "African Hub" },
-    { name: "SYDNEY", isHub: false, x: 771, y: 374, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 5.5, labelW: 40, dotR: 1.5, info: "Oceania Hub" },
-    { name: "TORONTO", isHub: false, x: 258, y: 159, offsetX: -10, offsetY: -10, anchor: "end" as const, fontSize: 5.5, labelW: 44, dotR: 1.5, info: "Canadian Office" }
+    { name: "LONDON", isHub: true, x: 430, y: 138, offsetX: -16, offsetY: 0, anchor: "end" as const, fontSize: 7, labelW: 34, dotR: 2.5, info: "European Hub" },
+    { name: "DÜSSELDORF", isHub: true, x: 444, y: 139, offsetX: 10, offsetY: -8, anchor: "start" as const, fontSize: 7, labelW: 50, dotR: 2.5, info: "Partner Hub" },
+    { name: "FRANKFURT", isHub: false, x: 448, y: 142, offsetX: 14, offsetY: 12, anchor: "start" as const, fontSize: 7, labelW: 46, dotR: 2, info: "FinTech Hub" },
+    { name: "BOSTON", isHub: true, x: 275, y: 163, offsetX: -12, offsetY: -12, anchor: "end" as const, fontSize: 7, labelW: 36, dotR: 2.5, info: "North American HQ" },
+    { name: "NEW YORK", isHub: true, x: 267, y: 167, offsetX: 12, offsetY: -12, anchor: "start" as const, fontSize: 7, labelW: 44, dotR: 2.5, info: "Financial Hub" },
+    { name: "SAN FRANCISCO", isHub: false, x: 158, y: 175, offsetX: 12, offsetY: 4, anchor: "start" as const, fontSize: 7, labelW: 66, dotR: 2, info: "West Coast Hub" },
+    { name: "DUBAI", isHub: false, x: 558, y: 210, offsetX: -10, offsetY: -12, anchor: "end" as const, fontSize: 7, labelW: 28, dotR: 2, info: "MEA Hub" },
+    { name: "HYDERABAD", isHub: true, x: 615, y: 232, offsetX: -12, offsetY: 15, anchor: "end" as const, fontSize: 7, labelW: 48, dotR: 2.5, info: "APAC Engineering" },
+    { name: "SINGAPORE", isHub: false, x: 678, y: 276, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 7, labelW: 48, dotR: 2, info: "APAC Hub" },
+    { name: "TOKYO", isHub: true, x: 743, y: 181, offsetX: -12, offsetY: -10, anchor: "end" as const, fontSize: 7, labelW: 32, dotR: 2.5, info: "East Asia Operations" },
+    { name: "PARIS", isHub: false, x: 435, y: 145, offsetX: -8, offsetY: 15, anchor: "end" as const, fontSize: 7, labelW: 28, dotR: 2, info: "Regional Office" },
+    { name: "AMSTERDAM", isHub: false, x: 440, y: 136, offsetX: 4, offsetY: -18, anchor: "start" as const, fontSize: 7, labelW: 50, dotR: 2, info: "Data Center" },
+    { name: "SÃO PAULO", isHub: false, x: 322, y: 345, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 7, labelW: 50, dotR: 2, info: "South American Hub" },
+    { name: "JOHANNESBURG", isHub: false, x: 495, y: 353, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 7, labelW: 68, dotR: 2, info: "African Hub" },
+    { name: "SYDNEY", isHub: false, x: 771, y: 374, offsetX: 12, offsetY: 6, anchor: "start" as const, fontSize: 7, labelW: 40, dotR: 2, info: "Oceania Hub" },
+    { name: "TORONTO", isHub: false, x: 258, y: 159, offsetX: -10, offsetY: -10, anchor: "end" as const, fontSize: 7, labelW: 44, dotR: 2, info: "Canadian Office" }
   ];
 
   const getArcControlPoint = (startX: number, startY: number, endX: number, endY: number) => {
@@ -141,7 +141,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
         />
       )}
       {/* Size and position the map to anchor to the right and spill over to the left behind text */}
-      <div className={isAmbient ? "absolute inset-0 w-full h-full scale-[1.8] md:scale-150" : "absolute right-[-20%] md:right-[-5%] lg:right-[0%] top-[55%] md:top-[60%] lg:top-[55%] -translate-y-1/2 w-[140%] md:w-[75%] lg:w-[60%] xl:w-[65%] aspect-[860/560]"}>
+      <div className={isAmbient ? "absolute inset-0 w-full h-full scale-[1.8] md:scale-150" : "absolute right-[-20%] md:right-[-5%] lg:right-[0%] top-[55%] md:top-[60%] lg:top-[55%] -translate-y-1/2 w-[140%] md:w-[75%] lg:w-[60%] xl:w-[65%] aspect-[860/440]"}>
         <svg 
           ref={svgRef}
           viewBox={`0 0 ${WORLD_MAP_WIDTH} ${WORLD_MAP_HEIGHT}`} 

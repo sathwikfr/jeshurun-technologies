@@ -158,6 +158,7 @@ export default function InsightArticlePage() {
             alt={article.title}
             fill
             priority
+            sizes="100vw"
             style={{ viewTransitionName: `insight-image-${article.slug}` }}
             className="object-cover opacity-50 dark:opacity-30"
           />
