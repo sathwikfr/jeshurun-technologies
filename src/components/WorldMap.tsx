@@ -141,7 +141,7 @@ export function WorldMap({ isAmbient = false, forceDark = false }: { isAmbient?:
         />
       )}
       {/* Size and position the map to anchor to the right and spill over to the left behind text */}
-      <div className={isAmbient ? "absolute inset-0 w-full h-full scale-[1.8] md:scale-150" : "absolute right-[-20%] md:right-[-5%] lg:right-[0%] top-[55%] md:top-[60%] lg:top-[55%] -translate-y-1/2 w-[140%] md:w-[75%] lg:w-[60%] xl:w-[65%] aspect-[860/440]"}>
+      <div className={isAmbient ? "absolute inset-0 w-full h-full scale-[1.8] md:scale-150" : "absolute right-[-20%] md:right-[-5%] lg:right-[0%] top-[50%] md:top-[52%] lg:top-[50%] -translate-y-1/2 w-[140%] md:w-[75%] lg:w-[60%] xl:w-[65%] aspect-[860/440]"}>
         <svg 
           ref={svgRef}
           viewBox={`0 0 ${WORLD_MAP_WIDTH} ${WORLD_MAP_HEIGHT}`} 
