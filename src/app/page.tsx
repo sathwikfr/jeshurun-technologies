@@ -1461,20 +1461,12 @@ export default function Home() {
         <style>{`
           .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.85) 40%, rgba(245,248,255,0.55) 58%, rgba(245,248,255,0.15) 72%, transparent 88%); }
           .scrim-diagonal-dark { background: linear-gradient(110deg, rgba(18,18,18,0.97) 0%, rgba(18,18,18,0.93) 20%, rgba(18,18,18,0.82) 40%, rgba(18,18,18,0.50) 58%, rgba(18,18,18,0.12) 72%, transparent 88%); }
-          .scrim-mobile-light { background: linear-gradient(to bottom, rgba(240,243,250,0.75) 0%, rgba(240,243,250,0.90) 20%, rgba(240,243,250,0.90) 80%, rgba(240,243,250,0.75) 100%); }
-          .scrim-mobile-dark  { background: linear-gradient(to bottom, rgba(10,12,20,0.55) 0%, rgba(10,12,20,0.82) 20%, rgba(10,12,20,0.82) 80%, rgba(10,12,20,0.55) 100%); }
         `}</style>
         
         {/* Layer 0: Full-Bleed Map Background */}
-        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden opacity-55 md:opacity-100">
+        <div className="absolute inset-0 w-full h-full z-0 overflow-hidden opacity-25 md:opacity-100">
           <WorldMap forceDark={true} />
         </div>
-
-        {/* Layer 1a: Mobile-only linear scrim – light mode (washes out map labels under text) */}
-        <div className="absolute inset-0 z-10 pointer-events-none md:hidden dark:hidden scrim-mobile-light" />
-
-        {/* Layer 1b: Mobile-only linear scrim – dark mode */}
-        <div className="absolute inset-0 z-10 pointer-events-none md:hidden hidden dark:block scrim-mobile-dark" />
 
         {/* Layer 1c: Protective Gradient Scrim (Desktop – Light Mode) */}
         <div className="absolute inset-0 z-10 pointer-events-none hidden md:block dark:hidden scrim-diagonal" />
