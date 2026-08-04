@@ -1631,10 +1631,6 @@ export default function Home() {
                       <h3 className="text-xl font-bold text-foreground">IT Consulting</h3>
                       <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed max-w-[260px]">Strategic technology planning to align your technical assets with key business metrics.</p>
                     </div>
-                    <div className="text-right shrink-0">
-                      <div className="text-3xl font-black text-foreground leading-none">20+</div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mt-0.5">Tech Domains</div>
-                    </div>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {services[0].tags?.map(f => (
@@ -1668,10 +1664,6 @@ export default function Home() {
                       </div>
                       <h3 className="text-xl font-bold text-foreground">Project Management</h3>
                       <p className="text-sm text-muted-foreground mt-1.5 leading-relaxed max-w-[260px]">Methodical agile project delivery ensuring deadlines are met with quality safeguards.</p>
-                    </div>
-                    <div className="text-right shrink-0">
-                      <div className="text-3xl font-black text-foreground leading-none">150+</div>
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mt-0.5">Projects</div>
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-1.5">
