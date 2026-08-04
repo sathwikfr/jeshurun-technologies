@@ -8,11 +8,11 @@ export async function GET() {
     const clientsCount = await prisma.client.count();
     const leadsCount = await prisma.lead.count();
 
-    // We fallback to at least 14 clients and 45 engineers as realistic seed minimums
+    // We fallback to at least 8 clients and 10 engineers as realistic seed minimums
     return NextResponse.json({
-      clientsCount: Math.max(clientsCount, 14),
+      clientsCount: Math.max(clientsCount, 8),
       experienceYears: 8, // founded in 2018
-      engineersCount: 45,
+      engineersCount: 10,
       leadsCount,
     });
   } catch (error) {

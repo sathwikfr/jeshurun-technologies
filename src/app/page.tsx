@@ -1346,9 +1346,10 @@ export default function Home() {
   };
 
   const [stats, setStats] = useState({
-    clientsCount: 14,
-    experienceYears: calculateExperience(),
-    engineersCount: 45,
+    clientsCount: 8,
+    experienceYears: 8,
+    engineersCount: 10,
+    leadsCount: 0
   });
 
   // Apple-style mouse parallax
@@ -1369,9 +1370,10 @@ export default function Home() {
         if (res.ok) {
           const data = await res.json();
           setStats({
-            clientsCount: data.clientsCount || 14,
+            clientsCount: data.clientsCount || 8,
             experienceYears: calculateExperience(), // Override API response to guarantee correct calculation
-            engineersCount: data.engineersCount || 45,
+            engineersCount: data.engineersCount || 10,
+            leadsCount: data.leadsCount || 0
           });
         }
       } catch (err) {
@@ -1764,7 +1766,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
               <div>
-                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.clientsCount} /></span>
+                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.clientsCount} suffix="+" /></span>
                 <span className="text-sm font-semibold text-slate-900 dark:text-white block">Enterprise clients</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">Across Ireland and Europe</span>
               </div>
@@ -1797,7 +1799,7 @@ export default function Home() {
 
             <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
               <div>
-                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.engineersCount} /></span>
+                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.engineersCount} suffix="+" /></span>
                 <span className="text-sm font-semibold text-slate-900 dark:text-white block">Certified engineers</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">Across disciplines</span>
               </div>
