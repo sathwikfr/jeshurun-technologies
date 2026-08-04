@@ -1450,12 +1450,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center relative min-h-dvh bg-transparent overflow-x-hidden">
+    <div className="flex flex-col items-center justify-center relative bg-transparent overflow-x-hidden">
 
       {/* ═══════════════════════════════════════════════════
           HERO CANVAS
       ═══════════════════════════════════════════════════ */}
-      <section id="hero-section" className="relative w-full min-h-dvh flex flex-col justify-center overflow-hidden bg-background dark:bg-background" onMouseMove={handleMouseMove}>
+      <section id="hero-section" className="relative w-full flex flex-col justify-center overflow-hidden bg-background dark:bg-background" onMouseMove={handleMouseMove}>
         <style>{`
           .scrim-diagonal { background: linear-gradient(110deg, rgba(245,248,255,0.98) 0%, rgba(245,248,255,0.95) 20%, rgba(245,248,255,0.85) 40%, rgba(245,248,255,0.55) 58%, rgba(245,248,255,0.15) 72%, transparent 88%); }
           .scrim-diagonal-dark { background: linear-gradient(110deg, rgba(18,18,18,0.97) 0%, rgba(18,18,18,0.93) 20%, rgba(18,18,18,0.82) 40%, rgba(18,18,18,0.50) 58%, rgba(18,18,18,0.12) 72%, transparent 88%); }
@@ -1474,9 +1474,9 @@ export default function Home() {
         <div className="absolute inset-0 z-10 pointer-events-none hidden md:block light-hidden scrim-diagonal-dark" />
 
         {/* Layer 2: Hero Content */}
-        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-4 lg:pt-[110px] xl:pt-[120px] 2xl:pt-[160px] flex flex-col min-h-dvh justify-between pointer-events-none">
+        <div className="relative z-20 w-full container mx-auto px-6 sm:px-8 pt-24 pb-12 md:pt-32 md:pb-24 lg:pt-36 lg:pb-28 xl:pt-40 xl:pb-32 flex flex-col justify-center pointer-events-none">
           
-          <div className="flex flex-col md:flex-row items-center md:items-stretch w-full flex-1 pb-2 lg:pb-4 xl:pb-6 2xl:pb-20 pointer-events-none">
+          <div className="flex flex-col md:flex-row items-center md:items-center w-full pointer-events-none">
             <motion.div 
               variants={enterpriseContainer}
               initial="hidden"
