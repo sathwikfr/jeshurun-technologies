@@ -570,12 +570,13 @@ function CaseStudyCard({ study }: CaseStudyCardProps) {
 }
 
 const trustLogos = [
-  { name: "Astellas", src: "/logos/astellas.webp" },
-  { name: "Vodafone", src: "/logos/vodafone.webp" },
-  { name: "Boston Scientific", src: "/logos/bostonScien.svg" },
-  { name: "Ergo", src: "/logos/ergo.webp" },
-  { name: "Pfizer", src: "/logos/pfizer.webp" },
-  { name: "Tech Placements", src: "/logos/techPlacements.jpeg" },
+  { name: "Astellas", src: "/logos/Astellas_logo.svg", imgClass: "scale-[1.15]", wrapperClass: "w-[140px]" },
+  { name: "Vodafone", src: "/logos/Vodafone_logo_2017.svg", imgClass: "scale-[1.3]", wrapperClass: "w-[140px]" },
+  { name: "Boston Scientific", src: "/logos/Boston_Scientific_Logo.svg", imgClass: "scale-100", wrapperClass: "w-[180px]" },
+  { name: "Ergo", src: "/logos/ergo.png", imgClass: "scale-[1.15]", wrapperClass: "w-[140px]" },
+  { name: "Pfizer", src: "/logos/Pfizer_(2021).svg", imgClass: "scale-125", wrapperClass: "w-[140px]" },
+  { name: "Tech Placements", src: "/logos/Pharma_Tech _Placement.png", imgClass: "", wrapperClass: "w-[220px]" },
+  { name: "Department of Social Protection", src: "/logos/Irish_Department_of_Social_Protection.png", imgClass: "", wrapperClass: "w-[260px]" },
 ];
 
 // --- MICRO-VISUALIZATION COMPONENTS FOR TECH STAT CARDS ---
@@ -609,7 +610,7 @@ function EnterpriseClientsViz() {
                 alt={logo.name}
                 fill
                 sizes="24px"
-                className="object-contain p-0.5"
+                className={`object-contain p-0.5 ${logo.imgClass || ''}`}
               />
             </div>
           </div>
@@ -1569,13 +1570,11 @@ export default function Home() {
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex items-center gap-20 pr-20">
                   {trustLogos.map((logo, index) => (
-                    <div key={`${logo.name}-${index}`} className="flex items-center justify-center min-w-[140px] h-12 hover:scale-[1.02] transition-transform duration-500 group relative">
-                      <Image 
+                    <div key={`${logo.name}-${index}`} className="flex items-center justify-center h-12 hover:scale-[1.02] transition-transform duration-500 group relative">
+                      <img 
                         src={logo.src} 
                         alt={`${logo.name} Logo`} 
-                        fill
-                        sizes="140px"
-                        className="object-contain select-none pointer-events-none transition-all duration-500"
+                        className="h-12 w-auto object-contain select-none pointer-events-none transition-all duration-500"
                       />
                     </div>
                   ))}

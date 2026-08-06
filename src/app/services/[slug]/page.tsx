@@ -642,7 +642,7 @@ export default function ServiceDetailPage({
           SECTION 1 — EDITORIAL HERO
           Typography-led, confident. Playfair Display headline.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-950 dark:bg-background text-white shadow-xl">
+      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-50 dark:bg-background text-slate-900 dark:text-white shadow-xl">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -651,10 +651,10 @@ export default function ServiceDetailPage({
             fill
             sizes="100vw"
             priority
-            className="object-cover object-top opacity-50 dark:opacity-30"
+            className="object-cover object-top opacity-30 dark:opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/40 dark:from-background dark:via-background/80 dark:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950 dark:from-background/50 dark:to-background" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-slate-50/20 dark:from-background dark:via-background/60 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-50/40 via-transparent to-slate-50/20 dark:from-background/60 dark:via-transparent dark:to-background/30" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.15)_0%,transparent_60%)]" />
         </div>
 
@@ -666,12 +666,12 @@ export default function ServiceDetailPage({
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 mb-8"
           >
-            <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-white/60">
-              <Link href="/" className="hover:text-white transition-colors">Home</Link>
-              <span className="w-1 h-1 rounded-full bg-white/30" />
-              <Link href="/services" className="hover:text-white transition-colors">Services</Link>
-              <span className="w-1 h-1 rounded-full bg-white/30" />
-              <span className="text-white">{service.title}</span>
+            <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-white/60">
+              <Link href="/" className="hover:text-slate-900 dark:hover:text-white transition-colors">Home</Link>
+              <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/30" />
+              <Link href="/services" className="hover:text-slate-900 dark:hover:text-white transition-colors">Services</Link>
+              <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/30" />
+              <span className="text-slate-900 dark:text-white">{service.title}</span>
             </nav>
           </motion.div>
 
@@ -685,15 +685,15 @@ export default function ServiceDetailPage({
               {/* Editorial Headline — Playfair Display */}
               <motion.h1
                 variants={fadeUp}
-                className="font-editorial text-4xl sm:text-5xl md:text-6xl text-white tracking-tight leading-tight"
+                className="font-editorial text-4xl sm:text-5xl md:text-6xl text-slate-900 dark:text-white tracking-tight leading-tight"
               >
-                {titleFirstWord} <span className="text-blue-400">{titleRest}</span>
+                {titleFirstWord} <span className="text-blue-600 dark:text-blue-400">{titleRest}</span>
               </motion.h1>
 
               {/* Subtitle — clean sans-serif contrast */}
               <motion.p
                 variants={fadeUp}
-                className="text-white/90 text-lg sm:text-xl font-medium leading-relaxed"
+                className="text-slate-700 dark:text-white/90 text-lg sm:text-xl font-medium leading-relaxed"
               >
                 {service.subtitle}
               </motion.p>
@@ -701,7 +701,7 @@ export default function ServiceDetailPage({
               {/* Description */}
               <motion.p
                 variants={fadeUp}
-                className="text-white/70 text-base md:text-lg font-medium leading-relaxed max-w-xl"
+                className="text-slate-600 dark:text-white/70 text-base md:text-lg font-medium leading-relaxed max-w-xl"
               >
                 {service.description}
               </motion.p>

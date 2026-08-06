@@ -200,7 +200,7 @@ ${formData.message}
             variants={item}
             className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-medium"
           >
-            From secure cloud infrastructure to mission-critical software. Tell us what you're building — or what's holding you back — and a senior consultant will be in touch within 2 business hours.
+            Whether you're scaling secure cloud infrastructure or launching mission-critical software, we're here to help. Tell us what you're building—or what's holding you back—and a senior consultant will be in touch within 2 business hours.
           </motion.p>
 
           {/* TRUST STRIP */}
@@ -555,38 +555,7 @@ ${formData.message}
           </motion.div>
         </div>
 
-        {/* ENGAGEMENT STANDARDS */}
-        <motion.div 
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-40px" }}
-          className="max-w-5xl mx-auto mb-16"
-        >
-          <SpotlightCard className="rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-[#18181c] dark:to-[#121214] border border-slate-200/50 dark:border-zinc-800/80 shadow-xl p-6 md:p-8">
-            <div className="text-center max-w-2xl mx-auto mb-8 space-y-2">
-              <h2 className="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center justify-center gap-2">
-                <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                Engagement Standards
-              </h2>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-              {[
-                { label: "Initial Response", val: "< 2 Hours" },
-                { label: "Proposal Turnaround", val: "24-48 Hours" },
-                { label: "Discovery Workshop", val: "1-3 Days" },
-                { label: "Support Coverage", val: "24/7" }
-              ].map((stat, i) => (
-                <motion.div key={i} variants={item}>
-                  <SpotlightCard className="p-4 bg-slate-50/50 dark:bg-zinc-900/60 border border-[rgba(15,23,42,0.08)] dark:border-zinc-800 rounded-2xl">
-                    <div className="text-xl md:text-2xl font-black text-blue-600 dark:text-blue-400">{stat.val}</div>
-                    <div className="text-[10px] uppercase font-bold text-slate-550 dark:text-slate-450 mt-1.5">{stat.label}</div>
-                  </SpotlightCard>
-                </motion.div>
-              ))}
-            </div>
-          </SpotlightCard>
-        </motion.div>
+
 
       </div>
       </section>

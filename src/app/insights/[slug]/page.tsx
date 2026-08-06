@@ -258,22 +258,6 @@ export default function InsightArticlePage() {
               {renderContent(article.content)}
             </article>
 
-            {/* SLA Secure Footer Disclaimer */}
-            <div className="mt-16 pt-8 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <div className="bg-[#2563EB]/10 p-3 rounded-2xl text-[#2563EB] dark:bg-[#2563EB]/20">
-                  <User className="w-5 h-5" />
-                </div>
-                <div>
-                  <span className="text-sm font-extrabold text-foreground block">Jeshurun Advisory Group</span>
-                  <span className="text-[11px] text-muted-foreground font-bold block">Enterprise Telemetry Team</span>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2 text-[10px] text-muted-foreground font-black uppercase tracking-widest bg-slate-100 dark:bg-slate-900 border border-border px-4 py-1.5 rounded-full">
-                <ShieldAlert className="w-4 h-4 text-[#2563EB]" /> SECURE ADVISORY REPORT
-              </div>
-            </div>
           </main>
         </div>
 

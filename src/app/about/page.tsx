@@ -139,7 +139,7 @@ export default function AboutPage() {
             variants={item}
             className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-medium"
           >
-            45+ certified engineers. 99.9% SLA uptime. Serving pharma, telecoms, and insurance leaders across Ireland, Europe, the Middle East, and India since 2017.
+            Delivering resilient, scalable technology solutions for industry leaders in pharma, telecoms, and insurance. Transforming enterprise infrastructure across Ireland, Europe, the Middle East, and India since 2017.
           </motion.p>
         </motion.div>
         </div>
@@ -505,12 +505,12 @@ export default function AboutPage() {
 
 
               {/* Resilience Cards (Box-less Floating Grid matching Tab 1 Features) */}
-              <motion.div
+              <motion.div 
                 variants={container}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-40px" }}
-                className="max-w-5xl mx-auto mb-32"
+                className="max-w-4xl mx-auto mb-32"
               >
                 <div className="text-center space-y-6 mb-16">
                   <motion.h2 
@@ -560,11 +560,11 @@ export default function AboutPage() {
                       icon: ShieldCheck 
                     }
                   ].map((resCard, idx) => (
-                    <motion.div key={idx} variants={item} className="flex flex-col items-start group">
+                    <motion.div key={idx} variants={item} className="flex flex-col items-center text-center group">
                       <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] mb-6">
                         <resCard.icon className="w-6 h-6" />
                       </div>
-                      <div className="space-y-2 text-left">
+                      <div className="space-y-2 text-center">
                         <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                           {resCard.title}
                         </h4>
