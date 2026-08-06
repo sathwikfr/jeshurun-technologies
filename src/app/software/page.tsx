@@ -280,7 +280,9 @@ export default function Software() {
 
       {/* HERO */}
       <section className="w-full min-h-dvh pt-24 pb-12 md:pt-32 flex items-center relative overflow-hidden bg-background border-b border-border">
-        <SpiralDustBackground lightVariant="light-minimal" />
+        <div className="hidden dark:block absolute inset-0 z-0">
+          <SpiralDustBackground lightVariant="light-minimal" />
+        </div>
         
         {/* Layer 0.5: Galaxy Spiral Particle Animation */}
 
@@ -296,14 +298,14 @@ export default function Software() {
               Software Engineering
             </motion.div>
             
-            <motion.h1 variants={enterpriseItem} className="text-6xl sm:text-7xl lg:text-[5.5rem] font-black tracking-tighter leading-[1.05] text-foreground drop-shadow-xl relative z-10">
+            <motion.h1 variants={enterpriseItem} className="text-6xl sm:text-7xl lg:text-[5.5rem] font-editorial tracking-tighter leading-[1.05] text-foreground drop-shadow-xl relative z-10">
               <span className="text-foreground">Enterprise</span>{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#12ABDB] via-[#0070AD] to-[#12ABDB] animate-gradient-text drop-shadow-[0_4px_32px_rgba(18,171,219,0.4)]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
                 Software
               </span>
             </motion.h1>
             
-            <motion.p variants={enterpriseItem} className="text-slate-700 dark:text-slate-300 text-xl sm:text-2xl leading-relaxed font-semibold max-w-2xl mx-auto">
+            <motion.p variants={enterpriseItem} className="text-slate-700 dark:text-slate-300 text-xl sm:text-2xl leading-relaxed font-medium max-w-2xl mx-auto">
               We design, architect, and deploy highly resilient software systems tailored for global scale and rigorous security compliance.
             </motion.p>
 

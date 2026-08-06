@@ -142,14 +142,14 @@ export default function CaseStudiesPage() {
                 </span>
                 Enterprise Proof Points
               </motion.div>
-              <motion.h1 variants={item} className="text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-none">
+              <motion.h1 variants={item} className="text-5xl sm:text-6xl md:text-7xl font-editorial tracking-tight leading-none">
                 <span className="text-blue-600 dark:text-blue-500">Proven Enterprise</span>{' '}
                 <br className="hidden sm:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4]">
                   Transformations
                 </span>
               </motion.h1>
-              <motion.p variants={item} className="text-muted-foreground text-lg sm:text-xl leading-relaxed font-semibold max-w-xl">
+              <motion.p variants={item} className="text-muted-foreground text-lg sm:text-xl leading-relaxed font-medium max-w-xl">
                 Discover how Jeshurun Technologies helps organizations modernize infrastructure, accelerate innovation, reduce costs, and achieve measurable business outcomes.
               </motion.p>
             </div>

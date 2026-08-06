@@ -188,7 +188,7 @@ ${formData.message}
           
           <motion.h1 
             variants={item}
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.15] text-foreground"
+            className="text-4xl sm:text-5xl md:text-6xl font-editorial tracking-tight leading-[1.15] text-foreground"
           >
             <span className="text-slate-900 dark:text-white block">Let's Solve Your Hardest</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 block">

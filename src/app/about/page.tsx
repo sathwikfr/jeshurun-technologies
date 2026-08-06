@@ -126,7 +126,7 @@ export default function AboutPage() {
           
           <motion.h1 
             variants={item}
-            className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.15] text-foreground"
+            className="text-4xl sm:text-5xl md:text-6xl font-editorial tracking-tight leading-[1.15] text-foreground"
           >
             <span className="text-slate-900 dark:text-white block">Where Mission-Critical</span>
             <span className="text-slate-900 dark:text-white block">Enterprise Technology</span>
