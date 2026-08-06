@@ -150,7 +150,7 @@ export default function InsightArticlePage() {
   return (
     <div className="min-h-dvh bg-background pb-24">
       {/* Hero Header Area */}
-      <section className="w-full pt-32 pb-20 relative overflow-hidden bg-slate-950 dark:bg-background text-white shadow-xl">
+      <section className="w-full pt-32 pb-20 relative overflow-hidden bg-slate-50 dark:bg-background text-slate-900 dark:text-white shadow-xl">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -160,32 +160,30 @@ export default function InsightArticlePage() {
             priority
             sizes="100vw"
             style={{ viewTransitionName: `insight-image-${article.slug}` }}
-            className="object-cover opacity-50 dark:opacity-30"
+            className="object-cover opacity-30 dark:opacity-60"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-slate-950/40 dark:from-background dark:via-background/80 dark:to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-950 dark:from-background/50 dark:to-background" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-50 via-slate-50/60 to-slate-50/20 dark:from-background dark:via-background/60 dark:to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-50/40 via-transparent to-slate-50/20 dark:from-background/60 dark:via-transparent dark:to-background/30" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.12)_0%,transparent_60%)]" />
         </div>
 
         <div className="w-full container px-6 sm:px-8 mx-auto relative z-10">
           <div className="max-w-4xl mx-auto space-y-6">
-            {/* Back button */}
-            <Link
-              href="/#insights"
-              className="inline-flex items-center gap-2 text-xs font-bold text-white/80 hover:text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full border border-white/15 transition-all duration-300 backdrop-blur-md w-fit"
-            >
-              <ArrowLeft className="w-4 h-4" /> Back to Insights
-            </Link>
+            {/* Breadcrumb / Label Row */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Link
+                href="/#insights"
+                className="inline-flex items-center gap-2 text-[13px] font-extrabold uppercase tracking-[0.15em] text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all duration-300 w-fit"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to Insights
+              </Link>
 
-            <div className="pt-2">
-              <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-white shadow-[0_0_25px_rgba(255,255,255,0.1)] ring-1 ring-white/15">
-                <span className="relative flex w-2 h-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
-                </span>
+              <span className="opacity-60 dark:opacity-40 text-xs font-normal text-slate-400 dark:text-white px-1">•</span>
+
+              <div className="inline-flex items-center gap-2.5 text-[13px] font-extrabold uppercase tracking-[0.15em] text-slate-900 dark:text-white">
                 <span>INSIGHT</span>
-                <span className="opacity-40 text-xs font-normal">•</span>
-                <span className="text-blue-300">{article.category}</span>
+                <span className="opacity-60 dark:opacity-40 text-xs font-normal">•</span>
+                <span className="text-blue-600 dark:text-blue-400">{article.category}</span>
               </div>
             </div>
 
@@ -193,15 +191,12 @@ export default function InsightArticlePage() {
               {article.title}
             </h1>
 
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-semibold text-white/70 pt-6 border-t border-white/10">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-xs font-semibold text-slate-600 dark:text-white/70 pt-6 border-t border-slate-200 dark:border-white/10">
               <span className="flex items-center gap-2">
-                <User className="w-4 h-4 text-blue-400" /> By {article.author}
+                <Calendar className="w-4 h-4 text-blue-600 dark:text-blue-400" /> {article.date}
               </span>
               <span className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-blue-400" /> {article.date}
-              </span>
-              <span className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-blue-400" /> {article.readTime}
+                <Clock className="w-4 h-4 text-blue-600 dark:text-blue-400" /> {article.readTime}
               </span>
             </div>
           </div>

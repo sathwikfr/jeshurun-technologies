@@ -1064,7 +1064,7 @@ export default function TechDetailPage({
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="mt-8 mb-8"
           >
-            <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-slate-500 dark:text-white/60">
+            <nav className="flex items-center gap-2.5 text-[13px] font-extrabold uppercase tracking-[0.15em] text-slate-500 dark:text-white/60">
               <Link href="/" className="hover:text-slate-900 dark:hover:text-white transition-colors">Home</Link>
               <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/30" />
               <Link href="/technology" className="hover:text-slate-900 dark:hover:text-white transition-colors">Technology</Link>

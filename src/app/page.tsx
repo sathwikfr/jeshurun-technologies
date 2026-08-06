@@ -575,7 +575,7 @@ const trustLogos = [
   { name: "Boston Scientific", src: "/logos/Boston_Scientific_Logo.svg", imgClass: "scale-100", wrapperClass: "w-[180px]" },
   { name: "Ergo", src: "/logos/ergo.png", imgClass: "scale-[1.15]", wrapperClass: "w-[140px]" },
   { name: "Pfizer", src: "/logos/Pfizer_(2021).svg", imgClass: "scale-125", wrapperClass: "w-[140px]" },
-  { name: "Tech Placements", src: "/logos/Pharma_Tech _Placement.png", imgClass: "", wrapperClass: "w-[220px]" },
+  { name: "Tech Placements", src: "/logos/pharma_tech_placement.png", imgClass: "", wrapperClass: "w-[220px]" },
   { name: "Department of Social Protection", src: "/logos/Irish_Department_of_Social_Protection.png", imgClass: "", wrapperClass: "w-[260px]" },
 ];
 
