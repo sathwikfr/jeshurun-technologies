@@ -77,7 +77,7 @@ export function MethodologyTimeline({
             </span>
             {badge}
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-foreground tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-editorial text-foreground tracking-tight">
             {title}
           </h2>
           {subtitle && (

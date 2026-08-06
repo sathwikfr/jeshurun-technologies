@@ -103,7 +103,7 @@ export function CloudROICalculator() {
             <Calculator className="w-3.5 h-3.5" />
             ROI Telemetry
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
+          <h2 className="text-3xl sm:text-4xl font-editorial tracking-tight text-foreground">
             Cloud Modernization ROI Calculator
           </h2>
           <p className="text-muted-foreground text-base font-medium">
@@ -307,7 +307,7 @@ export function CloudROICalculator() {
             
             {/* Results Card */}
             <div className="bg-card border border-border rounded-xl p-6 md:p-8 flex flex-col shadow-sm">
-              <h3 className="text-xl font-extrabold text-foreground tracking-tight mb-6 pb-4 border-b border-border">
+              <h3 className="text-xl font-editorial text-foreground tracking-tight mb-6 pb-4 border-b border-border">
                 Projected Enterprise Impact
               </h3>
               

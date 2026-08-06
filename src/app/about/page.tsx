@@ -401,7 +401,7 @@ export default function AboutPage() {
                     </div>
                     
                     <div className="relative z-10 flex flex-col flex-grow" style={{ transform: "translateZ(20px)" }}>
-                      <h3 className="text-xl font-extrabold text-slate-900 dark:text-white mb-1 tracking-tight">{leader.name}</h3>
+                      <h3 className="text-xl font-editorial text-slate-900 dark:text-white mb-1 tracking-tight">{leader.name}</h3>
                       <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">{leader.title}</p>
                       <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed flex-grow">
                         {leader.bio}

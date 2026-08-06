@@ -181,7 +181,7 @@ export default function SlaPage() {
               </span>
               Quality Assurance & Guarantees
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-[#0A1F44] dark:text-white">
+            <h1 className="text-4xl font-editorial tracking-tight sm:text-5xl md:text-6xl text-[#0A1F44] dark:text-white">
               SLA & Quality Standards
             </h1>
             <p className="text-muted-foreground dark:text-muted-foreground/60 text-lg sm:text-xl md:text-2xl leading-relaxed font-semibold">
@@ -198,7 +198,7 @@ export default function SlaPage() {
             {/* Left Content Column */}
             <div className="lg:col-span-6 space-y-8">
               <div className="space-y-4">
-                <h2 className="text-3xl font-extrabold text-[#0A1F44] dark:text-white tracking-tight">
+                <h2 className="text-3xl font-editorial text-[#0A1F44] dark:text-white tracking-tight">
                   Performance Commitments
                 </h2>
                 <p className="text-muted-foreground dark:text-muted-foreground/60 text-base leading-relaxed font-medium">
@@ -254,7 +254,7 @@ export default function SlaPage() {
               <span className="text-[10px] font-bold text-[#0057D9] dark:text-[#60A5FA] uppercase tracking-widest bg-[#0057D9]/5 dark:bg-[#0057D9]/15 border border-[#0057D9]/10 dark:border-[#0057D9]/20 px-3 py-1 rounded-full">
                 Interactive Telemetry
               </span>
-              <h2 className="text-3xl font-black text-[#0A1F44] dark:text-white tracking-tight">
+              <h2 className="text-3xl font-editorial text-[#0A1F44] dark:text-white tracking-tight">
                 Live SLA & Load Simulator
               </h2>
               <p className="text-muted-foreground dark:text-muted-foreground text-sm font-semibold max-w-md mx-auto">
@@ -410,7 +410,7 @@ export default function SlaPage() {
               <span className="text-[10px] font-bold text-[#0057D9] dark:text-[#60A5FA] uppercase tracking-widest bg-[#0057D9]/5 dark:bg-[#0057D9]/15 border border-[#0057D9]/10 dark:border-[#0057D9]/20 px-3 py-1 rounded-full">
                 Security & Accreditations
               </span>
-              <h2 className="text-3xl font-black text-[#0A1F44] dark:text-white tracking-tight">Compliance & Trust</h2>
+              <h2 className="text-3xl font-editorial text-[#0A1F44] dark:text-white tracking-tight">Compliance & Trust</h2>
               <p className="text-muted-foreground dark:text-muted-foreground text-sm font-semibold max-w-md mx-auto">
                 We operate under rigorous international standards to ensure the complete protection and security of your systems.
               </p>

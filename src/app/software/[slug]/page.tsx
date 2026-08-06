@@ -752,7 +752,7 @@ export default function SoftwareDetailPage({
                     Core Capabilities
                   </p>
                   <h3 className="text-3xl md:text-4xl lg:text-5xl font-editorial text-foreground leading-tight">
-                    What we build
+                    What We Build
                   </h3>
                 </div>
                 <p className="text-base text-muted-foreground leading-relaxed">
@@ -816,7 +816,7 @@ export default function SoftwareDetailPage({
                 Outcomes
               </p>
               <h3 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-                Measurable impact
+                Measurable Impact
               </h3>
             </motion.div>
 
@@ -939,7 +939,7 @@ export default function SoftwareDetailPage({
                 Frequently Asked
               </p>
               <h3 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-                Common questions
+                Common Questions
               </h3>
             </motion.div>
             <div className="max-w-3xl">
@@ -968,8 +968,8 @@ export default function SoftwareDetailPage({
             viewport={{ once: true, margin: "-60px" }}
           >
             <motion.div variants={fadeUp} className="mb-10">
-              <h2 className="font-editorial text-xl sm:text-2xl text-foreground tracking-tight">
-                Related practice areas
+              <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
+                Related Practice Areas
               </h2>
             </motion.div>
             <div className="space-y-0">
@@ -1021,4 +1021,4 @@ export default function SoftwareDetailPage({
       </section>
     </div>
   );
-}
+}

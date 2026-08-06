@@ -114,7 +114,7 @@ export function PremiumCTA({ variant, titleTop: customTitleTop, titleHighlight: 
 
           {/* Content Stack */}
           <div className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-foreground tracking-tight leading-[1.2] max-w-2xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-editorial text-foreground tracking-tight leading-[1.2] max-w-2xl mx-auto">
               {titleTop}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
                 {titleHighlight}

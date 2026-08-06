@@ -171,7 +171,7 @@ export function Footer() {
         </div>
 
         {/* ── Bottom Bar (Padded to avoid floating buttons overlap) ── */}
-        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-semibold text-muted-foreground pr-0 md:pr-44 lg:pr-48">
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-semibold text-muted-foreground">
           <p className="text-center md:text-left">
             &copy; {currentYear} Jeshurun Technologies Ltd. All rights reserved.
           </p>

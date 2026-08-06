@@ -59,7 +59,7 @@ export default function PrivacyPolicy() {
               </span>
               Legal Agreement
             </div>
-            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl text-[#0A1F44] dark:text-white">
+            <h1 className="text-4xl font-editorial tracking-tight sm:text-5xl md:text-6xl text-[#0A1F44] dark:text-white">
               Privacy Policy
             </h1>
             <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed font-semibold">

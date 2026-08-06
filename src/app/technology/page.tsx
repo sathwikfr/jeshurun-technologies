@@ -170,12 +170,12 @@ function TechnologyStrip({ tech, router, index }: { tech: any; router: any; inde
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
             className="flex-1 space-y-6 min-w-0"
           >
-            <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full ${tech.accentBg} ${tech.accentText} border ${tech.accentBorder} text-xs font-bold uppercase tracking-wider`}>
-              <span className={`w-1.5 h-1.5 rounded-full bg-current`} />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/8 text-primary border border-primary/20 text-xs font-bold uppercase tracking-wider">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
               Domain Expertise
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-editorial text-foreground tracking-tight leading-tight">
               {tech.title}
             </h2>
 
@@ -397,7 +397,7 @@ export default function Technology() {
             <motion.h1 variants={enterpriseItem} className="text-6xl sm:text-7xl lg:text-[5.5rem] font-editorial tracking-tighter leading-[1.05] text-foreground drop-shadow-xl relative z-10">
               <span className="text-foreground">Technology</span>{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
-                Expertise
+                Ecosystem
               </span>
             </motion.h1>
             

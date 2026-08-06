@@ -61,7 +61,7 @@ function CaseStudyCard({ study, onClick, compact = false }: { study: CaseStudyAr
         {/* Content Body */}
         <div className={`${compact ? 'p-4 md:p-5' : 'p-5 md:p-6'} flex-1 flex flex-col justify-between`}>
           <div>
-            <h3 className={`font-extrabold text-foreground tracking-tight leading-tight mb-4 group-hover:text-[#2563EB] transition-colors ${compact ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'} text-left`}>
+            <h3 className={`font-editorial text-foreground tracking-tight leading-tight mb-4 group-hover:text-[#2563EB] transition-colors ${compact ? 'text-xl md:text-2xl' : 'text-2xl md:text-3xl'} text-left`}>
               {study.title}
             </h3>
             
@@ -143,10 +143,10 @@ export default function CaseStudiesPage() {
                 Enterprise Proof Points
               </motion.div>
               <motion.h1 variants={item} className="text-5xl sm:text-6xl md:text-7xl font-editorial tracking-tight leading-none">
-                <span className="text-blue-600 dark:text-blue-500">Proven Enterprise</span>{' '}
+                <span className="text-blue-600 dark:text-blue-500">Enterprise Transformation</span>{' '}
                 <br className="hidden sm:block" />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2563EB] to-[#06B6D4]">
-                  Transformations
+                  Stories
                 </span>
               </motion.h1>
               <motion.p variants={item} className="text-muted-foreground text-lg sm:text-xl leading-relaxed font-medium max-w-xl">

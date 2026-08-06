@@ -336,7 +336,7 @@ function InsightCard({ insight }: InsightCardProps) {
         <div className="flex-1 flex flex-col">
           {/* Title */}
           <div className="mb-4 mt-2">
-            <h3 className="text-xl font-black leading-snug text-foreground group-hover:text-[#2563EB] transition-colors duration-300 line-clamp-2 flex items-start justify-between gap-3">
+            <h3 className="text-xl font-editorial leading-snug text-foreground group-hover:text-[#2563EB] transition-colors duration-300 line-clamp-2 flex items-start justify-between gap-3">
               <span>{insight.title}</span>
               <ArrowRight className="w-5 h-5 shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#2563EB] mt-0.5" />
             </h3>
@@ -469,7 +469,7 @@ function CaseStudyCard({ study }: CaseStudyCardProps) {
           <span className="text-[10px] font-extrabold tracking-widest text-[#2563EB] uppercase block mb-1.5 font-mono">
             CASE STUDY • {study.industry}
           </span>
-          <h3 className="text-xl font-black leading-snug text-foreground group-hover:text-[#2563EB] transition-colors duration-300 line-clamp-2">
+          <h3 className="text-xl font-editorial leading-snug text-foreground group-hover:text-[#2563EB] transition-colors duration-300 line-clamp-2">
             {study.title}
           </h3>
         </div>
@@ -1494,7 +1494,7 @@ export default function Home() {
 
               <div className="flex flex-col items-center md:items-start w-full gap-3 lg:gap-4 2xl:gap-6">
                 {/* 2. MAIN HEADING */}
-                <motion.h1 variants={enterpriseItem} className="font-extrabold tracking-tight text-[44px] md:text-[54px] lg:text-[44px] xl:text-[52px] leading-[1.05] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
+                <motion.h1 variants={enterpriseItem} className="font-editorial tracking-tight text-[44px] md:text-[54px] lg:text-[45px] xl:text-[52px] leading-[1.05] m-0 p-0 text-[#0B1220] dark:text-[#F5F7FA]">
                   <span className="block">Engineering the</span>
                   <span className="block">Future of</span>
                   <span
@@ -1550,7 +1550,7 @@ export default function Home() {
               </span>
               Our Clients
             </div>
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Trusted by Enterprise Leaders</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-[2.25rem] font-editorial text-foreground tracking-tight leading-tight">Trusted by Enterprise Leaders</h2>
             <p className="text-muted-foreground text-lg font-medium leading-relaxed">Partnering with global organizations across pharmaceuticals, telecommunications, and insurance to deliver mission-critical technology systems.</p>
           </div>
 
@@ -1596,7 +1596,10 @@ export default function Home() {
               </span>
               How We Deliver
             </div>
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">One Partner. Full Technology Lifecycle.</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-[2.25rem] font-editorial text-foreground tracking-tight leading-tight">
+              <span className="block">One Partner.</span>
+              <span className="block">Full Technology Lifecycle.</span>
+            </h2>
             <p className="text-muted-foreground text-lg font-medium">From architecture strategy to cloud operations — comprehensive services built for complex, multi-national enterprise requirements.</p>
           </div>
 
@@ -1752,7 +1755,7 @@ export default function Home() {
               </span>
               Technology Ecosystem
             </div>
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">Enterprise-grade technology stack</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-[2.25rem] font-editorial text-foreground tracking-tight leading-tight">Enterprise-grade Technology Stack</h2>
             <p className="text-slate-600 dark:text-slate-400 text-lg font-medium">Industry-leading tools and platforms powering our consulting and delivery capabilities</p>
           </div>
 
@@ -1880,7 +1883,7 @@ export default function Home() {
               </span>
               Corporate Intelligence
             </div>
-            <h2 className="text-3xl font-extrabold sm:text-4xl text-foreground tracking-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-[2.25rem] font-editorial text-foreground tracking-tight leading-tight">
               Insights &amp; Research Reports
             </h2>
             <p className="text-muted-foreground text-lg font-medium">
@@ -1909,7 +1912,7 @@ export default function Home() {
                 </span>
                 Stay Connected
               </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+              <h3 className="text-2xl sm:text-3xl font-editorial text-foreground tracking-tight">
                 Enterprise Technology Insights
               </h3>
               <p className="text-sm sm:text-base text-muted-foreground font-medium leading-relaxed">

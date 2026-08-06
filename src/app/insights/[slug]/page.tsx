@@ -110,7 +110,7 @@ export default function InsightArticlePage() {
           <h2
             key={index}
             id={id}
-            className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight mt-12 mb-6 scroll-mt-28 border-b border-border/70 pb-3"
+            className="text-2xl sm:text-3xl font-editorial text-foreground tracking-tight mt-12 mb-6 scroll-mt-28 border-b border-border/70 pb-3"
           >
             {text}
           </h2>
@@ -187,7 +187,7 @@ export default function InsightArticlePage() {
               </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] max-w-3xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-editorial tracking-tight leading-[1.1] max-w-3xl">
               {article.title}
             </h1>
 
@@ -262,7 +262,7 @@ export default function InsightArticlePage() {
             <span className="text-[10px] font-black uppercase text-[#2563EB] tracking-widest block">
               Continue Reading
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-editorial text-foreground tracking-tight">
               Related Research Reports
             </h2>
           </div>
@@ -291,7 +291,7 @@ export default function InsightArticlePage() {
                     <span className="text-[9px] font-black uppercase text-[#2563EB] tracking-wider block">
                       {rel.category}
                     </span>
-                    <h3 className="text-lg font-black text-foreground leading-snug group-hover:text-[#2563EB] transition-colors duration-300">
+                    <h3 className="text-lg font-editorial text-foreground leading-snug group-hover:text-[#2563EB] transition-colors duration-300">
                       {rel.title}
                     </h3>
                     <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">

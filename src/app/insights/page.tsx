@@ -28,7 +28,7 @@ export default function InsightsPage() {
             </span>
             Corporate Intelligence
           </div>
-          <h1 className="text-4xl font-extrabold sm:text-5xl lg:text-6xl text-foreground tracking-tight max-w-4xl mx-auto mb-6">
+          <h1 className="text-4xl font-editorial sm:text-5xl lg:text-6xl text-foreground tracking-tight max-w-4xl mx-auto mb-6">
             Insights &amp; Research Reports
           </h1>
           <p className="text-xl text-muted-foreground font-medium max-w-2xl mx-auto">
@@ -65,7 +65,7 @@ export default function InsightsPage() {
                   <div className="flex-1 flex flex-col">
                     {/* Title */}
                     <div className="mb-4 mt-2">
-                      <h3 className="text-xl font-black leading-snug text-foreground group-hover:text-[#2563EB] transition-colors duration-300 line-clamp-2 flex items-start justify-between gap-3">
+                      <h3 className="text-xl font-editorial leading-snug text-foreground group-hover:text-[#2563EB] transition-colors duration-300 line-clamp-2 flex items-start justify-between gap-3">
                         <span>{insight.title}</span>
                         <ArrowRight className="w-5 h-5 shrink-0 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#2563EB] mt-0.5" />
                       </h3>

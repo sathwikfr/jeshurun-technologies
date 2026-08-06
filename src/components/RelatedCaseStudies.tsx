@@ -21,7 +21,7 @@ export function RelatedCaseStudies({ category }: { category?: string }) {
       <div className="container px-6 sm:px-8 mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6">
           <div>
-            <h2 className="text-3xl md:text-4xl font-editorial text-foreground mb-4">Related Case Studies</h2>
+            <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight mb-4">Related Case Studies</h2>
             <p className="text-muted-foreground max-w-xl">See how we've helped other organizations transform their operations and achieve measurable impact.</p>
           </div>
           <Link href="/case-studies" className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary/80 transition-colors uppercase tracking-widest">
@@ -47,7 +47,7 @@ export function RelatedCaseStudies({ category }: { category?: string }) {
                   </span>
                 </div>
               </div>
-              <h3 className="text-xl md:text-2xl font-editorial font-bold text-foreground mb-3 group-hover:text-primary transition-colors">
+              <h3 className="text-xl md:text-2xl font-editorial text-foreground mb-3 group-hover:text-primary transition-colors">
                 {study.title}
               </h3>
               <p className="text-muted-foreground line-clamp-2 text-sm leading-relaxed">

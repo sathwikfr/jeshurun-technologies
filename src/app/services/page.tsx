@@ -308,7 +308,7 @@ function ServiceStrip({
             </div>
 
             {/* Title */}
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl font-editorial text-foreground tracking-tight leading-tight">
               {service.title}
             </h2>
 
@@ -395,9 +395,9 @@ export default function Services() {
               variants={enterpriseItem}
               className="text-6xl sm:text-7xl lg:text-[5.5rem] font-editorial tracking-tighter leading-[1.05] text-foreground drop-shadow-xl relative z-10"
             >
-              <span className="text-foreground">Technology</span>{" "}
+              <span className="text-foreground">Enterprise</span>{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500">
-                Consulting
+                Services
               </span>
             </motion.h1>
 

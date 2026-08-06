@@ -84,7 +84,7 @@ export function SplineChart({ data, title, color = "#0057D9" }: SplineChartProps
   return (
     <div className="w-full bg-card border border-border rounded-3xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.01)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.02)] transition-shadow duration-300 relative select-none">
       {title && (
-        <h3 className="text-sm font-extrabold uppercase tracking-wider text-muted-foreground mb-6">{title}</h3>
+        <h3 className="text-sm font-editorial uppercase tracking-wider text-muted-foreground mb-6">{title}</h3>
       )}
       
       <div className="relative w-full overflow-hidden">

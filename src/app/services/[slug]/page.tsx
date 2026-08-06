@@ -603,7 +603,7 @@ export default function ServiceDetailPage({
   if (!service) {
     return (
       <div className="w-full container mx-auto px-6 py-32 text-center min-h-[60vh] flex flex-col justify-center items-center">
-        <h1 className="text-3xl font-extrabold text-foreground">
+        <h1 className="text-3xl font-editorial text-foreground">
           Service Not Found
         </h1>
         <p className="text-muted-foreground mt-2 font-medium">
@@ -764,7 +764,7 @@ export default function ServiceDetailPage({
                   Practice Overview
                 </motion.p>
                 <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-                  How we approach {service.title}
+                  How We Approach {service.title}
                 </h2>
               </div>
 
@@ -818,7 +818,7 @@ export default function ServiceDetailPage({
                     Core Capabilities
                   </p>
                   <h3 className="text-3xl md:text-4xl lg:text-5xl font-editorial text-foreground leading-tight">
-                    What we deliver
+                    What We Deliver
                   </h3>
                 </div>
                 <p className="text-base text-muted-foreground leading-relaxed">
@@ -889,7 +889,7 @@ export default function ServiceDetailPage({
                 Outcomes
               </p>
               <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-                Measurable impact
+                Measurable Impact
               </h2>
             </motion.div>
 
@@ -1032,7 +1032,7 @@ export default function ServiceDetailPage({
               Frequently Asked
             </p>
             <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-              Common questions
+              Common Questions
             </h2>
           </motion.div>
 
@@ -1066,8 +1066,8 @@ export default function ServiceDetailPage({
           className="w-full container px-6 sm:px-8 mx-auto"
         >
           <motion.div variants={fadeUp} className="mb-10">
-            <h2 className="font-editorial text-xl sm:text-2xl text-foreground tracking-tight">
-              Related practice areas
+            <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
+              Related Practice Areas
             </h2>
           </motion.div>
 

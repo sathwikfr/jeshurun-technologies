@@ -246,7 +246,7 @@ ${formData.message}
           >
             <SpotlightCard className="p-6 md:p-8 rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-[#18181c] dark:to-[#121214] border border-slate-200/50 dark:border-zinc-800/80 shadow-xl overflow-hidden flex-1">
               <div className="space-y-2 mb-8 border-b border-slate-200/50 dark:border-slate-800/50 pb-6">
-                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                <h2 className="text-2xl md:text-3xl font-editorial text-slate-900 dark:text-white tracking-tight">
                   Start a Conversation
                 </h2>
                 <p className="text-slate-600 dark:text-slate-400 font-medium text-sm sm:text-base leading-relaxed">

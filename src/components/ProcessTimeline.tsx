@@ -39,7 +39,7 @@ export function ProcessTimeline({ badge, title, subtitle, steps }: ProcessTimeli
             {badge}
           </span>
           
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-foreground tracking-tight max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-editorial text-foreground tracking-tight max-w-3xl mx-auto">
             {title}
           </h2>
           

@@ -109,7 +109,7 @@ export default function CaseStudyArticlePage() {
           <h2
             key={index}
             id={id}
-            className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight mt-12 mb-6 scroll-mt-28 border-b border-border/70 pb-3 text-left"
+            className="text-2xl sm:text-3xl font-editorial text-foreground tracking-tight mt-12 mb-6 scroll-mt-28 border-b border-border/70 pb-3 text-left"
           >
             {text}
           </h2>
@@ -185,7 +185,7 @@ export default function CaseStudyArticlePage() {
               </div>
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] max-w-3xl text-left">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-editorial tracking-tight leading-[1.1] max-w-3xl text-left">
               {article.title}
             </h1>
 
@@ -259,7 +259,7 @@ export default function CaseStudyArticlePage() {
             <span className="text-[10px] font-black uppercase text-cyan-600 tracking-widest block">
               More Impact
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-editorial text-foreground tracking-tight">
               Other Transformation Case Studies
             </h2>
           </div>
@@ -288,7 +288,7 @@ export default function CaseStudyArticlePage() {
                     <span className="text-[9px] font-black uppercase text-cyan-600 tracking-wider block">
                       {rel.category}
                     </span>
-                    <h3 className="text-lg font-black text-foreground leading-snug group-hover:text-cyan-600 transition-colors duration-300">
+                    <h3 className="text-lg font-editorial text-foreground leading-snug group-hover:text-cyan-600 transition-colors duration-300">
                       {rel.title}
                     </h3>
                     <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
