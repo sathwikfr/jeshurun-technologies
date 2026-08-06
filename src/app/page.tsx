@@ -330,10 +330,6 @@ function InsightCard({ insight }: InsightCardProps) {
         {/* Bottom shadow blend */}
         <div className="absolute inset-0 bg-gradient-to-t from-card via-transparent to-transparent opacity-90" />
         
-        {/* Floating Category Badge */}
-        <div className="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[9px] font-extrabold tracking-widest text-white uppercase shadow-lg group-hover:bg-[#1D4ED8]/80 group-hover:border-[#1D4ED8] transition-colors duration-500">
-          {insight.category}
-        </div>
       </div>
 
       <div className="p-6 md:p-8 flex-1 flex flex-col justify-between">

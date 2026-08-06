@@ -58,51 +58,23 @@ export function AIChatbot() {
   const [hasUnread, setHasUnread] = useState(true);
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  // Initialize on mount and restore session
+  // Initialize on mount
   useEffect(() => {
     setMounted(true);
-    
-    const savedSession = sessionStorage.getItem("jeshurun_chat_session");
-    let initialMessages = [{ ...INITIAL_MESSAGE, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }];
-    
-    if (savedSession) {
-      try {
-        const { messages: savedMessages, lastUpdated } = JSON.parse(savedSession);
-        const now = Date.now();
-        
-        // Only restore if less than 10 minutes have passed
-        if (now - lastUpdated < 10 * 60 * 1000 && Array.isArray(savedMessages) && savedMessages.length > 0) {
-          initialMessages = savedMessages;
-          setHasUnread(false);
-        } else {
-          sessionStorage.removeItem("jeshurun_chat_session");
-        }
-      } catch (err) {
-        console.error("Failed to parse chat session", err);
-      }
-    }
-    
+    const initialMessages = [{ ...INITIAL_MESSAGE, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }];
     setMessages(initialMessages);
   }, []);
 
-  // Save to sessionStorage and manage 10-minute inactivity timer
+  // Manage 5-minute inactivity timer
   useEffect(() => {
     if (!mounted) return;
     
-    // Save current messages to sessionStorage if there is an actual conversation
-    if (messages.length > 1) {
-      sessionStorage.setItem("jeshurun_chat_session", JSON.stringify({
-        messages,
-        lastUpdated: Date.now()
-      }));
-    }
-    
-    // 10-minute inactivity timer to clear chat
+    // 5-minute inactivity timer to clear chat
     if (messages.length <= 1) return;
     
     const timer = setTimeout(() => {
       clearConversation();
-    }, 10 * 60 * 1000); // 10 minutes in milliseconds
+    }, 5 * 60 * 1000); // 5 minutes in milliseconds
     
     return () => clearTimeout(timer);
   }, [messages, mounted]);
@@ -140,7 +112,6 @@ export function AIChatbot() {
   const clearConversation = () => {
     const initial = [{ ...INITIAL_MESSAGE, timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }];
     setMessages(initial);
-    sessionStorage.removeItem("jeshurun_chat_session");
   };
 
   const streamReply = (fullText: string, quickReplies: string[], currentMessages: Message[]) => {
@@ -308,7 +279,7 @@ export function AIChatbot() {
                       <div className={`p-3 text-sm font-medium leading-relaxed max-w-[85%] ${
                         msg.role === "user" 
                           ? "bg-primary text-primary-foreground rounded-2xl rounded-br-sm shadow-sm" 
-                          : "bg-muted text-foreground rounded-2xl rounded-bl-sm border border-border/60 shadow-sm"
+                          : "bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-slate-100 rounded-2xl rounded-bl-sm border border-slate-200 dark:border-slate-700 shadow-sm"
                       }`}>
                         {msg.content}
                       </div>
@@ -326,7 +297,7 @@ export function AIChatbot() {
                     animate={{ opacity: 1, y: 0 }}
                     className="flex flex-col items-start space-y-1"
                   >
-                    <div className="bg-muted rounded-2xl rounded-bl-sm border border-border/60 p-3 shadow-sm flex items-center gap-1.5 h-[38px]">
+                    <div className="bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-bl-sm border border-slate-200 dark:border-slate-700 p-3 shadow-sm flex items-center gap-1.5 h-[38px]">
                       <motion.span animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0 }} className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60" />
                       <motion.span animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0.15 }} className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60" />
                       <motion.span animate={{ y: [0, -4, 0] }} transition={{ repeat: Infinity, duration: 0.6, ease: "easeInOut", delay: 0.3 }} className="w-1.5 h-1.5 rounded-full bg-muted-foreground/60" />

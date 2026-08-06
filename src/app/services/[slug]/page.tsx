@@ -622,10 +622,7 @@ export default function ServiceDetailPage({
   const statHighlights = service.statHighlights ?? [];
   const blueprintImage = oldImageMap[slug];
 
-  // For the two-tone editorial title
-  const titleWords = service.title.split(" ");
-  const titleFirstWord = titleWords[0];
-  const titleRest = titleWords.slice(1).join(" ");
+  // (Removed two-tone title logic)
 
   return (
     <div className="min-h-dvh bg-background relative overflow-x-hidden">
@@ -642,7 +639,7 @@ export default function ServiceDetailPage({
           SECTION 1 — EDITORIAL HERO
           Typography-led, confident. Playfair Display headline.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="w-full pt-16 pb-8 md:pt-20 md:pb-12 relative overflow-hidden bg-slate-50 dark:bg-background text-slate-900 dark:text-white shadow-xl">
+      <section className="w-full pt-24 pb-2 md:pt-32 md:pb-4 relative overflow-hidden bg-slate-50 dark:bg-background text-slate-900 dark:text-white shadow-xl">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -664,30 +661,29 @@ export default function ServiceDetailPage({
             initial={{ opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 mb-8"
+            className="mt-4 mb-4"
           >
-            <nav className="flex items-center gap-2.5 text-[13px] font-extrabold uppercase tracking-[0.15em] text-slate-500 dark:text-white/60">
+            <nav className="flex items-center gap-2.5 text-[14.5px] font-extrabold uppercase tracking-[0.15em] text-slate-500 dark:text-white/60">
               <Link href="/" className="hover:text-slate-900 dark:hover:text-white transition-colors">Home</Link>
-              <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/30" />
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-white/30" />
               <Link href="/services" className="hover:text-slate-900 dark:hover:text-white transition-colors">Services</Link>
-              <span className="w-1 h-1 rounded-full bg-slate-300 dark:bg-white/30" />
-              <span className="text-slate-900 dark:text-white">{service.title}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-white/30" />
+              <span className="text-blue-600 dark:text-blue-400">{service.title}</span>
             </nav>
           </motion.div>
 
-          <div className="flex-grow mb-8">
+          <div className="flex-grow mb-4">
             <motion.div
               variants={staggerSlow}
               initial="hidden"
               animate="show"
-              className="max-w-4xl space-y-8"
+              className="max-w-4xl space-y-4"
             >
-              {/* Editorial Headline — Playfair Display */}
               <motion.h1
                 variants={fadeUp}
-                className="font-editorial text-4xl sm:text-5xl md:text-6xl text-slate-900 dark:text-white tracking-tight leading-tight"
+                className="font-editorial text-4xl sm:text-5xl md:text-6xl text-blue-600 dark:text-blue-400 tracking-tight leading-tight"
               >
-                {titleFirstWord} <span className="text-blue-600 dark:text-blue-400">{titleRest}</span>
+                {service.title}
               </motion.h1>
 
               {/* Subtitle — clean sans-serif contrast */}
@@ -717,7 +713,7 @@ export default function ServiceDetailPage({
           SECTION 2 — EDITORIAL INTRODUCTION
           Full-width pull-quote paragraph. Magazine-style pacing.
       ════════════════════════════════════════════════════════════════ */}
-      <section className="py-12 md:py-16 !border-t-0">
+      <section className="pt-4 pb-8 md:pt-6 md:pb-10 !border-t-0">
         <motion.div
           initial="hidden"
           whileInView="show"
@@ -753,39 +749,17 @@ export default function ServiceDetailPage({
           viewport={{ once: true, margin: "-80px" }}
           className="w-full container px-6 sm:px-8 mx-auto"
         >
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-            {/* Image column — slide in from left with scale */}
-            <motion.div variants={slideInLeft} className="lg:col-span-5 min-w-0">
-              <motion.div
-                className="w-full relative overflow-hidden group aspect-square md:aspect-[4/3] flex items-center justify-center"
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              >
-                {/* Background ambient glow */}
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08)_0%,transparent_70%)]" />
-                
-                <ServiceCardVisual slug={slug} />
+          <div className="max-w-4xl mx-auto items-start">
 
-                {/* Viewfinder Corners */}
-                <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-cyan-500/30" />
-                <div className="absolute top-4 right-4 w-4 h-4 border-t border-r border-cyan-500/30" />
-                <div className="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cyan-500/30" />
-                <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cyan-500/30" />
-
-                {/* Subtle border glow on hover */}
-                <div className="absolute inset-0 rounded-xl border border-white/0 group-hover:border-cyan-500/20 transition-colors duration-300 pointer-events-none" />
-              </motion.div>
-            </motion.div>
-
-            {/* Narrative column — slide in from right */}
-            <motion.div variants={slideInRight} className="lg:col-span-7 space-y-8 min-w-0">
+            {/* Narrative column */}
+            <motion.div variants={fadeUp} className="space-y-8 min-w-0">
               <div className="space-y-3">
                 <motion.p
                   initial={{ opacity: 0, x: 12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-xs font-bold uppercase tracking-widest text-primary"
+                  className="text-[15px] font-extrabold uppercase tracking-[0.15em] text-primary"
                 >
                   Practice Overview
                 </motion.p>
@@ -840,7 +814,7 @@ export default function ServiceDetailPage({
             <div className="lg:col-span-4 min-w-0">
               <motion.div variants={fadeUp} className="lg:sticky lg:top-32 space-y-6">
                 <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
+                  <p className="text-[15px] font-extrabold uppercase tracking-[0.15em] text-primary mb-4">
                     Core Capabilities
                   </p>
                   <h3 className="text-3xl md:text-4xl lg:text-5xl font-editorial text-foreground leading-tight">
@@ -911,7 +885,7 @@ export default function ServiceDetailPage({
             className="w-full container px-6 sm:px-8 mx-auto"
           >
             <motion.div variants={fadeUp} className="max-w-3xl mb-16">
-              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+              <p className="text-[15px] font-extrabold uppercase tracking-[0.15em] text-primary mb-3">
                 Outcomes
               </p>
               <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
@@ -981,7 +955,7 @@ export default function ServiceDetailPage({
           className="w-full container px-6 sm:px-8 mx-auto"
         >
           <motion.div variants={fadeUp} className="max-w-3xl mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+            <p className="text-[15px] font-extrabold uppercase tracking-[0.15em] text-primary mb-3">
               Impact Comparison
             </p>
             <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
@@ -1054,7 +1028,7 @@ export default function ServiceDetailPage({
           className="w-full container px-6 sm:px-8 mx-auto"
         >
           <motion.div variants={fadeUp} className="max-w-3xl mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest text-primary mb-3">
+            <p className="text-[15px] font-extrabold uppercase tracking-[0.15em] text-primary mb-3">
               Frequently Asked
             </p>
             <h2 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">

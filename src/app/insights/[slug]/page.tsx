@@ -150,7 +150,7 @@ export default function InsightArticlePage() {
   return (
     <div className="min-h-dvh bg-background pb-24">
       {/* Hero Header Area */}
-      <section className="w-full pt-32 pb-20 relative overflow-hidden bg-slate-50 dark:bg-background text-slate-900 dark:text-white shadow-xl">
+      <section className="w-full pt-32 pb-20 min-h-[400px] lg:min-h-[480px] flex flex-col justify-center relative overflow-hidden bg-slate-50 dark:bg-background text-slate-900 dark:text-white shadow-xl">
         {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
