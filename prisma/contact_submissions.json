@@ -7,5 +7,14 @@
     "company": "TestCo",
     "message": "Hello world!",
     "createdAt": "2026-06-17T20:02:37.324Z"
+  },
+  {
+    "id": "k58r8qg",
+    "firstName": "Sathwik",
+    "lastName": "Dunna",
+    "email": "sathwik.fr@gmail.com",
+    "company": "tcs",
+    "message": "\n--- Enterprise Inquiry Details ---\nPhone: +353 8309426043\nService Interest: IT Consulting\n\n--- Project Requirements ---\ntesting\n",
+    "createdAt": "2026-08-07T14:07:01.663Z"
   }
 ]

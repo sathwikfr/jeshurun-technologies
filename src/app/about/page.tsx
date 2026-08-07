@@ -321,6 +321,8 @@ export default function AboutPage() {
                   ))}
                 </div>
               </motion.div>
+            </motion.div>
+          )}
 
           {activeTab === "delivery" && (
             <motion.div
