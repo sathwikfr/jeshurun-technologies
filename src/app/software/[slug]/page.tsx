@@ -155,7 +155,7 @@ function AnimatedStatValue({ value }: { value: string }) {
   }, [isInView, parsed, prefersReducedMotion, value]);
 
   return (
-    <div ref={ref} className="text-4xl sm:text-5xl font-editorial text-foreground">
+    <div ref={ref} className="editorial-stat font-normal text-4xl sm:text-5xl text-foreground">
       {!parsed || prefersReducedMotion ? value : displayValue}
     </div>
   );
@@ -844,7 +844,7 @@ export default function SoftwareDetailPage({
                       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 + idx * 0.15 }}
                       className="w-12 h-px bg-primary/40 transition-all duration-500 group-hover:w-24 group-hover:bg-primary"
                     />
-                    <p className="text-sm font-bold uppercase tracking-wider text-primary">
+                    <p className="text-sm font-medium uppercase tracking-wider text-primary">
                       {stat.label}
                     </p>
                     <p className="text-sm text-muted-foreground font-medium leading-relaxed">
