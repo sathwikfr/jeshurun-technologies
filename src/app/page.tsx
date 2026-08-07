@@ -78,11 +78,14 @@ function AnimatedCounter({ target, suffix = "", prefix = "", delay = 0 }: { targ
 
   useEffect(() => {
     const unsubscribe = springValue.on("change", (latest) => {
-      // Don't format with commas if it has a decimal point since our only decimal is 99.9 and we don't need commas there
-      setDisplay(Math.round(latest).toLocaleString("en-US"));
+      if (target % 1 !== 0) {
+        setDisplay(latest.toFixed(1));
+      } else {
+        setDisplay(Math.round(latest).toLocaleString("en-US"));
+      }
     });
     return unsubscribe;
-  }, [springValue]);
+  }, [springValue, target]);
 
   return (
     <span ref={ref}>
@@ -659,7 +662,7 @@ function SLAUptimeViz() {
       {/* 99.9% Active Status Badge */}
       <div className="absolute z-20 px-2 py-0.5 bg-white/90 dark:bg-[#1c1c1c]/90 backdrop-blur border border-emerald-500/50 rounded-full text-[9px] font-extrabold text-emerald-600 dark:text-emerald-400 tracking-wider shadow-[0_0_12px_rgba(16,185,129,0.3)] flex items-center gap-1">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        99.99% UP
+        99.9% UP
       </div>
     </div>
   );

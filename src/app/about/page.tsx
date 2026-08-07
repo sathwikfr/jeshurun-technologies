@@ -208,7 +208,7 @@ export default function AboutPage() {
                   
                   <motion.h2 
                     variants={item}
-                    className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+                    className="text-3xl md:text-4xl font-normal tracking-tight text-slate-900 dark:text-white"
                   >
                     About Jeshurun Technologies
                   </motion.h2>
@@ -280,7 +280,7 @@ export default function AboutPage() {
                   </motion.h2>
                   <motion.h3 
                     variants={item}
-                    className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight"
+                    className="text-3xl md:text-4xl font-normal text-slate-900 dark:text-white leading-tight"
                   >
                     Why Organizations Trust Jeshurun
                   </motion.h3>
@@ -363,7 +363,7 @@ export default function AboutPage() {
             
             <motion.h2 
               variants={item}
-              className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+              className="text-3xl md:text-4xl font-normal tracking-tight text-slate-900 dark:text-white"
             >
               Meet Our Leadership
             </motion.h2>
@@ -454,7 +454,7 @@ export default function AboutPage() {
                   
                   <motion.h2 
                     variants={item}
-                    className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+                    className="text-3xl md:text-4xl font-normal tracking-tight text-slate-900 dark:text-white"
                   >
                     Delivery & Quality Standards
                   </motion.h2>
@@ -525,7 +525,7 @@ export default function AboutPage() {
                   </motion.h2>
                   <motion.h3 
                     variants={item}
-                    className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white leading-tight"
+                    className="text-3xl md:text-4xl font-normal text-slate-900 dark:text-white leading-tight"
                   >
                     Enterprise Resilience Features
                   </motion.h3>
