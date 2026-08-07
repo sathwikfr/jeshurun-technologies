@@ -26,6 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/software/enterprise-api",
     "/software/data-pipelines",
     "/case-studies",
+    "/case-studies/telecom-network-modernisation",
     "/contact",
   ];
 

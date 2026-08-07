@@ -1278,9 +1278,12 @@ function DevOpsViz() {
     <div ref={ref} className="w-full h-16 flex items-center justify-center relative max-w-[200px] mt-2 overflow-hidden">
       <style>{`
         @keyframes drawInfinity {
-          0% { stroke-dashoffset: 300; opacity: 0; }
-          10%, 90% { opacity: 1; }
-          100% { stroke-dashoffset: 0; opacity: 0; }
+          0% { stroke-dashoffset: 300; opacity: 0; stroke: #22C55E; filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.8)); }
+          10% { opacity: 1; stroke: #22C55E; filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.8)); }
+          49.9% { opacity: 1; stroke: #22C55E; filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.8)); }
+          50% { opacity: 1; stroke: #1E5FFF; filter: drop-shadow(0 0 4px rgba(30, 95, 255, 0.8)); }
+          90% { opacity: 1; stroke: #1E5FFF; filter: drop-shadow(0 0 4px rgba(30, 95, 255, 0.8)); }
+          100% { stroke-dashoffset: 0; opacity: 0; stroke: #1E5FFF; filter: drop-shadow(0 0 4px rgba(30, 95, 255, 0.8)); }
         }
         @keyframes pulseNode {
           0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 5px rgba(34, 197, 94, 0.2); border-color: rgba(34, 197, 94, 0.4); }
@@ -1307,10 +1310,9 @@ function DevOpsViz() {
              d="M 30 30 C 30 10, 60 10, 60 30 C 60 50, 90 50, 90 30 C 90 10, 60 10, 60 30 C 60 50, 30 50, 30 30 Z" 
              fill="none" 
              strokeWidth="4" 
-             className="stroke-[#22C55E]" 
              strokeLinecap="round"
              strokeDasharray="40 260"
-             style={{ animation: `drawInfinity 3s linear infinite ${isInView ? "running" : "paused"}`, filter: "drop-shadow(0 0 4px #22C55E)" }}
+             style={{ animation: `drawInfinity 3s linear infinite ${isInView ? "running" : "paused"}` }}
            />
         </svg>
       </div>

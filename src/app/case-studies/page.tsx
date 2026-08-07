@@ -41,7 +41,7 @@ import { caseStudiesData, CaseStudyArticle } from "@/lib/caseStudiesData";
 
 const CASE_STUDIES = caseStudiesData;
 
-const FILTERS = ["All", "Financial Services", "Healthcare", "Manufacturing", "Logistics", "Pharmaceutical", "Insurance"];
+const FILTERS = ["All", "Financial Services", "Healthcare", "Logistics", "Pharmaceutical", "Insurance", "Telecommunications"];
 
 function CaseStudyCard({ study, onClick, compact = false }: { study: CaseStudyArticle, onClick: () => void, compact?: boolean }) {
   return (

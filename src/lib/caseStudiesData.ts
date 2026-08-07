@@ -93,46 +93,6 @@ To achieve the client's deployment speed goals, we modeled the entire infrastruc
 Engineers can now declare cluster states in Git, triggering automated rollout, validation, and rolling updates. This setup accelerated software releases by 65%, reducing deployment cycles from months to under 15 minutes, while maintaining a 99.99% platform availability guarantee.`
   },
   {
-    id: "mfg-analytics",
-    title: "Smart Factory IoT Analytics",
-    industry: "Manufacturing",
-    location: "Hyderabad",
-    category: "AI",
-    challenge: "Lack of machine health visibility caused unpredictable downtime and revenue loss.",
-    solution: "Deployed IoT edge sensors and a predictive AI maintenance model on GCP.",
-    metrics: [
-      { value: "85%", label: "Predictive Accuracy" },
-      { value: "-45%", label: "Downtime" },
-      { value: "$2.4M", label: "Saved Annually" }
-    ],
-    techStack: ["GCP", "Python", "AI", "Kubernetes"],
-    image: "/images/smart_factory_iot.jpg",
-    excerpt: "Leveraging Google Cloud IoT Core and TensorFlow models to predict machine fatigue, reducing manufacturing failures and predicting downtime.",
-    content: `## The Manufacturing Downtime Deficit
-
-At the client's heavy manufacturing assembly plants, unexpected machine failures were a major operational bottleneck. When a key robotic welder or conveyor motor broke down unexpectedly, it halted the entire production line, causing significant revenue loss and supply chain delays.
-
-The primary obstacle was a lack of real-time machine telemetry; maintenance crews could only react to failures after they happened rather than predicting mechanical fatigue.
-
-## Edge Telemetry Deployment
-
-We designed and deployed an IoT edge collection pipeline. Industrial sensors measuring vibration, motor temperature, and current draw were fitted to over 100 critical plant assets.
-
-Lightweight Gateway devices running Edge software collect, filter, and preprocess raw telemetry before transmission. This local processing significantly minimized network bandwidth needs, ensuring stable data transmission even during plant network fluctuations.
-
-## GCP Data Pipelines & Ingestion
-
-The preprocessed data stream is ingested via Google Cloud Pub/Sub at a rate of thousands of events per second. Dataflow pipelines clean, format, and enrich this telemetry, loading it concurrently into BigQuery for analytics and Cloud Bigtable for real-time dashboard visualization.
-
-Plant operators can monitor machine metrics (vibration, heat, power draw) on live dashboards, which refresh in milliseconds.
-
-## Predictive Maintenance Model
-
-Utilizing historic sensor telemetry, we trained predictive machine learning models in TensorFlow. The model analyzes patterns in vibration frequencies and thermal spikes to estimate the remaining useful life (RUL) of machine components.
-
-Deployed via Google Kubernetes Engine (GKE), the model continuously scans sensor logs, generating automatic alerts to maintenance crews 72 hours before a predicted mechanical failure. This solution decreased unscheduled downtime by 45%, saving the client $2.4M annually.`
-  },
-  {
     id: "logistics-automation",
     title: "Global Supply Chain Automation",
     industry: "Logistics",
@@ -243,5 +203,53 @@ Real-time Power BI dashboards were connected to Snowflake's materialized views, 
 ## Results
 
 Claims data latency dropped from 24 hours to under 3 minutes. Underwriting decision turnaround improved by 60% for commercial renewals. By decommissioning the legacy ETL tooling and its associated licensing and maintenance overhead, the group realised €1.2M in annual cost savings within the first 12 months of operation.`
+  },
+  {
+    id: "telecom-network-modernisation",
+    title: "Telecommunications Network Operations Modernisation",
+    industry: "Telecommunications",
+    location: "Dublin, Ireland",
+    category: "Network Infrastructure",
+    challenge: "A fragmented, manually operated network operations centre and aging OSS/BSS stack created a 6-hour mean time to resolution for P1 incidents and delayed new service provisioning by up to 72 hours.",
+    solution: "Designed and delivered an automated NOC platform with real-time telemetry ingestion, AIOps-driven root-cause analysis, and a cloud-native OSS integration layer on Azure.",
+    metrics: [
+      { value: "78%", label: "MTTR Reduction" },
+      { value: "40%", label: "Faster Service Provisioning" },
+      { value: "99.95%", label: "Network Availability" }
+    ],
+    techStack: ["Azure", "Apache Kafka", "Python", "Kubernetes", "Grafana"],
+    image: "/images/telecom_network_operations.png",
+    excerpt: "How Jeshurun helped a leading European telecommunications provider cut P1 incident resolution time by 78% and accelerate service provisioning by 40% through a cloud-native NOC and AIOps platform.",
+    content: `## Context & Challenge
+
+A leading European telecommunications provider operating fixed-line, mobile, and enterprise connectivity services across multiple markets faced mounting operational pressure from its legacy Network Operations Centre (NOC) and a fragmented Operations Support System / Business Support System (OSS/BSS) landscape.
+
+Incident triage was performed manually: engineers cross-referenced alerts from five separate monitoring tools with no unified correlation layer, resulting in an average mean time to resolution (MTTR) of 6 hours for Priority 1 network faults — a figure that directly impacted the provider's enterprise SLA commitments and attracted regulatory scrutiny.
+
+Simultaneously, new service provisioning for enterprise customers relied on manual workflows across disconnected systems, with end-to-end lead times routinely exceeding 72 hours. The business identified both challenges as strategic priorities ahead of a planned expansion of its enterprise managed connectivity portfolio.
+
+## Platform Architecture & AIOps Design
+
+Jeshurun's network engineering and data teams conducted a 4-week discovery engagement, documenting the full alert taxonomy, existing toolchain integrations, and provisioning workflow dependencies across the OSS/BSS estate.
+
+The resulting architecture was built on three integrated pillars:
+
+**Unified Telemetry Ingestion**: An Apache Kafka-based event streaming layer was deployed as the central integration backbone, aggregating raw SNMP traps, syslog streams, NetFlow records, and API events from the existing monitoring tools into a single normalised event bus. This eliminated the need to replace incumbent monitoring infrastructure, protecting prior capital investment.
+
+**AIOps Correlation Engine**: A Python-based machine learning pipeline, hosted on Azure Kubernetes Service (AKS), performs continuous root-cause correlation across ingested telemetry. Trained on 18 months of historical incident data, the model identifies fault propagation patterns and surfaces a ranked list of probable root causes within 90 seconds of alert onset — replacing the manual cross-referencing process that previously consumed the first two hours of every P1 response.
+
+**Cloud-Native OSS Integration Layer**: A RESTful integration mesh was designed on Azure API Management, creating a standardised provisioning interface across the fragmented OSS/BSS stack. Automated provisioning workflows, triggered via the integration layer, handle network element configuration, IP address allocation, and service activation without manual intervention for the majority of standard enterprise circuit orders.
+
+## Observability & NOC Workflow Transformation
+
+A unified Grafana-based observability platform consolidates telemetry, AIOps model outputs, and provisioning status into a single operator interface. NOC engineers now work from a single pane of glass: correlated alerts surface with pre-populated root-cause hypotheses and recommended remediation runbooks, significantly reducing cognitive load and enabling junior engineers to resolve fault categories that previously required senior escalation.
+
+Change management was conducted in parallel with the technical deployment: Jeshurun's team ran structured knowledge-transfer sessions and shadowed live NOC shifts throughout the 16-week rollout to ensure operator confidence prior to full cutover.
+
+## Results
+
+Following a phased cutover with no service disruption, the provider achieved a 78% reduction in mean time to resolution for Priority 1 network incidents — dropping from 6 hours to under 80 minutes on average. Enterprise service provisioning lead time was reduced by 40%, enabling the business to commit to faster SLAs for its managed connectivity product portfolio.
+
+Network availability across monitored domains improved to 99.95%, and the automated provisioning layer now handles over 60% of standard enterprise circuit orders without manual OSS intervention, freeing NOC and provisioning engineering capacity for complex fault investigation and network expansion programmes.`
   }
 ];
