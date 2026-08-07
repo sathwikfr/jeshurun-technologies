@@ -44,7 +44,7 @@ export function Footer() {
             <HeaderLogo className="h-10 w-auto" />
             
             <p className="text-sm text-foreground/80 leading-relaxed font-medium max-w-sm">
-              Architecting resilient systems and delivering mission-critical technology solutions for enterprise organizations across Ireland, Europe, the Middle East, and India.
+              Architecting resilient systems and delivering mission-critical technology solutions for enterprise organizations across Ireland.
             </p>
 
             {/* Contact Location & Email */}

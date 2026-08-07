@@ -139,7 +139,7 @@ export default function AboutPage() {
             variants={item}
             className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto font-medium"
           >
-            Delivering resilient, scalable technology solutions for industry leaders in pharma, telecoms, and insurance. Transforming enterprise infrastructure across Ireland, Europe, the Middle East, and India since 2017.
+            Delivering resilient, scalable technology solutions for industry leaders in pharma, telecoms, and insurance. Transforming enterprise infrastructure across Ireland since 2017.
           </motion.p>
         </motion.div>
         </div>
