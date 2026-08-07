@@ -325,18 +325,21 @@ export default function AboutPage() {
                       icon: Globe 
                     }
                   ].map((feature, idx) => (
-                    <motion.div key={idx} variants={item} className="flex flex-col items-start group">
-                      <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] mb-6">
-                        <feature.icon className="w-6 h-6" />
-                      </div>
-                      <div className="space-y-2 text-left">
-                        <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <motion.div key={idx} variants={item} className="flex flex-col items-start group relative border-t-2 border-slate-200 dark:border-zinc-800/80 hover:border-blue-500/50 transition-colors duration-300 pt-6 md:pt-8 mt-2">
+                      <span className="absolute top-4 right-0 text-5xl sm:text-6xl font-black font-editorial text-foreground/[0.08] dark:text-white/[0.09] tracking-tighter select-none pointer-events-none">
+                        0{idx + 1}
+                      </span>
+                      <div className="flex items-center gap-3 mb-3 relative z-10">
+                        <div className="text-slate-400 dark:text-zinc-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:scale-[1.08] transition-all duration-300 [&>svg]:!w-7 [&>svg]:!h-7 [&>svg]:!stroke-[1.5] flex-shrink-0">
+                          <feature.icon />
+                        </div>
+                        <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">
                           {feature.title}
                         </h4>
-                        <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">
-                          {feature.desc}
-                        </p>
                       </div>
+                      <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed relative z-10">
+                        {feature.desc}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -560,18 +563,21 @@ export default function AboutPage() {
                       icon: ShieldCheck 
                     }
                   ].map((resCard, idx) => (
-                    <motion.div key={idx} variants={item} className="flex flex-col items-center text-center group">
-                      <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300 group-hover:shadow-[0_0_20px_rgba(37,99,235,0.3)] mb-6">
-                        <resCard.icon className="w-6 h-6" />
-                      </div>
-                      <div className="space-y-2 text-center">
-                        <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <motion.div key={idx} variants={item} className="flex flex-col items-start group relative border-t-2 border-slate-200 dark:border-zinc-800/80 hover:border-blue-500/50 transition-colors duration-300 pt-6 md:pt-8 mt-2">
+                      <span className="absolute top-4 right-0 text-5xl sm:text-6xl font-black font-editorial text-foreground/[0.08] dark:text-white/[0.09] tracking-tighter select-none pointer-events-none">
+                        0{idx + 1}
+                      </span>
+                      <div className="flex items-center gap-3 mb-3 relative z-10">
+                        <div className="text-slate-400 dark:text-zinc-500 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:scale-[1.08] transition-all duration-300 [&>svg]:!w-7 [&>svg]:!h-7 [&>svg]:!stroke-[1.5] flex-shrink-0">
+                          <resCard.icon />
+                        </div>
+                        <h4 className="text-xl font-bold text-slate-900 dark:text-white leading-tight">
                           {resCard.title}
                         </h4>
-                        <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed">
-                          {resCard.desc}
-                        </p>
                       </div>
+                      <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed relative z-10">
+                        {resCard.desc}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
