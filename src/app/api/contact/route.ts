@@ -84,8 +84,8 @@ export async function POST(request: Request) {
 
     // 2. Send Email via Gmail SMTP or SendGrid (if configured)
     let emailSent = false;
-    const recipient = process.env.CONTACT_RECEIVER_EMAIL || "info@jeshuruntech.com";
-    const sender = process.env.CONTACT_SENDER_EMAIL || "no-reply@jeshuruntech.com";
+    const recipient = process.env.CONTACT_RECEIVER_EMAIL || "info@jeshurun-tech.com";
+    const sender = process.env.CONTACT_SENDER_EMAIL || "no-reply@jeshurun-tech.com";
 
     const mailText = `
 Name: ${firstName} ${lastName}
@@ -115,7 +115,7 @@ ${message}
       try {
         const { data, error } = await resend.emails.send({
           from: "onboarding@resend.dev",
-          to: ["info@jeshuruntech.com"],
+          to: ["info@jeshurun-tech.com"],
           replyTo: email,
           subject: `[Website Contact Form] Submission from ${firstName} ${lastName}`,
           text: mailText,

@@ -36,7 +36,7 @@ export default function TermsOfService() {
     {
       title: "6. Support & Inquiries",
       icon: <HelpCircle className="w-5 h-5" />,
-      content: "For questions about these Terms of Service or to report violations, please contact us at info@jeshuruntech.com. We reserve the right to modify these terms at any time by updating this page."
+      content: "For questions about these Terms of Service or to report violations, please contact us at info@jeshurun-tech.com. We reserve the right to modify these terms at any time by updating this page."
     }
   ];
 

@@ -332,66 +332,7 @@ const softwareData: Record<
       { q: "What happens to our legacy database?", a: "We employ data synchronization tools to keep the legacy and modern databases in sync until the final cutover is complete." },
     ],
   },
-  "mobile-architecture": {
-    title: "Mobile Architecture",
-    subtitle: "Enterprise-grade native and cross-platform apps",
-    description:
-      "Build secure, high-performance mobile applications that integrate seamlessly with your enterprise ecosystem.",
-    overview:
-      "Our Mobile Experience Architecture practice designs iOS and Android applications built for enterprise scale. We focus on offline synchronization, rigorous mobile device management (MDM) integration, and flawless user experiences using React Native and Flutter.",
-    image:
-      "/images/mobile_architecture_wireframes.png",
-    features: [
-      "React Native & Flutter Development",
-      "Complex Offline Data Synchronization",
-      "Mobile Device Management (MDM)",
-      "Biometric Security Integration",
-    ],
-    benefits: [
-      "Unified cross-platform codebases that cut ongoing maintenance costs",
-      "Enterprise-grade mobile security meeting HIPAA and PCI standards",
-      "Seamless offline capabilities keeping field teams productive anywhere",
-      "Intuitive, native-feeling UX for complex enterprise workflows",
-    ],
-    metrics: [
-      { label: "User Adoption", value: "+85%" },
-      { label: "Crash-Free Rate", value: "99.9%" },
-      { label: "Time to Market", value: "-30%" },
-    ],
-    editorialLead: "The mobile channel is no longer a secondary touchpoint — it is where enterprise workflows live. Field teams, executives, and customers demand applications that work flawlessly offline, load instantly, and meet the strictest security compliance requirements.",
-    statHighlights: [
-      { value: "85%", label: "User Adoption", description: "Enterprise user adoption within 90 days of launch" },
-      { value: "99.9%", label: "Crash-Free Rate", description: "Application stability across iOS and Android devices" },
-      { value: "30%", label: "Faster Market", description: "Time-to-market reduction vs. native-only approach" },
-    ],
-    caseStudyOutcomes: [
-      "99% data sync success rate in offline conditions",
-      "+85% enterprise user adoption within 90 days",
-      "-30% time to market vs. native-only approach",
-    ],
-    ctaTitleTop: "Ready to Build",
-    ctaTitleHighlight: "Your Next Mobile Experience?",
-    ctaDescription: "Discuss your product vision with our mobile architects and design an application built for performance and scale.",
-    comparison: [
-      { without: "Fragmented codebases for iOS and Android", with: "Unified, cross-platform code architecture" },
-      { without: "Poor offline functionality", with: "Robust offline data synchronization" },
-      { without: "Inconsistent user experiences", with: "Native-feeling, responsive UI components" },
-      { without: "Security risks with local storage", with: "Encrypted, MDM-compliant data handling" },
-    ],
-    testimonial: {
-      quote: "Our field technicians rely heavily on offline capabilities. The mobile architecture designed by Jeshurun has virtually eliminated data sync conflicts.",
-      author: "David Ross",
-      role: "Director of Field Operations",
-      company: "Logistics Plus",
-      stat: "99%",
-      statLabel: "Sync Success Rate",
-    },
-    faqs: [
-      { q: "Do you build native or cross-platform apps?", a: "We specialize in both, but heavily leverage React Native and Flutter for enterprises looking to maximize efficiency without compromising performance." },
-      { q: "How do you handle offline functionality?", a: "We use local-first database solutions like WatermelonDB or Realm, coupled with background sync queues to ensure data integrity when connectivity returns." },
-      { q: "Are your mobile apps secure enough for healthcare/finance?", a: "Yes. We implement certificate pinning, biometric authentication, and strict Keychain/Keystore encryption to meet compliance standards." },
-    ],
-  },
+
   "enterprise-api": {
     title: "Enterprise API",
     subtitle: "Robust GraphQL and REST APIs with data streaming",
@@ -801,62 +742,7 @@ export default function SoftwareDetailPage({
 
       <AccentLine />
 
-      {/* ── 5. MEASURABLE OUTCOMES ─────────────────────────────────── */}
-      <section className="py-24 md:py-32">
-        <div className="w-full container px-6 sm:px-8 mx-auto">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            className="space-y-16"
-          >
-            <motion.div variants={fadeUp} className="max-w-3xl">
-              <p className="text-[15px] font-extrabold uppercase tracking-[0.15em] text-primary mb-3">
-                Outcomes
-              </p>
-              <h3 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-                Measurable Impact
-              </h3>
-            </motion.div>
 
-            <motion.div
-              variants={stagger}
-              className="grid sm:grid-cols-3 gap-px bg-border rounded-xl overflow-hidden"
-            >
-              {category.statHighlights.map((stat, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: idx * 0.15 }}
-                  className="bg-background p-8 sm:p-10 relative group overflow-hidden"
-                >
-                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -translate-x-full group-hover:translate-x-0" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  <div className="relative z-10 space-y-3 transform transition-transform duration-500 group-hover:-translate-y-1">
-                    <AnimatedStatValue value={stat.value} />
-                    <motion.div
-                      initial={{ scaleX: 0, originX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 + idx * 0.15 }}
-                      className="w-12 h-px bg-primary/40 transition-all duration-500 group-hover:w-24 group-hover:bg-primary"
-                    />
-                    <p className="text-sm font-medium uppercase tracking-wider text-primary">
-                      {stat.label}
-                    </p>
-                    <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                      {stat.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
 
 
       {/* ── 7. IMPACT COMPARISON ───────────────────────────────────── */}

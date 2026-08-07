@@ -22,7 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/software",
     "/software/cloud-native",
     "/software/legacy-modernization",
-    "/software/mobile-architecture",
     "/software/enterprise-api",
     "/software/data-pipelines",
     "/case-studies",

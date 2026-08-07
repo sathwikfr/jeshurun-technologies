@@ -36,7 +36,7 @@ function matchRuleBasedResponse(lowercaseMessage: string): string {
     return "You can reach the appropriate Jeshurun team directly:\n\n" +
       "💼 **Enterprise Solutions & Sales**: sales@jeshuruntech.com\n" +
       "👥 **Careers & Recruitment**: careers@jeshuruntech.com\n" +
-      "📧 **General Inquiries**: info@jeshuruntech.com\n\n" +
+      "📧 **General Inquiries**: info@jeshurun-tech.com\n\n" +
       "For urgent project requests, submit an RFP at /contact — our practice leads guarantee a response within 2 hours.";
   }
 
@@ -79,7 +79,7 @@ They specialize in four core areas:
 4. Infrastructure Management (cloud migration, system monitoring, zero-downtime transitions)
 
 Their client portfolio includes leading brands like Pfizer, Vodafone, Astellas, Boston Scientific, Ergo, and Tech Placements. They guarantee a 99.9% SLA uptime on all managed architectures.
-If asked about contact info: sales@jeshuruntech.com for business queries, careers@jeshuruntech.com for jobs, and info@jeshuruntech.com for general topics. They have a dynamic contact form at /contact with a 2-hour response SLA.
+If asked about contact info: sales@jeshuruntech.com for business queries, careers@jeshuruntech.com for jobs, and info@jeshurun-tech.com for general topics. They have a dynamic contact form at /contact with a 2-hour response SLA.
 Please keep your answers helpful and format them nicely in Markdown.`;
 
       const geminiHistory = messages.map((m: { role: string; content: string }) => ({

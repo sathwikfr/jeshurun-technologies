@@ -56,10 +56,10 @@ export function Footer() {
               <div className="flex items-center gap-2.5 text-foreground/80">
                 <Mail className="w-4 h-4 text-primary shrink-0" aria-hidden="true" />
                 <a
-                  href="mailto:info@jeshuruntech.com"
+                  href="mailto:info@jeshurun-tech.com"
                   className="hover:text-primary transition-colors duration-200"
                 >
-                  info@jeshuruntech.com
+                  info@jeshurun-tech.com
                 </a>
               </div>
             </div>
@@ -90,7 +90,7 @@ export function Footer() {
               </a>
               {/* Email Direct */}
               <a
-                href="mailto:info@jeshuruntech.com"
+                href="mailto:info@jeshurun-tech.com"
                 aria-label="Email Us"
                 className="h-9 w-9 rounded-xl bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/40 hover:bg-primary/5 transition-all duration-300"
               >

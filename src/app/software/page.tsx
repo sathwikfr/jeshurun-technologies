@@ -88,24 +88,7 @@ const CAPABILITIES = [
     statLabel: "Avg. TCO Reduction",
     counter: { target: 60, suffix: "%", isNumeric: true }
   },
-  {
-    title: "Mobile Experience Architecture",
-    slug: "mobile-architecture",
-    Viz: MobileArchitectureViz,
-    image: "/images/mobile_architecture_wireframes.png",
-    vizBg: "bg-violet-500/5",
-    description: "Deliver enterprise-grade native and cross-platform mobile applications that provide seamless, secure experiences.",
-    features: ["React Native / Flutter", "MDM Integration"],
-    icon: <Smartphone className="w-6 h-6 text-[#7C3AED]" />,
-    size: "small",
-    accentColor: "from-violet-600 to-violet-400",
-    accentText: "text-violet-600 dark:text-violet-400",
-    accentBg: "bg-violet-500/10",
-    accentBorder: "border-violet-500/20",
-    stat: "4.9/5",
-    statLabel: "App Store Average",
-    counter: { target: 4.9, suffix: "/5", isNumeric: false }
-  },
+
   {
     title: "Enterprise APIs",
     slug: "enterprise-api",
@@ -173,30 +156,7 @@ function OfferingStrip({ cap, router, index }: { cap: any; router: any; index: n
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/45 via-slate-950/10 to-transparent pointer-events-none" />
 
-              {/* Proof stat badge */}
-              <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md border border-white/15 rounded-xl px-4 py-2.5 text-center min-w-[120px]">
-                <div className="text-white text-2xl font-black leading-none min-h-[1.5rem]">
-                  {cap.counter.isNumeric ? (
-                    <AnimatedCounter 
-                      target={cap.counter.target} 
-                      prefix={cap.counter.prefix || ""} 
-                      suffix={cap.counter.suffix || ""} 
-                      delay={100}
-                    />
-                  ) : (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8, y: 5 }}
-                      animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 5 }}
-                      transition={{ duration: 0.5, delay: 0.1, type: "spring", stiffness: 100 }}
-                    >
-                      {cap.stat}
-                    </motion.div>
-                  )}
-                </div>
-                <div className="text-white/70 text-[9px] font-bold uppercase tracking-wider mt-1">
-                  {cap.statLabel}
-                </div>
-              </div>
+
             </div>
           </motion.div>
 

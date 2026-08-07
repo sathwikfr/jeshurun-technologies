@@ -1252,68 +1252,7 @@ export default function TechDetailPage({
 
       <AccentLine />
 
-      {/* ── 5. MEASURABLE OUTCOMES ─────────────────────────────────── */}
-      <section className="py-24 md:py-32">
-        <div className="w-full container px-6 sm:px-8 mx-auto">
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            className="space-y-16"
-          >
-            <motion.div variants={fadeUp} className="max-w-3xl">
-              <p className="text-[15px] font-extrabold uppercase tracking-[0.15em] text-primary mb-3">
-                Outcomes
-              </p>
-              <h3 className="font-editorial text-2xl sm:text-3xl md:text-[2.25rem] text-foreground tracking-tight leading-tight">
-                Measurable Impact
-              </h3>
-            </motion.div>
 
-            <motion.div
-              variants={stagger}
-              className="grid sm:grid-cols-3 gap-px bg-border rounded-xl overflow-hidden"
-            >
-              {(tech.statHighlights || tech.metrics.map(m => ({
-                value: m.value,
-                label: m.label,
-                description: "",
-              }))).map((stat, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: idx * 0.15 }}
-                  className="bg-background p-8 sm:p-10 relative group overflow-hidden"
-                >
-                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 transform -translate-x-full group-hover:translate-x-0" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                  <div className="relative z-10 space-y-3 transform transition-transform duration-500 group-hover:-translate-y-1">
-                    <AnimatedStatValue value={stat.value} />
-                    <motion.div
-                      initial={{ scaleX: 0, originX: 0 }}
-                      whileInView={{ scaleX: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.5 + idx * 0.15 }}
-                      className="w-12 h-px bg-primary/40 transition-all duration-500 group-hover:w-24 group-hover:bg-primary"
-                    />
-                    <p className="text-sm font-medium uppercase tracking-wider text-primary">
-                      {stat.label}
-                    </p>
-                    {stat.description && (
-                      <p className="text-sm text-muted-foreground font-medium leading-relaxed">
-                        {stat.description}
-                      </p>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
 
 
       {/* ── 7. IMPACT COMPARISON ───────────────────────────────────── */}

@@ -36,7 +36,7 @@ export default function PrivacyPolicy() {
     {
       title: "6. Contact Us",
       icon: <Mail className="w-5 h-5" />,
-      content: "If you have any questions or concerns about this Privacy Policy or our data handling practices, please contact our Data Protection Team at info@jeshuruntech.com or write to us at our registered address in Dublin, Ireland."
+      content: "If you have any questions or concerns about this Privacy Policy or our data handling practices, please contact our Data Protection Team at info@jeshurun-tech.com or write to us at our registered address in Dublin, Ireland."
     }
   ];
 

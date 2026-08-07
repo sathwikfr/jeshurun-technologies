@@ -137,28 +137,7 @@ function TechnologyStrip({ tech, router, index }: { tech: any; router: any; inde
                 <span className="text-white text-sm font-bold tracking-wide">{tech.title}</span>
               </div>
 
-              {/* Stat Badge */}
-              <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md border border-white/15 rounded-xl px-4 py-2.5 text-center min-w-[120px]">
-                <div className="text-white text-2xl font-black leading-none min-h-[1.5rem]">
-                  {tech.counter.isNumeric ? (
-                    <AnimatedCounter 
-                      target={tech.counter.target} 
-                      prefix={tech.counter.prefix || ""} 
-                      suffix={tech.counter.suffix || ""} 
-                      delay={100}
-                    />
-                  ) : (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8, y: 5 }}
-                      animate={isInView ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.8, y: 5 }}
-                      transition={{ duration: 0.5, delay: 0.1, type: "spring", stiffness: 100 }}
-                    >
-                      {tech.stat}
-                    </motion.div>
-                  )}
-                </div>
-                <div className="text-white/70 text-[9px] font-bold uppercase tracking-widest mt-1">{tech.statLabel}</div>
-              </div>
+
             </div>
           </motion.div>
 

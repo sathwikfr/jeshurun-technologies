@@ -78,17 +78,7 @@ const menuData = {
           "Modularization",
         ],
       },
-      {
-        title: "Mobile Experience Architecture",
-        desc: "Enterprise-grade native and cross-platform mobile apps.",
-        href: "/software/mobile-architecture",
-        features: [
-          "React Native",
-          "Flutter",
-          "Offline Sync",
-          "MDM Integration",
-        ],
-      },
+
       {
         title: "Enterprise API & Data Pipelines",
         desc: "Building robust GraphQL and REST APIs alongside real-time data streaming.",
@@ -245,7 +235,7 @@ const searchIndex = [
   // Software Subpages
   { title: "Cloud-Native Engineering", desc: "Architecting resilient, hyper-scalable microservices.", href: "/software/cloud-native" },
   { title: "Legacy Modernization", desc: "Refactoring and migrating monolithic systems.", href: "/software/legacy-modernization" },
-  { title: "Mobile Experience Architecture", desc: "Enterprise-grade native and cross-platform mobile apps.", href: "/software/mobile-architecture" },
+
   { title: "Enterprise API & Data Pipelines", desc: "Building robust GraphQL and REST APIs alongside real-time data streaming.", href: "/software/enterprise-api" },
   { title: "Data Pipelines & Analytics", desc: "Real-time Kafka and Snowflake streaming pipelines turning operational data into business intelligence.", href: "/software/data-pipelines" },
   
@@ -656,6 +646,8 @@ export function Navbar() {
               />
             </span>
           </button>
+
+          {/* Theme toggle */}
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className={`group relative p-2 rounded-md transition-colors duration-300 ${
@@ -676,12 +668,13 @@ export function Navbar() {
             ) : (
               <div className="w-5 h-5" />
             )}
-            
+
             {/* Tooltip */}
             <div className="absolute right-0 top-full mt-2 w-max px-2 py-1 bg-gray-900 dark:bg-white text-white dark:text-gray-900 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
               {mounted && theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             </div>
           </button>
+
         </div>
       </div>
     </div>

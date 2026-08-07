@@ -22,7 +22,7 @@ export const chatRules: ChatRule[] = [
   },
   {
     keywords: ["where", "located", "contact", "email", "based", "reach", "get in touch"],
-    response: "We're headquartered in Dublin, Ireland. Reach us at info@jeshuruntech.com or use the Contact Us button above.",
+    response: "We're headquartered in Dublin, Ireland. Reach us at info@jeshurun-tech.com or use the Contact Us button above.",
     quickReplies: ["Do you offer free consultations?", "What industries do you serve?"]
   },
   {
