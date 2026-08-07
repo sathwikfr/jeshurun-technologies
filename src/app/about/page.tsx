@@ -73,30 +73,7 @@ export default function AboutPage() {
     },
   ];
 
-  // Leadership Team Placeholder Data
-  const leadershipData = [
-    {
-      name: "Full Name",
-      title: "Chief Executive Officer & Founder",
-      bio: "Brings over a decade of enterprise technology leadership, driving strategic growth and operational excellence across global markets.",
-      image: "", // Placeholder for actual image URL
-      socials: { linkedin: "#" }
-    },
-    {
-      name: "Full Name",
-      title: "Chief Technology Officer",
-      bio: "Brings over a decade of enterprise technology leadership, driving strategic growth and operational excellence across global markets.",
-      image: "", 
-      socials: { linkedin: "#" }
-    },
-    {
-      name: "Full Name",
-      title: "Chief Operating Officer",
-      bio: "Brings over a decade of enterprise technology leadership, driving strategic growth and operational excellence across global markets.",
-      image: "", 
-      socials: { linkedin: "#" }
-    }
-  ];
+
 
   return (
     <div className="bg-background text-foreground transition-colors duration-300">
@@ -344,90 +321,7 @@ export default function AboutPage() {
                   ))}
                 </div>
               </motion.div>
-        {/* LEADERSHIP TEAM */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-40px" }}
-          className="max-w-6xl mx-auto mb-20 pt-16 border-t border-[rgba(15,23,42,0.08)] dark:border-slate-800"
-        >
-          <div className="text-center mb-12 space-y-4">
-            <motion.div 
-              variants={item}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/5 dark:bg-white/10 backdrop-blur-md border border-black/20 dark:border-white/20 text-[13px] font-extrabold uppercase tracking-[0.15em] text-black dark:text-white shadow-[0_0_25px_rgba(0,0,0,0.1)] dark:shadow-[0_0_30px_rgba(255,255,255,0.15)] ring-1 ring-black/10 dark:ring-white/15"
-            >
-              <span className="relative flex w-2 h-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-                <span className="relative inline-flex rounded-full w-2 h-2 bg-[#2563EB] shadow-[0_0_10px_rgba(37,99,235,1)]"></span>
-              </span>
-              Leadership Team
-            </motion.div>
-            
-            <motion.h2 
-              variants={item}
-              className="text-3xl md:text-4xl font-normal tracking-tight text-slate-900 dark:text-white"
-            >
-              Meet Our Leadership
-            </motion.h2>
-            
-            <motion.p 
-              variants={item}
-              className="text-slate-500 dark:text-slate-400 font-semibold text-sm sm:text-base leading-relaxed max-w-2xl mx-auto"
-            >
-              Experienced leaders driving Jeshurun's technology strategy and delivery excellence.
-            </motion.p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {leadershipData.map((leader, i) => (
-              <motion.div key={i} variants={item}>
-                <TiltCard className="h-full">
-                  <SpotlightCard className="p-6 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md border border-white/20 dark:border-white/10 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.12)] flex flex-col h-full hover-card-effect text-center relative overflow-hidden group">
-                    {/* Glowing Mesh Background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/10 transition-colors duration-500" />
-                    
-                    <div 
-                      className="relative w-32 h-32 mx-auto mb-6 flex items-center justify-center group-hover:scale-105 transition-transform duration-500"
-                      style={{ transform: "translateZ(40px)" }}
-                    >
-                      {/* Animated Glow Ring */}
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 to-cyan-400 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-500 animate-pulse" />
-                      
-                      <div className="relative w-[120px] h-[120px] rounded-full bg-white dark:bg-slate-800 flex items-center justify-center overflow-hidden border-[3px] border-white dark:border-slate-800 shadow-xl z-10">
-                        {leader.image ? (
-                          <Image src={leader.image} alt={leader.name} fill className="object-cover" />
-                        ) : (
-                          <User className="w-12 h-12 text-slate-400 dark:text-slate-500" strokeWidth={1.5} />
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div className="relative z-10 flex flex-col flex-grow" style={{ transform: "translateZ(20px)" }}>
-                      <h3 className="text-xl font-editorial text-slate-900 dark:text-white mb-1 tracking-tight">{leader.name}</h3>
-                      <p className="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest mb-4">{leader.title}</p>
-                      <p className="text-sm font-medium text-slate-600 dark:text-slate-400 leading-relaxed flex-grow">
-                        {leader.bio}
-                      </p>
-                    </div>
-
-                    {/* Sliding Social Links */}
-                    <div 
-                      className="relative z-10 mt-6 pt-6 border-t border-slate-200/50 dark:border-slate-700/50 flex justify-center opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500"
-                      style={{ transform: "translateZ(30px)" }}
-                    >
-                      <a href={leader.socials.linkedin} className="w-10 h-10 rounded-full bg-white dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                        <Link className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </SpotlightCard>
-                </TiltCard>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-          </motion.div>
-        )}
           {activeTab === "delivery" && (
             <motion.div
               key="delivery"
