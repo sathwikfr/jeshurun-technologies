@@ -1278,7 +1278,7 @@ function DevOpsViz() {
     <div ref={ref} className="w-full h-16 flex items-center justify-center relative max-w-[200px] mt-2 overflow-hidden">
       <style>{`
         @keyframes drawInfinity {
-          0% { stroke-dashoffset: 300; opacity: 0; stroke: #22C55E; filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.8)); }
+          0% { stroke-dashoffset: 100; opacity: 0; stroke: #22C55E; filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.8)); }
           10% { opacity: 1; stroke: #22C55E; filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.8)); }
           49.9% { opacity: 1; stroke: #22C55E; filter: drop-shadow(0 0 4px rgba(34, 197, 94, 0.8)); }
           50% { opacity: 1; stroke: #1E5FFF; filter: drop-shadow(0 0 4px rgba(30, 95, 255, 0.8)); }
@@ -1307,11 +1307,12 @@ function DevOpsViz() {
            />
            {/* Animated Stream */}
            <path 
+             pathLength="100"
              d="M 30 30 C 30 10, 60 10, 60 30 C 60 50, 90 50, 90 30 C 90 10, 60 10, 60 30 C 60 50, 30 50, 30 30 Z" 
              fill="none" 
              strokeWidth="4" 
              strokeLinecap="round"
-             strokeDasharray="40 260"
+             strokeDasharray="15 100"
              style={{ animation: `drawInfinity 3s linear infinite ${isInView ? "running" : "paused"}` }}
            />
         </svg>
