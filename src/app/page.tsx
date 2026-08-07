@@ -1766,7 +1766,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
               <div>
-                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.clientsCount} suffix="+" /></span>
+                <span className="text-3xl font-normal text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.clientsCount} suffix="+" /></span>
                 <span className="text-sm font-semibold text-slate-900 dark:text-white block">Enterprise clients</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">Across Ireland and Europe</span>
               </div>
@@ -1777,7 +1777,7 @@ export default function Home() {
 
             <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
               <div>
-                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={99.9} suffix="%" /></span>
+                <span className="text-3xl font-normal text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={99.9} suffix="%" /></span>
                 <span className="text-sm font-semibold text-slate-900 dark:text-white block">SLA uptime</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">Guaranteed availability</span>
               </div>
@@ -1788,7 +1788,7 @@ export default function Home() {
 
             <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
               <div>
-                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.experienceYears} suffix="+" /></span>
+                <span className="text-3xl font-normal text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.experienceYears} suffix="+" /></span>
                 <span className="text-sm font-semibold text-slate-900 dark:text-white block">Years experience</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">In enterprise IT</span>
               </div>
@@ -1799,7 +1799,7 @@ export default function Home() {
 
             <div className="flex flex-col p-5 rounded-xl bg-white dark:bg-[#1c1c1c] border border-slate-200 dark:border-[#333333] shadow-sm dark:shadow-none justify-between h-[210px] overflow-hidden">
               <div>
-                <span className="text-3xl font-bold text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.engineersCount} suffix="+" /></span>
+                <span className="text-3xl font-normal text-slate-900 dark:text-white mb-1 block"><AnimatedCounter target={stats.engineersCount} suffix="+" /></span>
                 <span className="text-sm font-semibold text-slate-900 dark:text-white block">Certified engineers</span>
                 <span className="text-xs text-slate-500 dark:text-slate-400 block mt-0.5">Across disciplines</span>
               </div>
