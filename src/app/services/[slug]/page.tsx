@@ -925,10 +925,10 @@ export default function ServiceDetailPage({
                       className="w-12 h-px bg-primary/40 transition-all duration-500 group-hover:w-24 group-hover:bg-primary"
                     />
 
-                    <p className="text-sm font-normal uppercase tracking-wider text-primary">
+                    <p className="text-sm font-medium uppercase tracking-wider text-primary">
                       {stat.label}
                     </p>
-                    <p className="text-sm text-muted-foreground font-normal leading-relaxed">
+                    <p className="text-sm text-muted-foreground font-medium leading-relaxed">
                       {stat.description}
                     </p>
                   </div>
