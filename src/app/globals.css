@@ -451,7 +451,7 @@
   /* Editorial stat number */
   .editorial-stat {
     font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-    font-weight: 700;
+    font-weight: normal;
     letter-spacing: -0.03em;
     line-height: 1;
   }
